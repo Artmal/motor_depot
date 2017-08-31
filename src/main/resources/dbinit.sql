@@ -4,7 +4,7 @@ INSERT INTO roles(id, name) VALUES (2, "dispatcher");
 INSERT INTO roles(id, name) VALUES (3, "admin");
 
 # Inserting admin in to the system
-INSERT INTO users(id, username, pass) VALUES (1, "admin", "pass");
+INSERT INTO users(id, username, password, email) VALUES (1, "admin", "pass", "artmalchik@gmail.com");
 INSERT INTO user_roles(user_id, role_id) VALUES (1, 3);
 
 # Insert some cars

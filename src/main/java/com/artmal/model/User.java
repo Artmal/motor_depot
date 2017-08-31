@@ -10,17 +10,23 @@ public class User {
     private long id;
     private String username;
     private String password;
-    private transient String confirmPassword;
+    private String email;
     private Role role;
 
     public User() {
     }
 
-    public User(long id, String username, String password, String confirmPassword, Role role) {
+    public User(String username, String password, String email, Role role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
+    public User(long id, String username, String password, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.confirmPassword = confirmPassword;
         this.role = role;
     }
 
@@ -42,11 +48,11 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getEmail() {
+        return email;
     }
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setEmail(String email) {
+        this.email = email;
     }
     public Role getRole() {
         return role;

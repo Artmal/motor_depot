@@ -5,7 +5,7 @@ import com.artmal.model.enums.TripStatus;
 import java.util.Date;
 
 /**
- * Trip entity.
+ * Simple Java Bean for representing Trip entity.
  * @author Artem Malchenko
  */
 public class Trip {

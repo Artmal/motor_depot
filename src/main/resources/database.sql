@@ -3,9 +3,10 @@ CREATE DATABASE motor_depot;
 USE motor_depot;
 
 CREATE TABLE users (
-  id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  password     VARCHAR(255) NOT NULL
+  id        INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username  VARCHAR(255) NOT NULL,
+  password  VARCHAR(255) NOT NULL,
+  email     VARCHAR(100) NOT NULL
 )
   ENGINE = InnoDB;
 
@@ -41,15 +42,15 @@ CREATE TABLE cars (
 )
   ENGINE = InnoDB;
 
-/* TODO ----------------------------------------------------------------------------------------------*/
 CREATE TABLE drivers(
-  id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name     VARCHAR(255) NOT NULL,
-
-
-  user_id INT NOT NULL,
+  id                         INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name                       VARCHAR(255) NOT NULL,
+  passport_serial_number     VARCHAR(50)  NOT NULL,
+  phone_number               VARCHAR(50)  NOT NULL,
+  years_of_experience        INT          NOT NULL,
+  date_of_birth              DATE         NOT NULL,
+  user_id                    INT          NOT NULL,
 
   FOREIGN KEY (user_id) REFERENCES users(id)
 )
   ENGINE = InnoDB;
-

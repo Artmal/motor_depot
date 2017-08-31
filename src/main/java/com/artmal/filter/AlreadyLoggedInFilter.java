@@ -41,6 +41,9 @@ public class AlreadyLoggedInFilter implements Filter {
                 case DISPATCHER: httpResponse.sendRedirect("/dispatcher-panel");
                 case ADMIN:      httpResponse.sendRedirect("/admin-panel");
             }
+        } else {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+            httpServletResponse.sendRedirect("/");
         }
     }
 

@@ -20,12 +20,12 @@ public class UserDaoImpl implements UserDao {
         DatabaseUtils.setPoolProperties(datasource);
 
         Connection con = null;
-
         try {
             con = datasource.getConnection();
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE username = \"admin\"");
+            PreparedStatement st = con.prepareStatement("SELECT * FROM users WHERE  username = ?");
+            st.setString(1, username);
+            ResultSet rs = st.executeQuery();
 
             User user = new User();
             if (!rs.isBeforeFirst() ) {
@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean save(User user) throws SQLException {
+    public boolean save(User user) throws SQLException, NamingException {
         DataSource datasource = new DataSource();
         DatabaseUtils.setPoolProperties(datasource);
         Connection con = null;
@@ -70,9 +70,22 @@ public class UserDaoImpl implements UserDao {
         try {
             con = datasource.getConnection();
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE username = \"admin\"");
+            PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
+                    " (username, password, email) VALUES (?, ?, ?)");
+            insertUserStatement.setString(1, user.getUsername());
+            insertUserStatement.setString(2, user.getPassword());
+            insertUserStatement.setString(3, user.getEmail());
+            insertUserStatement.execute();
 
+            Statement st = con.createStatement();
+            long idOfLastInsert = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1").getInt("id");
+            
+            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) " +
+                    "VALUES (?, 1)");
+
+            setRoleForUser.setLong(1, new UserDaoImpl().findByUsername(user.getUsername()).getId());
+            
+            insertUserStatement.close();
             return true;
         } finally {
             if (con != null) try {

@@ -6,6 +6,7 @@ import com.artmal.model.enums.Role;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +19,14 @@ public class AdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        String username = servletRequest.getParameter("username");
-        String password = servletRequest.getParameter("password");
+        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        String username = (String) httpServletRequest.getSession().getAttribute("username");
+
+        if(username == null) {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
 
         UserDao userDaoImpl = new UserDaoImpl();
         try {

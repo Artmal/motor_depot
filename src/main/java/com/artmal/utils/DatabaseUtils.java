@@ -3,7 +3,6 @@ package com.artmal.utils;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
-
 public class DatabaseUtils {
     public static void setPoolProperties(DataSource dataSource) {
         PoolProperties p = new PoolProperties();

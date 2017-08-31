@@ -1,9 +1,9 @@
 package com.artmal.controller;
 
-import com.artmal.dao.UserDao;
-import com.artmal.dao.impl.UserDaoImpl;
 import com.artmal.model.User;
 import com.artmal.model.enums.Role;
+import com.artmal.service.UserService;
+import com.artmal.service.impl.UserServiceImpl;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -22,10 +22,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
+        System.out.println(username);
 
-        UserDao userDaoImpl = new UserDaoImpl();
+        UserService userService = new UserServiceImpl();
         try {
-            User userInDb = userDaoImpl.findByUsername(username);
+            User userInDb = userService.findByUsername(username);
 
             if(userInDb != null) {
                 req.getSession().setAttribute("username", userInDb.getUsername());
@@ -42,9 +43,7 @@ public class LoginServlet extends HttpServlet {
                                  break;
                 case ADMIN:      resp.sendRedirect("/admin-panel");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
     }

@@ -1,15 +1,11 @@
-package com.artmal.dao;
+package com.artmal.service;
 
 import com.artmal.model.User;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 
-/**
- * Data Access Object for User Entity.
- * @author Artem Malchenko
- */
-public interface UserDao {
+public interface UserService {
     User findByUsername(String username) throws SQLException, NamingException;
     boolean save(User user) throws SQLException, NamingException;
 }

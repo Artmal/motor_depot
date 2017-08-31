@@ -1,5 +1,9 @@
 package com.artmal.model;
 
+/**
+ * Simple Java Bean for representing Car entity.
+ * @author Artem Malchenko
+ */
 public class Car {
     private long id;
     private String registrationNumber;
