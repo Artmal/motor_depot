@@ -1,11 +1,12 @@
-# Inserting all rolles which are necessary for the system
+# Inserting all roles which are necessary for the system
 INSERT INTO roles(id, name) VALUES (1, "driver");
 INSERT INTO roles(id, name) VALUES (2, "dispatcher");
 INSERT INTO roles(id, name) VALUES (3, "admin");
 
-# Inserting admin in to the system
-INSERT INTO users(id, username, password, email) VALUES (1, "admin", "pass", "artmalchik@gmail.com");
-INSERT INTO user_roles(user_id, role_id) VALUES (1, 3);
+# Insert admin
+INSERT INTO users(id, email, password, date_of_registration) VALUES (1, "artmalchik@gmail.com",
+                            "$2a$10$ufibkIP46PDj0nV9JRCWSOsio0kaDhFycRLMPWmyUMQP.O5OyDdDW", NOW());
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 3);
 
 # Insert some cars
 INSERT INTO cars (registration_number, car_type, manufacturer, model, production_year, number_of_seats, car_color,

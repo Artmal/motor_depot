@@ -10,6 +10,6 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 public interface UserDao {
-    User findByUsername(String username) throws SQLException, NamingException;
+    User findByEmail(String username) throws SQLException, NamingException;
     boolean save(User user) throws SQLException, NamingException;
 }

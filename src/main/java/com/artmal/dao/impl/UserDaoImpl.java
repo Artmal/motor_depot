@@ -15,7 +15,7 @@ import java.sql.*;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public User findByUsername(String username) throws SQLException, NamingException {
+    public User findByEmail(String email) throws SQLException, NamingException {
         DataSource datasource = new DataSource();
         DatabaseUtils.setPoolProperties(datasource);
 
@@ -23,25 +23,25 @@ public class UserDaoImpl implements UserDao {
         try {
             con = datasource.getConnection();
 
-            PreparedStatement st = con.prepareStatement("SELECT * FROM users WHERE  username = ?");
-            st.setString(1, username);
-            ResultSet rs = st.executeQuery();
+            PreparedStatement findUserByUsername = con.prepareStatement("SELECT * FROM users WHERE  email = ?");
+            findUserByUsername.setString(1, email);
+            ResultSet usersWithTheUsername = findUserByUsername.executeQuery();
 
             User user = new User();
-            if (!rs.isBeforeFirst() ) {
+            if (!usersWithTheUsername.isBeforeFirst() ) {
                 user = null;
             } else {
-                rs.next();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
+                usersWithTheUsername.next();
+                user.setId(usersWithTheUsername.getInt("id"));
+                user.setEmail(usersWithTheUsername.getString("email"));
+                user.setPassword(usersWithTheUsername.getString("password"));
             }
 
             Statement st1 = con.createStatement();
-            ResultSet rs1 = st1.executeQuery("select role_id FROM user_roles WHERE user_id = " + user.getId());
+            ResultSet roleOfTheUser = st1.executeQuery("SELECT role_id FROM user_roles WHERE user_id = " + user.getId());
 
-            rs1.next();
-            switch(rs1.getInt("role_id")) {
+            roleOfTheUser.next();
+            switch(roleOfTheUser.getInt("role_id")) {
                 case 1: user.setRole(Role.DRIVER);
                         break;
                 case 2: user.setRole(Role.DISPATCHER);
@@ -50,8 +50,8 @@ public class UserDaoImpl implements UserDao {
                         break;
             }
 
-            rs.close();
-            st.close();
+            usersWithTheUsername.close();
+            findUserByUsername.close();
             return user;
         } finally {
             if (con != null) try {
@@ -72,18 +72,22 @@ public class UserDaoImpl implements UserDao {
 
             PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
                     " (username, password, email) VALUES (?, ?, ?)");
-            insertUserStatement.setString(1, user.getUsername());
+            insertUserStatement.setString(1, user.getEmail());
             insertUserStatement.setString(2, user.getPassword());
             insertUserStatement.setString(3, user.getEmail());
             insertUserStatement.execute();
 
             Statement st = con.createStatement();
-            long idOfLastInsert = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1").getInt("id");
+
+            ResultSet rs = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1");
+            rs.next();
+
+            long idOfLastInsert = rs.getInt("id");
             
             PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) " +
                     "VALUES (?, 1)");
 
-            setRoleForUser.setLong(1, new UserDaoImpl().findByUsername(user.getUsername()).getId());
+            setRoleForUser.setLong(1, idOfLastInsert);
             
             insertUserStatement.close();
             return true;
@@ -93,6 +97,5 @@ public class UserDaoImpl implements UserDao {
             } catch (Exception ignore) {
             }
         }
-
     }
 }

@@ -6,6 +6,6 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 
 public interface UserService {
-    User findByUsername(String username) throws SQLException, NamingException;
+    User findByEmail(String username) throws SQLException, NamingException;
     boolean save(User user) throws SQLException, NamingException;
 }

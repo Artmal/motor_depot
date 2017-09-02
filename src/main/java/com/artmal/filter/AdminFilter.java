@@ -30,7 +30,7 @@ public class AdminFilter implements Filter {
 
         UserDao userDaoImpl = new UserDaoImpl();
         try {
-            if(userDaoImpl.findByUsername(username).getRole().equals(Role.ADMIN)) {
+            if(userDaoImpl.findByEmail(username).getRole().equals(Role.ADMIN)) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;

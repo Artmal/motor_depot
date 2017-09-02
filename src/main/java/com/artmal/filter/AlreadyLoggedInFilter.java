@@ -28,7 +28,7 @@ public class AlreadyLoggedInFilter implements Filter {
 
             Role userRole = null;
             try {
-                userRole = userDao.findByUsername(username).getRole();
+                userRole = userDao.findByEmail(username).getRole();
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (NamingException e) {

@@ -72,13 +72,53 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminPanel</servlet-name>
-    <jsp-file>/WEB-INF/views/admin_panel/admin-panel.jsp</jsp-file>
+    <servlet-name>adminDashboard</servlet-name>
+    <jsp-file>/WEB-INF/views/admin_dashboard/adminDashboard.jsp</jsp-file>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminPanel</servlet-name>
-    <url-pattern>/admin-panel</url-pattern>
+    <servlet-name>adminDashboard</servlet-name>
+    <url-pattern>/admin-dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminDashBoard_driversPage</servlet-name>
+    <jsp-file>/WEB-INF/views/admin_dashboard/driversPage.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashBoard_driversPage</servlet-name>
+    <url-pattern>/admin-dashboard/drivers</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>reg</servlet-name>
+    <jsp-file>/WEB-INF/views/reg.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>reg</servlet-name>
+    <url-pattern>/reg</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>profilePage</servlet-name>
+    <jsp-file>/WEB-INF/views/profile.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>profilePage</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminDashboard-users</servlet-name>
+    <jsp-file>/WEB-INF/views/admin_dashboard/usersView.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashboard-users</servlet-name>
+    <url-pattern>/admin-dashboard/user</url-pattern>
   </servlet-mapping>
 
   <!-- Filters -->
@@ -99,6 +139,6 @@
 
   <filter-mapping>
     <filter-name>adminFilter</filter-name>
-    <url-pattern>/admin-panel</url-pattern>
+    <url-pattern>/admin-dashboard</url-pattern>
   </filter-mapping>
 </web-app>

@@ -12,8 +12,8 @@ public class UserServiceImpl implements UserService {
     private static UserDao userDaoImpl = new UserDaoImpl();
 
     @Override
-    public User findByUsername(String username) throws SQLException, NamingException {
-        return userDaoImpl.findByUsername(username);
+    public User findByEmail(String username) throws SQLException, NamingException {
+        return userDaoImpl.findByEmail(username);
     }
 
     @Override

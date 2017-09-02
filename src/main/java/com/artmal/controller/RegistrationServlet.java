@@ -8,6 +8,8 @@ import com.artmal.service.UserService;
 import com.artmal.service.impl.DriverServiceImpl;
 import com.artmal.service.impl.UserServiceImpl;
 import com.artmal.utils.RegistrationUtil;
+import org.apache.log4j.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -19,7 +21,15 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * Servlet for handling registration process.
+ * Get parameter from reg page -> create bean -> save to db.
+ * Mapped to: /register
+ * @author Artem Malchenko
+ */
 public class RegistrationServlet extends HttpServlet {
+    final static Logger logger = Logger.getLogger(LoginServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
@@ -32,21 +42,24 @@ public class RegistrationServlet extends HttpServlet {
         try {
             dateOfBirth = RegistrationUtil.stringToDate(req.getParameter("dateOfBirth"));
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error("Threw a ParseException in RegistrationServlet::doPost, full stack trace follows:", e);
         }
         String password = req.getParameter("password");
 
-        User user = new User(username, password, email, Role.DRIVER);
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        User user = new User(email, hashedPassword, Role.DRIVER);
         UserService userService = new UserServiceImpl();
         try {
             userService.save(user);
-            long userId = userService.findByUsername(username).getId();
+            long userId = userService.findByEmail(username).getId();
             Driver driver = new Driver(name, passportSerialNumber, phoneNumber, experience, dateOfBirth, userId);
 
             DriverService driverService = new DriverServiceImpl();
             driverService.save(driver);
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            logger.error("Threw a SQLException in RegistrationServlet::doPost, full stack trace follows:", e);
+        } catch (NamingException e) {
+            logger.error("Threw a NamingException in RegistrationServlet::doPost, full stack trace follows:", e);
         }
     }
 }

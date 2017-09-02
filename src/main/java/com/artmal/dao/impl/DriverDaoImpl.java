@@ -11,6 +11,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * DriverDao implementation.
+ * @author Artem Malchenko
+ */
 public class DriverDaoImpl implements DriverDao {
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {

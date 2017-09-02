@@ -4,6 +4,8 @@ import com.artmal.model.User;
 import com.artmal.model.enums.Role;
 import com.artmal.service.UserService;
 import com.artmal.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -13,23 +15,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for login page..
+ * Mapped to: /loginServlet
+ * @author Artem Malchenkon
+ */
 public class LoginServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+    final static Logger logger = Logger.getLogger(LoginServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        System.out.println(username);
+        String username = req.getParameter("email");
 
         UserService userService = new UserServiceImpl();
         try {
-            User userInDb = userService.findByUsername(username);
+            User userInDb = userService.findByEmail(username);
 
-            if(userInDb != null) {
-                req.getSession().setAttribute("username", userInDb.getUsername());
+            if(BCrypt.checkpw(req.getParameter("password"), userInDb.getPassword())) {
+                req.getSession().setAttribute("username", userInDb.getEmail());
                 req.getSession().setAttribute("password", userInDb.getPassword());
                 req.getSession().setAttribute("role", userInDb.getRole());
             }
@@ -41,10 +44,12 @@ public class LoginServlet extends HttpServlet {
                                  break;
                 case DISPATCHER: resp.sendRedirect("/dispatcher-panel");
                                  break;
-                case ADMIN:      resp.sendRedirect("/admin-panel");
+                case ADMIN:      resp.sendRedirect("/admin-dashboard");
             }
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            logger.error("Threw a SQLException in LoginServlet::doPost, full stack trace follows:", e);
+        } catch (NamingException e) {
+            logger.error("Threw a NamingException in LoginServlet::doPost, full stack trace follows:", e);
         }
     }
 }
