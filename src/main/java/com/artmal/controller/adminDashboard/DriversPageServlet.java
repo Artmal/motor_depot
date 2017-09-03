@@ -1,5 +1,6 @@
-package com.artmal.controller;
+package com.artmal.controller.adminDashboard;
 
+import com.artmal.controller.LoginServlet;
 import com.artmal.model.enums.Role;
 import com.artmal.model.users.Driver;
 import com.artmal.model.users.User;
@@ -16,15 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * Servlet for handling registration process.
- * Registration available only for drivers.
- * Get parameter from reg page -> create bean -> save to db.
- * Mapped to: /register
- * @author Artem Malchenko
- */
-public class RegistrationServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(RegistrationServlet.class);
+public class DriversPageServlet extends HttpServlet {
+    final static Logger logger = Logger.getLogger(LoginServlet.class);
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
             logger.error("Threw a NamingException in RegistrationServlet::doPost, full stack trace follows:", e);
         }
 
-        resp.sendRedirect("/login");
+        resp.sendRedirect("/admin-dashboard/drivers");
 
     }
 }

@@ -15,11 +15,10 @@
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
-
-    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/profile.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>

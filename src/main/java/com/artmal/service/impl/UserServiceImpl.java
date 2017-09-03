@@ -2,7 +2,7 @@ package com.artmal.service.impl;
 
 import com.artmal.dao.UserDao;
 import com.artmal.dao.impl.UserDaoImpl;
-import com.artmal.model.User;
+import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 
 import javax.naming.NamingException;
@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean save(User user) throws SQLException, NamingException {
+    public int save(User user) throws SQLException, NamingException {
         return userDaoImpl.save(user);
     }
 }

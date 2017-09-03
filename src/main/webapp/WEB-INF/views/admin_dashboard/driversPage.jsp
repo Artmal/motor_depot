@@ -8,14 +8,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+    <title>Drivers</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/admin-panel/driversPage.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -29,7 +31,6 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Drivers in the system</h1>
 
-            <h2>Section title</h2>
             <div class="table-responsive">
             <table class="table table-striped">
             <thead>
@@ -157,6 +158,68 @@
             </tbody>
             </table>
             </div>
+
+            <br>
+
+            <div class="card">
+                <div class="card-block">
+                    <form class="form-horizontal" action="/admin-dashboard/addDriverServlet" method="post">
+                        <label for="email">Email*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
+                        </div>
+
+                        <label for="password">Password*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password" name="password"
+                                   required>
+                        </div>
+
+                        <label for="name">Full Name*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user-circle-o"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
+                        </div>
+
+                        <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-id-card-o"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport-serial-numbers"
+                                   name="passport-serial-numbers" required>
+                        </div>
+
+                        <label for="phone-number">Phone Number*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-phone-square"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number"
+                                   name="phone-number" required>
+                        </div>
+
+                        <label for="age">Age:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-birthday-cake"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
+                        </div>
+                        <br>
+                        <button class="btn btn-primary">Add driver</button>
+                </form>
+                </div>
+            </div>
+            <br>
         </main>
     </div>
 </div>

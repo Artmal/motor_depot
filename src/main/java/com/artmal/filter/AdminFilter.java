@@ -3,6 +3,7 @@ package com.artmal.filter;
 import com.artmal.dao.UserDao;
 import com.artmal.dao.impl.UserDaoImpl;
 import com.artmal.model.enums.Role;
+import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class AdminFilter implements Filter {
+    final static Logger logger = Logger.getLogger(AdminFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -20,9 +23,9 @@ public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        String username = (String) httpServletRequest.getSession().getAttribute("username");
+        String email = (String) httpServletRequest.getSession().getAttribute("email");
 
-        if(username == null) {
+        if(email == null) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
@@ -30,16 +33,16 @@ public class AdminFilter implements Filter {
 
         UserDao userDaoImpl = new UserDaoImpl();
         try {
-            if(userDaoImpl.findByEmail(username).getRole().equals(Role.ADMIN)) {
+            if(userDaoImpl.findByEmail(email).getRole().equals(Role.ADMIN)) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Threw a SQLException in AdminFilter::doFilter, full stack trace follows:", e);
         } catch (NamingException e) {
-            e.printStackTrace();
+            logger.error("Threw a NamingException in AdminFilter::doFilter, full stack trace follows:", e);
         }
     }
 

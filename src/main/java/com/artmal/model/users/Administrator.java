@@ -1,34 +1,32 @@
 package com.artmal.model.users;
 
 /**
- * Simple Java Bean for representing Driver entity.
+ * Simple Java Bean for representing Administrator entity.
+ * @author Artem Malchenko
  */
-public class Driver {
+public class Administrator {
     private long id;
     private String name;
     private String passportSerialNumbers;
     private String phoneNumber;
-    private int age;
 
     private User userInfo;
 
-    public Driver() {
+    public Administrator() {
     }
 
-    public Driver(long id, String name, String passportSerialNumbers, String phoneNumber, int age, User userInfo) {
+    public Administrator(long id, String name, String passportSerialNumbers, String phoneNumber, User userInfo) {
         this.id = id;
         this.name = name;
         this.passportSerialNumbers = passportSerialNumbers;
         this.phoneNumber = phoneNumber;
-        this.age = age;
         this.userInfo = userInfo;
     }
 
-    public Driver(String name, String passportSerialNumbers, String phoneNumber, int age, User userInfo) {
+    public Administrator(String name, String passportSerialNumbers, String phoneNumber, User userInfo) {
         this.name = name;
         this.passportSerialNumbers = passportSerialNumbers;
         this.phoneNumber = phoneNumber;
-        this.age = age;
         this.userInfo = userInfo;
     }
 
@@ -47,20 +45,14 @@ public class Driver {
     public String getPassportSerialNumbers() {
         return passportSerialNumbers;
     }
-    public void setPassportSerialNumbers(String passport_serial_numbers) {
-        this.passportSerialNumbers = passport_serial_numbers;
+    public void setPassportSerialNumbers(String passportSerialNumbers) {
+        this.passportSerialNumbers = passportSerialNumbers;
     }
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public void setPhoneNumber(String phone_number) {
-        this.phoneNumber = phone_number;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     public User getUserInfo() {
         return userInfo;

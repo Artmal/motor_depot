@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Sign up</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -19,90 +19,78 @@
         <div class="col-md-8">
             <section>
                 <h1 class="entry-title"><span>Sign Up</span> </h1>
-                <hr>
-                <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" >
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
-                        <div class="col-md-8 col-sm-9">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input type="email" class="form-control" name="emailid" id="emailid" placeholder="Enter your Email ID" value="">
-                            </div>
-                            <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
+
+                <form action="/register" class="form-horizontal" method="post" name="signup" id="signup"
+                      onsubmit="validateInput()">
+
+                    <label for="email">Email*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
-                        <div class="col-md-5 col-sm-8">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (5-15 chars)" value="">
-                            </div>
+                    <label for="password">Password*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-key"></i>
                         </div>
+                        <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password"
+                               name="password" required>
                     </div>
 
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
-                        <div class="col-md-5 col-sm-8">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password" value="">
-                            </div>
+                    <label for="password">Confirm password*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-key"></i>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
-                        <div class="col-md-8 col-sm-9">
-                            <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="Enter your Name here" value="">
-                        </div>
+                        <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="cpassword" name="cpassword"
+                               required>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Passport serial numbers<span class="text-danger">*</span></label>
-                        <div class="col-md-8 col-sm-9">
-                            <input type="text" class="form-control" name="mem_name" id="mem_passportSerialNumbers" placeholder="Enter your passport serial numbers here" value="">
+                    <label for="name">Full Name*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user-circle-o"></i>
                         </div>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Date of Birth<span class="text-danger">*</span></label>
-                        <div class="col-md-8 col-sm-9">
-                            <input type="text" class="form-control" name="mem_name" id="mem_dateOfBirth" placeholder="YYYY-MM-DD" value="">
+                    <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-id-card-o"></i>
                         </div>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport-serial-numbers"
+                               name="passport-serial-numbers" required>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
-                        <div class="col-md-5 col-sm-8">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                <input type="text" class="form-control" name="contactnum" id="contactnum" placeholder="Enter your Primary contact no." value="">
-                            </div>
+                    <label for="phone-number">Phone Number*:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-phone-square"></i>
                         </div>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number" required>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Profile Photo <br>
-                            <small>(optional)</small></label>
-                        <div class="col-md-5 col-sm-8">
-                            <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-upload"></i></span>
-                                <input type="file" name="file_nm" id="file_nm" class="form-control upload" placeholder="" aria-describedby="file_upload">
-                            </div>
+                    <label for="age">Age:</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon">
+                            <i class="fa fa-birthday-cake"></i>
                         </div>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Security Code </label>
-                        <div class="col-md-5 col-sm-8">
-                            <div >
 
-                                <input type="text" name="captcha" id="captcha" class="form-control label-warning"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
-                    </div>
+                    <%--<label for="age">Security code:</label>--%>
+                    <%--<div class="input-group mb-2 mr-sm-2 mb-sm-0">--%>
+                        <%--<div class="input-group-addon">--%>
+                            <%--<i class="fa fa-shield"></i>--%>
+                        <%--</div>--%>
+                        <%--<input name="captcha" id = "captcha" class="form-control mb-2 mr-sm-2 mb-sm-0" id="securityCode">--%>
+                    <%--</div>--%>
+
+                    <br>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-10">
                             <input name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
@@ -112,6 +100,39 @@
         </div>
     </div>
 </div>
+
+<script>
+//    var password = document.getElementById("password");
+//    var confirm_password = document.getElementById("cpassword");
+//
+//    function validatePassword(){
+//        if(password.value != confirm_password.value) {
+//            confirm_password.setCustomValidity("Passwords Don't Match");
+//        } else {
+//            confirm_password.setCustomValidity('');
+//        }
+//    }
+//
+//    password.onchange = validatePassword;
+//    confirm_password.onkeyup = validatePassword;
+//
+//    var email = document.getElementById("email");
+//    function isEmail(email) {
+//        var regex = /^([a-zA-Z0-9_.+-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+//        if(!regex.test(email)) {
+//            email.setCustomValidity("Please Enter Valid Email")
+//        } else {
+//            email.setCustomValidity('');
+//        }
+//    }
+//
+//    email.onchange = isEmail();
+//
+//    function validateInput() {
+//        validatePassword();
+//        isEmail();
+//    }
+</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

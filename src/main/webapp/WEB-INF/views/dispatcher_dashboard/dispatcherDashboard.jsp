@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+    <title>Dispatcher Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -24,13 +24,10 @@
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Dispatcher Dashboard</a>
+    <a class="navbar-brand" href="/dispatcher-dashboard">Dispatcher Dashboard</a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Settings</a>
             </li>
@@ -51,37 +48,19 @@
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="#">Trips <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trips</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin-dashboard/drivers">Drivers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dispatchers</a>
+                    <a class="nav-link" href="#">Requests</a>
                 </li>
             </ul>
         </nav>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Overview</h1>
 
-            <div class="card">
-                <div class="card-header">Successful trips this month</div>
-                <div class="card-block">43</div>
-            </div>
-
-            <br>
-
-            <div class="card">
-                <div class="card-header">Salary paid to drivers this month</div>
-                <div class="card-block">8321$</div>
-            </div>
         </main>
     </div>
 </div>

@@ -1,6 +1,6 @@
 package com.artmal.dao;
 
-import com.artmal.model.User;
+import com.artmal.model.users.User;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -11,5 +11,5 @@ import java.sql.SQLException;
  */
 public interface UserDao {
     User findByEmail(String username) throws SQLException, NamingException;
-    boolean save(User user) throws SQLException, NamingException;
+    int save(User user) throws SQLException, NamingException;
 }

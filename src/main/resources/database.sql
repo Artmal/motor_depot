@@ -4,7 +4,7 @@ USE motor_depot;
 
 -- Types  of Users -----------------------------------------------------------------------------------------------------
 CREATE TABLE users (
-  id                    INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id                    INT          AUTO_INCREMENT PRIMARY KEY,
   email                 VARCHAR(100) NOT NULL,
   password              VARCHAR(255) NOT NULL,
   date_of_registration  DATETIME     NOT NULL,
@@ -12,24 +12,38 @@ CREATE TABLE users (
 )
   ENGINE = InnoDB;
 
-CREATE TABLE persons(
-  id                      INT NOT NULL  AUTO_INCREMENT PRIMARY KEY,
-  name                    VARCHAR(255) NOT NULL,
-  passport_serial_numbers VARCHAR(255),
-  phone_number            VARCHAR(50),
-  date_of_birth           DATE,
-  user_id                 INT NOT NULL,
+CREATE TABLE administrators(
+  id                        INT          AUTO_INCREMENT PRIMARY KEY,
+  name                      VARCHAR(225) NOT NULL,
+  passport_serial_numbers   VARCHAR(30)  NOT NULL,
+  phone_number              VARCHAR(30)  NOT NULL,
+  user_id                   INT          NOT NULL,
 
   FOREIGN KEY (user_id) REFERENCES users(id)
 )
   ENGINE = InnoDB;
 
 CREATE TABLE dispatchers(
-  id                      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  salary_in_dollars       INT NOT NULL,
-  person_id               INT NOT NULL,
+  id                        INT AUTO_INCREMENT PRIMARY KEY,
+  name                      VARCHAR(225) NOT NULL,
+  passport_serial_numbers   VARCHAR(30),
+  phone_number              VARCHAR(30),
+  salary_in_dollars         INT,
+  user_id                   INT NOT NULL,
 
-  FOREIGN KEY (person_id) REFERENCES persons(id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE drivers(
+  id                        INT AUTO_INCREMENT PRIMARY KEY,
+  name                      VARCHAR(225) NOT NULL,
+  passport_serial_numbers   VARCHAR(30),
+  phone_number              VARCHAR(30),
+  age                       INT,
+  user_id                   INT          NOT NULL,
+
+  FOREIGN KEY (user_id) REFERENCES users(id)
 )
   ENGINE = InnoDB;
 -- ---------------------------------------------------------------------------------------------------------------------

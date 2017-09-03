@@ -1,9 +1,11 @@
 package com.artmal.dao.impl;
 
 import com.artmal.dao.UserDao;
-import com.artmal.model.User;
-import com.artmal.model.enums.Role;
+import com.artmal.model.users.User;
+import com.artmal.service.UserService;
+import com.artmal.service.impl.UserServiceImpl;
 import com.artmal.utils.DatabaseUtils;
+import org.apache.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
 import javax.naming.NamingException;
@@ -14,6 +16,8 @@ import java.sql.*;
  * @author Artem Malchenko
  */
 public class UserDaoImpl implements UserDao {
+    final static Logger logger = Logger.getLogger(UserDaoImpl.class);
+
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {
         DataSource datasource = new DataSource();
@@ -41,14 +45,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet roleOfTheUser = st1.executeQuery("SELECT role_id FROM user_roles WHERE user_id = " + user.getId());
 
             roleOfTheUser.next();
-            switch(roleOfTheUser.getInt("role_id")) {
-                case 1: user.setRole(Role.DRIVER);
-                        break;
-                case 2: user.setRole(Role.DISPATCHER);
-                        break;
-                case 3: user.setRole(Role.ADMIN);
-                        break;
-            }
+            user.setRole(DatabaseUtils.intToRole(roleOfTheUser.getInt("role_id")));
 
             usersWithTheUsername.close();
             findUserByUsername.close();
@@ -62,7 +59,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean save(User user) throws SQLException, NamingException {
+    public int save(User user) throws SQLException, NamingException {
         DataSource datasource = new DataSource();
         DatabaseUtils.setPoolProperties(datasource);
         Connection con = null;
@@ -71,14 +68,12 @@ public class UserDaoImpl implements UserDao {
             con = datasource.getConnection();
 
             PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
-                    " (username, password, email) VALUES (?, ?, ?)");
+                    " (email, password, date_of_registration) VALUES (?, ?, NOW())");
             insertUserStatement.setString(1, user.getEmail());
             insertUserStatement.setString(2, user.getPassword());
-            insertUserStatement.setString(3, user.getEmail());
             insertUserStatement.execute();
 
             Statement st = con.createStatement();
-
             ResultSet rs = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1");
             rs.next();
 
@@ -88,9 +83,14 @@ public class UserDaoImpl implements UserDao {
                     "VALUES (?, 1)");
 
             setRoleForUser.setLong(1, idOfLastInsert);
-            
+            st.close();
+            rs.close();
             insertUserStatement.close();
-            return true;
+
+            UserService userService = new UserServiceImpl();
+
+            System.out.println((int) userService.findByEmail(user.getEmail()).getId());
+            return (int) userService.findByEmail(user.getEmail()).getId();
         } finally {
             if (con != null) try {
                 con.close();

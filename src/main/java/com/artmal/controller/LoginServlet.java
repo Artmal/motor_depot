@@ -1,7 +1,7 @@
 package com.artmal.controller;
 
-import com.artmal.model.User;
 import com.artmal.model.enums.Role;
+import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
@@ -32,7 +32,8 @@ public class LoginServlet extends HttpServlet {
             User userInDb = userService.findByEmail(username);
 
             if(BCrypt.checkpw(req.getParameter("password"), userInDb.getPassword())) {
-                req.getSession().setAttribute("username", userInDb.getEmail());
+                req.getSession().setAttribute("id", userInDb.getId());
+                req.getSession().setAttribute("email", userInDb.getEmail());
                 req.getSession().setAttribute("password", userInDb.getPassword());
                 req.getSession().setAttribute("role", userInDb.getRole());
             }
@@ -40,9 +41,9 @@ public class LoginServlet extends HttpServlet {
             Role role = userInDb.getRole();
 
             switch(role) {
-                case DRIVER:     resp.sendRedirect("/driver-panel");
+                case DRIVER:     resp.sendRedirect("/driver-dashboard");
                                  break;
-                case DISPATCHER: resp.sendRedirect("/dispatcher-panel");
+                case DISPATCHER: resp.sendRedirect("/dispatcher-dashboard");
                                  break;
                 case ADMIN:      resp.sendRedirect("/admin-dashboard");
             }

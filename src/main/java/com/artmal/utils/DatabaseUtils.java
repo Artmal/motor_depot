@@ -1,5 +1,6 @@
 package com.artmal.utils;
 
+import com.artmal.model.enums.Role;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
@@ -30,5 +31,18 @@ public class DatabaseUtils {
                         "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
 
         dataSource.setPoolProperties(p);
+    }
+
+    public static Role intToRole(int valueFromDB) {
+        switch(valueFromDB) {
+            case 1:
+                return Role.DRIVER;
+            case 2:
+                return Role.DISPATCHER;
+            case 3:
+                return Role.ADMIN;
+        }
+
+        return null;
     }
 }

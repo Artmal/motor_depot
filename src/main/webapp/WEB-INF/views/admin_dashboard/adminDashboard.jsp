@@ -16,6 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
