@@ -30,7 +30,6 @@
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
 
-
   <servlet>
     <servlet-name>adminDashboard_addCar</servlet-name>
     <servlet-class>com.artmal.controller.adminDashboard.DriversPageServlet</servlet-class>
@@ -42,13 +41,54 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>adminDashboard_profilesServlet</servlet-name>
+    <servlet-class>com.artmal.controller.adminDashboard.ProfilesViewServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashboard_profilesServlet</servlet-name>
+    <url-pattern>/admin-dashboard/driver-profile</url-pattern>
+    <url-pattern>/admin-dashboard/dispatcher-profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>logoutServlet</servlet-name>
     <servlet-class>com.artmal.controller.LogoutServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>logoutServlet</servlet-name>
-    <url-pattern>/logout</url-pattern>
+  <servlet-name>logoutServlet</servlet-name>
+  <url-pattern>/logout</url-pattern>
+</servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminDashboard_dispatcherServlet</servlet-name>
+    <servlet-class>com.artmal.controller.adminDashboard.DispatchersPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashboard_dispatcherServlet</servlet-name>
+    <url-pattern>/admin-dashboard/dispatcherServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>myProfilePageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.MyProfilePageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>myProfilePageServlet</servlet-name>
+    <url-pattern>/my-profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminDashboard_driversPageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.adminDashboard.DriversPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashboard_driversPageServlet</servlet-name>
+    <url-pattern>/admin-dashboard/driversServlet</url-pattern>
   </servlet-mapping>
 
   <!-- JSP -->
@@ -80,16 +120,6 @@
   <servlet-mapping>
     <servlet-name>adminDashboard</servlet-name>
     <url-pattern>/admin-dashboard</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>adminDashBoard_driversPage</servlet-name>
-    <jsp-file>/WEB-INF/views/admin_dashboard/driversPage.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>adminDashBoard_driversPage</servlet-name>
-    <url-pattern>/admin-dashboard/drivers</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -132,6 +162,26 @@
     <url-pattern>/dispatcher-dashboard</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>driverDashboard</servlet-name>
+    <jsp-file>/WEB-INF/views/driver_dashboard/driverDashboard.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard</servlet-name>
+    <url-pattern>/driver-dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard-garage</servlet-name>
+    <jsp-file>/WEB-INF/views/driver_dashboard/garagePage.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard-garage</servlet-name>
+    <url-pattern>/driver-dashboard/garage</url-pattern>
+  </servlet-mapping>
+
   <!-- Filters -->
   <filter>
     <filter-name>alreadyLoggedInFilter</filter-name>
@@ -150,6 +200,6 @@
 
   <filter-mapping>
     <filter-name>adminFilter</filter-name>
-    <url-pattern>/admin-dashboard</url-pattern>
+    <url-pattern>/admin-dashboard/*</url-pattern>
   </filter-mapping>
 </web-app>

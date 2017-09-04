@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -31,186 +32,89 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Dispatchers in the system</h1>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                        <td>elit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                        <td>ante</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                        <td>nisi</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                        <td>at</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                        <td>Duis</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                        <td>mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,008</td>
-                        <td>Fusce</td>
-                        <td>nec</td>
-                        <td>tellus</td>
-                        <td>sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,009</td>
-                        <td>augue</td>
-                        <td>semper</td>
-                        <td>porta</td>
-                        <td>Mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,010</td>
-                        <td>massa</td>
-                        <td>Vestibulum</td>
-                        <td>lacinia</td>
-                        <td>arcu</td>
-                    </tr>
-                    <tr>
-                        <td>1,011</td>
-                        <td>eget</td>
-                        <td>nulla</td>
-                        <td>Class</td>
-                        <td>aptent</td>
-                    </tr>
-                    <tr>
-                        <td>1,012</td>
-                        <td>taciti</td>
-                        <td>sociosqu</td>
-                        <td>ad</td>
-                        <td>litora</td>
-                    </tr>
-                    <tr>
-                        <td>1,013</td>
-                        <td>torquent</td>
-                        <td>per</td>
-                        <td>conubia</td>
-                        <td>nostra</td>
-                    </tr>
-                    <tr>
-                        <td>1,014</td>
-                        <td>per</td>
-                        <td>inceptos</td>
-                        <td>himenaeos</td>
-                        <td>Curabitur</td>
-                    </tr>
-                    <tr>
-                        <td>1,015</td>
-                        <td>sodales</td>
-                        <td>ligula</td>
-                        <td>in</td>
-                        <td>libero</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <c:if test="${not empty setOfDispatchers}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Dispatcher ID</th>
+                            <th>Name</th>
+                            <th>Passport Serial Numbers</th>
+                            <th>Phone Number</th>
+                            <th>Salary($)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${setOfDispatchers}" var="dispatcher">
+                            <c:set var="count" value="${count + 1}" scope="page"/>
+                            <tr>
+                                <td>${dispatcher.id}</td>
+                                <td><a href="${contextPath}/admin-dashboard/dispatcher-profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
+                                <td>${dispatcher.passportSerialNumbers}</td>
+                                <td>${dispatcher.phoneNumber}</td>
+                                <td>${dispatcher.salaryInDollars}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:if>
 
             <br>
 
             <div class="card">
                 <div class="card-block">
-                    <form class="form-horizontal">
-
-                        <label for="email">Email:</label>
+                    <form class="form-horizontal" action="/admin-dashboard/dispatcherServlet" method="post">
+                        <label for="email">Email*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-envelope fa-fw"></i>
                             </div>
-                            <input class="form-control" id="email">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                         </div>
 
-                        <label for="password">Password:</label>
+                        <label for="password">Password*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-key"></i>
+                                <i class="fa fa-key fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="password">
+                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password" name="password"
+                                   required>
                         </div>
 
-                        <label for="name">Name:</label>
+                        <label for="name">Full Name*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-user-circle-o"></i>
+                                <i class="fa fa-user-circle-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
                         </div>
 
-                        <label for="passport_serial_numbers">Passport Serial Numbers:</label>
+                        <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-id-card-o"></i>
+                                <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport_serial_numbers">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport-serial-numbers"
+                                   name="passport-serial-numbers" required>
                         </div>
 
-                        <label for="phoneNumber">Phone Number:</label>
+                        <label for="phone-number">Phone Number*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                <i class="fa fa-phone-square fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phoneNumber">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number"
+                                   name="phone-number" required>
                         </div>
 
-                        <label for="dateOfBirth">Date Of Birth:</label>
+                        <label for="salary-in-dollars">Salary($)</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-birthday-cake"></i>
+                                <i class="fa fa-usd fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="dateOfBirth" placeholder="YYYY-MM-DD">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="salary-in-dollars"
+                                    name="salary-in-dollars">
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Add dispatcher</button>

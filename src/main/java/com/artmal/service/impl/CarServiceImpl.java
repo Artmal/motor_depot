@@ -7,18 +7,12 @@ import com.artmal.service.CarService;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class CarServiceImpl implements CarService {
-    private static CarDao carDaoImpl = new CarDaoImpl();
-
-    @Override
-    public List<Car> findAllCars() throws SQLException {
-        return carDaoImpl.findAllCars();
-    }
+    private static CarDao carDao = new CarDaoImpl();
 
     @Override
     public boolean save(Car car) throws SQLException, NamingException {
-        return carDaoImpl.save(car);
+        return carDao.save(car);
     }
 }

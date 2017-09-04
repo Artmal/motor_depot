@@ -18,7 +18,7 @@ import java.sql.SQLException;
 /**
  * Servlet for login page..
  * Mapped to: /loginServlet
- * @author Artem Malchenkon
+ * @author Artem Malchenko
  */
 public class LoginServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(LoginServlet.class);
@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("email");
 
         UserService userService = new UserServiceImpl();
+
         try {
             User userInDb = userService.findByEmail(username);
 
@@ -36,16 +37,16 @@ public class LoginServlet extends HttpServlet {
                 req.getSession().setAttribute("email", userInDb.getEmail());
                 req.getSession().setAttribute("password", userInDb.getPassword());
                 req.getSession().setAttribute("role", userInDb.getRole());
-            }
 
-            Role role = userInDb.getRole();
+                Role role = userInDb.getRole();
 
-            switch(role) {
-                case DRIVER:     resp.sendRedirect("/driver-dashboard");
-                                 break;
-                case DISPATCHER: resp.sendRedirect("/dispatcher-dashboard");
-                                 break;
-                case ADMIN:      resp.sendRedirect("/admin-dashboard");
+                switch(role) {
+                    case Driver:     resp.sendRedirect("/driver-dashboard");
+                        break;
+                    case Dispatcher: resp.sendRedirect("/dispatcher-dashboard");
+                        break;
+                    case Admin:      resp.sendRedirect("/admin-dashboard");
+                }
             }
         } catch (SQLException e) {
             logger.error("Threw a SQLException in LoginServlet::doPost, full stack trace follows:", e);

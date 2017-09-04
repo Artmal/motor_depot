@@ -1,36 +1,19 @@
 package com.artmal.model;
 
-/**
- * Simple Java Bean for representing Car entity.
- * @author Artem Malchenko
- */
+import com.artmal.model.enums.CarCondition;
+import com.artmal.model.enums.CarType;
+
 public class Car {
     private long id;
     private String registrationNumber;
-    private String carType;
-    private String manufacturer;
     private String model;
-    private int productionYear;
     private int numberOfSeats;
     private String color;
-    private int mileage;
-    private String carCondition;
+    private CarType type;
+    private CarCondition condition;
+    private long ownerId;
 
     public Car() {
-    }
-
-    public Car(long id, String registrationNumber, String carType, String manufacturer, String model,
-               int productionYear, int numberOfSeats, String color, int mileage, String carCondition) {
-        this.id = id;
-        this.registrationNumber = registrationNumber;
-        this.carType = carType;
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.productionYear = productionYear;
-        this.numberOfSeats = numberOfSeats;
-        this.color = color;
-        this.mileage = mileage;
-        this.carCondition = carCondition;
     }
 
     public long getId() {
@@ -45,29 +28,11 @@ public class Car {
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
-    public String getCarType() {
-        return carType;
-    }
-    public void setCarType(String carType) {
-        this.carType = carType;
-    }
-    public String getManufacturer() {
-        return manufacturer;
-    }
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
     public String getModel() {
         return model;
     }
     public void setModel(String model) {
         this.model = model;
-    }
-    public int getProductionYear() {
-        return productionYear;
-    }
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
     }
     public int getNumberOfSeats() {
         return numberOfSeats;
@@ -81,16 +46,22 @@ public class Car {
     public void setColor(String color) {
         this.color = color;
     }
-    public int getMileage() {
-        return mileage;
+    public CarType getType() {
+        return type;
     }
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
+    public void setType(CarType type) {
+        this.type = type;
     }
-    public String getCarCondition() {
-        return carCondition;
+    public CarCondition getCondition() {
+        return condition;
     }
-    public void setCarCondition(String carCondition) {
-        this.carCondition = carCondition;
+    public void setCondition(CarCondition condition) {
+        this.condition = condition;
+    }
+    public long getOwnerId() {
+        return ownerId;
+    }
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 }

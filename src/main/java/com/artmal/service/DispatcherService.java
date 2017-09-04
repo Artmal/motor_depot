@@ -1,4 +1,4 @@
-package com.artmal.dao;
+package com.artmal.service;
 
 import com.artmal.model.users.Dispatcher;
 
@@ -6,11 +6,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.Set;
 
-/**
- * Data Access Object for Dispatcher Entity.
- * @author Artem Malchenko
- */
-public interface DispatcherDao {
+public interface DispatcherService {
     boolean save(Dispatcher dispatcher) throws SQLException, NamingException;
 
     Dispatcher findById(long id) throws SQLException;

@@ -8,39 +8,56 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dispatcher Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/profile.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-<%@include file = "utils/dispatcherHeader.jsp" %>
+<%@include file = "../utils/adminHeader.jsp" %>
 
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Trips <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+<div class="container">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        ${dispatcher.name}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        DISPATCHER
+                    </div>
+                </div>
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <button type="button" class="btn btn-success btn-sm">Message</button>
+                    <button type="button" class="btn btn-danger btn-sm">Ban</button>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
 
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Requests</a>
-                </li>
-            </ul>
-        </nav>
+                <div class="profile-usermenu">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Created Trips</a>
+                        </li>
+                    </ul>
+                </div>
 
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-
-        </main>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                No trips yet...
+            </div>
+        </div>
     </div>
 </div>
 

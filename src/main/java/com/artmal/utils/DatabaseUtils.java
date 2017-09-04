@@ -36,11 +36,11 @@ public class DatabaseUtils {
     public static Role intToRole(int valueFromDB) {
         switch(valueFromDB) {
             case 1:
-                return Role.DRIVER;
+                return Role.Driver;
             case 2:
-                return Role.DISPATCHER;
+                return Role.Dispatcher;
             case 3:
-                return Role.ADMIN;
+                return Role.Admin;
         }
 
         return null;

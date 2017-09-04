@@ -7,8 +7,41 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 
 import javax.naming.NamingException;
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DriverDaoImpl implements DriverDao {
+    @Override
+    public Driver findById(long id) throws SQLException {
+        DataSource datasource = new DataSource();
+        DatabaseUtils.setPoolProperties(datasource);
+        Connection con = null;
+
+        try {
+            con = datasource.getConnection();
+
+            PreparedStatement findDriverByIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE id = ?");
+            findDriverByIdStatement.setLong(1, id);
+            ResultSet driver = findDriverByIdStatement.executeQuery();
+            driver.next();
+
+            Driver theDriver = new Driver();
+            theDriver.setId(driver.getInt("id"));
+            theDriver.setName(driver.getString("name"));
+            theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
+            theDriver.setPhoneNumber(driver.getString("phone_number"));
+
+            findDriverByIdStatement.close();
+            driver.close();
+            return theDriver;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {
         DataSource datasource = new DataSource();
@@ -53,6 +86,40 @@ public class DriverDaoImpl implements DriverDao {
             st.close();
             rs.close();
             return true;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Set<Driver> findAll() throws SQLException {
+        DataSource datasource = new DataSource();
+        DatabaseUtils.setPoolProperties(datasource);
+        Connection con = null;
+
+        try {
+            con = datasource.getConnection();
+
+            PreparedStatement findAllDriversStatement = con.prepareStatement("SELECT * FROM drivers ORDER BY id");
+            ResultSet drivers = findAllDriversStatement.executeQuery();
+
+            Set<Driver> driverSet = new HashSet();
+            while(drivers.next()) {
+                Driver driver = new Driver();
+                driver.setId(drivers.getInt("id"));
+                driver.setName(drivers.getString("name"));
+                driver.setPassportSerialNumbers(drivers.getString("passport_serial_numbers"));
+                driver.setPhoneNumber(drivers.getString("phone_number"));
+                driverSet.add(driver);
+            }
+
+            findAllDriversStatement.close();
+            drivers.close();
+
+            return driverSet;
         } finally {
             if (con != null) try {
                 con.close();

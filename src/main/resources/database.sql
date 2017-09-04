@@ -67,23 +67,36 @@ CREATE TABLE user_roles (
   ENGINE = InnoDB;
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Cars ----------------------------------------------------------------------------------------------------------------
+CREATE TABLE car_types(
+  id    INT AUTO_INCREMENT PRIMARY KEY,
+  name  VARCHAR(30) NOT NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE car_condition_types(
+  id    INT AUTO_INCREMENT PRIMARY KEY,
+  name  VARCHAR(30)
+)
+  ENGINE = InnoDB;
+
 -- Table for cars
 CREATE TABLE cars (
   id                  INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   registration_number VARCHAR(50)  NOT NULL,
-  car_type            VARCHAR(100) NOT NULL,
-  manufacturer        VARCHAR(100) NOT NULL,
   model               VARCHAR(100) NOT NULL,
-  production_year     INT,
   number_of_seats     INT          NOT NULL,
   car_color           VARCHAR(100) NOT NULL,
-  mileage             INT,
-  car_condition       VARCHAR(50)  NOT NULL,
-  owner_id            INT,
+  type_id             INT NOT NULL,
+  condition_type_id   INT NOT NULL,
+  owner_id            INT NOT NULL,
 
-  FOREIGN KEY (owner_id) REFERENCES persons(id)
+  FOREIGN KEY (type_id) REFERENCES car_types(id),
+  FOREIGN KEY (condition_type_id) REFERENCES car_condition_types(id),
+  FOREIGN KEY (owner_id) REFERENCES drivers(id)
 )
   ENGINE = InnoDB;
+-- ---------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE trips(
   id                  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

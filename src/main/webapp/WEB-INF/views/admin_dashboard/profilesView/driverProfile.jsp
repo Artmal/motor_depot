@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<%@include file = "utils/adminHeader.jsp" %>
+<%@include file = "../utils/adminHeader.jsp" %>
 
 <div class="container">
     <div class="row profile">
@@ -30,10 +30,10 @@
             <div class="profile-sidebar">
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        Nick Malchenko
+                        ${driver.name}
                     </div>
                     <div class="profile-usertitle-job">
-                        Driver
+                        DRIVER
                     </div>
                 </div>
                 <!-- SIDEBAR BUTTONS -->
@@ -56,9 +56,31 @@
 
             </div>
         </div>
+
         <div class="col-md-9">
             <div class="profile-content">
-                No trips yet...
+
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">
+                            <i class="fa fa-check"></i>
+                            Trip #123
+                        </h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Completed</h6>
+                        <p class="card-text">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            Date: 19.09.17
+                            <br>
+
+                            <i class="fa fa-building-o"></i>
+                            From: Donetsk
+                            <br>
+
+                            <i class="fa fa-building"></i>
+                            To: Kharkiv
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

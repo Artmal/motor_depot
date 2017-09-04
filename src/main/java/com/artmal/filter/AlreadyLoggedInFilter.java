@@ -37,9 +37,9 @@ public class AlreadyLoggedInFilter implements Filter {
 
             HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
             switch(userRole) {
-                case DRIVER:     httpResponse.sendRedirect("/driver-panel");
-                case DISPATCHER: httpResponse.sendRedirect("/dispatcher-panel");
-                case ADMIN:      httpResponse.sendRedirect("/admin-panel");
+                case Driver:     httpResponse.sendRedirect("/Driver-panel");
+                case Dispatcher: httpResponse.sendRedirect("/Dispatcher-panel");
+                case Admin:      httpResponse.sendRedirect("/Admin-panel");
             }
         } else {
             HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;

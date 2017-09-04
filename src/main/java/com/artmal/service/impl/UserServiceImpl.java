@@ -9,15 +9,15 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {
-    private static UserDao userDaoImpl = new UserDaoImpl();
+    private static UserDao userDao = new UserDaoImpl();
 
     @Override
     public User findByEmail(String username) throws SQLException, NamingException {
-        return userDaoImpl.findByEmail(username);
+        return userDao.findByEmail(username);
     }
 
     @Override
     public int save(User user) throws SQLException, NamingException {
-        return userDaoImpl.save(user);
+        return userDao.save(user);
     }
 }
