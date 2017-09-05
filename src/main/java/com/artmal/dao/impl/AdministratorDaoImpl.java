@@ -2,9 +2,11 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.AdministratorDao;
 import com.artmal.model.users.Administrator;
-import com.artmal.utils.DatabaseUtils;
-import org.apache.tomcat.jdbc.pool.DataSource;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,13 +14,14 @@ import java.sql.SQLException;
 
 public class AdministratorDaoImpl implements AdministratorDao {
     @Override
-    public Administrator findByUserId(long id) throws SQLException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+    public Administrator findByUserId(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement findAdministratorByIdStatement = con.prepareStatement("SELECT * FROM administrators WHERE user_id = ?");
             findAdministratorByIdStatement.setLong(1, id);
@@ -39,5 +42,6 @@ public class AdministratorDaoImpl implements AdministratorDao {
                 con.close();
             } catch (Exception ignore) {
             }
-        }    }
+        }
+    }
 }

@@ -9,77 +9,126 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Driver Dashboard</title>
+    <title>Cars in the system</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/admin-panel/driversPage.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Data Table-->
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="script" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+    <link rel="script" href="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js">
 </head>
 
 <body>
-<%@include file = "utils/driverHeader.jsp" %>
+<%@include file = "utils/adminHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/driverSidebar.jsp" %>
+        <%@include file = "utils/adminSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Garage</h1>
+            <h1>Cars in the system</h1>
 
             <c:if test="${not empty setOfCars}">
+            <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Car ID</th>
+                    <th>Registration Number</th>
+                    <th>Type</th>
+                    <th>Condition</th>
+                    <th>Model</th>
+                    <th>Number of seats</th>
+                    <th>Color</th>
+                    <th>Driver ID</th>
+                </tr>
+                </thead>
+                <tbody>
                 <c:forEach items="${setOfCars}" var="car">
                     <c:set var="count" value="${count + 1}" scope="page"/>
-                    <div class="card">
-                        <h3 class="card-header"> ${car.model}
-                            <a href="/driver-dashboard/edit?car-id=${car.id}">
-                                <i style="font-size: 20px; float: right; color: crimson" class="fa fa-times fa-fw"></i>
-                            </a>
-
-                            <a href="/driver-dashboard/delete?car-id=${car.id}">
-                                <i style="font-size: 20px; float: right; color: darkorange" class="fa fa-pencil fa-fw"></i>
-                            </a>
-                        </h3>
-                        <div class="card-block">
-                            <p class="card-text">
-                                <i class="fa fa-id-card-o fa-fw"></i>
-                                Registration number: ${car.registrationNumber}
-                                <br>
-                                <i class="fa fa-car fa-fw"></i>
-                                Type: ${car.type}
-                                <br>
-                                <i class="fa fa-cogs fa-fw"></i>
-                                Condition:
-                                <c:if test="${car.condition eq 'Broken'}">
-                                    <span class="badge badge-danger">Broken</span>
-                                </c:if>
-                                <c:if test="${car.condition eq 'Repairing'}">
-                                    <span class="badge badge-warning">Repairing</span>
-                                </c:if>
-                                <c:if test="${car.condition eq 'Ready'}">
-                                    <span class="badge badge-success">Ready</span>
-                                </c:if>
-                                <br>
-                                <i class="fa fa-users fa-fw"></i>
-                                Number of seats: ${car.numberOfSeats}
-                                <br>
-                                <i class="fa fa-tint fa-fw"></i>
-                                Car color: ${car.color}
-                            </p>
-                        </div>
-                    </div>
-                    <br>
+                    <tr>
+                        <td>${car.id}</td>
+                        <td>${car.registrationNumber}</td>
+                        <td>${car.type}</td>
+                        <td>
+                            <c:if test="${car.condition eq 'Broken'}">
+                                <span class="badge badge-danger">Broken</span>
+                            </c:if>
+                            <c:if test="${car.condition eq 'Repairing'}">
+                                <span class="badge badge-warning">Repairing</span>
+                            </c:if>
+                            <c:if test="${car.condition eq 'Ready'}">
+                                <span class="badge badge-success">Ready</span>
+                            </c:if>
+                        </td>
+                        <td>${car.model}</td>
+                        <td>${car.numberOfSeats}</td>
+                        <td>${car.color}</td>
+                        <td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>
+                    </tr>
                 </c:forEach>
+                </tbody>
+            </table>
             </c:if>
+
+
+
+                <%--<div class="table-responsive">--%>
+                    <%--<table class="table table-striped">--%>
+                        <%--<thead>--%>
+                        <%--<tr>--%>
+                            <%--<th>Car ID</th>--%>
+                            <%--<th>Registration Number</th>--%>
+                            <%--<th>Type</th>--%>
+                            <%--<th>Condition</th>--%>
+                            <%--<th>Model</th>--%>
+                            <%--<th>Number of seats</th>--%>
+                            <%--<th>Color</th>--%>
+                            <%--<th>Driver ID</th>--%>
+                        <%--</tr>--%>
+                        <%--</thead>--%>
+                        <%--<tbody>--%>
+                        <%--<c:forEach items="${setOfCars}" var="car">--%>
+                            <%--<c:set var="count" value="${count + 1}" scope="page"/>--%>
+                            <%--<tr>--%>
+                                <%--<td>${car.id}</td>--%>
+                                <%--<td>${car.registrationNumber}</td>--%>
+                                <%--<td>${car.type}</td>--%>
+                                <%--<td>--%>
+                                    <%--<c:if test="${car.condition eq 'Broken'}">--%>
+                                        <%--<span class="badge badge-danger">Broken</span>--%>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${car.condition eq 'Repairing'}">--%>
+                                        <%--<span class="badge badge-warning">Repairing</span>--%>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${car.condition eq 'Ready'}">--%>
+                                        <%--<span class="badge badge-success">Ready</span>--%>
+                                    <%--</c:if>--%>
+                                <%--</td>--%>
+                                <%--<td>${car.model}</td>--%>
+                                <%--<td>${car.numberOfSeats}</td>--%>
+                                <%--<td>${car.color}</td>--%>
+                                <%--<td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>--%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
+                        <%--</tbody>--%>
+                    <%--</table>--%>
+                <%--</div>--%>
+            <%--</c:if>--%>
 
             <br>
 
             <div class="card">
                 <div class="card-block">
-                    <form class="form-horizontal" action="/driver-dashboard/garage" accept-charset="UTF-8" method="post">
+                    <form class="form-horizontal" action="/admin-dashboard/cars" method="post">
                         <label for="registration-number">Registration Number*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
@@ -160,6 +209,15 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="color" name="color"
                                    required>
                         </div>
+
+                        <label for="ownerId">Driver ID*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user-circle-o fa-fw"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="ownerId" name="ownerId"
+                                   required>
+                        </div>
                         <br>
                         <button class="btn btn-primary">Add car</button>
                     </form>
@@ -171,7 +229,13 @@
 </div>
 
 <script>
-    document.getElementById("garage-nav-link").classList.add("active");
+    document.getElementById("cars-nav-link").classList.add("active");
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
 </script>
 
 <!-- Bootstrap core JavaScript

@@ -6,14 +6,24 @@ import com.artmal.model.enums.CarType;
 public class Car {
     private long id;
     private String registrationNumber;
+    private CarType type;
+    private CarCondition condition;
     private String model;
     private int numberOfSeats;
     private String color;
-    private CarType type;
-    private CarCondition condition;
     private long ownerId;
 
     public Car() {
+    }
+
+    public Car(String registrationNumber, CarType type, CarCondition condition, String model, int numberOfSeats, String color, long ownerId) {
+        this.registrationNumber = registrationNumber;
+        this.type = type;
+        this.condition = condition;
+        this.model = model;
+        this.numberOfSeats = numberOfSeats;
+        this.color = color;
+        this.ownerId = ownerId;
     }
 
     public long getId() {

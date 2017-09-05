@@ -33,8 +33,8 @@ public class DispatchersPageServlet extends HttpServlet {
             Set<Dispatcher> dispatcherSet = dispatcherService.findAll();
 
             req.setAttribute("setOfDispatchers", dispatcherSet);
-        } catch (SQLException e) {
-            logger.error("Threw a SQLException in RegistrationServlet::doGet, full stack trace follows:", e);
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/dispatchersPage.jsp").forward(req, resp);
@@ -55,12 +55,10 @@ public class DispatchersPageServlet extends HttpServlet {
         DispatcherService dispatcherService = new DispatcherServiceImpl();
         try {
             dispatcherService.save(dispatcher);
-        } catch (SQLException e) {
-            logger.error("Threw a SQLException in DispatchersPageServlet::doPost, full stack trace follows:", e);
-        } catch (NamingException e) {
-            logger.error("Threw a NamingException in DispatchersPageServlet::doPost, full stack trace follows:", e);
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
 
-        resp.sendRedirect("/Admin-dashboard/dispatchers");
+        resp.sendRedirect("/admin-dashboard/dispatchers");
     }
 }

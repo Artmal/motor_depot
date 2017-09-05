@@ -2,23 +2,25 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.DriverDao;
 import com.artmal.model.users.Driver;
-import com.artmal.utils.DatabaseUtils;
-import org.apache.tomcat.jdbc.pool.DataSource;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DriverDaoImpl implements DriverDao {
     @Override
-    public Driver findById(long id) throws SQLException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+    public Driver findById(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement findDriverByIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE id = ?");
             findDriverByIdStatement.setLong(1, id);
@@ -44,12 +46,13 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             // Insert to users
             PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
@@ -95,13 +98,47 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Set<Driver> findAll() throws SQLException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+    public Driver findByUserId(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
+
+            PreparedStatement findDriverByUserIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");
+            findDriverByUserIdStatement.setLong(1, id);
+            ResultSet driver = findDriverByUserIdStatement.executeQuery();
+            driver.next();
+
+            Driver theDriver = new Driver();
+            theDriver.setId(driver.getInt("id"));
+            theDriver.setName(driver.getString("name"));
+            theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
+            theDriver.setPhoneNumber(driver.getString("phone_number"));
+            theDriver.setAge(driver.getInt("age"));
+
+            findDriverByUserIdStatement.close();
+            driver.close();
+            return theDriver;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Set<Driver> findAll() throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
 
             PreparedStatement findAllDriversStatement = con.prepareStatement("SELECT * FROM drivers ORDER BY id");
             ResultSet drivers = findAllDriversStatement.executeQuery();

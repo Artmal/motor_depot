@@ -42,10 +42,8 @@ public class MyProfilePageServlet extends HttpServlet {
                     req.getSession().setAttribute("name", admin.getName());
                     req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/myProfilePage.jsp").forward(req, resp);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
     }
 

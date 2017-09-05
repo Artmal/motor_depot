@@ -5,10 +5,11 @@ import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.service.impl.UserServiceImpl;
 import com.artmal.utils.DatabaseUtils;
-import org.apache.log4j.Logger;
-import org.apache.tomcat.jdbc.pool.DataSource;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -16,16 +17,15 @@ import java.sql.*;
  * @author Artem Malchenko
  */
 public class UserDaoImpl implements UserDao {
-    final static Logger logger = Logger.getLogger(UserDaoImpl.class);
-
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
 
         Connection con = null;
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement findUserByUsername = con.prepareStatement("SELECT * FROM users WHERE  email = ?");
             findUserByUsername.setString(1, email);
@@ -60,12 +60,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int save(User user) throws SQLException, NamingException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
                     " (email, password, date_of_registration) VALUES (?, ?, NOW())");
@@ -88,8 +89,6 @@ public class UserDaoImpl implements UserDao {
             insertUserStatement.close();
 
             UserService userService = new UserServiceImpl();
-
-            System.out.println((int) userService.findByEmail(user.getEmail()).getId());
             return (int) userService.findByEmail(user.getEmail()).getId();
         } finally {
             if (con != null) try {

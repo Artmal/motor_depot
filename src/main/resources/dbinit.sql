@@ -36,3 +36,9 @@ INSERT INTO car_types (id, name) VALUES (13, "Pickup");
 INSERT INTO car_types (id, name) VALUES (14, "Coupe");
 INSERT INTO car_types (id, name) VALUES (15, "Supercar");
 INSERT INTO car_types (id, name) VALUES (16, "Cabriolet");
+
+# Insert trip statuses
+INSERT INTO trip_statuses (id, name) VALUES (1, "Open");
+INSERT INTO trip_statuses (id, name) VALUES (2, "In progress");
+INSERT INTO trip_statuses (id, name) VALUES (3, "Closed");
+INSERT INTO trip_statuses (id, name) VALUES (4, "Canceled");

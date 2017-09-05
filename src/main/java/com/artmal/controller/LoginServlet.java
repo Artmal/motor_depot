@@ -48,10 +48,8 @@ public class LoginServlet extends HttpServlet {
                     case Admin:      resp.sendRedirect("/admin-dashboard");
                 }
             }
-        } catch (SQLException e) {
-            logger.error("Threw a SQLException in LoginServlet::doPost, full stack trace follows:", e);
-        } catch (NamingException e) {
-            logger.error("Threw a NamingException in LoginServlet::doPost, full stack trace follows:", e);
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
     }
 }

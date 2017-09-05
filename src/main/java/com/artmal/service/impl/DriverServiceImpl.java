@@ -18,12 +18,17 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Set<Driver> findAll() throws SQLException {
+    public Driver findByUserId(long id) throws SQLException, NamingException {
+        return driverDao.findByUserId(id);
+    }
+
+    @Override
+    public Set<Driver> findAll() throws SQLException, NamingException {
         return driverDao.findAll();
     }
 
     @Override
-    public Driver findById(long id) throws SQLException {
+    public Driver findById(long id) throws SQLException, NamingException {
         return driverDao.findById(id);
     }
 }

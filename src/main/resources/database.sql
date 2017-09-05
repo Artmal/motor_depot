@@ -84,12 +84,12 @@ CREATE TABLE car_condition_types(
 CREATE TABLE cars (
   id                  INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   registration_number VARCHAR(50)  NOT NULL,
+  type_id             INT          NOT NULL,
+  condition_type_id   INT          NOT NULL,
   model               VARCHAR(100) NOT NULL,
   number_of_seats     INT          NOT NULL,
-  car_color           VARCHAR(100) NOT NULL,
-  type_id             INT NOT NULL,
-  condition_type_id   INT NOT NULL,
-  owner_id            INT NOT NULL,
+  color           VARCHAR(50) NOT NULL,
+  owner_id            INT          NOT NULL,
 
   FOREIGN KEY (type_id) REFERENCES car_types(id),
   FOREIGN KEY (condition_type_id) REFERENCES car_condition_types(id),
@@ -97,37 +97,40 @@ CREATE TABLE cars (
 )
   ENGINE = InnoDB;
 -- ---------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE trips(
-  id                  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  date_of_creation    DATETIME NOT NULL,
-  trip_type           VARCHAR(50),
-  status              VARCHAR(50),
-  town_from           VARCHAR(100),
-  town_to             VARCHAR(100),
-  time_out            DATETIME,
-  time_in             DATETIME,
-  payment_in_dollars  INT,
-  dispatcher_id       INT
+CREATE TABLE trip_statuses(
+  id    INT AUTO_INCREMENT PRIMARY KEY,
+  name  VARCHAR(30) NOT NULL
 )
   ENGINE = InnoDB;
 
-CREATE TABLE trip_cars(
-  trip_id INT NOT NULL,
-  car_id  INT NOT NULL,
+CREATE TABLE trips(
+  id                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  date_of_creation      DATETIME NOT NULL,
+  status_id             INT NOT NULL,
+  car_type_id_required  INT NOT NULL,
+  car_id                INT,
 
-  FOREIGN KEY (trip_id) REFERENCES trips(id),
-  FOREIGN KEY (car_id)  REFERENCES cars(id)
+  town_from             VARCHAR(100) NOT NULL,
+  town_to               VARCHAR(100) NOT NULL,
+  time_out              DATETIME,
+  time_in               DATETIME,
+
+  payment_in_dollars    INT,
+  dispatcher_id         INT,
+
+  FOREIGN KEY (status_id) REFERENCES trip_statuses(id),
+  FOREIGN KEY (car_type_id_required) REFERENCES car_types(id),
+  FOREIGN KEY (car_id) REFERENCES cars(id),
+  FOREIGN KEY (dispatcher_id) REFERENCES dispatchers(id)
 )
   ENGINE = InnoDB;
 
 CREATE TABLE requests(
-  id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  trip_id   INT NOT NULL,
-  car_id    INT NOT NULL,
-  datetime  DATETIME,
+  id      INT AUTO_INCREMENT PRIMARY KEY,
+  trip_id INT NOT NULL,
+  car_id  INT NOT NULL,
 
   FOREIGN KEY (trip_id) REFERENCES trips(id),
-  FOREIGN KEY (car_id)  REFERENCES cars(id)
+  FOREIGN KEY (car_id) REFERENCES cars(id)
 )
   ENGINE = InnoDB;

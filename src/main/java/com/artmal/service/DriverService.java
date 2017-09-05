@@ -9,7 +9,8 @@ import java.util.Set;
 public interface DriverService {
     boolean save(Driver driver) throws SQLException, NamingException;
 
-    Set<Driver> findAll() throws SQLException;
-    Driver findById(long id) throws SQLException;
+    Driver findByUserId(long id) throws SQLException, NamingException;
+    Set<Driver> findAll() throws SQLException, NamingException;
+    Driver findById(long id) throws SQLException, NamingException;
 
 }

@@ -7,13 +7,13 @@
 
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">Trips</a>
+            <a id = "trips-nav-link" class="nav-link" href="/admin-dashboard/trips">Trips</a>
         </li>
         <li class="nav-item">
-            <a id = "drivers-nav-link" class="nav-link" href="/admin-dashboard/driversServlet">Drivers</a>
+            <a id = "drivers-nav-link" class="nav-link" href="/admin-dashboard/drivers">Drivers</a>
         </li>
         <li class="nav-item">
-            <a id = "dispatchers-nav-link" class="nav-link" href="/admin-dashboard/dispatcherServlet">Dispatchers</a>
+            <a id = "dispatchers-nav-link" class="nav-link" href="/admin-dashboard/dispatchers">Dispatchers</a>
         </li>
         <li class="nav-item">
             <a id = "cars-nav-link" class="nav-link" href="/admin-dashboard/cars">Cars</a>

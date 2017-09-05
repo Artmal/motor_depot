@@ -18,12 +18,12 @@ public class DispatcherServiceImpl implements DispatcherService {
     }
 
     @Override
-    public Dispatcher findById(long id) throws SQLException {
+    public Dispatcher findById(long id) throws SQLException, NamingException {
         return dispatcherDao.findById(id);
     }
 
     @Override
-    public Set<Dispatcher> findAll() throws SQLException {
+    public Set<Dispatcher> findAll() throws SQLException, NamingException {
         return dispatcherDao.findAll();
     }
 }

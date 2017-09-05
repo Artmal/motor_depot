@@ -5,13 +5,14 @@ import com.artmal.dao.impl.AdministratorDaoImpl;
 import com.artmal.model.users.Administrator;
 import com.artmal.service.AdministratorService;
 
+import javax.naming.NamingException;
 import java.sql.SQLException;
 
 public class AdministratorServiceImpl implements AdministratorService {
     private static AdministratorDao administratorDao = new AdministratorDaoImpl();
 
     @Override
-    public Administrator findByUserId(long id) throws SQLException {
+    public Administrator findByUserId(long id) throws SQLException, NamingException {
         return administratorDao.findByUserId(id);
     }
 }

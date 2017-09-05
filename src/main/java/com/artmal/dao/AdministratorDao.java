@@ -2,6 +2,7 @@ package com.artmal.dao;
 
 import com.artmal.model.users.Administrator;
 
+import javax.naming.NamingException;
 import java.sql.SQLException;
 
 /**
@@ -9,5 +10,5 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 public interface AdministratorDao {
-    Administrator findByUserId(long id) throws SQLException;
+    Administrator findByUserId(long id) throws SQLException, NamingException;
 }

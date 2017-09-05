@@ -48,7 +48,7 @@
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
                                 <td>${driver.id}</td>
-                                <td><a href="${contextPath}/admin-dashboard/driver-profile?id=${driver.id}">${driver.name}</a></td>
+                                <td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${driver.id}">${driver.name}</a></td>
                                 <td>${driver.passportSerialNumbers}</td>
                                 <td>${driver.phoneNumber}</td>
                             </tr>

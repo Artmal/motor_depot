@@ -2,10 +2,11 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.DispatcherDao;
 import com.artmal.model.users.Dispatcher;
-import com.artmal.utils.DatabaseUtils;
-import org.apache.tomcat.jdbc.pool.DataSource;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,12 +14,13 @@ import java.util.Set;
 public class DispatcherDaoImpl implements DispatcherDao {
     @Override
     public boolean save(Dispatcher dispatcher) throws SQLException, NamingException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             // Insert to users
             PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
@@ -64,13 +66,14 @@ public class DispatcherDaoImpl implements DispatcherDao {
     }
 
     @Override
-    public Dispatcher findById(long id) throws SQLException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+    public Dispatcher findById(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement findDispatcherByIdStatement = con.prepareStatement("SELECT * FROM dispatchers WHERE id = ?");
             findDispatcherByIdStatement.setLong(1, id);
@@ -96,13 +99,14 @@ public class DispatcherDaoImpl implements DispatcherDao {
     }
 
     @Override
-    public Set<Dispatcher> findAll() throws SQLException {
-        DataSource datasource = new DataSource();
-        DatabaseUtils.setPoolProperties(datasource);
+    public Set<Dispatcher> findAll() throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
-            con = datasource.getConnection();
+            con = dataSource.getConnection();
 
             PreparedStatement findAllDriversStatement = con.prepareStatement("SELECT * FROM dispatchers ORDER BY id");
             ResultSet dispatchers = findAllDriversStatement.executeQuery();

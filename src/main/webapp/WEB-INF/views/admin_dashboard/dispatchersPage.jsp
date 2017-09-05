@@ -49,7 +49,7 @@
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
                                 <td>${dispatcher.id}</td>
-                                <td><a href="${contextPath}/admin-dashboard/dispatcher-profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
+                                <td><a href="${contextPath}/admin-dashboard/dispatchers/profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
                                 <td>${dispatcher.passportSerialNumbers}</td>
                                 <td>${dispatcher.phoneNumber}</td>
                                 <td>${dispatcher.salaryInDollars}</td>
