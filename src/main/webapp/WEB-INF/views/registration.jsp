@@ -87,7 +87,8 @@
                         <%--<div class="input-group-addon">--%>
                             <%--<i class="fa fa-shield"></i>--%>
                         <%--</div>--%>
-                        <%--<input name="captcha" id = "captcha" class="form-control mb-2 mr-sm-2 mb-sm-0" id="securityCode">--%>
+                        <%----%>
+                        <%--<input name="captchaCode" id = "captchaCode" class="form-control mb-2 mr-sm-2 mb-sm-0">--%>
                     <%--</div>--%>
 
                     <br>

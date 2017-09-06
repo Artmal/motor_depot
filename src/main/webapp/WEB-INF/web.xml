@@ -83,6 +83,16 @@
   </servlet>
 
   <servlet-mapping>
+    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
+    <url-pattern>/dispatcher-dashboard/trips</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
+    <servlet-class>com.artmal.controller.dispatcherDashboard.TripsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
     <servlet-name>myProfilePageServlet</servlet-name>
     <url-pattern>/my-profile</url-pattern>
   </servlet-mapping>
@@ -116,6 +126,16 @@
     <servlet-name>adminDashboard_profilesServlet</servlet-name>
     <url-pattern>/admin-dashboard/drivers/profile</url-pattern>
     <url-pattern>/admin-dashboard/dispatchers/profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_tripsPageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driverDashboard.TripsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_tripsPageServlet</servlet-name>
+    <url-pattern>/driver-dashboard/trips</url-pattern>
   </servlet-mapping>
 
   <!-- JSP -->

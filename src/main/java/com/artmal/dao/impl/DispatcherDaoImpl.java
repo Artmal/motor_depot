@@ -66,6 +66,39 @@ public class DispatcherDaoImpl implements DispatcherDao {
     }
 
     @Override
+    public Dispatcher findByUserId(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findDispatcherByUsedId = con.prepareStatement("SELECT * FROM dispatchers WHERE user_id = ?");
+            findDispatcherByUsedId.setLong(1, id);
+            ResultSet dispatcher = findDispatcherByUsedId.executeQuery();
+            dispatcher.next();
+
+            Dispatcher theDispatcher = new Dispatcher();
+            theDispatcher.setId(dispatcher.getInt("id"));
+            theDispatcher.setName(dispatcher.getString("name"));
+            theDispatcher.setPassportSerialNumbers(dispatcher.getString("passport_serial_numbers"));
+            theDispatcher.setPhoneNumber(dispatcher.getString("phone_number"));
+            theDispatcher.setSalaryInDollars(dispatcher.getInt("salary_in_dollars"));
+
+            findDispatcherByUsedId.close();
+            dispatcher.close();
+            return theDispatcher;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public Dispatcher findById(long id) throws SQLException, NamingException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");

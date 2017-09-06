@@ -20,6 +20,9 @@
 
     <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Data tables -->
+    <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
 </head>
 
 <body>
@@ -33,8 +36,7 @@
             <h1>Dispatchers in the system</h1>
 
             <c:if test="${not empty setOfDispatchers}">
-                <div class="table-responsive">
-                    <table class="table table-striped">
+                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>Dispatcher ID</th>
@@ -56,8 +58,7 @@
                             </tr>
                         </c:forEach>
                         </tbody>
-                    </table>
-                </div>
+                </table>
             </c:if>
 
             <br>
@@ -130,11 +131,17 @@
     document.getElementById("dispatchers-nav-link").classList.add("active");
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+<%--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>--%>
+<%--<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 

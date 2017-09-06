@@ -21,10 +21,8 @@
     <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Data Table-->
-    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link rel="script" href="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
-    <link rel="script" href="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js">
+    <!-- Data tables -->
+    <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
 </head>
 
 <body>
@@ -38,7 +36,7 @@
             <h1>Cars in the system</h1>
 
             <c:if test="${not empty setOfCars}">
-            <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
                 <tr>
                     <th>Car ID</th>
@@ -78,51 +76,6 @@
                 </tbody>
             </table>
             </c:if>
-
-
-
-                <%--<div class="table-responsive">--%>
-                    <%--<table class="table table-striped">--%>
-                        <%--<thead>--%>
-                        <%--<tr>--%>
-                            <%--<th>Car ID</th>--%>
-                            <%--<th>Registration Number</th>--%>
-                            <%--<th>Type</th>--%>
-                            <%--<th>Condition</th>--%>
-                            <%--<th>Model</th>--%>
-                            <%--<th>Number of seats</th>--%>
-                            <%--<th>Color</th>--%>
-                            <%--<th>Driver ID</th>--%>
-                        <%--</tr>--%>
-                        <%--</thead>--%>
-                        <%--<tbody>--%>
-                        <%--<c:forEach items="${setOfCars}" var="car">--%>
-                            <%--<c:set var="count" value="${count + 1}" scope="page"/>--%>
-                            <%--<tr>--%>
-                                <%--<td>${car.id}</td>--%>
-                                <%--<td>${car.registrationNumber}</td>--%>
-                                <%--<td>${car.type}</td>--%>
-                                <%--<td>--%>
-                                    <%--<c:if test="${car.condition eq 'Broken'}">--%>
-                                        <%--<span class="badge badge-danger">Broken</span>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${car.condition eq 'Repairing'}">--%>
-                                        <%--<span class="badge badge-warning">Repairing</span>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${car.condition eq 'Ready'}">--%>
-                                        <%--<span class="badge badge-success">Ready</span>--%>
-                                    <%--</c:if>--%>
-                                <%--</td>--%>
-                                <%--<td>${car.model}</td>--%>
-                                <%--<td>${car.numberOfSeats}</td>--%>
-                                <%--<td>${car.color}</td>--%>
-                                <%--<td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>--%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
-                        <%--</tbody>--%>
-                    <%--</table>--%>
-                <%--</div>--%>
-            <%--</c:if>--%>
 
             <br>
 
@@ -241,8 +194,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+<%--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>--%>
+<%--<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 

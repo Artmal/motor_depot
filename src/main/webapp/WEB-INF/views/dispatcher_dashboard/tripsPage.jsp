@@ -25,11 +25,11 @@
 </head>
 
 <body>
-<%@include file = "utils/adminHeader.jsp" %>
+<%@include file = "utils/dispatcherHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/adminSidebar.jsp" %>
+        <%@include file = "utils/dispatcherSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Trips</h1>
@@ -55,7 +55,7 @@
                         <c:forEach items="${setOfTrips}" var="trip">
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
-                                <td>${trip.id}</td>
+                                <td><a href="/dispatcher-dashboard/trip?id=${trip.id}">${trip.id}</a></td>
                                 <td>${trip.dateOfCreation}</td>
                                 <td>
                                     <c:if test="${trip.tripStatus eq 'Open'}">

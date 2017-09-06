@@ -13,12 +13,81 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class TripDaoImpl implements TripDao {
     @Override
-    public Set<Trip> findAll() throws NamingException, SQLException {
+    public boolean save(Trip trip) throws SQLException, NamingException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement insertTripStatement = con.prepareStatement("INSERT INTO trips" +
+                    " (date_of_creation, status_id, car_type_id_required, town_from, town_to, time_out, time_in," +
+                    " payment_in_dollars, dispatcher_id) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            insertTripStatement.setInt(1, TripUtils.statusToInt(trip.getTripStatus()));
+            insertTripStatement.setInt(2, CarUtils.typeToInt(trip.getCarTypeRequired()));
+            insertTripStatement.setString(3, trip.getTownFrom());
+            insertTripStatement.setString(4, trip.getTownTo());
+            insertTripStatement.setTimestamp(5, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeOut()));
+            insertTripStatement.setTimestamp(6, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeIn()));
+            insertTripStatement.setInt(7, trip.getPaymentInDollars());
+            if(trip.getDispatcherId() != 0) {
+                insertTripStatement.setLong(8, trip.getDispatcherId());
+            } else {
+                insertTripStatement.setNull(8, java.sql.Types.INTEGER);
+            }
+            insertTripStatement.execute();
+
+            insertTripStatement.close();
+            return true;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Trip findById(long id) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findTripById = con.prepareStatement("SELECT * FROM trips WHERE id = ?");
+            findTripById.setLong(1, id);
+            ResultSet trip = findTripById.executeQuery();
+            trip.next();
+
+            Trip theTrip = new Trip();
+            theTrip.setId(trip.getLong("id"));
+            //TODO
+
+            findTripById.close();
+            trip.close();
+            return theTrip;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Set<Trip> findAll() throws NamingException, SQLException, ParseException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
         DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
@@ -34,7 +103,7 @@ public class TripDaoImpl implements TripDao {
             Set<Trip> tripSet = new HashSet();
             while(trips.next()) {
                 Trip trip = new Trip();
-                trip.setId(trips.getInt("id"));
+                trip.setId(trips.getLong("id"));
                 trip.setDateOfCreation(trips.getDate("date_of_creation"));
                 trip.setTripStatus(TripUtils.intToStatus(trips.getInt("status_id")));
                 trip.setCarTypeRequired(CarUtils.intToType(trips.getInt("car_type_id_required")));
@@ -42,8 +111,8 @@ public class TripDaoImpl implements TripDao {
 
                 trip.setTownFrom(trips.getString("town_from"));
                 trip.setTownTo(trips.getString("town_to"));
-                trip.setTimeOut(trips.getDate("time_out"));
-                trip.setTimeIn(trips.getDate("time_in"));
+                trip.setTimeOut(TripUtils.sqlDateToDateTime(trips.getTimestamp("time_out")));
+                trip.setTimeIn(TripUtils.sqlDateToDateTime(trips.getTimestamp("time_in")));
                 trip.setPaymentInDollars(trips.getInt("payment_in_dollars"));
                 trip.setDispatcherId(trips.getLong("dispatcher_id"));
                 tripSet.add(trip);

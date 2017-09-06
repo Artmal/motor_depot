@@ -2,11 +2,12 @@ package com.artmal.model;
 
 import com.artmal.model.enums.CarType;
 import com.artmal.model.enums.TripStatus;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 
 public class Trip {
-    private int id;
+    private long id;
     private Date dateOfCreation;
     private TripStatus tripStatus;
     private CarType carTypeRequired;
@@ -14,8 +15,8 @@ public class Trip {
 
     private String townFrom;
     private String townTo;
-    private Date timeOut;
-    private Date timeIn;
+    private DateTime timeOut;
+    private DateTime timeIn;
 
     private int paymentInDollars;
     private long dispatcherId;
@@ -23,10 +24,31 @@ public class Trip {
     public Trip() {
     }
 
-    public int getId() {
+    public Trip(TripStatus tripStatus, CarType carTypeRequired, String townFrom, String townTo, DateTime timeOut, DateTime timeIn, int paymentInDollars, long dispatcherId) {
+        this.tripStatus = tripStatus;
+        this.carTypeRequired = carTypeRequired;
+        this.townFrom = townFrom;
+        this.townTo = townTo;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
+        this.paymentInDollars = paymentInDollars;
+        this.dispatcherId = dispatcherId;
+    }
+
+    public Trip(TripStatus tripStatus, CarType carTypeRequired, String townFrom, String townTo, DateTime timeOut, DateTime timeIn, int paymentInDollars) {
+        this.tripStatus = tripStatus;
+        this.carTypeRequired = carTypeRequired;
+        this.townFrom = townFrom;
+        this.townTo = townTo;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
+        this.paymentInDollars = paymentInDollars;
+    }
+
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public Date getDateOfCreation() {
@@ -65,16 +87,16 @@ public class Trip {
     public void setTownTo(String townTo) {
         this.townTo = townTo;
     }
-    public Date getTimeOut() {
+    public DateTime getTimeOut() {
         return timeOut;
     }
-    public void setTimeOut(Date timeOut) {
+    public void setTimeOut(DateTime timeOut) {
         this.timeOut = timeOut;
     }
-    public Date getTimeIn() {
+    public DateTime getTimeIn() {
         return timeIn;
     }
-    public void setTimeIn(Date timeIn) {
+    public void setTimeIn(DateTime timeIn) {
         this.timeIn = timeIn;
     }
     public int getPaymentInDollars() {

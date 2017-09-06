@@ -7,7 +7,7 @@
 
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">Trips</a>
+            <a id = "trips-nav-link" class="nav-link" href="/driver-dashboard/trips">Trips</a>
         </li>
     </ul>
 

@@ -1,9 +1,10 @@
-package com.artmal.controller.adminDashboard;
+package com.artmal.controller.dispatcherDashboard;
 
 import com.artmal.model.Trip;
 import com.artmal.model.enums.CarType;
 import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripService;
+import com.artmal.service.impl.DispatcherServiceImpl;
 import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.TripUtils;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ import java.text.ParseException;
 import java.util.Set;
 
 public class TripsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
+    final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +33,7 @@ public class TripsPageServlet extends HttpServlet {
             logger.error(e);
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/tripsPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/dispatcher_dashboard/tripsPage.jsp").forward(req, resp);
     }
 
     @Override
@@ -45,14 +46,15 @@ public class TripsPageServlet extends HttpServlet {
         DateTime timeIn = TripUtils.stringDateToDateTime(req.getParameter("time-in"));
         int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
 
-        Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
-        TripService tripService = new TripServiceImpl();
         try {
+            long dispatcherId = new DispatcherServiceImpl().findByUserId((long) req.getSession().getAttribute("id")).getId();
+            Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
+            TripService tripService = new TripServiceImpl();
             tripService.save(trip);
         } catch (SQLException | NamingException | ParseException e) {
             logger.error(e);
         }
 
-        resp.sendRedirect("/admin-dashboard/trips");
+        resp.sendRedirect("/dispatcher-dashboard/trips");
     }
 }

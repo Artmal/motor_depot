@@ -104,6 +104,7 @@ public class CarDaoImpl implements CarDao {
             Set<Car> carSet = new HashSet();
             while(cars.next()) {
                 Car car = new Car();
+                car.setId(cars.getLong("id"));
                 car.setRegistrationNumber(cars.getString("registration_number"));
                 car.setType(CarUtils.intToType(cars.getInt("type_id")));
                 car.setCondition(CarUtils.intToCondition(cars.getInt("condition_type_id")));

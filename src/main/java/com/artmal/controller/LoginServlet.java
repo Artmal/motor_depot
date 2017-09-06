@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                 switch(role) {
                     case Driver:     resp.sendRedirect("/driver-dashboard");
                         break;
-                    case Dispatcher: resp.sendRedirect("/dispatcher-dashboard");
+                    case Dispatcher: resp.sendRedirect("/dispatcher-dashboard/trips");
                         break;
                     case Admin:      resp.sendRedirect("/admin-dashboard");
                 }
