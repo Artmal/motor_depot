@@ -112,8 +112,8 @@ CREATE TABLE trips(
 
   town_from             VARCHAR(100) NOT NULL,
   town_to               VARCHAR(100) NOT NULL,
-  time_out              DATETIME,
-  time_in               DATETIME,
+  time_out              DATETIME NOT NULL,
+  time_in               DATETIME NOT NULL,
 
   payment_in_dollars    INT,
   dispatcher_id         INT,
@@ -125,12 +125,17 @@ CREATE TABLE trips(
 )
   ENGINE = InnoDB;
 
-CREATE TABLE requests(
+CREATE TABLE trip_requests(
   id      INT AUTO_INCREMENT PRIMARY KEY,
   trip_id INT NOT NULL,
   car_id  INT NOT NULL,
+  message VARCHAR(200),
+
+  date_of_creation DATETIME NOT NULL,
+  date_of_confirmation DATETIME,
 
   FOREIGN KEY (trip_id) REFERENCES trips(id),
   FOREIGN KEY (car_id) REFERENCES cars(id)
 )
   ENGINE = InnoDB;
+

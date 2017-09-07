@@ -1,6 +1,7 @@
 package com.artmal.dao.impl;
 
 import com.artmal.dao.TripDao;
+import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.utils.CarUtils;
 import com.artmal.utils.TripUtils;
@@ -57,7 +58,7 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
-    public Trip findById(long id) throws SQLException, NamingException {
+    public Trip findById(long id) throws SQLException, NamingException, ParseException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
         DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
@@ -73,7 +74,17 @@ public class TripDaoImpl implements TripDao {
 
             Trip theTrip = new Trip();
             theTrip.setId(trip.getLong("id"));
-            //TODO
+            theTrip.setDateOfCreation(trip.getDate("date_of_creation"));
+            theTrip.setTripStatus(TripUtils.intToStatus(trip.getInt("status_id")));
+            theTrip.setCarTypeRequired(CarUtils.intToType(trip.getInt("car_type_id_required")));
+            theTrip.setCarId(trip.getLong("car_id"));
+
+            theTrip.setTownFrom(trip.getString("town_from"));
+            theTrip.setTownTo(trip.getString("town_to"));
+            theTrip.setTimeOut(TripUtils.sqlDateToDateTime(trip.getTimestamp("time_out")));
+            theTrip.setTimeIn(TripUtils.sqlDateToDateTime(trip.getTimestamp("time_in")));
+            theTrip.setPaymentInDollars(trip.getInt("payment_in_dollars"));
+            theTrip.setDispatcherId(trip.getLong("dispatcher_id"));
 
             findTripById.close();
             trip.close();
@@ -121,6 +132,31 @@ public class TripDaoImpl implements TripDao {
             findAllTrips.close();
             trips.close();
             return tripSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement assignCar = con.prepareStatement("UPDATE trips SET status_id = 2, car_id = ? WHERE id = ?");
+            assignCar.setLong(1, car.getId());
+            assignCar.setLong(2, trip.getId());
+            assignCar.execute();
+
+            assignCar.close();
         } finally {
             if (con != null) try {
                 con.close();

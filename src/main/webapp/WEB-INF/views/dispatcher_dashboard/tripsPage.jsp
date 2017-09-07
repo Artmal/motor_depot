@@ -22,6 +22,11 @@
 
     <!-- Data tables -->
     <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
+
+    <!-- DateTime Picker -->
+    <link href="${contextPath}/webjars/momentjs/2.18.1/moment.js" rel="script">
+    <link rel="stylesheet" href="/path/to/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 </head>
 
 <body>
@@ -35,7 +40,7 @@
             <h1>Trips</h1>
 
             <c:if test="${not empty setOfTrips}">
-                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>Trip ID</th>
@@ -55,23 +60,23 @@
                         <c:forEach items="${setOfTrips}" var="trip">
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
-                                <td><a href="/dispatcher-dashboard/trip?id=${trip.id}">${trip.id}</a></td>
+                                <td><a href="/dispatcher-dashboard/trip?trip-id=${trip.id}">${trip.id}</a></td>
                                 <td>${trip.dateOfCreation}</td>
                                 <td>
-                                    <c:if test="${trip.tripStatus eq 'Open'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                                         <span class="badge badge-success">Open</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'In_progress'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
                                         <span class="badge badge-warning">In Progress</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'Closed'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
                                         <span class="badge badge-default">Closed</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'Canceled'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
                                         <span class="badge badge-danger">Canceled</span>
                                     </c:if>
                                 </td>
-                                <td>${trip.carTypeRequired}</td>
+                                <td>${trip.carTypeRequired.displayName()}</td>
                                 <td>
                                         <c:choose>
                                         <c:when test="${trip.carId eq '0'}">
@@ -98,7 +103,7 @@
 
             <div class="card">
                 <div class="card-block">
-                    <form class="form-horizontal" action="/admin-dashboard/trips" method="post">
+                    <form class="form-horizontal" action="/dispatcher-dashboard/trips" method="post">
                         <label for="status">Status*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
@@ -148,7 +153,6 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-building-o fa-fw"></i>
-
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from" required>
                         </div>
@@ -162,15 +166,25 @@
                                    name="town-to" required>
                         </div>
 
-                        <label for="time-out">Time out*:</label>
+                        <label for="datetimepicker4">Time out*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar fa-fw"></i>
-
-                            </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
-                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS" required>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                </div>
+                                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id='datetimepicker4' />
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker4').datetimepicker();
+                                });
+                            </script>
                         </div>
+
+                            <%--<div class="input-group-addon">--%>
+                                <%--<i class="fa fa-calendar fa-fw"></i>--%>
+                            <%--</div>--%>
+                            <%--<input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"--%>
+                                   <%--name="time-out" placeholder="YYYY-MM-DD HH:MM:SS" required>--%>
+                        <%--</div>--%>
 
                         <label for="time-in">Time in*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -212,8 +226,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<%--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>--%>
-<%--<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 

@@ -7,6 +7,7 @@ import com.artmal.service.CarService;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Set;
 
 public class CarServiceImpl implements CarService {
@@ -15,6 +16,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public boolean save(Car car) throws SQLException, NamingException {
         return carDao.save(car);
+    }
+
+    @Override
+    public Car findById(long id) throws SQLException, NamingException, ParseException {
+        return carDao.findById(id);
     }
 
     @Override

@@ -1,9 +1,11 @@
-package com.artmal.controller.adminDashboard;
+package com.artmal.controller.driver_dashboard;
 
-import com.artmal.controller.LoginServlet;
 import com.artmal.model.Car;
+import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
+import com.artmal.service.DriverService;
 import com.artmal.service.impl.CarServiceImpl;
+import com.artmal.service.impl.DriverServiceImpl;
 import com.artmal.utils.CarUtils;
 import org.apache.log4j.Logger;
 
@@ -16,31 +18,40 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
 
-public class CarsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(LoginServlet.class);
+/**
+ * Servlet for garage page in Driver mode.
+ * Mapped to: /driver-dashboard/garageServlet
+ * @author Artem Malchenko
+ */
+public class GaragePageServlet extends HttpServlet {
+    final static Logger logger = Logger.getLogger(GaragePageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CarService carService = new CarServiceImpl();
         try {
-            Set<Car> carSet = carService.findAll();
+            DriverService driverService = new DriverServiceImpl();
+            Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
 
+            long ownerId = loggedDriver.getId();
+
+            Set<Car> carSet = carService.findAllByOwnerId(ownerId);
             req.setAttribute("setOfCars", carSet);
         } catch (SQLException | NamingException e) {
             logger.error(e);
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/carsPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/garagePage.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            CarUtils.addNewCarAsAdmin(req);
-        } catch (SQLException e) {
+            CarUtils.addNewCarAsDriver(req);
+        } catch (SQLException | NamingException e) {
             logger.error(e);
         }
 
-        resp.sendRedirect("/admin-dashboard/cars");
+        resp.sendRedirect("/driver-dashboard/garage");
     }
 }

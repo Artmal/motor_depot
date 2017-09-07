@@ -35,12 +35,11 @@
                     <c:set var="count" value="${count + 1}" scope="page"/>
                     <div class="card">
                         <h3 class="card-header"> ${car.model}
-                            <a href="/driver-dashboard/edit?car-id=${car.id}">
-                                <i style="font-size: 20px; float: right; color: crimson" class="fa fa-times fa-fw"></i>
-                            </a>
-
                             <a href="/driver-dashboard/delete?car-id=${car.id}">
-                                <i style="font-size: 20px; float: right; color: darkorange" class="fa fa-pencil fa-fw"></i>
+                                <i style="font-size: 20px; color: crimson; margin: auto; float: right" class="btn btn-default fa fa-times fa-fw"></i>
+                            </a>
+                            <a href="/driver-dashboard/edit?car-id=${car.id}">
+                                <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
                             </a>
                         </h3>
                         <div class="card-block">
@@ -49,7 +48,7 @@
                                 Registration number: ${car.registrationNumber}
                                 <br>
                                 <i class="fa fa-car fa-fw"></i>
-                                Type: ${car.type}
+                                Type: ${car.type.displayName()}
                                 <br>
                                 <i class="fa fa-cogs fa-fw"></i>
                                 Condition:
@@ -178,7 +177,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/1.12.4/jquery.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 

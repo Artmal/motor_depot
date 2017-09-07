@@ -44,7 +44,6 @@ public class TripUtils {
         String stringDate = sqlDate.toString().split("\\.")[0];
 
         DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        DateTime dateTime = DateTime.parse(stringDate, dft);
         return DateTime.parse(stringDate, dft);
     }
 

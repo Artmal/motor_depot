@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,6 +51,42 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
+    public Car findById(long id) throws SQLException, NamingException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findCarById = con.prepareStatement("SELECT * FROM cars WHERE id = ?");
+            findCarById.setLong(1, id);
+            ResultSet car = findCarById.executeQuery();
+            car.next();
+
+            Car theCar = new Car();
+            theCar.setId(car.getLong("id"));
+            theCar.setRegistrationNumber(car.getString("registration_number"));
+            theCar.setType(CarUtils.intToType(car.getInt("type_id")));
+            theCar.setCondition(CarUtils.intToCondition(car.getInt("condition_type_id")));
+            theCar.setModel(car.getString("model"));
+            theCar.setNumberOfSeats(car.getInt("number_of_seats"));
+            theCar.setColor(car.getString("color"));
+            theCar.setOwnerId(car.getLong("owner_id"));
+
+            findCarById.close();
+            car.close();
+            return theCar;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public Set<Car> findAllByOwnerId(long id) throws SQLException, NamingException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
@@ -66,6 +103,7 @@ public class CarDaoImpl implements CarDao {
             Set<Car> carSet = new HashSet();
             while(cars.next()) {
                 Car car = new Car();
+                car.setId(cars.getLong("id"));
                 car.setRegistrationNumber(cars.getString("registration_number"));
                 car.setType(CarUtils.intToType(cars.getInt("type_id")));
                 car.setCondition(CarUtils.intToCondition(cars.getInt("condition_type_id")));

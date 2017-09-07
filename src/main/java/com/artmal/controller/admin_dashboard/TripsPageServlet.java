@@ -1,4 +1,4 @@
-package com.artmal.controller.adminDashboard;
+package com.artmal.controller.admin_dashboard;
 
 import com.artmal.model.Trip;
 import com.artmal.model.enums.CarType;

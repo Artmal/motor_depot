@@ -38,8 +38,28 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>logoutServlet</servlet-name>
+    <servlet-class>com.artmal.controller.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>logoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>myProfilePageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.MyProfilePageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>myProfilePageServlet</servlet-name>
+    <url-pattern>/my-profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>adminDashboard_driversPageServlet</servlet-name>
-    <servlet-class>com.artmal.controller.adminDashboard.DriversPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dashboard.DriversPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -48,18 +68,8 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>logoutServlet</servlet-name>
-    <servlet-class>com.artmal.controller.LogoutServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-  <servlet-name>logoutServlet</servlet-name>
-  <url-pattern>/logout</url-pattern>
-</servlet-mapping>
-
-  <servlet>
     <servlet-name>adminDashboard_dispatcherServlet</servlet-name>
-    <servlet-class>com.artmal.controller.adminDashboard.DispatchersPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dashboard.DispatchersPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -69,7 +79,7 @@
 
   <servlet>
     <servlet-name>adminDashboard_tripsServlet</servlet-name>
-    <servlet-class>com.artmal.controller.adminDashboard.TripsPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dashboard.TripsPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -78,38 +88,8 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>myProfilePageServlet</servlet-name>
-    <servlet-class>com.artmal.controller.MyProfilePageServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
-    <url-pattern>/dispatcher-dashboard/trips</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
-    <servlet-class>com.artmal.controller.dispatcherDashboard.TripsPageServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>myProfilePageServlet</servlet-name>
-    <url-pattern>/my-profile</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>driverDashboard_garage</servlet-name>
-    <servlet-class>com.artmal.controller.driverDashboard.GaragePageServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>driverDashboard_garage</servlet-name>
-    <url-pattern>/driver-dashboard/garage</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>adminDashboard_cars</servlet-name>
-    <servlet-class>com.artmal.controller.adminDashboard.CarsPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dashboard.CarsPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -119,7 +99,7 @@
 
   <servlet>
     <servlet-name>adminDashboard_profilesServlet</servlet-name>
-    <servlet-class>com.artmal.controller.adminDashboard.ProfilesViewServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dashboard.ProfilesViewServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -128,14 +108,56 @@
     <url-pattern>/admin-dashboard/dispatchers/profile</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
+    <url-pattern>/dispatcher-dashboard/trips</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
+    <servlet-class>com.artmal.controller.dispatcher_dashboard.TripsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>dispatcherDashboard_tripRequestAcceptServlet</servlet-name>
+    <servlet-class>com.artmal.controller.dispatcher_dashboard.TripRequestAcceptServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatcherDashboard_tripRequestAcceptServlet</servlet-name>
+    <url-pattern>/dispatcher-dashboard/trip/accept</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_garage</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.GaragePageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_garage</servlet-name>
+    <url-pattern>/driver-dashboard/garage</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>driverDashboard_tripsPageServlet</servlet-name>
-    <servlet-class>com.artmal.controller.driverDashboard.TripsPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.driver_dashboard.TripsPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>driverDashboard_tripsPageServlet</servlet-name>
     <url-pattern>/driver-dashboard/trips</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>tripInfoServlet</servlet-name>
+    <servlet-class>com.artmal.controller.TripInfoPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>tripInfoServlet</servlet-name>
+    <url-pattern>/driver-dashboard/trip</url-pattern>
+    <url-pattern>/dispatcher-dashboard/trip</url-pattern>
+    <url-pattern>/administrator-dashboard/trip</url-pattern>
   </servlet-mapping>
 
   <!-- JSP -->

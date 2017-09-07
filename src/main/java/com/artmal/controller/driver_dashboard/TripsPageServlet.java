@@ -1,4 +1,4 @@
-package com.artmal.controller.driverDashboard;
+package com.artmal.controller.driver_dashboard;
 
 import com.artmal.model.Trip;
 import com.artmal.service.TripService;

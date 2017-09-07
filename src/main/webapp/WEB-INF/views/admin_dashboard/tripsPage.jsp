@@ -35,7 +35,7 @@
             <h1>Trips</h1>
 
             <c:if test="${not empty setOfTrips}">
-                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>Trip ID</th>
@@ -58,20 +58,20 @@
                                 <td>${trip.id}</td>
                                 <td>${trip.dateOfCreation}</td>
                                 <td>
-                                    <c:if test="${trip.tripStatus eq 'Open'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                                         <span class="badge badge-success">Open</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'In_progress'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
                                         <span class="badge badge-warning">In Progress</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'Closed'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
                                         <span class="badge badge-default">Closed</span>
                                     </c:if>
-                                    <c:if test="${trip.tripStatus eq 'Canceled'}">
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
                                         <span class="badge badge-danger">Canceled</span>
                                     </c:if>
                                 </td>
-                                <td>${trip.carTypeRequired}</td>
+                                <td>${trip.carTypeRequired.displayName()}</td>
                                 <td>
                                         <c:choose>
                                         <c:when test="${trip.carId eq '0'}">
@@ -212,8 +212,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<%--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>--%>
-<%--<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 
