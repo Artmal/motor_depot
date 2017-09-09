@@ -26,11 +26,27 @@
 </head>
 
 <body>
-<%@include file = "utils/dispatcherHeader.jsp" %>
+<c:choose>
+    <c:when test = "${sessionScope.role eq 'Admin'}">
+        <%@include file = "../admin_dashboard/utils/adminHeader.jsp" %>
+    </c:when>
+
+    <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+        <%@include file = "../dispatcher_dashboard/utils/dispatcherHeader.jsp" %>
+    </c:when>
+</c:choose>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/dispatcherSidebar.jsp" %>
+        <c:choose>
+            <c:when test = "${sessionScope.role eq 'Admin'}">
+                <%@include file = "../admin_dashboard/utils/adminSidebar.jsp" %>
+            </c:when>
+
+            <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+                <%@include file = "../dispatcher_dashboard/utils/dispatcherSidebar.jsp" %>
+            </c:when>
+        </c:choose>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div id = "trip-info" class="card card-outline-info">

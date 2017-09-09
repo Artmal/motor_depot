@@ -1,9 +1,11 @@
-package com.artmal.controller.admin_dashboard;
+package com.artmal.controller.admin_dispatcher;
 
 import com.artmal.model.Trip;
 import com.artmal.model.enums.CarType;
+import com.artmal.model.enums.Role;
 import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripService;
+import com.artmal.service.impl.DispatcherServiceImpl;
 import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.TripUtils;
 import org.apache.log4j.Logger;
@@ -19,12 +21,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
-/**
- * Admin can view, edit and create trips.
- * Note, that admin can also accept or deny requests in {@link com.artmal.controller.TripInfoPageServlet}.
- * Mapped to: /admin-dashboard/trips
- * @author Artem Malchenko
- */
 public class TripsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 
@@ -38,7 +34,7 @@ public class TripsPageServlet extends HttpServlet {
             logger.error(e);
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/tripsPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripsPage.jsp").forward(req, resp);
     }
 
     @Override
@@ -51,14 +47,32 @@ public class TripsPageServlet extends HttpServlet {
         DateTime timeIn = TripUtils.stringDateToDateTime(req.getParameter("time-in"));
         int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
 
-        Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
-        TripService tripService = new TripServiceImpl();
-        try {
-            tripService.save(trip);
-        } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
-        }
+        Role role = (Role) req.getSession().getAttribute("role");
+        switch (role) {
+            case Dispatcher:
+                try {
+                    long dispatcherId = new DispatcherServiceImpl().findByUserId((long) req.getSession().getAttribute("id")).getId();
+                    System.out.println(dispatcherId);
 
-        resp.sendRedirect("/admin-dashboard/trips");
+                    Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
+                    TripService tripService = new TripServiceImpl();
+                    tripService.save(trip);
+                } catch (SQLException | NamingException | ParseException e) {
+                    logger.error(e);
+                }
+
+                resp.sendRedirect("/dispatcher-dashboard/trips");
+                break;
+            case Admin:
+                Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
+                TripService tripService = new TripServiceImpl();
+                try {
+                    tripService.save(trip);
+                } catch (SQLException | NamingException | ParseException e) {
+                    logger.error(e);
+                }
+
+                resp.sendRedirect("/admin-dashboard/trips");
+        }
     }
 }

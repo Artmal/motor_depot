@@ -1,8 +1,7 @@
-package com.artmal.controller;
+package com.artmal.controller.admin_dispatcher;
 
 import com.artmal.model.Trip;
 import com.artmal.model.TripRequest;
-import com.artmal.model.enums.Role;
 import com.artmal.service.TripRequestService;
 import com.artmal.service.TripService;
 import com.artmal.service.impl.TripRequestServiceImpl;
@@ -45,13 +44,6 @@ public class TripInfoPageServlet extends HttpServlet {
             logger.error(e);
         }
 
-        Role role = (Role) req.getSession().getAttribute("role");
-        switch(role) {
-            case Dispatcher:
-                req.getRequestDispatcher("/WEB-INF/views/dispatcher_dashboard/tripInfoPage.jsp").forward(req, resp);
-                return;
-            case Admin:
-                req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/tripInfoPage.jsp").forward(req, resp);
-        }
+        req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripInfoPage.jsp").forward(req, resp);
     }
 }

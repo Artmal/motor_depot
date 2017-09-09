@@ -82,13 +82,14 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminDashboard_tripsServlet</servlet-name>
-    <servlet-class>com.artmal.controller.admin_dashboard.TripsPageServlet</servlet-class>
+    <servlet-name>admin-dispatcher_tripsServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.TripsPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminDashboard_tripsServlet</servlet-name>
+    <servlet-name>admin-dispatcher_tripsServlet</servlet-name>
     <url-pattern>/admin-dashboard/trips</url-pattern>
+    <url-pattern>/dispatcher-dashboard/trips</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -121,16 +122,6 @@
     <servlet-name>adminDashboard_driversGarageServlet</servlet-name>
     <url-pattern>/admin-dashboard/drivers/profile/garage</url-pattern>
   </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
-    <url-pattern>/dispatcher-dashboard/trips</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
-    <servlet-class>com.artmal.controller.dispatcher_dashboard.TripsPageServlet</servlet-class>
-  </servlet>
 
   <servlet>
     <servlet-name>dispatcherDashboard_tripRequestAcceptServlet</servlet-name>
@@ -214,7 +205,7 @@
 
   <servlet>
     <servlet-name>tripInfoServlet</servlet-name>
-    <servlet-class>com.artmal.controller.TripInfoPageServlet</servlet-class>
+    <servlet-class>com.artmal.controller.admin_dispatcher.TripInfoPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

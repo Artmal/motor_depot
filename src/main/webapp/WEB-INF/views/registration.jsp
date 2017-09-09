@@ -27,7 +27,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
+                        <input type="email" class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                     </div>
 
                     <label for="password">Password*:</label>
@@ -78,7 +78,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-birthday-cake"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
+                        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
                     </div>
 
                     <%--<label for="age">Security code:</label>--%>
@@ -93,7 +93,7 @@
                     <br>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-10">
-                            <input name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
+                            <input onclick="return checkPass()" name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
                         </div>
                     </div>
                 </form>
@@ -102,36 +102,23 @@
 </div>
 
 <script>
-//    var password = document.getElementById("password");
-//    var confirm_password = document.getElementById("cpassword");
-//
-//    function validatePassword(){
-//        if(password.value != confirm_password.value) {
-//            confirm_password.setCustomValidity("Passwords Don't Match");
-//        } else {
-//            confirm_password.setCustomValidity('');
-//        }
-//    }
-//
-//    password.onchange = validatePassword;
-//    confirm_password.onkeyup = validatePassword;
-//
-//    var email = document.getElementById("email");
-//    function isEmail(email) {
-//        var regex = /^([a-zA-Z0-9_.+-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-//        if(!regex.test(email)) {
-//            email.setCustomValidity("Please Enter Valid Email")
-//        } else {
-//            email.setCustomValidity('');
-//        }
-//    }
-//
-//    email.onchange = isEmail();
-//
-//    function validateInput() {
-//        validatePassword();
-//        isEmail();
-//    }
+    function checkPass()
+    {
+        //Store the password field objects into variables ...
+        var pass1 = document.getElementById('password');
+        var pass2 = document.getElementById('cpassword');
+
+        //Store the Confimation Message Object ...
+        var message = document.getElementById('confirmMessage');
+
+        var badColor = "#ff6666";
+        if(pass1.value !== pass2.value){
+            pass2.style.backgroundColor = badColor;
+            message.style.color = badColor;
+            message.innerHTML = "Passwords Do Not Match!"
+            return false;
+        }
+    }
 </script>
 
 <!-- Bootstrap core JavaScript
