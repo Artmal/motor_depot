@@ -48,6 +48,10 @@ public class LoginServlet extends HttpServlet {
                     case Admin:      resp.sendRedirect("/admin-dashboard");
                 }
             }
+            else {
+                req.setAttribute("errorText", "Wrong email/password");
+                req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+            }
         } catch (SQLException | NamingException e) {
             logger.error(e);
         }

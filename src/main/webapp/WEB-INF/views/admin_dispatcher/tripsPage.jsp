@@ -231,7 +231,7 @@
                                    name="payment-in-dollars">
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Add trip</button>
+                        <button class="btn btn-primary">Add trip</button>
                     </form>
                 </div>
             </div>

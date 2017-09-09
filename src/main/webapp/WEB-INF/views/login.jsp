@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,8 +25,12 @@
                     <div class="form-group">
                         <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
                     </div>
-                    <span class="button-checkbox">
-					<a href="" class="btn btn-link pull-right">Forgot Password?</a>
+
+                    <c:if test="${errorText ne null}">
+                        <p style="color: #ff6666">${errorText}</p>
+                    </c:if>
+
+					<a href="#" class="btn btn-link pull-right">Forgot Password?</a>
 				</span>
                     <hr class="colorgraph">
                     <div class="row">
