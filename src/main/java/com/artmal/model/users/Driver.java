@@ -1,7 +1,7 @@
 package com.artmal.model.users;
 
 /**
- * Simple Java Bean for representing Driver entity.
+ * Simple Java Bean for representing {@link Driver} entity.
  */
 public class Driver {
     private long id;

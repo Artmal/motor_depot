@@ -6,6 +6,7 @@ import com.artmal.model.enums.CarType;
 import com.artmal.service.CarService;
 import com.artmal.service.impl.CarServiceImpl;
 import com.artmal.service.impl.DriverServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
-public class CarUtils {
+/**
+ * Utility class which is used for operations with
+ * {@link Car} objects.
+ * @author Artem Malchenko
+ */
+public final class CarUtils {
+    final static Logger logger = Logger.getLogger(CarUtils.class);
+
+    private CarUtils() { }
+
+    /**
+     * In database there is the dictionary called car_types(id, name), so we
+     * need conversion between CarType and int in order to save entry to database.
+     * @return id in 'car_types' table.
+     */
     public static int typeToInt(CarType carType) {
         switch(carType) {
             case Van:
@@ -53,6 +68,11 @@ public class CarUtils {
         throw new NoSuchElementException();
     }
 
+    /**
+     * In database there is the dictionary called car_types(id, name), so we
+     * need conversion between int and Car Type in order to fetch entry from database.
+     * @return {@link CarType} which corresponds carTypeId in car_types.
+     */
     public static CarType intToType(int carTypeId) {
         switch(carTypeId) {
             case 1:
@@ -91,6 +111,11 @@ public class CarUtils {
             throw new NoSuchElementException();
     }
 
+    /**
+     * In database there is the dictionary called car_condition_types(id, name), so we
+     * need conversion between CarCondition and int in order to save entry to database.
+     * @return id in 'car_condition_types' table.
+     */
     public static int conditionTypeToInt(CarCondition carCondition) {
         switch (carCondition) {
             case Broken: return 1;
@@ -101,6 +126,11 @@ public class CarUtils {
         throw new NoSuchElementException();
     }
 
+    /**
+     * In database there is the dictionary called car_condition_types(id, name), so we
+     * need conversion between int and CarCondition in order to fetch entry from database.
+     * @return {@link CarCondition} which corresponds carConditionId in car_condition_types.
+     */
     public static CarCondition intToCondition(int carConditionId) {
         switch (carConditionId) {
             case 1:
@@ -114,6 +144,9 @@ public class CarUtils {
         throw new NoSuchElementException();
     }
 
+    /**
+     * Separate method for more clear code in servlet part.
+     */
     public static void addNewCarAsDriver(HttpServletRequest req) throws SQLException, NamingException {
         String registrationNumber = req.getParameter("registration-number");
         CarType type = CarType.valueOf(req.getParameter("type"));
@@ -127,13 +160,14 @@ public class CarUtils {
         CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
     }
 
+    /**
+     * Separate method for more clear code in servlet part.
+     */
     public static void addNewCarAsAdmin(HttpServletRequest req) throws SQLException {
         String registrationNumber = req.getParameter("registration-number");
         CarType type = CarType.valueOf(req.getParameter("type"));
@@ -148,10 +182,14 @@ public class CarUtils {
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
+    /**
+     * @param cars take result set. In loop we always will get different objects from db.
+     * @return constructed {@link Car}.
+     */
     public static Car initializeCar(ResultSet cars) throws SQLException {
         Car car = new Car();
         car.setId(cars.getLong("id"));

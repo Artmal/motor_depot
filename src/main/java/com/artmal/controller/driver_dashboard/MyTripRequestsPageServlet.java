@@ -18,6 +18,12 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Driver can view his/her requests for trips.
+ * Mapped to: /driver-dashboard/my-requests
+ * @author Artem Malchenko
+ */
+
 public class MyTripRequestsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(MyTripRequestsPageServlet.class);
 

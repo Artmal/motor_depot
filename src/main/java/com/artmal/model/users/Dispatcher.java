@@ -1,7 +1,7 @@
 package com.artmal.model.users;
 
 /**
- * Simple Java Bean for representing Dispatcher entity.
+ * Simple Java Bean for representing {@link Dispatcher} entity.
  * @author Artem Malchenko
  */
 public class Dispatcher {

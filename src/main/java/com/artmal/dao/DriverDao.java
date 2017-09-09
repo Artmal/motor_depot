@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 /**
- * Data Access Object for Driver Entity.
+ * Data Access Object for {@link Driver}.
  * @author Artem Malchenko
  */
 public interface DriverDao {

@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 /**
- * Servlet for garage page in Driver mode.
+ * Driver can view, edit and add new cars in their garages.
  * Mapped to: /driver-dashboard/garageServlet
  * @author Artem Malchenko
  */

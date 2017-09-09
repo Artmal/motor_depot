@@ -6,6 +6,10 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.Set;
 
+/**
+ * Additional layer for {@link com.artmal.dao.DriverDao}.
+ * @author Artem Malchenko
+ */
 public interface DriverService {
     boolean save(Driver driver) throws SQLException, NamingException;
 

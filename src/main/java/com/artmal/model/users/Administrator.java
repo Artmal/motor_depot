@@ -1,7 +1,7 @@
 package com.artmal.model.users;
 
 /**
- * Simple Java Bean for representing Administrator entity.
+ * Simple Java Bean for representing {@link Administrator} entity.
  * @author Artem Malchenko
  */
 public class Administrator {

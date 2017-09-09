@@ -19,8 +19,14 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Admin can view, edit and create trips.
+ * Note, that admin can also accept or deny requests in {@link com.artmal.controller.TripInfoPageServlet}.
+ * Mapped to: /admin-dashboard/trips
+ * @author Artem Malchenko
+ */
 public class TripsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
+    final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

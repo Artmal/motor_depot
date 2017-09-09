@@ -1,6 +1,5 @@
 package com.artmal.utils;
 
-import com.artmal.controller.RegistrationServlet;
 import com.artmal.model.enums.Role;
 import com.artmal.model.users.Driver;
 import com.artmal.model.users.User;
@@ -17,9 +16,14 @@ import java.sql.SQLException;
  * Utility class for registration.
  * @author Artem Malchenko
  */
-public class RegistrationUtils {
-    final static Logger logger = Logger.getLogger(RegistrationServlet.class);
+public final class RegistrationUtils {
+    final static Logger logger = Logger.getLogger(RegistrationUtils.class);
 
+    private RegistrationUtils() { }
+
+    /**
+     * Separate method for more clear code in servlet part.
+     */
     public static void registerNewDriver(HttpServletRequest req) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -34,14 +38,8 @@ public class RegistrationUtils {
         DriverService driverService = new DriverServiceImpl();
         try {
             driverService.save(driver);
-        } catch (SQLException e) {
-            logger.error("Threw a SQLException in RegistrationUtils::registerNewDriver, full stack trace follows:", e);
-        } catch (NamingException e) {
-            logger.error("Threw a NamingException in RegistrationUtils::registerNewDriver, full stack trace follows:", e);
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
-    }
-
-    public static void registerNewDispatcher(HttpServletRequest req) {
-
     }
 }

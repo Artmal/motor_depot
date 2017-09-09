@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 
 /**
- * Data Access Object for User Entity.
+ * Data Access Object for {@link User}.
  * @author Artem Malchenko
  */
 public interface UserDao {

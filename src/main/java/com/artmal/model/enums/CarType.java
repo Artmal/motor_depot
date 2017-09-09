@@ -1,5 +1,9 @@
 package com.artmal.model.enums;
 
+/**
+ * Basic car types listed.
+ * @author Artem Malchenko
+ */
 public enum CarType {
     Van("Van"),
     Minivan("Minivan"),

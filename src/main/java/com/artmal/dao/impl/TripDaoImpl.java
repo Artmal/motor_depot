@@ -82,8 +82,8 @@ public class TripDaoImpl implements TripDao {
 
             theTrip.setTownFrom(trip.getString("town_from"));
             theTrip.setTownTo(trip.getString("town_to"));
-            theTrip.setTimeOut(TripUtils.sqlDateToDateTime(trip.getTimestamp("time_out")));
-            theTrip.setTimeIn(TripUtils.sqlDateToDateTime(trip.getTimestamp("time_in")));
+            theTrip.setTimeOut(TripUtils.sqlTimestampToDatetime(trip.getTimestamp("time_out")));
+            theTrip.setTimeIn(TripUtils.sqlTimestampToDatetime(trip.getTimestamp("time_in")));
             theTrip.setPaymentInDollars(trip.getInt("payment_in_dollars"));
             theTrip.setDispatcherId(trip.getLong("dispatcher_id"));
 
@@ -123,8 +123,8 @@ public class TripDaoImpl implements TripDao {
 
                 trip.setTownFrom(trips.getString("town_from"));
                 trip.setTownTo(trips.getString("town_to"));
-                trip.setTimeOut(TripUtils.sqlDateToDateTime(trips.getTimestamp("time_out")));
-                trip.setTimeIn(TripUtils.sqlDateToDateTime(trips.getTimestamp("time_in")));
+                trip.setTimeOut(TripUtils.sqlTimestampToDatetime(trips.getTimestamp("time_out")));
+                trip.setTimeIn(TripUtils.sqlTimestampToDatetime(trips.getTimestamp("time_in")));
                 trip.setPaymentInDollars(trips.getInt("payment_in_dollars"));
                 trip.setDispatcherId(trips.getLong("dispatcher_id"));
                 tripSet.add(trip);

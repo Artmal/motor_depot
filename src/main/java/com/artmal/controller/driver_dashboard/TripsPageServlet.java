@@ -15,6 +15,11 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Driver can view list of trips.
+ * Mapped to: /driver-dashboard/trips
+ * @author Artem Malchenko
+ */
 public class TripsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 

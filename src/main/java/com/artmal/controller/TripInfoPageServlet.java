@@ -19,6 +19,12 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Servlet for viewing tripInfo for {@link com.artmal.model.users.Administrator}
+ * and                              {@link com.artmal.model.users.Dispatcher}
+ * Mapped to: /dispatcher-dashboard/trip & /admin-dashboard/trip
+ * @author Artem Malchenko
+ */
 public class TripInfoPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripInfoPageServlet.class);
 

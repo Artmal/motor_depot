@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Additional layer for {@link com.artmal.dao.CarDao}.
+ * @author Artem Malchenko
+ */
 public interface CarService {
     boolean save(Car car) throws SQLException, NamingException;
 

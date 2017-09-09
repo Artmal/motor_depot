@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ *
+ */
 public class AlreadyLoggedInFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,9 +32,7 @@ public class AlreadyLoggedInFilter implements Filter {
             Role userRole = null;
             try {
                 userRole = userDao.findByEmail(username).getRole();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (NamingException e) {
+            } catch (SQLException | NamingException e) {
                 e.printStackTrace();
             }
 

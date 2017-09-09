@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Additional layer for {@link com.artmal.dao.TripDao}.
+ * @author Artem Malchenko
+ */
 public interface TripService {
     boolean save(Trip trip) throws SQLException, NamingException, ParseException;
 

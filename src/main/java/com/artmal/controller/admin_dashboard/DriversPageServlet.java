@@ -1,6 +1,5 @@
 package com.artmal.controller.admin_dashboard;
 
-import com.artmal.controller.LoginServlet;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.service.impl.DriverServiceImpl;
@@ -16,8 +15,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
 
+/**
+ * Admin can delete, edit information for drivers and create new ones.
+ * Mapped to: /admin-dashboard/drivers
+ * @author Artem Malchenko
+ */
 public class DriversPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(LoginServlet.class);
+    final static Logger logger = Logger.getLogger(DriversPageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -6,6 +6,10 @@ import org.joda.time.DateTime;
 
 import java.util.Date;
 
+/**
+ * Dispatchers create trips and drivers make requests to them.
+ * @author Artem Malchenko
+ */
 public class Trip {
     private long id;
     private Date dateOfCreation;

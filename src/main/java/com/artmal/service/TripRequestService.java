@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Additional layer for {@link com.artmal.dao.TripRequestDao}.
+ * @author Artem Malchenko
+ */
 public interface TripRequestService {
     void save(TripRequest tripRequest) throws SQLException, NamingException;
 

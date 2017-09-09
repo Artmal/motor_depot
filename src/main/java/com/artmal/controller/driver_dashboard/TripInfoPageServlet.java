@@ -24,6 +24,11 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Driver can view information about particular trip and make request if possible.
+ * Mapped to: /driver-dashboard/trip
+ * @author Artem Malchenko
+ */
 public class TripInfoPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripInfoPageServlet.class);
 

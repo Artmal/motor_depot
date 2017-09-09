@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Data Access Object for {@link Car}
+ * @author Artem Malchenko
+ */
 public interface CarDao {
     boolean save(Car car) throws SQLException, NamingException;
 

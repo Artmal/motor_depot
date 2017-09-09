@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Servlet for login page..
+ * Servlet for logging handling.
  * Mapped to: /loginServlet
  * @author Artem Malchenko
  */

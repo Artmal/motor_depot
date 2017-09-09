@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Data Access Object for {@link TripRequestDao}.
+ * @author Artem Malchenko
+ */
 public interface TripRequestDao {
     void save(TripRequest tripRequest) throws SQLException, NamingException;
 

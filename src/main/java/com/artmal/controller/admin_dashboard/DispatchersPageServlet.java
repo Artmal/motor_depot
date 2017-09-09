@@ -1,6 +1,5 @@
 package com.artmal.controller.admin_dashboard;
 
-import com.artmal.controller.LoginServlet;
 import com.artmal.model.enums.Role;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.model.users.User;
@@ -19,12 +18,12 @@ import java.sql.SQLException;
 import java.util.Set;
 
 /**
- * Servlet for Dispatchers Page in Admin mode.
- * Mapped to: /Admin-dashboard/dispatcherServlet
+ * Admin can delete, edit information for dispatchers and create new ones.
+ * Mapped to: /admin-dashboard/dispatcherServlet
  * @author Artem Malchenko
  */
 public class DispatchersPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(LoginServlet.class);
+    final static Logger logger = Logger.getLogger(DispatchersPageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

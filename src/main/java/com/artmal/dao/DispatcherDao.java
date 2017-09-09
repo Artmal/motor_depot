@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 /**
- * Data Access Object for Dispatcher Entity.
+ * Data Access Object for {@link Dispatcher}.
  * @author Artem Malchenko
  */
 public interface DispatcherDao {

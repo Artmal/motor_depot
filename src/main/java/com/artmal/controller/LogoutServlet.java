@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet for logout.
+ * Servlet for logout handling.
  * Mapped to: /logout
  * @author Artem Malchenko
  */

@@ -19,6 +19,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Driver can notify dispatcher that he successfully completed particular trip.
+ * @author Artem Malchenko
+ */
 public class CompleteTripServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(CompleteTripServlet.class);
 

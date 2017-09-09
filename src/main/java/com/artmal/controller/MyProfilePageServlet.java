@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for registration handling.
+ * @author Artem Malchenko
+ */
 public class MyProfilePageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(MyProfilePageServlet.class);
 

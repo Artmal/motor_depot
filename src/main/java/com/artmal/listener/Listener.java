@@ -9,6 +9,10 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+/**
+ * Basic ServletContextListener for logging common operations.
+ * @author Artem Malchenko
+ */
 public class Listener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
     final static Logger logger = Logger.getLogger(Listener.class);

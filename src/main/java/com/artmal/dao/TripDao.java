@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Data Access Object for {@link Trip}.
+ * @author Artem Malchenko
+ */
 public interface TripDao {
     boolean save(Trip trip) throws SQLException, NamingException, ParseException;
 

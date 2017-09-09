@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Restricts unauthorized access for drivers's page.
+ * Filters /driver-dashboard/*
+ * @author Artem Malchenko
+ */
 public class DriverFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

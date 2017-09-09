@@ -3,6 +3,11 @@ package com.artmal.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * Set all requests's character encoding to UTF-8/
+ * Filters /*
+ * @author Artem Malchenko
+ */
 public class CharacterFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

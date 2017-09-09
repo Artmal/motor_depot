@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 
 /**
- * Data Access Object for Administrator Entity.
+ * Data Access Object for {@link Administrator}.
  * @author Artem Malchenko
  */
 public interface AdministratorDao {

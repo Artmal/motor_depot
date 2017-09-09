@@ -3,6 +3,10 @@ package com.artmal.model;
 import com.artmal.model.enums.CarCondition;
 import com.artmal.model.enums.CarType;
 
+/**
+ * Drivers have cars. They manage cars in their garages(/driver-dashboard/garage).
+ * @author Artem Malchenko
+ */
 public class Car {
     private long id;
     private String registrationNumber;

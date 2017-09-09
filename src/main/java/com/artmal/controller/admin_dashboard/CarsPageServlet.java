@@ -1,6 +1,5 @@
 package com.artmal.controller.admin_dashboard;
 
-import com.artmal.controller.LoginServlet;
 import com.artmal.model.Car;
 import com.artmal.service.CarService;
 import com.artmal.service.impl.CarServiceImpl;
@@ -16,8 +15,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
 
+/**
+ * Admin can view, edit and create new cars in Admin Dashboard.
+ * Mapped to: /admin-dashboard/cars
+ * @author Artem Malchenko
+ */
 public class CarsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(LoginServlet.class);
+    final static Logger logger = Logger.getLogger(CarsPageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

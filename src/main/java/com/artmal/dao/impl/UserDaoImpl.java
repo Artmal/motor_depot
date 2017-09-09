@@ -12,10 +12,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 
-/**
- * UserDAO implementation.
- * @author Artem Malchenko
- */
 public class UserDaoImpl implements UserDao {
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {

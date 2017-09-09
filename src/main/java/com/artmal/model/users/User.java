@@ -5,7 +5,7 @@ import com.artmal.model.enums.Role;
 import java.util.Date;
 
 /**
- * Simple Java Bean for representing User entity.
+ * Simple Java Bean for representing {@link Driver} entity.
  * @author Artem Malchenko
  */
 public class User {
