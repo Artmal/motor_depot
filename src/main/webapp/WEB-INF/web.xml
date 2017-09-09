@@ -111,6 +111,16 @@
     <url-pattern>/admin-dashboard/dispatchers/profile</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>adminDashboard_driversGarageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dashboard.DriverGaragePageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>adminDashboard_driversGarageServlet</servlet-name>
+    <url-pattern>/admin-dashboard/drivers/profile/garage</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>dispatcherDashboard_tripsServlet</servlet-name>
     <url-pattern>/dispatcher-dashboard/trips</url-pattern>

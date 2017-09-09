@@ -1,6 +1,3 @@
-<%--<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js">--%>
-<%--</script>--%>
-
 <script type="text/javascript" language="javascript" src="${contextPath}/webjars/jquery/1.12.4/jquery.js">
 </script>
 

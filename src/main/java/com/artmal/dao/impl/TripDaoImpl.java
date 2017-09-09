@@ -153,7 +153,8 @@ public class TripDaoImpl implements TripDao {
             con = dataSource.getConnection();
 
             PreparedStatement findAllTrips = con.prepareStatement("SELECT * FROM trips WHERE car_id IN(SELECT car_id FROM trip_requests WHERE date_of_confirmation IS NOT NULL AND car_id IN\n" +
-                    "(SELECT id FROM cars WHERE owner_id = 5))");
+                    "(SELECT id FROM cars WHERE owner_id = ?))");
+            findAllTrips.setLong(1, id);
             ResultSet trips = findAllTrips.executeQuery();
 
             Set<Trip> tripSet = new HashSet();

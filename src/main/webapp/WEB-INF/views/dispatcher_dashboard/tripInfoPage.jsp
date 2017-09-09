@@ -33,7 +33,7 @@
         <%@include file = "utils/dispatcherSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <div class="card card-outline-info">
+            <div id = "trip-info" class="card card-outline-info">
                 <div class="card-block">
                     <h4 class="card-title">Trip №${trip.id} Info</h4>
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
