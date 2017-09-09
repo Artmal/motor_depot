@@ -2,133 +2,99 @@
 <html>
 <head>
     <title>Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+
+    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+        #leftPanel{
+            background-color:#0079ac;
+            color:#fff;
+            text-align: center;
+        }
+
+        #rightPanel{
+            min-height:415px;
+        }
+
+        /* Credit to bootsnipp.com for the css for the color graph */
+        .colorgraph {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+    </style>
 </head>
 <body>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <ul class="nav nav-pills nav-stacked admin-menu" >
-                <li><a href="" data-target-id="change-password"><i class="glyphicon glyphicon-lock"></i> Change Password</a></li>
-                <li><a href="" data-target-id="change-email"><i class="glyphicon glyphicon-cog"></i> Change Email</a></li>
-                <li><a href="" data-target-id="logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
-            </ul>
-        </div>
+    <br>
+    <br>
+    <div class="row" id="main">
+        <div class="col-md-8 well" id="rightPanel">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Edit your profile.<small>It's always easy</small></h2>
+                    <form action="/my-settings/save" method="post">
+                        <hr class="colorgraph">
+                        <label for="email">Email*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" value="${user.email}"
+                                   required>
+                        </div>
 
-        <div class="col-md-9 admin-content" id="change-email">
-            <div class="panel panel-info" style="margin: 1em;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Notification</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="label label-success">allowed</div>
-                </div>
-            </div>
-            <div class="panel panel-info" style="margin: 1em;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Newsletter</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="badge">Monthly</div>
-                </div>
-            </div>
-            <div class="panel panel-info" style="margin: 1em;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Admin</h3>
+                        <label for="password">Password*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password"
+                                   name="password" required>
+                        </div>
 
-                </div>
-                <div class="panel-body">
-                    <div class="label label-success">yes</div>
-                </div>
-            </div>
+                        <label for="password">Confirm password*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="cpassword" name="cpassword"
+                                   required>
+                        </div>
 
-        </div>
+                        <br>
+                        <hr class="colorgraph">
 
-        <div class="col-md-9  admin-content" id="change-password">
-            <form action="/password" method="post">
-
-
-                <div class="panel panel-info" style="margin: 1em;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label for="new_password" class="control-label panel-title">New Password</label></h3>
-                    </div>
-                    <div class="panel-body">
                         <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password" id="new_password" >
+                            <div class="col-xs-12 col-md-6">
+                                <input name="Submit" type="submit" value="Save" class="btn btn-success btn-block btn-lg">
                             </div>
                         </div>
 
-                    </div>
+                        <%--<div class="row">--%>
+                            <%--<div class="col-xs-12 col-md-6"></div>--%>
+                            <%--<button hclass="col-xs-12 col-md-6"><a href="/my-settings/save" class="btn btn-success btn-block btn-lg">Save</a></div>--%>
+                        <%--</div>--%>
+                    </form>
                 </div>
-
-
-                <div class="panel panel-info" style="margin: 1em;">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label for="confirm_password" class="control-label panel-title">Confirm password</label></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="password_confirmation" id="confirm_password" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-info border" style="margin: 1em;">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="pull-left">
-                                <input type="submit" class="form-control btn btn-primary" name="submit" id="submit">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-
-        <div class="col-md-9  admin-content" id="logout">
-            <div class="panel panel-info" style="margin: 1em;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Confirm Logout</h3>
-                </div>
-                <div class="panel-body">
-                    Do you really want to logout ?  
-                    <a  href="#" class="label label-danger"
-                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        <span >   Yes   </span>
-                    </a>    
-                    <a href="/account" class="label label-success"> <span >  No   </span></a>
-                </div>
-                <form id="logout-form" action="#" method="POST" style="display: none;">
-                </form>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<script>
-    $(document).ready(function()
-    {
-        var navItems = $('.Admin-menu li > a');
-        var navListItems = $('.Admin-menu li');
-        var allWells = $('.Admin-content');
-        var allWellsExceptFirst = $('.Admin-content:not(:first)');
-        allWellsExceptFirst.hide();
-        navItems.click(function(e)
-        {
-            e.preventDefault();
-            navListItems.removeClass('active');
-            $(this).closest('li').addClass('active');
-            allWells.hide();
-            var target = $(this).attr('data-target-id');
-            $('#' + target).show();
-        });
-    });
-</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

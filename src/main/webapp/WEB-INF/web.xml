@@ -31,6 +31,17 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>mySettingsServlet</servlet-name>
+    <servlet-class>com.artmal.controller.MySettingsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>mySettingsServlet</servlet-name>
+    <url-pattern>/my-settings</url-pattern>
+    <url-pattern>/my-settings/save</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>com.artmal.controller.LoginServlet</servlet-class>
   </servlet>
@@ -48,16 +59,6 @@
   <servlet-mapping>
     <servlet-name>logoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>myProfilePageServlet</servlet-name>
-    <servlet-class>com.artmal.controller.MyProfilePageServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>myProfilePageServlet</servlet-name>
-    <url-pattern>/my-profile</url-pattern>
   </servlet-mapping>
 
   <servlet>

@@ -12,4 +12,6 @@ import java.sql.SQLException;
 public interface UserService {
     User findByEmail(String username) throws SQLException, NamingException;
     int save(User user) throws SQLException, NamingException;
+
+    void updateUser(User user) throws NamingException, SQLException;
 }

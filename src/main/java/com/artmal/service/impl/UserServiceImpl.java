@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService {
     public int save(User user) throws SQLException, NamingException {
         return userDao.save(user);
     }
+
+    @Override
+    public void updateUser(User user) throws NamingException, SQLException {
+        userDao.updateUser(user);
+    }
 }

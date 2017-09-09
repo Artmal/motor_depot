@@ -20,8 +20,7 @@
             <section>
                 <h1 class="entry-title"><span>Sign Up</span> </h1>
 
-                <form action="/register" class="form-horizontal" method="post" name="signup" id="signup"
-                      onsubmit="validateInput()">
+                <form action="/register" class="form-horizontal" method="post" name="signup" id="signup">
 
                     <label for="email">Email*:</label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">

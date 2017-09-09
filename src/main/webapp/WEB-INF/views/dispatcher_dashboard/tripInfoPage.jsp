@@ -135,11 +135,13 @@
 
 <%-- Disable Accept buttons if there is the car for the trip--%>
 <script>
-    if(${trip.tripStatus.displayName() eq 'In progress'}) {
+    if(${trip.tripStatus.displayName() ne 'Open'}) {
         var acceptButtons = document.getElementsByClassName("btn-success");
+        var denyButtons = document.getElementsByClassName("btn-danger");
 
         for(var i = 0; i < acceptButtons.length; i++) {
             acceptButtons[i].classList.add("disabled");
+            denyButtons[i].classList.add("disabled");
         }
     }
 </script>

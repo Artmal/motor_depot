@@ -93,4 +93,29 @@ public class UserDaoImpl implements UserDao {
             }
         }
     }
+
+    @Override
+    public void updateUser(User user) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement updateUser = con.prepareStatement("UPDATE users SET email = ?, password = ? WHERE id = ?");
+            updateUser.setString(1, user.getEmail());
+            updateUser.setString(2, user.getPassword());
+            updateUser.setLong(3, user.getId());
+            updateUser.execute();
+
+            updateUser.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
 }

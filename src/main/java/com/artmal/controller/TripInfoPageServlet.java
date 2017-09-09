@@ -28,7 +28,6 @@ import java.util.Set;
 public class TripInfoPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripInfoPageServlet.class);
 
-
     private TripRequestService tripRequestService = new TripRequestServiceImpl();
     private TripService tripService = new TripServiceImpl();
 
