@@ -3,6 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+  <listener>
+    <listener-class>com.artmal.listener.Listener</listener-class>
+  </listener>
 
   <jsp-config>
     <jsp-property-group>
@@ -149,15 +152,64 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>driverDashboard_tripsInfoPageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.TripInfoPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_tripsInfoPageServlet</servlet-name>
+    <url-pattern>/driver-dashboard/trip</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_myRequestsPageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.MyTripRequestsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_myRequestsPageServlet</servlet-name>
+    <url-pattern>/driver-dashboard/my-requests</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_tripRequestDiscardServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.DiscardTripRequestServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_tripRequestDiscardServlet</servlet-name>
+    <url-pattern>/driver-dashboard/my-requests/discard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_myTripsPageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.MyTripsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_myTripsPageServlet</servlet-name>
+    <url-pattern>/driver-dashboard/my-trips</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>driverDashboard_completeTripServlet</servlet-name>
+    <servlet-class>com.artmal.controller.driver_dashboard.CompleteTripServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>driverDashboard_completeTripServlet</servlet-name>
+    <url-pattern>/driver-dashboard/my-trips/complete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>tripInfoServlet</servlet-name>
     <servlet-class>com.artmal.controller.TripInfoPageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>tripInfoServlet</servlet-name>
-    <url-pattern>/driver-dashboard/trip</url-pattern>
     <url-pattern>/dispatcher-dashboard/trip</url-pattern>
-    <url-pattern>/administrator-dashboard/trip</url-pattern>
+    <url-pattern>/admin-dashboard/trip</url-pattern>
   </servlet-mapping>
 
   <!-- JSP -->
@@ -288,4 +340,10 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+
+  <error-page>
+    <!-- Forbidden directory listing -->
+    <error-code>403</error-code>
+    <location>/WEB-INF/views/util/error/403.jsp</location>
+  </error-page>
 </web-app>

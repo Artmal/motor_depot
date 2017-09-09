@@ -13,7 +13,10 @@
 
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">My trips</a>
+            <a id="my-trips-nav-link" class="nav-link" href="/driver-dashboard/my-trips">My trips</a>
+        </li>
+        <li class="nav-item">
+            <a id="my-requests-nav-link" class="nav-link" href="/driver-dashboard/my-requests">My requests</a>
         </li>
         <li class="nav-item">
             <a id = "garage-nav-link" class="nav-link" href="/driver-dashboard/garage">Garage</a>

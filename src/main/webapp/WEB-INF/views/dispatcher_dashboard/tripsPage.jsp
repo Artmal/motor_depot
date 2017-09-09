@@ -22,11 +22,6 @@
 
     <!-- Data tables -->
     <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
-
-    <!-- DateTime Picker -->
-    <link href="${contextPath}/webjars/momentjs/2.18.1/moment.js" rel="script">
-    <link rel="stylesheet" href="/path/to/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-
 </head>
 
 <body>
@@ -166,25 +161,16 @@
                                    name="town-to" required>
                         </div>
 
-                        <label for="datetimepicker4">Time out*:</label>
+
+                        <label for="time-out">Time in*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar fa-fw"></i>
-                                </div>
-                                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id='datetimepicker4' />
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker4').datetimepicker();
-                                });
-                            </script>
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar fa-fw"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
+                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS" required>
                         </div>
 
-                            <%--<div class="input-group-addon">--%>
-                                <%--<i class="fa fa-calendar fa-fw"></i>--%>
-                            <%--</div>--%>
-                            <%--<input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"--%>
-                                   <%--name="time-out" placeholder="YYYY-MM-DD HH:MM:SS" required>--%>
-                        <%--</div>--%>
 
                         <label for="time-in">Time in*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -228,8 +214,5 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

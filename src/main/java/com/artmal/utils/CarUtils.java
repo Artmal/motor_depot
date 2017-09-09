@@ -9,6 +9,7 @@ import com.artmal.service.impl.DriverServiceImpl;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
@@ -146,10 +147,21 @@ public class CarUtils {
         CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Car initializeCar(ResultSet cars) throws SQLException {
+        Car car = new Car();
+        car.setId(cars.getLong("id"));
+        car.setRegistrationNumber(cars.getString("registration_number"));
+        car.setType(CarUtils.intToType(cars.getInt("type_id")));
+        car.setCondition(CarUtils.intToCondition(cars.getInt("condition_type_id")));
+        car.setModel(cars.getString("model"));
+        car.setNumberOfSeats(cars.getInt("number_of_seats"));
+        car.setColor(cars.getString("color"));
+        car.setOwnerId(cars.getLong("owner_id"));
+        return car;
     }
 }

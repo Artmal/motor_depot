@@ -27,4 +27,14 @@ public class TripRequestServiceImpl implements TripRequestService {
     public Set<TripRequest> findAllByTripId(long id) throws SQLException, NamingException, ParseException {
        return tripRequestDao.findAllByTripId(id);
     }
+
+    @Override
+    public Set<TripRequest> findAllByDriverId(long id) throws NamingException, SQLException, ParseException {
+        return tripRequestDao.findAllByDriverId(id);
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        tripRequestDao.deleteById(id);
+    }
 }

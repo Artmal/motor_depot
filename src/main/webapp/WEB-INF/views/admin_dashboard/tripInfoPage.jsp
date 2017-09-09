@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trip №${trip.id}</title>
+    <title>Trips</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<%@include file = "utils/driverHeader.jsp" %>
+<%@include file = "utils/adminHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/driverSidebar.jsp" %>
+        <%@include file = "utils/adminSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="card card-outline-info">
@@ -88,56 +88,41 @@
                 </div>
             </div>
 
-            <br>
+            <hr>
+            <h3>Requests</h3>
 
-            <c:choose>
-
-                <c:when test = "${trip.tripStatus.displayName() ne 'Open'}">
-                    <div class="card card-inverse" style="background-color: #333; border-color: #333;">
-                        <div class="card-block">
-                            <h3 class="card-title">Requests closed for the trip</h3>
-                            <p class="card-text">The trip already in progress or canceled or completed.</p>
-                            <a href="/driver-dashboard/trips" class="btn btn-primary">Go to trips page</a>
-                        </div>
-                    </div>
-                </c:when>
-
-                <c:otherwise>
+            <c:if test="${not empty setOfTripRequests}">
+                <c:forEach items="${setOfTripRequests}" var="tripRequest">
+                    <c:set var="count" value="${count + 1}" scope="page"/>
                     <div class="card">
+                        <div class="card-header">
+                            Request №${tripRequest.id}
+                            <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                               style="float: right"
+                               class="btn btn-danger btn-sm btn-space">Deny</a>
+                            <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                               style="float: right"
+                               class="btn btn-success btn-sm btn-space">Accept</a>
+                        </div>
                         <div class="card-block">
-                            <form class="form-horizontal" action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">
-                                <label for="car">Car*:</label>
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-cogs fa-fw"></i>
-                                    </div>
+                            <i class="fa fa-user-circle-o fa-fw"></i>
+                            <strong>Driver:</strong> ${tripRequest.carInfo.ownerId}<br>
 
-                                    <select class="form-control" id="car" name="car-id" required>
-                                        <c:forEach items="${setOfSuitableCars}" var="car">
-                                            <c:set var="count" value="${count + 1}" scope="page"/>
-                                            <option value="${car.id}">${car.model}</option>
-                                        </c:forEach>
-                                    </select>
+                            <i class="fa fa-car fa-fw"></i>
+                            <strong>Car model: </strong> ${tripRequest.carInfo.model}<br>
 
-                                    <input type="hidden" value="${trip.id}" name="trip-id" />
-                                </div>
+                            <i class="fa fa-users fa-fw"></i>
+                            <strong>Number of seats: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
 
-                                <label for="message">Message(optional):</label>
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-comment-o fa-fw"></i>
-                                    </div>
-                                    <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="message"
-                                           name="message">
-                                </div>
+                            <i class="fa fa-tint fa-fw"></i>
+                            <strong>Car color: </strong> ${tripRequest.carInfo.color}<br>
 
-                                <br>
-                                <button class="btn btn-primary">Make request</button>
-                            </form>
+                            <i class="fa fa-clock-o fa-fw"></i>
+                            <strong>Date of creation:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
                         </div>
                     </div>
-                </c:otherwise>
-            </c:choose>
+                </c:forEach>
+            </c:if>
         </main>
     </div>
 </div>
@@ -146,6 +131,17 @@
     $(document).ready(function() {
         $('#example').DataTable();
     } );
+</script>
+
+<%-- Disable Accept buttons if there is the car for the trip--%>
+<script>
+    if(${trip.tripStatus.displayName() eq 'In progress'}) {
+        var acceptButtons = document.getElementsByClassName("btn-success");
+
+        for(var i = 0; i < acceptButtons.length; i++) {
+            acceptButtons[i].classList.add("disabled");
+        }
+    }
 </script>
 
 <!-- Bootstrap core JavaScript

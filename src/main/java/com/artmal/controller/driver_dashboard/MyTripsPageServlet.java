@@ -1,7 +1,10 @@
 package com.artmal.controller.driver_dashboard;
 
 import com.artmal.model.Trip;
+import com.artmal.model.users.Driver;
+import com.artmal.service.DriverService;
 import com.artmal.service.TripService;
+import com.artmal.service.impl.DriverServiceImpl;
 import com.artmal.service.impl.TripServiceImpl;
 import org.apache.log4j.Logger;
 
@@ -15,19 +18,24 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
-public class TripsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(TripsPageServlet.class);
+public class MyTripsPageServlet extends HttpServlet {
+    final static Logger logger = Logger.getLogger(MyTripsPageServlet.class);
+
+    private TripService tripService = new TripServiceImpl();
+    private DriverService driverService = new DriverServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TripService tripService = new TripServiceImpl();
+        long userId = (long) req.getSession().getAttribute("id");
         try {
-            Set<Trip> tripSet = tripService.findAll();
+            Driver driver = driverService.findByUserId(userId);
+
+            Set<Trip> tripSet = tripService.findAllByDriverId(driver.getId());
             req.setAttribute("setOfTrips", tripSet);
+
+            req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/myTripsPage.jsp").forward(req, resp);
         } catch (SQLException | NamingException | ParseException e) {
             logger.error(e);
         }
-
-        req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/tripsPage.jsp").forward(req, resp);
     }
 }

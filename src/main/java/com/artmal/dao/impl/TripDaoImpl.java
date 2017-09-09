@@ -3,6 +3,7 @@ package com.artmal.dao.impl;
 import com.artmal.dao.TripDao;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
+import com.artmal.model.enums.TripStatus;
 import com.artmal.utils.CarUtils;
 import com.artmal.utils.TripUtils;
 
@@ -23,7 +24,7 @@ public class TripDaoImpl implements TripDao {
     public boolean save(Trip trip) throws SQLException, NamingException, ParseException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -40,7 +41,7 @@ public class TripDaoImpl implements TripDao {
             insertTripStatement.setTimestamp(5, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeOut()));
             insertTripStatement.setTimestamp(6, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeIn()));
             insertTripStatement.setInt(7, trip.getPaymentInDollars());
-            if(trip.getDispatcherId() != 0) {
+            if (trip.getDispatcherId() != 0) {
                 insertTripStatement.setLong(8, trip.getDispatcherId());
             } else {
                 insertTripStatement.setNull(8, java.sql.Types.INTEGER);
@@ -61,7 +62,7 @@ public class TripDaoImpl implements TripDao {
     public Trip findById(long id) throws SQLException, NamingException, ParseException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+        DataSource dataSource = (javax.sql.DataSource) envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -101,7 +102,7 @@ public class TripDaoImpl implements TripDao {
     public Set<Trip> findAll() throws NamingException, SQLException, ParseException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
 
         Connection con = null;
 
@@ -112,7 +113,7 @@ public class TripDaoImpl implements TripDao {
             ResultSet trips = findAllTrips.executeQuery();
 
             Set<Trip> tripSet = new HashSet();
-            while(trips.next()) {
+            while (trips.next()) {
                 Trip trip = new Trip();
                 trip.setId(trips.getLong("id"));
                 trip.setDateOfCreation(trips.getDate("date_of_creation"));
@@ -141,10 +142,42 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findAllTrips = con.prepareStatement("SELECT * FROM trips WHERE car_id IN(SELECT car_id FROM trip_requests WHERE date_of_confirmation IS NOT NULL AND car_id IN\n" +
+                    "(SELECT id FROM cars WHERE owner_id = 5))");
+            ResultSet trips = findAllTrips.executeQuery();
+
+            Set<Trip> tripSet = new HashSet();
+            while (trips.next()) {
+                Trip trip = TripUtils.initializeTrip(trips);
+                tripSet.add(trip);
+            }
+
+            findAllTrips.close();
+            trips.close();
+            return tripSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
 
         Connection con = null;
 
@@ -156,7 +189,35 @@ public class TripDaoImpl implements TripDao {
             assignCar.setLong(2, trip.getId());
             assignCar.execute();
 
+            PreparedStatement setConfirmationDateForRequest = con.prepareStatement("UPDATE trip_requests SET date_of_confirmation = NOW() WHERE car_id = ?");
+            setConfirmationDateForRequest.setLong(1, car.getId());
+            setConfirmationDateForRequest.execute();
+
             assignCar.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement setTripStatus = con.prepareStatement("UPDATE trips SET status_id = ? WHERE id = ?");
+            setTripStatus.setInt(1, TripUtils.statusToInt(tripStatus));
+            setTripStatus.setLong(2, trip.getId());
+            setTripStatus.execute();
+            setTripStatus.close();
         } finally {
             if (con != null) try {
                 con.close();

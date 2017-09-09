@@ -2,6 +2,8 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.CarDao;
 import com.artmal.model.Car;
+import com.artmal.model.Trip;
+import com.artmal.model.users.Driver;
 import com.artmal.utils.CarUtils;
 
 import javax.naming.Context;
@@ -141,19 +143,45 @@ public class CarDaoImpl implements CarDao {
 
             Set<Car> carSet = new HashSet();
             while(cars.next()) {
-                Car car = new Car();
-                car.setId(cars.getLong("id"));
-                car.setRegistrationNumber(cars.getString("registration_number"));
-                car.setType(CarUtils.intToType(cars.getInt("type_id")));
-                car.setCondition(CarUtils.intToCondition(cars.getInt("condition_type_id")));
-                car.setModel(cars.getString("model"));
-                car.setNumberOfSeats(cars.getInt("number_of_seats"));
-                car.setColor(cars.getString("color"));
-                car.setOwnerId(cars.getLong("owner_id"));
+                Car car = CarUtils.initializeCar(cars);
                 carSet.add(car);
             }
 
             findAllCars.close();
+            cars.close();
+            return carSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Set<Car> findSuitableForTripDriverCars(Driver driver, Trip trip) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findAllSuitableCars = con.prepareStatement("SELECT * FROM cars WHERE owner_id = ? AND type_id = ?");
+            findAllSuitableCars.setLong(1, driver.getId());
+            findAllSuitableCars.setInt(2, CarUtils.typeToInt(trip.getCarTypeRequired()));
+
+            ResultSet cars = findAllSuitableCars.executeQuery();
+
+            Set<Car> carSet = new HashSet();
+            while(cars.next()) {
+                Car car = CarUtils.initializeCar(cars);
+                carSet.add(car);
+            }
+
+            findAllSuitableCars.close();
             cars.close();
             return carSet;
         } finally {

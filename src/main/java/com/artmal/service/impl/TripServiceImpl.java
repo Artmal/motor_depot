@@ -4,6 +4,7 @@ import com.artmal.dao.TripDao;
 import com.artmal.dao.impl.TripDaoImpl;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
+import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripService;
 
 import javax.naming.NamingException;
@@ -30,7 +31,17 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException {
+        return tripDao.findAllByDriverId(id);
+    }
+
+    @Override
     public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
         tripDao.assignCarToTheTrip(trip, car);
+    }
+
+    @Override
+    public void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException {
+        tripDao.setTripStatus(trip, tripStatus);
     }
 }

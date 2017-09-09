@@ -6,7 +6,7 @@ import com.artmal.service.CarService;
 import com.artmal.service.TripService;
 import com.artmal.service.impl.CarServiceImpl;
 import com.artmal.service.impl.TripServiceImpl;
-import com.artmal.utils.TripUtils;
+import com.artmal.utils.TripRequestUtils;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -37,22 +37,65 @@ public class TripRequestDaoImpl implements TripRequestDao {
 
             Set<TripRequest> tripRequestSet = new HashSet();
             while(tripRequests.next()) {
-                TripRequest tripRequest = new TripRequest();
-                tripRequest.setId(tripRequests.getLong("id"));
-                tripRequest.setTripInfo(tripService.findById(tripRequests.getLong("trip_id")));
-                tripRequest.setCarInfo(carService.findById(tripRequests.getLong("car_id")));
-                tripRequest.setDateOfCreation(TripUtils.sqlDateToDateTime(tripRequests.getTimestamp("date_of_creation")));
-
-                if(tripRequests.getTimestamp("date_of_confirmation") != null) {
-                    tripRequest.setDateOfConfirmation(TripUtils.sqlDateToDateTime(tripRequests.getTimestamp("date_of_confirmation")));
-                }
-
+                TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
                 tripRequestSet.add(tripRequest);
-
             }
             findAllTripRequestsByTripId.close();
             tripRequests.close();
             return tripRequestSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public Set<TripRequest> findAllByDriverId(long id) throws NamingException, SQLException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findAllTripRequestsByDriverId = con.prepareStatement("SELECT * FROM trip_requests" +
+                    " WHERE car_id IN(SELECT id FROM cars WHERE owner_id = ?)");
+            findAllTripRequestsByDriverId.setLong(1, id);
+            ResultSet tripRequests = findAllTripRequestsByDriverId.executeQuery();
+
+            Set<TripRequest> tripRequestSet = new HashSet();
+            while(tripRequests.next()) {
+                TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
+                tripRequestSet.add(tripRequest);
+            }
+
+            findAllTripRequestsByDriverId.close();
+            tripRequests.close();
+            return tripRequestSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement deleteTripRequestById = con.prepareStatement("DELETE FROM trip_requests WHERE id = ?");
+            deleteTripRequestById.setLong(1, id);
+            deleteTripRequestById.execute();
         } finally {
             if (con != null) try {
                 con.close();
@@ -74,7 +117,7 @@ public class TripRequestDaoImpl implements TripRequestDao {
             PreparedStatement insertTripRequest = con.prepareStatement("INSERT INTO trip_requests" +
                     "(trip_id, car_id, message, date_of_creation) VALUES (?, ?, ?, NOW())");
 
-            insertTripRequest.setLong(1, tripRequest.getId());
+            insertTripRequest.setLong(1, tripRequest.getTripInfo().getId());
             insertTripRequest.setLong(2, tripRequest.getCarInfo().getId());
             if(tripRequest.getMessage() != null) {
                 insertTripRequest.setString(3, tripRequest.getMessage());
@@ -106,11 +149,7 @@ public class TripRequestDaoImpl implements TripRequestDao {
             ResultSet tripRequest = findTripRequestById.executeQuery();
             tripRequest.next();
 
-            TripRequest theTripRequest = new TripRequest();
-            theTripRequest.setId(tripRequest.getLong("id"));
-            theTripRequest.setTripInfo(tripService.findById(tripRequest.getLong("trip_id")));
-            theTripRequest.setCarInfo(carService.findById(tripRequest.getLong("car_id")));
-            theTripRequest.setDateOfCreation(TripUtils.sqlDateToDateTime(tripRequest.getTimestamp("date_of_creation")));
+            TripRequest theTripRequest = TripRequestUtils.initializeTripRequest(tripRequest);
 
             findTripRequestById.close();
             tripRequest.close();

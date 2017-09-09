@@ -14,7 +14,7 @@
             </ul>
         </div>
 
-        <div class="col-md-9  admin-content" id="change-email">
+        <div class="col-md-9 admin-content" id="change-email">
             <div class="panel panel-info" style="margin: 1em;">
                 <div class="panel-heading">
                     <h3 class="panel-title">Notification</h3>
@@ -137,8 +137,5 @@
 <script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

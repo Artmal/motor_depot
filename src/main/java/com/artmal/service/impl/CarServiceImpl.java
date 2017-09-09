@@ -3,6 +3,8 @@ package com.artmal.service.impl;
 import com.artmal.dao.CarDao;
 import com.artmal.dao.impl.CarDaoImpl;
 import com.artmal.model.Car;
+import com.artmal.model.Trip;
+import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 
 import javax.naming.NamingException;
@@ -31,5 +33,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public Set<Car> findAll() throws SQLException, NamingException {
         return carDao.findAll();
+    }
+
+    @Override
+    public Set<Car> findSuitableForTripDriverCars(Driver driver, Trip trip) throws NamingException, SQLException {
+        return carDao.findSuitableForTripDriverCars(driver, trip);
     }
 }
