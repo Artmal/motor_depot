@@ -11,10 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
@@ -216,6 +213,30 @@ public class TripDaoImpl implements TripDao {
 
             PreparedStatement setTripStatus = con.prepareStatement("UPDATE trips SET status_id = ? WHERE id = ?");
             setTripStatus.setInt(1, TripUtils.statusToInt(tripStatus));
+            setTripStatus.setLong(2, trip.getId());
+            setTripStatus.execute();
+            setTripStatus.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement setTripStatus = con.prepareStatement("UPDATE trips SET car_id = ? WHERE id = ?");
+            setTripStatus.setNull(1, Types.INTEGER);
             setTripStatus.setLong(2, trip.getId());
             setTripStatus.execute();
             setTripStatus.close();

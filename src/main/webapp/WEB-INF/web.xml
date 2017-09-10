@@ -135,6 +135,18 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>tripRequestDenyServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.TripRequestDenyServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>tripRequestDenyServlet</servlet-name>
+    <url-pattern>/dispatcher-dashboard/trip/deny</url-pattern>
+    <url-pattern>/admin-dashboard/trip/deny</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
     <servlet-name>driverDashboard_garage</servlet-name>
     <servlet-class>com.artmal.controller.driver_dashboard.GaragePageServlet</servlet-class>
   </servlet>

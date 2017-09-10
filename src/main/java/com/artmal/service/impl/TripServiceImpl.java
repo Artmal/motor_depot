@@ -46,6 +46,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException {
+        tripDao.nullifyResponsibleCarColumn(trip);
+    }
+
+    @Override
     public void deleteByCarId(long id) throws NamingException, SQLException {
         tripDao.deleteByCarId(id);
     }
