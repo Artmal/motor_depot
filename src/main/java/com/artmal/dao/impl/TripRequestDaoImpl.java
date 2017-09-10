@@ -130,6 +130,33 @@ public class TripRequestDaoImpl implements TripRequestDao {
     }
 
     @Override
+    public long countAllPendingRequests() throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement countAllPendingTripRequests = con.
+                    prepareStatement("SELECT COUNT(*) FROM trip_requests WHERE date_of_confirmation IS NULL");
+
+            ResultSet rs3 = countAllPendingTripRequests.executeQuery();
+            rs3.next();
+            long numberOfPendingRequests = rs3.getInt(1);
+            countAllPendingTripRequests.close();
+
+            return numberOfPendingRequests;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public void save(TripRequest tripRequest) throws SQLException, NamingException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");

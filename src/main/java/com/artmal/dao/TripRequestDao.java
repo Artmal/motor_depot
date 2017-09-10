@@ -20,4 +20,6 @@ public interface TripRequestDao {
 
     void deleteById(long id) throws NamingException, SQLException;
     void deleteByCarId(long id) throws NamingException, SQLException;
+
+    long countAllPendingRequests() throws NamingException, SQLException;
 }

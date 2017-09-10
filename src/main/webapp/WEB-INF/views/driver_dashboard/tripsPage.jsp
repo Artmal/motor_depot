@@ -45,8 +45,8 @@
                     <th>Car ID</th>
                     <th>Town from</th>
                     <th>Town to</th>
-                    <th>Time in</th>
                     <th>Time out</th>
+                    <th>Time in</th>
                     <th>Payment</th>
                     <th>Dispatcher ID</th>
                 </tr>
