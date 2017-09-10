@@ -25,6 +25,7 @@ public class ProfilesViewServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
 
     private TripService tripService = new TripServiceImpl();
+    private DispatcherService dispatcherServiceImpl = new DispatcherServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,11 +50,14 @@ public class ProfilesViewServlet extends HttpServlet {
         } else if(url.contains("dispatchers")) {
             long dispatcherId = Long.parseLong(req.getParameter("id"));
 
-            DispatcherService dispatcherServiceImpl = new DispatcherServiceImpl();
             try {
                 Dispatcher dispatcherInfo = dispatcherServiceImpl.findById(dispatcherId);
                 req.setAttribute("dispatcher", dispatcherInfo);
-            } catch (SQLException | NamingException e) {
+
+                Set<Trip> tripSet = tripService.findAllByDispatcherId(dispatcherId);
+                req.setAttribute("setOfCreatedTrips", tripSet);
+
+            } catch (SQLException | NamingException | ParseException e) {
                 logger.error(e);
             }
 

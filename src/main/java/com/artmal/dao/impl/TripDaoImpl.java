@@ -172,6 +172,38 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findAllByDispatcherId = con.prepareStatement("SELECT  * FROM trips WHERE dispatcher_id = ?");
+            findAllByDispatcherId.setLong(1, id);
+            ResultSet trips = findAllByDispatcherId.executeQuery();
+
+            Set<Trip> tripSet = new HashSet();
+            while (trips.next()) {
+                Trip trip = TripUtils.initializeTrip(trips);
+                tripSet.add(trip);
+            }
+
+            findAllByDispatcherId.close();
+            trips.close();
+            return tripSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");

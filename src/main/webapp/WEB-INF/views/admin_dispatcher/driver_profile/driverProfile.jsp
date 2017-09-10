@@ -68,16 +68,6 @@
                         <div class="card">
                             <div class="card-header">
                                 Trip №${trip.id}
-                                <script>
-                                    if(${trip.tripStatus.displayName() ne 'In progress'}) {
-                                        var completeButton = document.getElementById("completeButton${count}");
-                                        completeButton.classList.add("disabled");
-
-                                        var refuseButton = document.getElementById("refuseButton${count}")
-                                        refuseButton.classList.add("disabled");
-                                    }
-                                </script>
-
                             </div>
                             <div class="card-block">
                                 <h4 class="card-title">Info</h4>
