@@ -6,7 +6,7 @@
             <a id = "trips-nav-link" class="nav-link" href="/admin-dashboard/trips">Trips</a>
         </li>
         <li class="nav-item">
-            <a id = "requests-nav-link" class="nav-link" href="/admin-dashboard/drivers">
+            <a id = "requests-nav-link" class="nav-link" href="/admin-dashboard/requests">
                 Requests
                 <span class="badge badge-pill badge-default">
                     <mytags:countPendingRequests />

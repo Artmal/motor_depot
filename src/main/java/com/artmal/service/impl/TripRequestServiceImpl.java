@@ -34,6 +34,11 @@ public class TripRequestServiceImpl implements TripRequestService {
     }
 
     @Override
+    public Set<TripRequest> findAllPending() throws NamingException, SQLException, ParseException {
+        return tripRequestDao.findAllPending();
+    }
+
+    @Override
     public void deleteById(long id) throws NamingException, SQLException {
         tripRequestDao.deleteById(id);
     }

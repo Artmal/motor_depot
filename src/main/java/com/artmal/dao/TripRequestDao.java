@@ -17,6 +17,10 @@ public interface TripRequestDao {
     TripRequest findById(long id) throws NamingException, SQLException, ParseException;
     Set<TripRequest> findAllByTripId(long id) throws SQLException, NamingException, ParseException;
     Set<TripRequest> findAllByDriverId(long id) throws NamingException, SQLException, ParseException;
+    /**
+     * TripRequest without confirmation date.
+     */
+    Set<TripRequest> findAllPending() throws NamingException, SQLException, ParseException;
 
     void deleteById(long id) throws NamingException, SQLException;
     void deleteByCarId(long id) throws NamingException, SQLException;

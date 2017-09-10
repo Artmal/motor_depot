@@ -258,6 +258,17 @@
     <url-pattern>/car/delete</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>requestsPage</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.RequestsPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>requestsPage</servlet-name>
+    <url-pattern>/admin-dashboard/requests</url-pattern>
+    <url-pattern>/dispatcher-dashboard/requests</url-pattern>
+  </servlet-mapping>
+
   <!-- JSP -->
   <servlet>
     <servlet-name>login</servlet-name>

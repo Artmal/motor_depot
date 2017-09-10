@@ -84,6 +84,37 @@ public class TripRequestDaoImpl implements TripRequestDao {
     }
 
     @Override
+    public Set<TripRequest> findAllPending() throws NamingException, SQLException, ParseException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement findAllPendingTripRequests = con.
+                    prepareStatement("SELECT * FROM trip_requests WHERE date_of_confirmation IS NULL ");
+            ResultSet tripRequests = findAllPendingTripRequests.executeQuery();
+
+            Set<TripRequest> tripRequestSet = new HashSet();
+            while(tripRequests.next()) {
+                TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
+                tripRequestSet.add(tripRequest);
+            }
+
+            findAllPendingTripRequests.close();
+            tripRequests.close();
+            return tripRequestSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
     public void deleteById(long id) throws NamingException, SQLException {
         Context ctx = new InitialContext();
         Context envContext = (Context) ctx.lookup("java:comp/env");
