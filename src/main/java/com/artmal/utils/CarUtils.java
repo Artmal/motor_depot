@@ -175,7 +175,7 @@ public final class CarUtils {
         String model = req.getParameter("model");
         int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
         String carColor = req.getParameter("color");
-        long ownerId = Long.parseLong(req.getParameter("owner_id"));
+        long ownerId = Long.parseLong(req.getParameter("owner-id"));
 
         Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
         CarService carService = new CarServiceImpl();

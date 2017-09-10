@@ -242,12 +242,12 @@ public class CarDaoImpl implements CarDao {
         try {
             con = dataSource.getConnection();
 
+            tripRequestService.deleteByCarId(id);
+            tripService.deleteByCarId(id);
+
             PreparedStatement deleteCarById = con.prepareStatement("DELETE FROM cars WHERE id = ?");
             deleteCarById.setLong(1, id);
             deleteCarById.execute();
-
-            tripRequestService.deleteByCarId(id);
-            tripService.deleteByCarId(id);
 
             deleteCarById.close();
         } finally {

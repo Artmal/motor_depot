@@ -26,11 +26,12 @@ import java.util.Set;
 public class GaragePageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(GaragePageServlet.class);
 
+    private DriverService driverService = new DriverServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CarService carService = new CarServiceImpl();
         try {
-            DriverService driverService = new DriverServiceImpl();
             Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
 
             long ownerId = loggedDriver.getId();

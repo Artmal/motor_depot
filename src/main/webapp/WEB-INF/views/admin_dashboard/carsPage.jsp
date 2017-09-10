@@ -163,12 +163,12 @@
                                    required>
                         </div>
 
-                        <label for="ownerId">Driver ID*:</label>
+                        <label for="owner-id">Driver ID*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="ownerId" name="ownerId"
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="owner-id" name="owner-id"
                                    required>
                         </div>
                         <br>

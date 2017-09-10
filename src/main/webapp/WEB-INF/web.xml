@@ -242,6 +242,7 @@
   <servlet-mapping>
     <servlet-name>deleteCarServlet</servlet-name>
     <url-pattern>/driver-dashboard/garage/delete</url-pattern>
+    <url-pattern>/car/delete</url-pattern>
   </servlet-mapping>
 
   <!-- JSP -->

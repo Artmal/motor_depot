@@ -126,6 +126,12 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Save">
                             </div>
+
+                            <c:if test="${sessionScope.role eq 'Admin'}">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="/car/delete?car-id=${carInfo.id}" class="btn btn-lg btn-danger btn-block">Delete</a>
+                                </div>
+                            </c:if>
                         </div>
                     </fieldset>
                 </form>
