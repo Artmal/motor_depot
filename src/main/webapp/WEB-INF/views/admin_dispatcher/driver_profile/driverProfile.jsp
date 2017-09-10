@@ -23,7 +23,15 @@
 </head>
 
 <body>
-<%@include file = "../../utils/adminHeader.jsp" %>
+<c:choose>
+    <c:when test = "${sessionScope.role eq 'Admin'}">
+        <%@include file = "../../../../resources/jsp/admin_utils/adminHeader.jsp" %>
+    </c:when>
+
+    <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+        <%@include file = "../../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
+    </c:when>
+</c:choose>
 
 <div class="container">
     <div class="row profile">
@@ -37,20 +45,14 @@
                         DRIVER
                     </div>
                 </div>
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <%--<button type="button" class="btn btn-success btn-sm">Message</button>--%>
-                        <button type="button" class="btn btn-danger btn-sm">Delete from Database</button>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
 
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/admin-dashboard/drivers/profile?id=${driver.id}">Last Trips</a>
+                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}">Last Trips</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin-dashboard/drivers/profile/garage?driver-id=${driver.id}">Garage</a>
+                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}">Garage</a>
                         </li>
                     </ul>
                 </div>

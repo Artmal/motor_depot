@@ -41,11 +41,11 @@ public class LoginServlet extends HttpServlet {
                 Role role = userInDb.getRole();
 
                 switch(role) {
-                    case Driver:     resp.sendRedirect("/driver-dashboard");
+                    case Driver:     resp.sendRedirect("/driver-dashboard/trips");
                         break;
                     case Dispatcher: resp.sendRedirect("/dispatcher-dashboard/trips");
                         break;
-                    case Admin:      resp.sendRedirect("/admin-dashboard");
+                    case Admin:      resp.sendRedirect("/admin-dashboard/trips");
                 }
             }
             else {

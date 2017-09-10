@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<%@include file = "utils/adminHeader.jsp" %>
+<%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/adminSidebar.jsp" %>
+        <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Cars in the system</h1>

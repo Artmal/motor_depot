@@ -21,11 +21,11 @@
 </head>
 
 <body>
-<%@include file = "utils/driverHeader.jsp" %>
+<%@include file = "../../../resources/jsp/driver_utils/driverHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/driverSidebar.jsp" %>
+        <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>My Requests</h1>

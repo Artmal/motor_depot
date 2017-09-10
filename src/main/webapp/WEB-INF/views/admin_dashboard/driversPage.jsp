@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<%@include file = "utils/adminHeader.jsp" %>
+<%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/adminSidebar.jsp" %>
+        <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Drivers in the system</h1>
@@ -50,7 +50,7 @@
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
                                 <td>${driver.id}</td>
-                                <td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${driver.id}">${driver.name}</a></td>
+                                <td><a href="${contextPath}/drivers/profile?id=${driver.id}">${driver.name}</a></td>
                                 <td>${driver.passportSerialNumbers}</td>
                                 <td>${driver.phoneNumber}</td>
                             </tr>

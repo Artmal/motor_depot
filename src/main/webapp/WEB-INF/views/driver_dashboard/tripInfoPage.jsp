@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<%@include file = "utils/driverHeader.jsp" %>
+<%@include file = "../../../resources/jsp/driver_utils/driverHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/driverSidebar.jsp" %>
+        <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="card card-outline-info">
@@ -96,7 +96,7 @@
                     <div class="card card-inverse" style="background-color: #333; border-color: #333;">
                         <div class="card-block">
                             <h3 class="card-title">Requests closed for the trip</h3>
-                            <p class="card-text">The trip already in progress or canceled or completed.</p>
+                            <p class="card-text">The trip is ${trip.tripStatus.displayName().toLowerCase()}.</p>
                             <a href="/driver-dashboard/trips" class="btn btn-primary">Go to trips page</a>
                         </div>
                     </div>

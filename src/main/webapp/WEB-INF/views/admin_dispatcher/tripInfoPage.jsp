@@ -28,11 +28,11 @@
 <body>
 <c:choose>
     <c:when test = "${sessionScope.role eq 'Admin'}">
-        <%@include file = "../admin_dashboard/utils/adminHeader.jsp" %>
+        <%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
     </c:when>
 
     <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-        <%@include file = "../dispatcher_dashboard/utils/dispatcherHeader.jsp" %>
+        <%@include file = "../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
     </c:when>
 </c:choose>
 
@@ -40,11 +40,11 @@
     <div class="row">
         <c:choose>
             <c:when test = "${sessionScope.role eq 'Admin'}">
-                <%@include file = "../admin_dashboard/utils/adminSidebar.jsp" %>
+                <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
             </c:when>
 
             <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-                <%@include file = "../dispatcher_dashboard/utils/dispatcherSidebar.jsp" %>
+                <%@include file = "../../../resources/jsp/dispatcher_utils/dispatcherSidebar.jsp" %>
             </c:when>
         </c:choose>
 
@@ -122,7 +122,7 @@
                         </div>
                         <div class="card-block">
                             <i class="fa fa-user-circle-o fa-fw"></i>
-                            <strong>Driver:</strong> ${tripRequest.carInfo.ownerId}<br>
+                            <strong>Driver:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
 
                             <i class="fa fa-car fa-fw"></i>
                             <strong>Car model: </strong> ${tripRequest.carInfo.model}<br>

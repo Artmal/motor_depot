@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -8,45 +9,60 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Driver Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/profile.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-<%@include file = "utils/driverHeader.jsp" %>
+<c:choose>
+    <c:when test = "${sessionScope.role eq 'Admin'}">
+        <%@include file = "../../../../resources/jsp/admin_utils/adminHeader.jsp" %>
+    </c:when>
 
-<div class="container-fluid">
-    <div class="row">
-        <%@include file = "utils/driverSidebar.jsp" %>
+    <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+        <%@include file = "../../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
+    </c:when>
+</c:choose>
 
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Overview</h1>
+<div class="container">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        ${dispatcher.name}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        DISPATCHER
+                    </div>
+                </div>
 
-            <div class="card">
-                <div class="card-header">Successful trips this month</div>
-                <div class="card-block">43</div>
+                <div class="profile-usermenu">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Created Trips</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-
-            <br>
-
-            <div class="card">
-                <div class="card-header">Salary paid to drivers this month</div>
-                <div class="card-block">8321$</div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                No trips yet...
             </div>
-        </main>
+        </div>
     </div>
 </div>
-
-<script>
-    document.getElementById("overview-nav-link").classList.add("active");
-</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

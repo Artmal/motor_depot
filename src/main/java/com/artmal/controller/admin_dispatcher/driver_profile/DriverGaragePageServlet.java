@@ -1,4 +1,4 @@
-package com.artmal.controller.admin_dashboard;
+package com.artmal.controller.admin_dispatcher.driver_profile;
 
 import com.artmal.model.Car;
 import com.artmal.model.users.Driver;
@@ -41,7 +41,7 @@ public class DriverGaragePageServlet extends HttpServlet {
             logger.error(e);
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/profiles_view/driver/driverGaragePage.jsp")
+        req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/driver_profile/driverGaragePage.jsp")
                 .forward(req, resp);
     }
 

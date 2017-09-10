@@ -27,11 +27,11 @@
 <body>
 <c:choose>
     <c:when test = "${sessionScope.role eq 'Admin'}">
-        <%@include file = "../admin_dashboard/utils/adminHeader.jsp" %>
+        <%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
     </c:when>
 
     <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-        <%@include file = "../dispatcher_dashboard/utils/dispatcherHeader.jsp" %>
+        <%@include file = "../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
     </c:when>
 </c:choose>
 
@@ -39,11 +39,11 @@
     <div class="row">
         <c:choose>
             <c:when test = "${sessionScope.role eq 'Admin'}">
-                <%@include file = "../admin_dashboard/utils/adminSidebar.jsp" %>
+                <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
             </c:when>
 
             <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-                <%@include file = "../dispatcher_dashboard/utils/dispatcherSidebar.jsp" %>
+                <%@include file = "../../../resources/jsp/dispatcher_utils/dispatcherSidebar.jsp" %>
             </c:when>
         </c:choose>
 

@@ -9,6 +9,9 @@
 
     <!-- Custom styles for this template -->
     <link href="${contextPath}/resources/css/login.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -17,7 +20,13 @@
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <form action="/loginServlet" method="post">
                 <fieldset>
-                    <h2>Please Sign In</h2>
+                    <h2>
+                        Please Sign In
+                        <a style="float: right" href="#">
+                            <i style="margin: auto" class="fa fa-globe"></i>
+                        </a>
+                    </h2>
+
                     <hr class="colorgraph">
                     <div class="form-group">
                         <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
@@ -30,8 +39,8 @@
                         <p style="color: #ff6666">${errorText}</p>
                     </c:if>
 
-					<a href="#" class="btn btn-link pull-right">Forgot Password?</a>
-				</span>
+                    <a href="#">Forgot Password?</a>
+                    </span>
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">

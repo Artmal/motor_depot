@@ -103,24 +103,24 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminDashboard_profilesServlet</servlet-name>
-    <servlet-class>com.artmal.controller.admin_dashboard.ProfilesViewServlet</servlet-class>
+    <servlet-name>profilesServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.ProfilesViewServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminDashboard_profilesServlet</servlet-name>
-    <url-pattern>/admin-dashboard/drivers/profile</url-pattern>
-    <url-pattern>/admin-dashboard/dispatchers/profile</url-pattern>
+    <servlet-name>profilesServlet</servlet-name>
+    <url-pattern>/drivers/profile</url-pattern>
+    <url-pattern>/dispatchers/profile</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminDashboard_driversGarageServlet</servlet-name>
-    <servlet-class>com.artmal.controller.admin_dashboard.DriverGaragePageServlet</servlet-class>
+    <servlet-name>driversGaragePageServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.driver_profile.DriverGaragePageServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>adminDashboard_driversGarageServlet</servlet-name>
-    <url-pattern>/admin-dashboard/drivers/profile/garage</url-pattern>
+    <servlet-name>driversGaragePageServlet</servlet-name>
+    <url-pattern>/drivers/profile/garage</url-pattern>
   </servlet-mapping>
 
   <servlet>

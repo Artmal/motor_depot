@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<%@include file = "utils/adminHeader.jsp" %>
+<%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
 
 <div class="container-fluid">
     <div class="row">
-        <%@include file = "utils/adminSidebar.jsp" %>
+        <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Dispatchers in the system</h1>
@@ -51,7 +51,7 @@
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
                                 <td>${dispatcher.id}</td>
-                                <td><a href="${contextPath}/admin-dashboard/dispatchers/profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
+                                <td><a href="${contextPath}/dispatchers/profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
                                 <td>${dispatcher.passportSerialNumbers}</td>
                                 <td>${dispatcher.phoneNumber}</td>
                                 <td>${dispatcher.salaryInDollars}</td>

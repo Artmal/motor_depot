@@ -31,7 +31,6 @@ public class MySettingsPageServlet extends HttpServlet {
         }
 
         req.getRequestDispatcher("/WEB-INF/views/settingsPage.jsp").forward(req, resp);
-
     }
 
     @Override
