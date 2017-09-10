@@ -4,6 +4,10 @@ import com.artmal.dao.CarDao;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
+import com.artmal.service.TripRequestService;
+import com.artmal.service.TripService;
+import com.artmal.service.impl.TripRequestServiceImpl;
+import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.CarUtils;
 
 import javax.naming.Context;
@@ -19,6 +23,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CarDaoImpl implements CarDao {
+    private TripRequestService tripRequestService = new TripRequestServiceImpl();
+    private TripService tripService = new TripServiceImpl();
+
     @Override
     public boolean save(Car car) throws SQLException, NamingException {
         Context ctx = new InitialContext();
@@ -184,6 +191,65 @@ public class CarDaoImpl implements CarDao {
             findAllSuitableCars.close();
             cars.close();
             return carSet;
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void updateCar(Car car) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement updateCar = con.prepareStatement("UPDATE cars SET registration_number = ?, model = ?," +
+                            " type_id = ?, condition_type_id = ?, number_of_seats = ?, color = ? WHERE id = ?");
+
+            updateCar.setString(1, car.getRegistrationNumber());
+            updateCar.setString(2, car.getModel());
+            updateCar.setInt(3, CarUtils.typeToInt(car.getType()));
+            updateCar.setInt(4, CarUtils.conditionTypeToInt(car.getCondition()));
+            updateCar.setInt(5, car.getNumberOfSeats());
+            updateCar.setString(6, car.getColor());
+            updateCar.setLong(7, car.getId());
+            updateCar.execute();
+
+            updateCar.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement deleteCarById = con.prepareStatement("DELETE FROM cars WHERE id = ?");
+            deleteCarById.setLong(1, id);
+            deleteCarById.execute();
+
+            tripRequestService.deleteByCarId(id);
+            tripService.deleteByCarId(id);
+
+            deleteCarById.close();
         } finally {
             if (con != null) try {
                 con.close();

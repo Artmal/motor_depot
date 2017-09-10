@@ -30,6 +30,16 @@ public class Car {
         this.ownerId = ownerId;
     }
 
+    public Car(long id, String registrationNumber, CarType type, CarCondition condition, String model, int numberOfSeats, String color) {
+        this.id = id;
+        this.registrationNumber = registrationNumber;
+        this.type = type;
+        this.condition = condition;
+        this.model = model;
+        this.numberOfSeats = numberOfSeats;
+        this.color = color;
+    }
+
     public long getId() {
         return id;
     }

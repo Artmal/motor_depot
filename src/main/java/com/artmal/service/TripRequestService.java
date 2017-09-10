@@ -19,4 +19,6 @@ public interface TripRequestService {
     Set<TripRequest> findAllByDriverId(long id) throws NamingException, SQLException, ParseException;
 
     void deleteById(long id) throws NamingException, SQLException;
+    void deleteByCarId(long id) throws NamingException, SQLException;
+
 }

@@ -20,4 +20,8 @@ public interface CarDao {
     Set<Car> findAllByOwnerId(long id) throws SQLException, NamingException;
     Set<Car> findAll() throws SQLException, NamingException;
     Set<Car> findSuitableForTripDriverCars(Driver driver, Trip trip) throws NamingException, SQLException;
+
+    void updateCar(Car car) throws NamingException, SQLException;
+
+    void deleteById(long id) throws NamingException, SQLException;
 }

@@ -37,4 +37,9 @@ public class TripRequestServiceImpl implements TripRequestService {
     public void deleteById(long id) throws NamingException, SQLException {
         tripRequestDao.deleteById(id);
     }
+
+    @Override
+    public void deleteByCarId(long id) throws NamingException, SQLException {
+        tripRequestDao.deleteByCarId(id);
+    }
 }

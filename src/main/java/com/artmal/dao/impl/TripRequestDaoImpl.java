@@ -96,6 +96,31 @@ public class TripRequestDaoImpl implements TripRequestDao {
             PreparedStatement deleteTripRequestById = con.prepareStatement("DELETE FROM trip_requests WHERE id = ?");
             deleteTripRequestById.setLong(1, id);
             deleteTripRequestById.execute();
+
+            deleteTripRequestById.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
+    @Override
+    public void deleteByCarId(long id) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement deleteTripRequestById = con.prepareStatement("DELETE FROM trip_requests WHERE car_id = ?");
+            deleteTripRequestById.setLong(1, id);
+            deleteTripRequestById.execute();
+
+            deleteTripRequestById.close();
         } finally {
             if (con != null) try {
                 con.close();

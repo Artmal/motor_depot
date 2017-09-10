@@ -44,4 +44,9 @@ public class TripServiceImpl implements TripService {
     public void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException {
         tripDao.setTripStatus(trip, tripStatus);
     }
+
+    @Override
+    public void deleteByCarId(long id) throws NamingException, SQLException {
+        tripDao.deleteByCarId(id);
+    }
 }

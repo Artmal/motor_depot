@@ -7,18 +7,28 @@ import com.artmal.service.UserService;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserServiceImpl implements UserService {
     private static UserDao userDao = new UserDaoImpl();
 
     @Override
-    public User findByEmail(String username) throws SQLException, NamingException {
-        return userDao.findByEmail(username);
+    public User findByEmail(String email) throws SQLException, NamingException {
+        return userDao.findByEmail(email);
     }
 
     @Override
     public int save(User user) throws SQLException, NamingException {
-        return userDao.save(user);
+        Pattern checkEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = checkEmail.matcher(user.getEmail());
+
+
+        if(matcher.find()) {
+            return userDao.save(user);
+        }
+
+        return 0;
     }
 
     @Override

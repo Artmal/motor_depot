@@ -39,4 +39,14 @@ public class CarServiceImpl implements CarService {
     public Set<Car> findSuitableForTripDriverCars(Driver driver, Trip trip) throws NamingException, SQLException {
         return carDao.findSuitableForTripDriverCars(driver, trip);
     }
+
+    @Override
+    public void updateCar(Car car) throws NamingException, SQLException {
+        carDao.updateCar(car);
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        carDao.deleteById(id);
+    }
 }

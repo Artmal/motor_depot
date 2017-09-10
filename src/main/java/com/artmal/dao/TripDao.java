@@ -22,4 +22,6 @@ public interface TripDao {
 
     void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException;
     void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException;
+
+    void deleteByCarId(long id) throws NamingException, SQLException;
 }

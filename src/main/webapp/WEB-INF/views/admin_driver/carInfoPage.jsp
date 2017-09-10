@@ -28,75 +28,41 @@
 <body>
 <%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
 
-<div class="container-fluid">
-    <div class="row">
-        <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
+<div class="container">
+    <br>
+    <br>
+    <div class="container">
 
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Cars in the system</h1>
+        <div class="row" style="margin-top:20px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form name="settingsChangeForm" action="/car/save" method="post">
+                    <input hidden name="id" value="${param.id}">
 
-            <c:if test="${not empty setOfCars}">
-                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Car ID</th>
-                    <th>Registration Number</th>
-                    <th>Type</th>
-                    <th>Condition</th>
-                    <th>Model</th>
-                    <th>Number of seats</th>
-                    <th>Color</th>
-                    <th>Driver ID</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${setOfCars}" var="car">
-                    <c:set var="count" value="${count + 1}" scope="page"/>
-                    <tr>
-                        <td><a href="${contextPath}/car?id=${car.id}">${car.id}</a></td>
-                        <td>${car.registrationNumber}</td>
-                        <td>${car.type.displayName()}</td>
-                        <td>
-                            <c:if test="${car.condition eq 'Broken'}">
-                                <span class="badge badge-danger">Broken</span>
-                            </c:if>
-                            <c:if test="${car.condition eq 'Repairing'}">
-                                <span class="badge badge-warning">Repairing</span>
-                            </c:if>
-                            <c:if test="${car.condition eq 'Ready'}">
-                                <span class="badge badge-success">Ready</span>
-                            </c:if>
-                        </td>
-                        <td>${car.model}</td>
-                        <td>${car.numberOfSeats}</td>
-                        <td>${car.color}</td>
-                        <td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            </c:if>
-
-            <br>
-
-            <div class="card">
-                <div class="card-block">
-                    <form class="form-horizontal" action="/admin-dashboard/cars" method="post">
-                        <label for="registration-number">Registration Number*:</label>
+                    <fieldset>
+                        <h2>Edit Car №${carInfo.id} info</h2>
+                        <label for="registration-number">Email*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="registration-number"
-                                   name="registration-number" required>
+                                   name="registration-number" value="${carInfo.registrationNumber}" required>
                         </div>
 
-                        <label for="type">Type*:</label>
+                        <label for="model">Model*:</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-industry fa-fw"></i>
+                            </div>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="model"
+                                   name="model" value="${carInfo.model}" required>
+                        </div>
+
+                        <label for="type">Type:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-car fa-fw"></i>
                             </div>
-
                             <select class="form-control" id="type" name="type" required>
                                 <optgroup label="Light">
                                     <option>Micro</option>
@@ -123,12 +89,12 @@
                             </select>
                         </div>
 
-                        <label for="condition">Condition*:</label>
+
+                        <label for="condition">Condition: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-cogs fa-fw"></i>
                             </div>
-
                             <select class="form-control" id="condition" name="condition" required>
                                 <option>Broken</option>
                                 <option>Repairing</option>
@@ -136,60 +102,38 @@
                             </select>
                         </div>
 
-                        <label for="model">Model*:</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon">
-                                <i class="fa fa-industry fa-fw"></i>
-                            </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="model"
-                                   name="model" placeholder="Kia Optima" required>
-                        </div>
-
-                        <label for="number-of-seats">Number of seats*:</label>
+                        <label for="number-of-seats">Number of seats: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-users fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="number-of-seats"
-                                   name="number-of-seats" required>
+                                   name="number-of-seats" required value="${carInfo.numberOfSeats}">
                         </div>
 
-                        <label for="color">Car color*:</label>
+                        <label for="color">Car color: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-tint fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="color" name="color"
-                                   required>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="color"
+                                   name="color" required value="${carInfo.color}">
                         </div>
 
-                        <label for="ownerId">Driver ID*:</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon">
-                                <i class="fa fa-user-circle-o fa-fw"></i>
-                            </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="ownerId" name="ownerId"
-                                   required>
-                        </div>
                         <br>
-                        <button class="btn btn-primary">Add car</button>
-                    </form>
-                </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Save">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-            <br>
-        </main>
+        </div>
     </div>
 </div>
-
-<script>
-    document.getElementById("cars-nav-link").classList.add("active");
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-</script>
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

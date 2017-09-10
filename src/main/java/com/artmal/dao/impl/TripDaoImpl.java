@@ -226,4 +226,28 @@ public class TripDaoImpl implements TripDao {
             }
         }
     }
+
+    @Override
+    public void deleteByCarId(long id) throws NamingException, SQLException {
+        Context ctx = new InitialContext();
+        Context envContext = (Context) ctx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+
+        Connection con = null;
+
+        try {
+            con = dataSource.getConnection();
+
+            PreparedStatement deleteByCarId = con.prepareStatement("DELETE  FROM trips WHERE car_id = ?");
+            deleteByCarId.setLong(1, id);
+            deleteByCarId.execute();
+
+            deleteByCarId.close();
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (Exception ignore) {
+            }
+        }
+    }
 }
