@@ -112,13 +112,28 @@
                     <c:set var="count" value="${count + 1}" scope="page"/>
                     <div class="card">
                         <div class="card-header">
+                            <c:if test="${trip.carId eq tripRequest.carInfo.id}">
+                                <i class="fa fa-check-square-o fa-fw"></i>
+                            </c:if>
                             Request №${tripRequest.id}
-                            <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                               style="float: right"
-                               class="btn btn-danger btn-sm btn-space">Deny</a>
-                            <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                               style="float: right"
-                               class="btn btn-success btn-sm btn-space">Accept</a>
+                            <c:choose>
+                                <c:when test="${sessionScope.role eq 'Admin'}">
+                                    <a href="/admin-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                       style="float: right"
+                                       class="btn btn-danger btn-sm btn-space">Deny</a>
+                                    <a href="/admin-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                       style="float: right"
+                                       class="btn btn-success btn-sm btn-space">Accept</a>
+                                </c:when>
+                                <c:when test="${sessionScope.role eq 'Dispatcher'}">
+                                    <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                       style="float: right"
+                                       class="btn btn-danger btn-sm btn-space">Deny</a>
+                                    <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                       style="float: right"
+                                       class="btn btn-success btn-sm btn-space">Accept</a>
+                                </c:when>
+                            </c:choose>
                         </div>
                         <div class="card-block">
                             <i class="fa fa-user-circle-o fa-fw"></i>
@@ -151,13 +166,11 @@
 
 <%-- Disable Accept buttons if there is the car for the trip--%>
 <script>
-    if(${trip.tripStatus.displayName() ne 'Open'}) {
+    if(${trip.tripStatus.displayName() eq 'In progress'}) {
         var acceptButtons = document.getElementsByClassName("btn-success");
-        var denyButtons = document.getElementsByClassName("btn-danger");
 
         for(var i = 0; i < acceptButtons.length; i++) {
             acceptButtons[i].classList.add("disabled");
-            denyButtons[i].classList.add("disabled");
         }
     }
 </script>

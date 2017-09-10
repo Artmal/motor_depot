@@ -87,7 +87,15 @@
                         <td>${trip.timeIn.toString("yyyy-MM-dd HH:mm")}</td>
 
                         <td>${trip.paymentInDollars}</td>
-                        <td>${trip.dispatcherId}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${trip.dispatcherId eq 0}">
+                                    Admin
+                                </c:when>
+                                <c:otherwise>
+                                    ${trip.dispatcherId}</td>
+                                </c:otherwise>
+                            </c:choose>
                     </tr>
                 </c:forEach>
                 </tbody>

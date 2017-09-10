@@ -124,13 +124,14 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>dispatcherDashboard_tripRequestAcceptServlet</servlet-name>
-    <servlet-class>com.artmal.controller.dispatcher_dashboard.TripRequestAcceptServlet</servlet-class>
+    <servlet-name>tripRequestAcceptServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.TripRequestAcceptServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>dispatcherDashboard_tripRequestAcceptServlet</servlet-name>
+    <servlet-name>tripRequestAcceptServlet</servlet-name>
     <url-pattern>/dispatcher-dashboard/trip/accept</url-pattern>
+    <url-pattern>/admin-dashboard/trip/accept</url-pattern>
   </servlet-mapping>
 
   <servlet>
