@@ -1,15 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.driver_profile.driverProfilePage" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Driver's Profile</title>
+    <title><fmt:message key="adminDispatcher.driverProfile.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +36,7 @@
         <%@include file = "../../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
     </c:when>
 </c:choose>
+<fmt:setBundle basename="i18n.admin_dispatcher.driver_profile.driverProfilePage" />
 
 <div class="container">
     <div class="row profile">
@@ -42,17 +47,17 @@
                         ${driver.name}
                     </div>
                     <div class="profile-usertitle-job">
-                        DRIVER
+                        <fmt:message key="adminDispatcher.driverProfile.driver"></fmt:message>
                     </div>
                 </div>
 
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}">Last Trips</a>
+                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}"><fmt:message key="adminDispatcher.driverProfile.lastTrips"/></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}">Garage</a>
+                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}"><fmt:message key="adminDispatcher.driverProfile.garage"/></a>
                         </li>
                     </ul>
                 </div>
@@ -67,15 +72,15 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <div class="card">
                             <div class="card-header">
-                                Trip №${trip.id}
+                                <fmt:message key="adminDispatcher.driverProfile.header"/>${trip.id}
                             </div>
                             <div class="card-block">
                                 <h4 class="card-title">Info</h4>
                                 <i class="fa fa-calendar-plus-o fa-fw"></i>
-                                <strong>Date of creation:</strong> ${trip.dateOfCreation}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
                                 <br>
                                 <i class="fa fa-tasks fa-fw"></i>
-                                <strong>Status:</strong>
+                                <strong><fmt:message key="adminDispatcher.driverProfile.status"/>:</strong>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                                     <span class="badge badge-success">Open</span>
                                 </c:if>
@@ -90,10 +95,10 @@
                                 </c:if>
                                 <br>
                                 <i class="fa fa-car fa-fw"></i>
-                                <strong>Car Type Required:</strong> ${trip.carTypeRequired.displayName()}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
                                 <br>
                                 <i class="fa fa-id-card-o fa-fw"></i>
-                                <strong>Car ID:</strong>
+                                <strong><fmt:message key="adminDispatcher.driverProfile.carId"/>:</strong>
                                 <c:choose>
                                     <c:when test="${trip.carId eq '0'}">
                                         <span class="badge badge-pill badge-success">Free spot</span>
@@ -104,22 +109,22 @@
                                 </c:choose>
                                 <br>
                                 <i class="fa fa-building-o fa-fw"></i>
-                                <strong>Town from:</strong> ${trip.townFrom}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.townFrom"/>:</strong> ${trip.townFrom}
                                 <br>
                                 <i class="fa fa-building fa-fw"></i>
-                                <strong>Town to:</strong> ${trip.townTo}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.townTo"/>:</strong> ${trip.townTo}
                                 <br>
                                 <i class="fa fa-calendar fa-fw"></i>
-                                <strong>Time out:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                                 <br>
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
-                                <strong>Time in:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                                 <br>
                                 <i class="fa fa-usd fa-fw"></i>
-                                <strong>Payment:</strong> ${trip.paymentInDollars}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.payment"/>:</strong> ${trip.paymentInDollars}
                                 <br>
                                 <i class="fa fa-user-plus fa-fw"></i>
-                                <strong>Dispatcher ID:</strong> ${trip.dispatcherId}
+                                <strong><fmt:message key="adminDispatcher.driverProfile.dispatcherId"/>:</strong> ${trip.dispatcherId}
                             </div>
                         </div>
                     </c:forEach>

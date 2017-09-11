@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +37,7 @@
 
         <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Trips</h1>
+            <h1><fmt:message key="tripsPage.content.trips"/></h1>
 
             <c:if test="${not empty setOfTrips}">
             <table id="example" class="table table-bordered" width="100%" cellspacing="0">

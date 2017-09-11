@@ -1,15 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.driver_dashboard.tripInfoPage" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trip №${trip.id}</title>
+    <title><fmt:message key="driverDashboard.tripInfoPage.pageTitle"/>${trip.id}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -31,16 +35,17 @@
 <div class="container-fluid">
     <div class="row">
         <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
+        <fmt:setBundle basename="i18n.driver_dashboard.tripInfoPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div class="card card-outline-info">
                 <div class="card-block">
-                    <h4 class="card-title">Trip №${trip.id} Info</h4>
+                    <h4 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.header"/>${trip.id}</h4>
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
-                    <strong>Date of creation:</strong> ${trip.dateOfCreation}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
                     <br>
                     <i class="fa fa-tasks fa-fw"></i>
-                    <strong>Status:</strong>
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.status"/>:</strong>
                     <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                         <span class="badge badge-success">Open</span>
                     </c:if>
@@ -55,10 +60,10 @@
                     </c:if>
                     <br>
                     <i class="fa fa-car fa-fw"></i>
-                    <strong>Car Type Required:</strong> ${trip.carTypeRequired.displayName()}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
                     <br>
                     <i class="fa fa-id-card-o fa-fw"></i>
-                    <strong>Car ID:</strong>
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.carId"/>:</strong>
                     <c:choose>
                         <c:when test="${trip.carId eq '0'}">
                             <span class="badge badge-pill badge-success">Free spot</span>
@@ -69,22 +74,22 @@
                     </c:choose>
                     <br>
                     <i class="fa fa-building-o fa-fw"></i>
-                    <strong>Town from:</strong> ${trip.townFrom}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.townFrom"/>:</strong> ${trip.townFrom}
                     <br>
                     <i class="fa fa-building fa-fw"></i>
-                    <strong>Town to:</strong> ${trip.townTo}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.townTo"/>:</strong> ${trip.townTo}
                     <br>
                     <i class="fa fa-calendar fa-fw"></i>
-                    <strong>Time out:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                    <strong>Time in:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-usd fa-fw"></i>
-                    <strong>Payment:</strong> ${trip.paymentInDollars}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.payment"/>:</strong> ${trip.paymentInDollars}
                     <br>
                     <i class="fa fa-user-plus fa-fw"></i>
-                    <strong>Dispatcher ID:</strong> ${trip.dispatcherId}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
                 </div>
             </div>
 
@@ -95,9 +100,8 @@
                 <c:when test = "${trip.tripStatus.displayName() ne 'Open'}">
                     <div class="card card-inverse" style="background-color: #333; border-color: #333;">
                         <div class="card-block">
-                            <h3 class="card-title">Requests closed for the trip</h3>
-                            <p class="card-text">The trip is ${trip.tripStatus.displayName().toLowerCase()}.</p>
-                            <a href="/driver-dashboard/trips" class="btn btn-primary">Go to trips page</a>
+                            <h3 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.closedRequest"/></h3>
+                            <a href="/driver-dashboard/trips" class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/></a>
                         </div>
                     </div>
                 </c:when>
@@ -106,7 +110,7 @@
                     <div class="card">
                         <div class="card-block">
                             <form class="form-horizontal" action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">
-                                <label for="car">Car*:</label>
+                                <label for="car"><fmt:message key="driverDashboard.tripInfoPage.car"/>*:</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <div class="input-group-addon">
                                         <i class="fa fa-cogs fa-fw"></i>
@@ -122,7 +126,7 @@
                                     <input type="hidden" value="${trip.id}" name="trip-id" />
                                 </div>
 
-                                <label for="message">Message(optional):</label>
+                                <label for="message"><fmt:message key="driverDashboard.tripInfoPage.message"/>:</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <div class="input-group-addon">
                                         <i class="fa fa-comment-o fa-fw"></i>
@@ -132,7 +136,7 @@
                                 </div>
 
                                 <br>
-                                <button class="btn btn-primary">Make request</button>
+                                <button class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.makeRequest"/></button>
                             </form>
                         </div>
                     </div>

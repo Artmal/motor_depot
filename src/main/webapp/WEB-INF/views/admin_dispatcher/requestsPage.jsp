@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.admin_dispatcher.requestsPage" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

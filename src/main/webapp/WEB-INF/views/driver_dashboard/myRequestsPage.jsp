@@ -1,15 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.driver_dashboard.myRequestsPage" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Requests</title>
+    <title><fmt:message key="driverDashboard.myRequestsPage.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -26,37 +30,39 @@
 <div class="container-fluid">
     <div class="row">
         <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
+        <fmt:setBundle basename="i18n.driver_dashboard.myRequestsPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>My Requests</h1>
+            <h1><fmt:message key="driverDashboard.myRequestsPage.header"/></h1>
 
             <c:if test="${not empty setOfTripRequests}">
                 <c:forEach items="${setOfTripRequests}" var="tripRequest">
                     <c:set var="count" value="${count + 1}" scope="page"/>
                     <div class="card">
                         <div class="card-header">
-                            Request №${tripRequest.id}
+                            <fmt:message key="driverDashboard.myRequestsPage.requestNumber"/>${tripRequest.id}
                             <a href="/driver-dashboard/my-requests/discard?trip-request-id=${tripRequest.id}"
                                style="float: right"
-                               class="btn btn-danger btn-sm btn-space">Discard</a>
+                               class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myRequestPage.discard"/></a>
 
 
                         </div>
                         <div class="card-block">
                             <i class="fa fa-road fa-fw"></i>
-                            <strong>Trip:</strong> <a href="/driver-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">Trip №${tripRequest.tripInfo.id}</a><br>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.trip"/>:</strong> <a href="/driver-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
+                            <fmt:message key="driverDashboard.myRequestsPage.label.trip"/> №${tripRequest.tripInfo.id}</a><br>
 
                             <i class="fa fa-car fa-fw"></i>
-                            <strong>Car model: </strong> ${tripRequest.carInfo.model}<br>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>
 
                             <i class="fa fa-users fa-fw"></i>
-                            <strong>Number of seats: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.numberOfSeats"/>: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
 
                             <i class="fa fa-tint fa-fw"></i>
-                            <strong>Car color: </strong> ${tripRequest.carInfo.color}<br>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.color"/>: </strong> ${tripRequest.carInfo.color}<br>
 
                             <i class="fa fa-clock-o fa-fw"></i>
-                            <strong>Date of creation:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.color"/>:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
                         </div>
                     </div>
                     <br>
