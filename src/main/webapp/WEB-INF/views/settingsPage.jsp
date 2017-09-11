@@ -1,7 +1,14 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.settings" />
+
+<fmt:message key="settings.button.save" var="saveButtonText" />
+
 <html>
 <head>
-    <title>Title</title>
+    <title><fmt:message key="settings.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -21,8 +28,8 @@
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form name="settingsChangeForm" action="/my-settings/save" method="post">
                     <fieldset>
-                        <h2>Edit your profile.<small>It's always easy</small></h2>
-                        <label for="email">Email*:</label>
+                        <h2><fmt:message key="settings.header"/></h2>
+                        <label for="email"><fmt:message key="settings.label.email"/></label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope"></i>
@@ -32,7 +39,7 @@
                                    required>
                         </div>
 
-                        <label for="password">Password:</label>
+                        <label for="password"><fmt:message key="settings.label.password"/></label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key"></i>
@@ -41,7 +48,7 @@
                                    required>
                         </div>
 
-                        <label for="cpassword">Confirm password*:</label>
+                        <label for="cpassword"><fmt:message key="settings.label.confirmPassword"/></label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key"></i>
@@ -56,7 +63,8 @@
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
-                                <input onclick="return checkPass()" type="submit" class="btn btn-lg btn-success btn-block" value="Save">
+                                <input onclick="return checkPass()" type="submit" class="btn btn-lg btn-success btn-block"
+                                       value="${saveButtonText}">
                             </div>
                         </div>
                     </fieldset>

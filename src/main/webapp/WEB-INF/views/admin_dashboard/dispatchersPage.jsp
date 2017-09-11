@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dashboard.dispatchersPage" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+    <title><fmt:message key="adminDashboard.dispatchersPage.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -31,19 +35,20 @@
 <div class="container-fluid">
     <div class="row">
         <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
+        <fmt:setBundle basename="i18n.admin_dashboard.dispatchersPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Dispatchers in the system</h1>
+            <h1><fmt:message key="adminDashboard.dispatchersPage.header"/></h1>
 
             <c:if test="${not empty setOfDispatchers}">
                 <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Dispatcher ID</th>
-                            <th>Name</th>
-                            <th>Passport Serial Numbers</th>
-                            <th>Phone Number</th>
-                            <th>Salary($)</th>
+                            <th><fmt:message key="adminDashboard.dispatchersPage.table.dispatcherId"/></th>
+                            <th><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/></th>
+                            <th><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/></th>
+                            <th><fmt:message key="adminDashboard.dispatchersPage.table.phoneNumber"/></th>
+                            <th><fmt:message key="adminDashboard.dispatchersPage.table.salary"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,7 +71,7 @@
             <div class="card">
                 <div class="card-block">
                     <form class="form-horizontal" action="/admin-dashboard/dispatcherServlet" method="post">
-                        <label for="email">Email*:</label>
+                        <label for="email"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.email"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
@@ -74,7 +79,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                         </div>
 
-                        <label for="password">Password*:</label>
+                        <label for="password"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.password"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
@@ -83,7 +88,7 @@
                                    required>
                         </div>
 
-                        <label for="name">Full Name*:</label>
+                        <label for="name"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
@@ -91,7 +96,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
                         </div>
 
-                        <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
+                        <label for="passport-serial-numbers"><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
@@ -100,7 +105,7 @@
                                    name="passport-serial-numbers" required>
                         </div>
 
-                        <label for="phone-number">Phone Number*:</label>
+                        <label for="phone-number"><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
@@ -109,7 +114,7 @@
                                    name="phone-number" required>
                         </div>
 
-                        <label for="salary-in-dollars">Salary($)</label>
+                        <label for="salary-in-dollars"><fmt:message key="adminDashboard.dispatchersPage.table.salary"/>:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
@@ -118,7 +123,7 @@
                                     name="salary-in-dollars">
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Add dispatcher</button>
+                        <button type="submit" class="btn btn-primary"><fmt:message key="adminDashboard.dispatchersPage.button.addDispatcher"/></button>
                     </form>
                 </div>
             </div>

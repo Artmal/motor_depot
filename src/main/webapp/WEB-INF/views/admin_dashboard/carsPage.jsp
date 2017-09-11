@@ -1,8 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dashboard.carsPage" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,21 +36,23 @@
     <div class="row">
         <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
 
+        <fmt:setBundle basename="i18n.admin_dashboard.carsPage" />
+
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Cars in the system</h1>
+            <h1><fmt:message key="adminDashboard.carsPage.header"/></h1>
 
             <c:if test="${not empty setOfCars}">
                 <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>Car ID</th>
-                    <th>Registration Number</th>
-                    <th>Type</th>
-                    <th>Condition</th>
-                    <th>Model</th>
-                    <th>Number of seats</th>
-                    <th>Color</th>
-                    <th>Driver ID</th>
+                    <th><fmt:message key="adminDashboard.carsPage.carId"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.registrationNumber"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.type"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.condition"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.condition"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.numberOfSeats"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.color"/></th>
+                    <th><fmt:message key="adminDashboard.carsPage.driverId"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,7 +88,7 @@
             <div class="card">
                 <div class="card-block">
                     <form class="form-horizontal" action="/admin-dashboard/cars" method="post">
-                        <label for="registration-number">Registration Number*:</label>
+                        <label for="registration-number"><fmt:message key="adminDashboard.carsPage.registrationNumber"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
@@ -91,52 +97,54 @@
                                    name="registration-number" required>
                         </div>
 
-                        <label for="type">Type*:</label>
+                        <label for="type"><fmt:message key="adminDashboard.carsPage.type"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-car fa-fw"></i>
                             </div>
 
+                            <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
                             <select class="form-control" id="type" name="type" required>
                                 <optgroup label="Light">
-                                    <option>Micro</option>
-                                    <option>Sedan</option>
-                                    <option>Hatchback</option>
-                                    <option>Roadster</option>
-                                    <option>Coupe</option>
-                                    <option>Supercar</option>
-                                    <option>Cabriolet</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.micro"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.sedan"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.hatchback"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.roadster"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.coupe"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.supercar"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.cabriolet"/></option>
                                 </optgroup>
                                 <optgroup label="Medium">
-                                    <option>Minivan</option>
-                                    <option>Van</option>
-                                    <option>CUV</option>
-                                    <option>SUV</option>
-                                    <option>Pickup</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.minivan"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.van"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.cuv"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.suv"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.pickup"/></option>
                                 </optgroup>
                                 <optgroup label="Heavy">
-                                    <option>Campervan</option>
-                                    <option value="Mini_truck">Mini truck</option>
-                                    <option>Truck</option>
-                                    <option value="Big_truck">Big truck</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.campervan"/></option>
+                                    <option value="Mini_truck"><fmt:message key="tripsPage.content.addTripForm.option.miniTruck"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.truck"/></option>
+                                    <option value="Big_truck"><fmt:message key="tripsPage.content.addTripForm.option.bigTruck"/></option>
                                 </optgroup>
                             </select>
                         </div>
 
-                        <label for="condition">Condition*:</label>
+                        <fmt:setBundle basename="i18n.admin_dashboard.carsPage" />
+                        <label for="condition"><fmt:message key="adminDashboard.carsPage.condition"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-cogs fa-fw"></i>
                             </div>
 
                             <select class="form-control" id="condition" name="condition" required>
-                                <option>Broken</option>
-                                <option>Repairing</option>
-                                <option>Ready</option>
+                                <option><fmt:message key="adminDashboard.carsPage.broken"/></option>
+                                <option><fmt:message key="adminDashboard.carsPage.repairing"/></option>
+                                <option><fmt:message key="adminDashboard.carsPage.ready"/></option>
                             </select>
                         </div>
 
-                        <label for="model">Model*:</label>
+                        <label for="model"><fmt:message key="adminDashboard.carsPage.model"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-industry fa-fw"></i>
@@ -145,7 +153,7 @@
                                    name="model" placeholder="Kia Optima" required>
                         </div>
 
-                        <label for="number-of-seats">Number of seats*:</label>
+                        <label for="number-of-seats"><fmt:message key="adminDashboard.carsPage.numberOfSeats"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-users fa-fw"></i>
@@ -154,7 +162,7 @@
                                    name="number-of-seats" required>
                         </div>
 
-                        <label for="color">Car color*:</label>
+                        <label for="color"><fmt:message key="adminDashboard.carsPage.color"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-tint fa-fw"></i>
@@ -163,7 +171,7 @@
                                    required>
                         </div>
 
-                        <label for="owner-id">Driver ID*:</label>
+                        <label for="owner-id"><fmt:message key="adminDashboard.carsPage.driverId"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
@@ -172,7 +180,7 @@
                                    required>
                         </div>
                         <br>
-                        <button class="btn btn-primary">Add car</button>
+                        <button class="btn btn-primary"><fmt:message key="adminDashboard.carsPage.addCarForm"/></button>
                     </form>
                 </div>
             </div>

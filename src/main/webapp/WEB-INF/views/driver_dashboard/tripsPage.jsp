@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +35,7 @@
     <div class="row">
         <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
 
+        <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1>Trips</h1>
 
@@ -38,17 +43,17 @@
             <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>Trip ID</th>
-                    <th>Date of creation</th>
-                    <th>Status</th>
-                    <th>Car Type Required</th>
-                    <th>Car ID</th>
-                    <th>Town from</th>
-                    <th>Town to</th>
-                    <th>Time out</th>
-                    <th>Time in</th>
-                    <th>Payment</th>
-                    <th>Dispatcher ID</th>
+                    <th><fmt:message key="tripsPage.content.table.tripId"/></th>
+                    <th><fmt:message key="tripsPage.content.table.dateOfCreation"/></th>
+                    <th><fmt:message key="tripsPage.content.table.status"/></th>
+                    <th><fmt:message key="tripsPage.content.table.carTypeRequired"/></th>
+                    <th><fmt:message key="tripsPage.content.table.carId"/></th>
+                    <th><fmt:message key="tripsPage.content.table.townFrom"/></th>
+                    <th><fmt:message key="tripsPage.content.table.townTo"/></th>
+                    <th><fmt:message key="tripsPage.content.table.timeOut"/></th>
+                    <th><fmt:message key="tripsPage.content.table.timeIn"/></th>
+                    <th><fmt:message key="tripsPage.content.table.payment"/></th>
+                    <th><fmt:message key="tripsPage.content.table.dispatcherId"/></th>
                 </tr>
                 </thead>
                 <tbody>
