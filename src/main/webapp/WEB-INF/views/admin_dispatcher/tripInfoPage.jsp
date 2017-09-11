@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trips</title>
+    <title>Trip Info</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -166,11 +167,13 @@
 
 <%-- Disable Accept buttons if there is the car for the trip--%>
 <script>
-    if(${trip.tripStatus.displayName() eq 'In progress'}) {
-        var acceptButtons = document.getElementsByClassName("btn-success");
+    var acceptButtons = document.getElementsByClassName("btn-success");
+    var denyButtons = document.getElementsByClassName("btn-danger");
 
+    if(${trip.tripStatus.displayName() eq 'Canceled' or trip.tripStatus.displayName() eq 'Closed'}) {
         for(var i = 0; i < acceptButtons.length; i++) {
             acceptButtons[i].classList.add("disabled");
+            denyButtons[i].classList.add("disabled");
         }
     }
 </script>

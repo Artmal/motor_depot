@@ -1,15 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
+
+<fmt:message key="login.placeholder.email" var="emailPlaceholderText" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trips</title>
+    <title><fmt:message key="tripsPage.title"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -47,26 +53,28 @@
             </c:when>
         </c:choose>
 
+        <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
+
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Trips</h1>
+            <h1><fmt:message key="tripsPage.content.trips"/></h1>
 
             <c:if test="${not empty setOfTrips}">
                 <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Trip ID</th>
-                        <th>Date of creation</th>
-                        <th>Status</th>
-                        <th>Car Type Required</th>
-                        <th>Car ID</th>
-                        <th>Town from</th>
-                        <th>Town to</th>
-                        <th>Time out</th>
-                        <th>Time in</th>
-                        <th>Payment</th>
+                        <th><fmt:message key="tripsPage.content.table.tripId"/></th>
+                        <th><fmt:message key="tripsPage.content.table.dateOfCreation"/></th>
+                        <th><fmt:message key="tripsPage.content.table.status"/></th>
+                        <th><fmt:message key="tripsPage.content.table.carTypeRequired"/></th>
+                        <th><fmt:message key="tripsPage.content.table.carId"/></th>
+                        <th><fmt:message key="tripsPage.content.table.townFrom"/></th>
+                        <th><fmt:message key="tripsPage.content.table.townTo"/></th>
+                        <th><fmt:message key="tripsPage.content.table.timeOut"/></th>
+                        <th><fmt:message key="tripsPage.content.table.timeIn"/></th>
+                        <th><fmt:message key="tripsPage.content.table.payment"/></th>
                         
                         <c:if test="${sessionScope.role eq 'Admin'}">
-                            <th>Dispatcher ID</th>
+                            <th><fmt:message key="tripsPage.content.table.dispatcherId"/></th>
                         </c:if>
                     </tr>
                     </thead>
@@ -140,20 +148,20 @@
                             </c:when>
                         </c:choose>
 
-                        <label for="status">Status*:</label>
+                        <label for="status"><fmt:message key="tripsPage.content.addTripForm.label.status"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-tasks fa-fw"></i>
                             </div>
                             <select class="form-control" id="status" name="status" required>
-                                <option>Open</option>
-                                <option value="In_progress">In Progress</option>
-                                <option>Closed</option>
-                                <option>Canceled</option>
+                                <option><fmt:message key="tripsPage.content.addTripForm.option.open"/></option>
+                                <option value="In_progress"><fmt:message key="tripsPage.content.addTripForm.option.inProgress"/></option>
+                                <option><fmt:message key="tripsPage.content.addTripForm.option.closed" /></option>
+                                <option><fmt:message key="tripsPage.content.addTripForm.option.canceled"/></option>
                             </select>
                         </div>
 
-                        <label for="car-type-required">Car Type Required*:</label>
+                        <label for="car-type-required"><fmt:message key="tripsPage.content.addTripForm.label.carTypeRequired"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-car fa-fw"></i>
@@ -161,31 +169,31 @@
                             </div>
                             <select class="form-control" id="car-type-required" name="car-type-required" required>
                                 <optgroup label="Light">
-                                    <option>Micro</option>
-                                    <option>Sedan</option>
-                                    <option>Hatchback</option>
-                                    <option>Roadster</option>
-                                    <option>Coupe</option>
-                                    <option>Supercar</option>
-                                    <option>Cabriolet</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.micro"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.sedan"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.hatchback"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.roadster"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.coupe"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.supercar"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.cabriolet"/></option>
                                 </optgroup>
                                 <optgroup label="Medium">
-                                    <option>Minivan</option>
-                                    <option>Van</option>
-                                    <option>CUV</option>
-                                    <option>SUV</option>
-                                    <option>Pickup</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.minivan"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.van"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.cuv"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.suv"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.pickup"/></option>
                                 </optgroup>
                                 <optgroup label="Heavy">
-                                    <option>Campervan</option>
-                                    <option value="Mini_truck">Mini truck</option>
-                                    <option>Truck</option>
-                                    <option value="Big_truck">Big truck</option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.campervan"/></option>
+                                    <option value="Mini_truck"><fmt:message key="tripsPage.content.addTripForm.option.miniTruck"/></option>
+                                    <option><fmt:message key="tripsPage.content.addTripForm.option.truck"/></option>
+                                    <option value="Big_truck"><fmt:message key="tripsPage.content.addTripForm.option.bigTruck"/></option>
                                 </optgroup>
                             </select>
                         </div>
 
-                        <label for="town-from">Town from*:</label>
+                        <label for="town-from"><fmt:message key="tripsPage.content.addTripForm.label.townFrom"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-building-o fa-fw"></i>
@@ -193,7 +201,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from" required>
                         </div>
 
-                        <label for="town-to">Town to*:</label>
+                        <label for="town-to"><fmt:message key="tripsPage.content.addTripForm.label.townTo"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-building fa-fw"></i>
@@ -203,7 +211,7 @@
                         </div>
 
 
-                        <label for="time-out">Time out*:</label>
+                        <label for="time-out"><fmt:message key="tripsPage.content.addTripForm.label.timeOut"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar fa-fw"></i>
@@ -213,7 +221,7 @@
                         </div>
 
 
-                        <label for="time-in">Time in*:</label>
+                        <label for="time-in"><fmt:message key="tripsPage.content.addTripForm.label.timeIn"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
@@ -222,7 +230,7 @@
                                    name="time-in" placeholder="YYYY-MM-DD HH:MM:SS">
                         </div>
 
-                        <label for="payment-in-dollars">Payment($)*:</label>
+                        <label for="payment-in-dollars"><fmt:message key="tripsPage.content.addTripForm.label.payment"/>($)*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
@@ -231,7 +239,7 @@
                                    name="payment-in-dollars">
                         </div>
                         <br>
-                        <button class="btn btn-primary">Add trip</button>
+                        <button class="btn btn-primary"><fmt:message key="tripsPage.content.addTripForm.button.addTrip"/></button>
                     </form>
                 </div>
             </div>

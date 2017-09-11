@@ -1,7 +1,14 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.registration" />
+
+<fmt:message key="registration.button.signUp" var="signUpButtonText" />
+
+<html lang="${language}">
 <head>
-    <title>Sign up</title>
+    <title><fmt:message key="registration.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -18,11 +25,10 @@
     <div class="row">
         <div class="col-md-8">
             <section>
-                <h1 class="entry-title"><span>Sign Up</span> </h1>
+                <h1 class="entry-title"><span><fmt:message key="registration.header"/></span> </h1>
 
                 <form action="/register" class="form-horizontal" method="post" name="signup" id="signup">
-
-                    <label for="email">Email*:</label>
+                    <label for="email"><fmt:message key="registration.label.email"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
@@ -30,7 +36,7 @@
                         <input type="email" class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                     </div>
 
-                    <label for="password">Password*:</label>
+                    <label for="password"><fmt:message key="registration.label.password"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-key"></i>
@@ -39,7 +45,7 @@
                                name="password" required>
                     </div>
 
-                    <label for="password">Confirm password*:</label>
+                    <label for="password"><fmt:message key="registration.label.confirmPassword"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-key"></i>
@@ -48,7 +54,7 @@
                                required>
                     </div>
 
-                    <label for="name">Full Name*:</label>
+                    <label for="name"><fmt:message key="registration.label.fullName"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
@@ -56,7 +62,7 @@
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
                     </div>
 
-                    <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
+                    <label for="passport-serial-numbers"><fmt:message key="registration.label.passportSerialNumber"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-id-card-o"></i>
@@ -65,7 +71,7 @@
                                name="passport-serial-numbers" required>
                     </div>
 
-                    <label for="phone-number">Phone Number*:</label>
+                    <label for="phone-number"><fmt:message key="registration.label.phoneNumber"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-phone-square"></i>
@@ -73,7 +79,7 @@
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number" required>
                     </div>
 
-                    <label for="age">Age:</label>
+                    <label for="age"><fmt:message key="registration.label.age"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-birthday-cake"></i>
@@ -93,7 +99,7 @@
                     <br>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-10">
-                            <input onclick="return checkPass()" name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
+                            <input onclick="return checkPass()" name="Submit" type="submit" value="${signUpButtonText}" class="btn btn-primary">
                         </div>
                     </div>
                 </form>

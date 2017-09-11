@@ -1,13 +1,18 @@
 <%@ taglib prefix="mytags" uri="http://www.artmal.com/tags"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.utils.admin_utils.adminSidebar"/>
+
 <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a id = "trips-nav-link" class="nav-link" href="/admin-dashboard/trips">Trips</a>
+            <a id = "trips-nav-link" class="nav-link" href="/admin-dashboard/trips"><fmt:message key="adminSidebar.trips"/></a>
         </li>
         <li class="nav-item">
             <a id = "requests-nav-link" class="nav-link" href="/admin-dashboard/requests">
-                Requests
+                <fmt:message key="adminSidebar.requests"/>
                 <span class="badge badge-pill badge-default">
                     <mytags:countPendingRequests />
                 </span>
@@ -17,13 +22,19 @@
 
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a id = "drivers-nav-link" class="nav-link" href="/admin-dashboard/drivers">Drivers</a>
+            <a id = "drivers-nav-link" class="nav-link" href="/admin-dashboard/drivers">
+                <fmt:message key="adminSidebar.drivers"/>
+            </a>
         </li>
         <li class="nav-item">
-            <a id = "dispatchers-nav-link" class="nav-link" href="/admin-dashboard/dispatchers">Dispatchers</a>
+            <a id = "dispatchers-nav-link" class="nav-link" href="/admin-dashboard/dispatchers">
+                <fmt:message key="adminSidebar.dispatchers"/>
+            </a>
         </li>
         <li class="nav-item">
-            <a id = "cars-nav-link" class="nav-link" href="/admin-dashboard/cars">Cars</a>
+            <a id = "cars-nav-link" class="nav-link" href="/admin-dashboard/cars">
+                <fmt:message key="adminSidebar.cars"/>
+            </a>
         </li>
     </ul>
 </nav>
