@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.driver_dashboard.myTripsPage" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Trips</title>
+    <title><fmt:message key="driverDashboard.myTripsPage.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -32,22 +36,23 @@
 <div class="container-fluid">
     <div class="row">
         <%@include file = "../../../resources/jsp/driver_utils/driverSidebar.jsp" %>
+        <fmt:setBundle basename="i18n.driver_dashboard.myTripsPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>My trips</h1>
+            <h1><fmt:message key="driverDashboard.myTripsPage.header"/></h1>
 
             <c:if test="${not empty setOfTrips}">
                 <c:forEach items="${setOfTrips}" var="trip">
                     <c:set var="count" value="${count + 1}" scope="page"/>
                     <div class="card">
                         <div class="card-header">
-                            Trip №${trip.id}
+                            <fmt:message key="driverDashboard.myTripsPage.tripNumber"/>${trip.id}
                             <a id = "completeButton${count}" href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}"
                                style="float: right"
-                               class="btn btn-danger btn-sm btn-space">Refuse</a>
+                               class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.refuse"/></a>
                             <a id = "refuseButton${count}" href="/driver-dashboard/my-trips/complete?trip-id=${trip.id}"
                                style="float: right"
-                               class="btn btn-success btn-sm btn-space">Mark as completed</a>
+                               class="btn btn-success btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.markAsCompleted"/></a>
 
                             <script>
                                 if(${trip.tripStatus.displayName() ne 'In progress'}) {
@@ -63,10 +68,10 @@
                         <div class="card-block">
                             <h4 class="card-title">Info</h4>
                             <i class="fa fa-calendar-plus-o fa-fw"></i>
-                            <strong>Date of creation:</strong> ${trip.dateOfCreation}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
                             <br>
                             <i class="fa fa-tasks fa-fw"></i>
-                            <strong>Status:</strong>
+                            <strong><fmt:message key="driverDashboard.myTripsPage.status"/>:</strong>
                             <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                                 <span class="badge badge-success">Open</span>
                             </c:if>
@@ -81,10 +86,10 @@
                             </c:if>
                             <br>
                             <i class="fa fa-car fa-fw"></i>
-                            <strong>Car Type Required:</strong> ${trip.carTypeRequired.displayName()}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
                             <br>
                             <i class="fa fa-id-card-o fa-fw"></i>
-                            <strong>Car ID:</strong>
+                            <strong><fmt:message key="driverDashboard.myTripsPage.carId"/>:</strong>
                             <c:choose>
                                 <c:when test="${trip.carId eq '0'}">
                                     <span class="badge badge-pill badge-success">Free spot</span>
@@ -95,22 +100,22 @@
                             </c:choose>
                             <br>
                             <i class="fa fa-building-o fa-fw"></i>
-                            <strong>Town from:</strong> ${trip.townFrom}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong> ${trip.townFrom}
                             <br>
                             <i class="fa fa-building fa-fw"></i>
-                            <strong>Town to:</strong> ${trip.townTo}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.townTo"/>:</strong> ${trip.townTo}
                             <br>
                             <i class="fa fa-calendar fa-fw"></i>
-                            <strong>Time out:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                             <br>
                             <i class="fa fa-calendar-check-o fa-fw"></i>
-                            <strong>Time in:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                             <br>
                             <i class="fa fa-usd fa-fw"></i>
-                            <strong>Payment:</strong> ${trip.paymentInDollars}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.payment"/>:</strong> ${trip.paymentInDollars}
                             <br>
                             <i class="fa fa-user-plus fa-fw"></i>
-                            <strong>Dispatcher ID:</strong> ${trip.dispatcherId}
+                            <strong><fmt:message key="driverDashboard.myTripsPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
                         </div>
                     </div>
                 </c:forEach>

@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.requestsPage" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trips</title>
+    <title><fmt:message key="adminDispatcher.requestsPage.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -46,18 +50,19 @@
                 <%@include file = "../../../resources/jsp/dispatcher_utils/dispatcherSidebar.jsp" %>
             </c:when>
         </c:choose>
+        <fmt:setBundle basename="i18n.admin_dispatcher.requestsPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Trips</h1>
+            <h1><fmt:message key="adminDispatcher.requestsPage.header"/></h1>
 
             <c:if test="${not empty setOfTripRequests}">
                 <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Trip Requests ID</th>
-                        <th>Trip</th>
-                        <th>Car ID</th>
-                        <th>Date of creation</th>
+                        <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
+                        <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
+                        <th><fmt:message key="adminDispatcher.requestsPage.carId"/></th>
+                        <th><fmt:message key="adminDispatcher.requestsPage.dateOfCreation"/></th>
                     </tr>
                     </thead>
                     <tbody>

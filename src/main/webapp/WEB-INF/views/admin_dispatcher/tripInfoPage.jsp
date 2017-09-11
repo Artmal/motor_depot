@@ -2,8 +2,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.tripInfoPage" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,15 +52,17 @@
             </c:when>
         </c:choose>
 
+        <fmt:setBundle basename="i18n.admin_dispatcher.tripInfoPage" />
+
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div id = "trip-info" class="card card-outline-info">
                 <div class="card-block">
-                    <h4 class="card-title">Trip №${trip.id} Info</h4>
+                    <h4 class="card-title"><fmt:message key="adminDispatcher.tripInfoPage.header"/>${trip.id}</h4>
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
-                    <strong>Date of creation:</strong> ${trip.dateOfCreation}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
                     <br>
                     <i class="fa fa-tasks fa-fw"></i>
-                    <strong>Status:</strong>
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.status"/>:</strong>
                     <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
                         <span class="badge badge-success">Open</span>
                     </c:if>
@@ -72,10 +77,10 @@
                     </c:if>
                     <br>
                     <i class="fa fa-car fa-fw"></i>
-                    <strong>Car Type Required:</strong> ${trip.carTypeRequired.displayName()}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
                     <br>
                     <i class="fa fa-id-card-o fa-fw"></i>
-                    <strong>Car ID:</strong>
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.carId"/>:</strong>
                     <c:choose>
                         <c:when test="${trip.carId eq '0'}">
                             <span class="badge badge-pill badge-success">Free spot</span>
@@ -86,27 +91,27 @@
                     </c:choose>
                     <br>
                     <i class="fa fa-building-o fa-fw"></i>
-                    <strong>Town from:</strong> ${trip.townFrom}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.townFrom"/>:</strong> ${trip.townFrom}
                     <br>
                     <i class="fa fa-building fa-fw"></i>
-                    <strong>Town to:</strong> ${trip.townTo}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.townTo"/>:</strong> ${trip.townTo}
                     <br>
                     <i class="fa fa-calendar fa-fw"></i>
-                    <strong>Time out:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                    <strong>Time in:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-usd fa-fw"></i>
-                    <strong>Payment:</strong> ${trip.paymentInDollars}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.payment"/>:</strong> ${trip.paymentInDollars}
                     <br>
                     <i class="fa fa-user-plus fa-fw"></i>
-                    <strong>Dispatcher ID:</strong> ${trip.dispatcherId}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
                 </div>
             </div>
 
             <hr>
-            <h3>Requests</h3>
+            <h3><fmt:message key="adminDispatcher.tripInfoPage.requests"/></h3>
 
             <c:if test="${not empty setOfTripRequests}">
                 <c:forEach items="${setOfTripRequests}" var="tripRequest">
@@ -116,15 +121,15 @@
                             <c:if test="${trip.carId eq tripRequest.carInfo.id}">
                                 <i class="fa fa-check-square-o fa-fw"></i>
                             </c:if>
-                            Request №${tripRequest.id}
+                            <fmt:message key="adminDispatcher.tripInfoPage.requestHeader"/>${tripRequest.id}
                             <c:choose>
                                 <c:when test="${sessionScope.role eq 'Admin'}">
                                     <a href="/admin-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                        style="float: right"
-                                       class="btn btn-danger btn-sm btn-space">Deny</a>
+                                       class="btn btn-danger btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.deny"/></a>
                                     <a href="/admin-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                        style="float: right"
-                                       class="btn btn-success btn-sm btn-space">Accept</a>
+                                       class="btn btn-success btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.accept"/></a>
                                 </c:when>
                                 <c:when test="${sessionScope.role eq 'Dispatcher'}">
                                     <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
@@ -138,19 +143,19 @@
                         </div>
                         <div class="card-block">
                             <i class="fa fa-user-circle-o fa-fw"></i>
-                            <strong>Driver:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
+                            <strong><fmt:message key="adminDispatcher.tripInfoPage.driver"/>:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
 
                             <i class="fa fa-car fa-fw"></i>
-                            <strong>Car model: </strong> ${tripRequest.carInfo.model}<br>
+                            <strong><fmt:message key="adminDispatcher.tripInfoPage.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>
 
                             <i class="fa fa-users fa-fw"></i>
-                            <strong>Number of seats: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
+                            <strong><fmt:message key="adminDispatcher.tripInfoPage.numberOfSeats"/>: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
 
                             <i class="fa fa-tint fa-fw"></i>
-                            <strong>Car color: </strong> ${tripRequest.carInfo.color}<br>
+                            <strong><fmt:message key="adminDispatcher.tripInfoPage.carColor"/>: </strong> ${tripRequest.carInfo.color}<br>
 
                             <i class="fa fa-clock-o fa-fw"></i>
-                            <strong>Date of creation:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
+                            <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
                         </div>
                     </div>
                 </c:forEach>

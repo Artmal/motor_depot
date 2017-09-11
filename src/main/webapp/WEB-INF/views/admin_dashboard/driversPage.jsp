@@ -35,18 +35,19 @@
 <div class="container-fluid">
     <div class="row">
         <%@include file = "../../../resources/jsp/admin_utils/adminSidebar.jsp" %>
+        <fmt:setBundle basename="i18n.admin_dashboard.driversPage" />
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Drivers in the system</h1>
+            <h1><fmt:message key="adminDashboard.driversPage.header"/></h1>
 
             <c:if test="${not empty setOfDrivers}">
                 <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Driver ID</th>
-                            <th>Name</th>
-                            <th>Passport Serial Numbers</th>
-                            <th>Phone Number</th>
+                            <th><fmt:message key="adminDashboard.driversPage.table.driverId"/></th>
+                            <th><fmt:message key="adminDashboard.driversPage.name"/></th>
+                            <th><fmt:message key="adminDashboard.driversPage.passportSerialNumbers"/></th>
+                            <th><fmt:message key="adminDashboard.driversPage.phoneNumber"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,7 +69,7 @@
             <div class="card">
                 <div class="card-block">
                     <form class="form-horizontal" action="/admin-dashboard/addDriverServlet" method="post">
-                        <label for="email">Email*:</label>
+                        <label for="email"><fmt:message key="adminDashboard.driversPage.addDriverForm.email"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
@@ -76,7 +77,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
                         </div>
 
-                        <label for="password">Password*:</label>
+                        <label for="password"><fmt:message key="adminDashboard.driversPage.addDriverForm.password"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
@@ -85,7 +86,7 @@
                                    required>
                         </div>
 
-                        <label for="name">Full Name*:</label>
+                        <label for="name"><fmt:message key = "adminDashboard.driversPage.addDriverForm.fullName"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
@@ -93,7 +94,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
                         </div>
 
-                        <label for="passport-serial-numbers">Passport Serial Numbers*:</label>
+                        <label for="passport-serial-numbers"><fmt:message key="adminDashboard.driversPage.passportSerialNumbers"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
@@ -102,7 +103,7 @@
                                    name="passport-serial-numbers" required>
                         </div>
 
-                        <label for="phone-number">Phone Number*:</label>
+                        <label for="phone-number"><fmt:message key="adminDashboard.driversPage.phoneNumber"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
@@ -111,7 +112,7 @@
                                    name="phone-number" required>
                         </div>
 
-                        <label for="age">Age:</label>
+                        <label for="age"><fmt:message key="adminDashboard.driversPage.addDriverForm.age"/>:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-birthday-cake fa-fw"></i>
@@ -119,7 +120,7 @@
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
                         </div>
                         <br>
-                        <button class="btn btn-primary">Add driver</button>
+                        <button class="btn btn-primary"><fmt:message key="adminDashboard.driversPage.button.addDriver"/></button>
                 </form>
                 </div>
             </div>
