@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="i18n.driver_dashboard.tripInfoPage" />
@@ -117,6 +119,8 @@
                 </c:when>
 
                 <c:otherwise>
+                    <%--<h:showRequestFormOrDeny trip_id="${trip.id}" car_id=""--%>
+                    
                     <div class="card">
                         <div class="card-block">
                             <form class="form-horizontal" action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">

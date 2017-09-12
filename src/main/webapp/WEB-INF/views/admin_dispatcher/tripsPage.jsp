@@ -96,23 +96,23 @@
                             <td>${trip.dateOfCreation}</td>
                             <td>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                    <span class="badge badge-success">Open</span>
+                                    <span class="badge badge-success"><fmt:message key="tripsPage.content.option.open"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                    <span class="badge badge-warning">In Progress</span>
+                                    <span class="badge badge-warning"><fmt:message key="tripsPage.content.option.inProgress"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                    <span class="badge badge-default">Closed</span>
+                                    <span class="badge badge-default"><fmt:message key="tripsPage.content.option.closed"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                    <span class="badge badge-danger">Canceled</span>
+                                    <span class="badge badge-danger"><fmt:message key="tripsPage.content.option.canceled"/></span>
                                 </c:if>
                             </td>
                             <td>${trip.carTypeRequired.displayName()}</td>
                             <td>
                                 <c:choose>
                                 <c:when test="${trip.carId eq '0'}">
-                                <span class="badge badge-pill badge-success">Free spot</span>
+                                <span class="badge badge-pill badge-success"><fmt:message key="tripsPage.content.badge.freeSpot"/></span>
                                 </c:when>
                                 <c:otherwise>
                                     ${trip.carId}
@@ -148,16 +148,16 @@
                             </c:when>
                         </c:choose>
 
-                        <label for="status"><fmt:message key="tripsPage.content.addTripForm.label.status"/>*:</label>
+                        <label for="status"><fmt:message key="tripsPage.content.label.status"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-tasks fa-fw"></i>
                             </div>
                             <select class="form-control" id="status" name="status" required>
-                                <option><fmt:message key="tripsPage.content.addTripForm.option.open"/></option>
-                                <option value="In_progress"><fmt:message key="tripsPage.content.addTripForm.option.inProgress"/></option>
-                                <option><fmt:message key="tripsPage.content.addTripForm.option.closed" /></option>
-                                <option><fmt:message key="tripsPage.content.addTripForm.option.canceled"/></option>
+                                <option><fmt:message key="tripsPage.content.option.open"/></option>
+                                <option value="In_progress"><fmt:message key="tripsPage.content.option.inProgress"/></option>
+                                <option><fmt:message key="tripsPage.content.option.closed" /></option>
+                                <option><fmt:message key="tripsPage.content.option.canceled"/></option>
                             </select>
                         </div>
 
