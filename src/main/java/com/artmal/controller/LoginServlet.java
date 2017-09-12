@@ -28,12 +28,12 @@ public class LoginServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("email");
 
         UserService userService = new UserServiceImpl();
-
         try {
             User userInDb = userService.findByEmail(username);
 

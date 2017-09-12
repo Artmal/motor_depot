@@ -15,9 +15,16 @@
                 <a class="nav-link" href="/my-settings"><fmt:message key="adminHeader.settings"/></a>
             </li>
             <li class = "nav-item">
-                <a class="nav-link" style="float: right" href="#">
-                    <i class="fa fa-globe"></i>
+                <form id="changeLanguageForm" hidden>
+                    <button id="languageChangeButton" hidden name = "languageChange" value="change"></button>
+                </form>
+
+                <a class="nav-link" href = "javascript:document.getElementById('languageChangeButton').click();" style="float: right">
+                    <span class="fa fa-globe"></span>
                 </a>
+                <%--<a class="nav-link" style="float: right" href="#">--%>
+                    <%--<i class="fa fa-globe"></i>--%>
+                <%--</a>--%>
             </li>
         </ul>
     </div>

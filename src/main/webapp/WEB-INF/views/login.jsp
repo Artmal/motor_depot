@@ -30,12 +30,16 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form id="changeLanguageForm" hidden>
+                <button id="languageChangeButton" hidden name = "languageChange" value="change"></button>
+            </form>
+
             <form action="/loginServlet" method="post">
                 <fieldset>
                     <h2>
                         <fmt:message key="login.header" />
 
-                        <a onclick = "changeLanguage()" style="float: right">
+                        <a href = "javascript:document.getElementById('languageChangeButton').click();" style="float: right">
                             <span class="fa fa-globe"></span>
                         </a>
                     </h2>
@@ -78,9 +82,14 @@
 
 <script>
     function changeLanguage() {
-        $(function () {
-            $('<form><button name="languageChange" value="change"></button></form>').appendTo('body').submit().remove();
-        });
+        var form = document.createElement("form");
+        var button = document.createElement("button");
+
+        button.name = "languageChange";
+        button.value = "change";
+
+        form.appendChild(button);
+        document.appendChild(form)
     }
 </script>
 
