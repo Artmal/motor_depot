@@ -1,15 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_driver.carInfoPage" />
+
+<fmt:message key="adminDriver.carInfoPage.button.save" var="saveButtonText" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cars in the system</title>
+    <title><fmt:message key="adminDriver.carInfoPage.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +33,8 @@
 
 <body>
 <%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
+<fmt:setBundle basename="i18n.admin_driver.carInfoPage" />
+
 
 <div class="container">
     <br>
@@ -39,8 +47,8 @@
                     <input hidden name="id" value="${param.id}">
 
                     <fieldset>
-                        <h2>Edit Car №${carInfo.id} info</h2>
-                        <label for="registration-number">Email*:</label>
+                        <h2><fmt:message key="adminDriver.carInfoPage.editCarNumber"/>${carInfo.id}</h2>
+                        <label for="registration-number"><fmt:message key="adminDriver.carInfoPage.registrationNumber"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
@@ -49,7 +57,7 @@
                                    name="registration-number" value="${carInfo.registrationNumber}" required>
                         </div>
 
-                        <label for="model">Model*:</label>
+                        <label for="model"><fmt:message key="adminDriver.carInfoPage.model"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-industry fa-fw"></i>
@@ -58,51 +66,51 @@
                                    name="model" value="${carInfo.model}" required>
                         </div>
 
-                        <label for="type">Type:</label>
+                        <label for="type"><fmt:message key="adminDriver.carInfoPage.type"/>:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-car fa-fw"></i>
                             </div>
-                            <select class="form-control" id="type" name="type" required>
+                            <select class="form-control" id="type" name="type" required>adminDriver.carInfoPage
                                 <optgroup label="Light">
-                                    <option>Micro</option>
-                                    <option>Sedan</option>
-                                    <option>Hatchback</option>
-                                    <option>Roadster</option>
-                                    <option>Coupe</option>
-                                    <option>Supercar</option>
-                                    <option>Cabriolet</option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.micro"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.sedan"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.hatchback"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.roadster"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.coupe"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.supercar"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.cabriolet"/></option>
                                 </optgroup>
                                 <optgroup label="Medium">
-                                    <option>Minivan</option>
-                                    <option>Van</option>
-                                    <option>CUV</option>
-                                    <option>SUV</option>
-                                    <option>Pickup</option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.minivan"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.van"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.cuv"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.suv"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.pickup"/></option>
                                 </optgroup>
                                 <optgroup label="Heavy">
-                                    <option>Campervan</option>
-                                    <option value="Mini_truck">Mini truck</option>
-                                    <option>Truck</option>
-                                    <option value="Big_truck">Big truck</option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.campervan"/></option>
+                                    <option value="Mini_truck"><fmt:message key="adminDriver.carInfoPage.option.miniTruck"/></option>
+                                    <option><fmt:message key="adminDriver.carInfoPage.option.truck"/></option>
+                                    <option value="Big_truck"><fmt:message key="adminDriver.carInfoPage.option.bigTruck"/></option>
                                 </optgroup>
                             </select>
                         </div>
 
 
-                        <label for="condition">Condition: </label>
+                        <label for="condition"><fmt:message key="adminDriver.carInfoPage.condition"/>: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-cogs fa-fw"></i>
                             </div>
                             <select class="form-control" id="condition" name="condition" required>
-                                <option>Broken</option>
-                                <option>Repairing</option>
-                                <option>Ready</option>
+                                <option><fmt:message key="adminDriver.carInfoPage.broken"/></option>
+                                <option><fmt:message key="adminDriver.carInfoPage.repairing"/></option>
+                                <option><fmt:message key="adminDriver.carInfoPage.ready"/></option>
                             </select>
                         </div>
 
-                        <label for="number-of-seats">Number of seats: </label>
+                        <label for="number-of-seats"><fmt:message key="adminDriver.carInfoPage.numberOfSeats"/>: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-users fa-fw"></i>
@@ -111,7 +119,7 @@
                                    name="number-of-seats" required value="${carInfo.numberOfSeats}">
                         </div>
 
-                        <label for="color">Car color: </label>
+                        <label for="color"><fmt:message key="adminDriver.carInfoPage.color"/>: </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-tint fa-fw"></i>
@@ -124,12 +132,14 @@
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Save">
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="${saveButtonText}">
                             </div>
 
                             <c:if test="${sessionScope.role eq 'Admin'}">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <a href="/car/delete?car-id=${carInfo.id}" class="btn btn-lg btn-danger btn-block">Delete</a>
+                                    <a href="/car/delete?car-id=${carInfo.id}" class="btn btn-lg btn-danger btn-block">
+                                        <fmt:message key="adminDriver.carInfoPage.button.delete"/>
+                                    </a>
                                 </div>
                             </c:if>
                         </div>

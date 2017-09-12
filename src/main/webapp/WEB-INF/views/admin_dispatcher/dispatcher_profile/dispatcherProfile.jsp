@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.dispatcher_profile.dispatcherProfilePage" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+    <title><fmt:message key="adminDispatcher.dispatcherProfile.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +39,8 @@
         <%@include file = "../../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
     </c:when>
 </c:choose>
+<fmt:setBundle basename="i18n.admin_dispatcher.dispatcher_profile.dispatcherProfilePage" />
+
 
 <div class="container">
     <div class="row profile">
@@ -45,14 +51,14 @@
                         ${dispatcher.name}
                     </div>
                     <div class="profile-usertitle-job">
-                        DISPATCHER
+                        <fmt:message key="adminDispatcher.dispatcherProfile.dispatcher"/>
                     </div>
                 </div>
 
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Created Trips</a>
+                            <a class="nav-link active" href="#"><fmt:message key="adminDispatcher.dispatcherProfile.createdTrips"/></a>
                         </li>
                     </ul>
                 </div>
@@ -61,14 +67,14 @@
         </div>
         <div class="col-md-9">
             <div class="profile-content">
-                <h2>Created trips</h2><br>
+                <h2><fmt:message key="adminDispatcher.dispatcherProfile.createdTrips"/></h2><br>
                 <c:if test="${not empty setOfCreatedTrips}">
                 <table id="example" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Trip ID</th>
-                        <th>Date of creation</th>
-                        <th>Status</th>
+                        <th><fmt:message key="adminDispatcher.dispatcherProfile.tripId"/></th>
+                        <th><fmt:message key="adminDispatcher.dispatcherProfile.dateOfCreation"/></th>
+                        <th><fmt:message key="adminDispatcher.dispatcherProfile.status"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -90,16 +96,16 @@
                             <td>${trip.dateOfCreation}</td>
                             <td>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                    <span class="badge badge-success">Open</span>
+                                    <span class="badge badge-success"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                    <span class="badge badge-warning">In Progress</span>
+                                    <span class="badge badge-warning"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                    <span class="badge badge-default">Closed</span>
+                                    <span class="badge badge-default"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                    <span class="badge badge-danger">Canceled</span>
+                                    <span class="badge badge-danger"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
                                 </c:if>
                             </td>
                         </tr>

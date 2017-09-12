@@ -82,16 +82,16 @@
                                 <i class="fa fa-tasks fa-fw"></i>
                                 <strong><fmt:message key="adminDispatcher.driverProfile.status"/>:</strong>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                    <span class="badge badge-success">Open</span>
+                                    <span class="badge badge-success"><fmt:message key="adminDispatcher.driverProfile.badge.open"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                    <span class="badge badge-warning">In Progress</span>
+                                    <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverProfile.badge.inProgress"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                    <span class="badge badge-default">Closed</span>
+                                    <span class="badge badge-default"><fmt:message key="adminDispatcher.driverProfile.badge.closed"/></span>
                                 </c:if>
                                 <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                    <span class="badge badge-danger">Canceled</span>
+                                    <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverProfile.badge.canceled"/></span>
                                 </c:if>
                                 <br>
                                 <i class="fa fa-car fa-fw"></i>

@@ -64,13 +64,13 @@
                         <td>${car.type.displayName()}</td>
                         <td>
                             <c:if test="${car.condition eq 'Broken'}">
-                                <span class="badge badge-danger">Broken</span>
+                                <span class="badge badge-danger"><fmt:message key="adminDashboard.carsPage.broken"/></span>
                             </c:if>
                             <c:if test="${car.condition eq 'Repairing'}">
-                                <span class="badge badge-warning">Repairing</span>
+                                <span class="badge badge-warning"><fmt:message key="adminDashboard.carsPage.repairing"/></span>
                             </c:if>
                             <c:if test="${car.condition eq 'Ready'}">
-                                <span class="badge badge-success">Ready</span>
+                                <span class="badge badge-success"><fmt:message key="adminDashboard.carsPage.ready"/></span>
                             </c:if>
                         </td>
                         <td>${car.model}</td>

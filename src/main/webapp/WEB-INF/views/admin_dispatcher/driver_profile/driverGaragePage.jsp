@@ -1,8 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.admin_dispatcher.driver_profile.driverGaragePage" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,6 +36,8 @@
         <%@include file = "../../../../resources/jsp/dispatcher_utils/dispatcherHeader.jsp" %>
     </c:when>
 </c:choose>
+<fmt:setBundle basename="i18n.admin_dispatcher.driver_profile.driverGaragePage" />
+
 
 <div class="container">
     <div class="row profile">
@@ -42,17 +48,21 @@
                         ${driver.name}
                     </div>
                     <div class="profile-usertitle-job">
-                        DRIVER
+                        <fmt:message key="adminDispatcher.driverGaragePage.driver"/>
                     </div>
                 </div>
 
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}">Last Trips</a>
+                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}">
+                                <fmt:message key="adminDispatcher.driverGaragePage.lastTrips"/>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}">Garage</a>
+                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}">
+                                <fmt:message key="adminDispatcher.driverGaragePage.garage"/>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -71,28 +81,28 @@
                             <div class="card-block">
                                 <p class="card-text">
                                     <i class="fa fa-id-card-o fa-fw"></i>
-                                    Registration number: ${car.registrationNumber}
+                                    <fmt:message key="adminDispatcher.driverGaragePage.registrationNumber"/>: ${car.registrationNumber}
                                     <br>
                                     <i class="fa fa-car fa-fw"></i>
-                                    Type: ${car.type.displayName()}
+                                    <fmt:message key="adminDispatcher.driverGaragePage.type"/>: ${car.type.displayName()}
                                     <br>
                                     <i class="fa fa-cogs fa-fw"></i>
-                                    Condition:
+                                    <fmt:message key="adminDispatcher.driverGaragePage.condition"/>:
                                     <c:if test="${car.condition eq 'Broken'}">
-                                        <span class="badge badge-danger">Broken</span>
+                                        <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverGaragePage.badge.broken"/></span>
                                     </c:if>
                                     <c:if test="${car.condition eq 'Repairing'}">
-                                        <span class="badge badge-warning">Repairing</span>
+                                        <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverGaragePage.badge.repairing"/></span>
                                     </c:if>
                                     <c:if test="${car.condition eq 'Ready'}">
-                                        <span class="badge badge-success">Ready</span>
+                                        <span class="badge badge-success"><fmt:message key="adminDispatcher.driverGaragePage.badge.ready"/></span>
                                     </c:if>
                                     <br>
                                     <i class="fa fa-users fa-fw"></i>
-                                    Number of seats: ${car.numberOfSeats}
+                                    <fmt:message key="adminDispatcher.driverGaragePage.numberOfSeats"/>: ${car.numberOfSeats}
                                     <br>
                                     <i class="fa fa-tint fa-fw"></i>
-                                    Car color: ${car.color}
+                                    <fmt:message key="adminDispatcher.driverGaragePage.color"/>: ${car.color}
                                 </p>
                             </div>
                         </div>
