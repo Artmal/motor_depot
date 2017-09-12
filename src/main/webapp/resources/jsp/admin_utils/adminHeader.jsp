@@ -27,5 +27,11 @@
                 <%--</a>--%>
             </li>
         </ul>
+
+        <ul class="navbar-nav" style="float: right">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout"><fmt:message key="adminHeader.logout"/></a>
+            </li>
+        </ul>
     </div>
 </nav>

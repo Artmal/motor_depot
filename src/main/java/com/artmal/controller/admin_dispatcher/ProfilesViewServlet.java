@@ -21,6 +21,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Users can view each others profiles.
+ * @author Artem Malchenko
+ */
 public class ProfilesViewServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
 

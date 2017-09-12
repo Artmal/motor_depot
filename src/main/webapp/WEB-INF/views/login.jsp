@@ -78,21 +78,6 @@
     </div>
 </div>
 
-<link href="${contextPath}/resources/js/login.js" rel="script">
-
-<script>
-    function changeLanguage() {
-        var form = document.createElement("form");
-        var button = document.createElement("button");
-
-        button.name = "languageChange";
-        button.value = "change";
-
-        form.appendChild(button);
-        document.appendChild(form)
-    }
-</script>
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

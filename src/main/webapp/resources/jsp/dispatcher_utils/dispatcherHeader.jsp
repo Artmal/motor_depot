@@ -14,10 +14,25 @@
             <li class="nav-item">
                 <a class="nav-link" href="/my-settings"><fmt:message key="dispatcherHeader.settings"/></a>
             </li>
-            <li class = "nav-item">
-                <a class="nav-link" style="float: right" href="#">
-                    <i class="fa fa-globe"></i>
-                </a>
+
+            <form id="changeLanguageForm" hidden>
+                <button id="languageChangeButton" hidden name = "languageChange" value="change"></button>
+            </form>
+
+            <a class="nav-link" href = "javascript:document.getElementById('languageChangeButton').click();" style="float: right">
+                <span class="fa fa-globe"></span>
+            </a>
+
+            <%--<li class = "nav-item">--%>
+                <%--<a class="nav-link" style="float: right" href="#">--%>
+                    <%--<i class="fa fa-globe"></i>--%>
+                <%--</a>--%>
+            <%--</li>--%>
+        </ul>
+
+        <ul class="navbar-nav" style="float: right">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout"><fmt:message key="dispatcherHeader.logout"/></a>
             </li>
         </ul>
     </div>

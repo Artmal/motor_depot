@@ -21,6 +21,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+/**
+ * Admin and dispatchers can view trips and add new ones.
+ * @author Artem Malchenko
+ */
 public class TripsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 

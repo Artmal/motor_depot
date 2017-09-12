@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
 
+/**
+ * Admin and drivers can delete cars.
+ * @author Artem Malchenko
+ */
 public class DeleteCarServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(DeleteCarServlet.class);
 
