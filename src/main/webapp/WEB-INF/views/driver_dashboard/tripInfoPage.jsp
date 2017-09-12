@@ -105,6 +105,16 @@
                         </div>
                     </div>
                 </c:when>
+                
+                <c:when test="${empty setOfSuitableCars}">
+                    <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                        <div class="card-block">
+                            <h3 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.closedRequest"/></h3>
+                            <p><fmt:message key="driverDashoard.tripInfoPage.noSuitableCar"/></p>
+                            <a href="/driver-dashboard/trips" class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/></a>
+                        </div>
+                    </div>
+                </c:when>
 
                 <c:otherwise>
                     <div class="card">
