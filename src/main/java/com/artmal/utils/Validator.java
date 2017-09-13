@@ -35,4 +35,11 @@ public class Validator {
 
         return matcher.find();
     }
+
+    public static boolean validateAge(int age) {
+        Pattern checkAge = Pattern.compile("^[1-9]{1,3}$");
+        Matcher matcher = checkAge.matcher(String.valueOf(age));
+
+        return matcher.find();
+    }
 }

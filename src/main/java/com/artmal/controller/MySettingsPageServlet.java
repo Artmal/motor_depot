@@ -35,8 +35,6 @@ public class MySettingsPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("PIPISKA!");
-
         User user = new User();
         long userId = (long) req.getSession().getAttribute("id");
         String newEmail = req.getParameter("email");
@@ -52,8 +50,6 @@ public class MySettingsPageServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-        System.out.println("PISUN");
         req.getSession().invalidate();
         resp.sendRedirect("/login");
     }

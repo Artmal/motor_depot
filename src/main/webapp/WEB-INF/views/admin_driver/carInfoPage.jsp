@@ -32,7 +32,17 @@
 </head>
 
 <body>
-<%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
+<c:choose>
+    <c:when test = "${sessionScope.role eq 'Admin'}">
+        <%@include file = "../../../resources/jsp/admin_utils/adminHeader.jsp" %>
+    </c:when>
+
+    <c:when test = "${sessionScope.role eq 'Driver'}">
+        <%@include file = "../../../resources/jsp/driver_utils/driverHeader.jsp" %>
+
+    </c:when>
+</c:choose>
+
 <fmt:setBundle basename="i18n.admin_driver.carInfoPage" />
 
 

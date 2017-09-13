@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
         Pattern checkEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = checkEmail.matcher(user.getEmail());
 
-
         if(matcher.find()) {
             return userDao.save(user);
         }
