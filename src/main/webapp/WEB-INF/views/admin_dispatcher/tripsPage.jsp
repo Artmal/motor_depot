@@ -125,7 +125,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-building-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from" required>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from"
+                                   placeholder="Kharkov"
+                                   pattern="^[A-ZА-Я][a-zа-я-\\s]+$" required>
                         </div>
 
                         <label for="town-to"><fmt:message key="tripsPage.content.addTripForm.label.townTo"/>*:</label>
@@ -133,8 +135,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-building fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-to"
-                                   name="town-to" required>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-to" name="town-to"
+                                   placeholder="Kiev"
+                                   pattern="^[A-ZА-Я][a-zа-я-\\s]+$" required>
                         </div>
 
 
@@ -144,7 +147,8 @@
                                 <i class="fa fa-calendar fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
-                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS" required>
+                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS"
+                                   pattern="^[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$" required>
                         </div>
 
 
@@ -153,8 +157,9 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in"
-                                   name="time-in" placeholder="YYYY-MM-DD HH:MM:SS">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in"
+                                   placeholder="YYYY-MM-DD HH:MM:SS"
+                                   pattern="^[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$" required>
                         </div>
 
                         <label for="payment-in-dollars"><fmt:message key="tripsPage.content.addTripForm.label.payment"/>($)*:</label>
@@ -162,8 +167,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="payment-in-dollars"
-                                   name="payment-in-dollars">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="payment-in-dollars" name="payment-in-dollars"
+                                   pattern="^[1-9][\\d]*$" required>
                         </div>
                         <br>
                         <button class="btn btn-primary"><fmt:message key="tripsPage.content.addTripForm.button.addTrip"/></button>

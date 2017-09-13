@@ -59,7 +59,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name"
+                               pattern="^[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+$" required>
                     </div>
 
                     <label for="passport-serial-numbers"><fmt:message key="registration.label.passportSerialNumber"/></label>

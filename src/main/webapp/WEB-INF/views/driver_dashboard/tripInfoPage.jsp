@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${language}" />
@@ -48,27 +48,17 @@
                     <br>
                     <i class="fa fa-tasks fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.status"/>:</strong>
-                    <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                        <span class="badge badge-success">Open</span>
-                    </c:if>
-                    <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                        <span class="badge badge-warning">In Progress</span>
-                    </c:if>
-                    <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                        <span class="badge badge-default">Closed</span>
-                    </c:if>
-                    <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                        <span class="badge badge-danger">Canceled</span>
-                    </c:if>
+                    <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
                     <br>
                     <i class="fa fa-car fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.carTypeRequired"/>:</strong>
+                    <custom:printTypeCarRequiredFmt carTypeRequired="${trip.carTypeRequired}"/>
                     <br>
                     <i class="fa fa-id-card-o fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.carId"/>:</strong>
                     <c:choose>
                         <c:when test="${trip.carId eq '0'}">
-                            <span class="badge badge-pill badge-success">Free spot</span>
+                            <span class="badge badge-pill badge-success"><fmt:message key="driverDashoard.tripInfoPage.badge.freeSpot"/></span>
                         </c:when>
                         <c:otherwise>
                             ${trip.carId}
@@ -119,8 +109,6 @@
                 </c:when>
 
                 <c:otherwise>
-                    <%--<h:showRequestFormOrDeny trip_id="${trip.id}" car_id=""--%>
-                    
                     <div class="card">
                         <div class="card-block">
                             <form class="form-horizontal" action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">

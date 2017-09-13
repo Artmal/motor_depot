@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 
 /**
  * Servlet for logging handling.
@@ -54,7 +55,13 @@ public class LoginServlet extends HttpServlet {
                 }
             }
             else {
-                req.setAttribute("errorText", "Wrong email/password");
+                Locale language = (Locale) req.getSession().getAttribute("language");
+
+                if(language.getLanguage().equals("ru")) {
+                    req.setAttribute("errorText", "Неправильный электронный адрес/пароль");
+                } else if(language.getLanguage().equals("en")) {
+                    req.setAttribute("errorText", "Wrong email/password");
+                }
                 req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
             }
         } catch (SQLException | NamingException e) {
