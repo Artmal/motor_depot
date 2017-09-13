@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public class Validator {
     public static boolean validateEmail(String email) {
-        Pattern checkEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$");
+        Pattern checkEmail = Pattern.compile("^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$");
         Matcher matcher = checkEmail.matcher(email);
 
         return matcher.find();
@@ -23,7 +23,7 @@ public class Validator {
     }
 
     public static boolean validateFullName(String fullName) {
-        Pattern checkFullName = Pattern.compile("^[a-z ,.'-]+$", Pattern.CASE_INSENSITIVE);
+        Pattern checkFullName = Pattern.compile("^[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+$");
         Matcher matcher = checkFullName.matcher(fullName);
 
         return matcher.find();
@@ -36,9 +36,9 @@ public class Validator {
         return matcher.find();
     }
 
-    public static boolean validateAge(int age) {
+    public static boolean validateAge(String age) {
         Pattern checkAge = Pattern.compile("^[1-9]{1,3}$");
-        Matcher matcher = checkAge.matcher(String.valueOf(age));
+        Matcher matcher = checkAge.matcher(age);
 
         return matcher.find();
     }
