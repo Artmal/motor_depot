@@ -50,7 +50,6 @@
     <br>
     <br>
     <div class="container">
-
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form name="settingsChangeForm" action="/car/save" method="post">
@@ -114,9 +113,9 @@
                                 <i class="fa fa-cogs fa-fw"></i>
                             </div>
                             <select class="form-control" id="condition" name="condition" required>
-                                <option><fmt:message key="adminDriver.carInfoPage.broken"/></option>
-                                <option><fmt:message key="adminDriver.carInfoPage.repairing"/></option>
-                                <option><fmt:message key="adminDriver.carInfoPage.ready"/></option>
+                                <option value="Broken"><fmt:message key="adminDriver.carInfoPage.broken"/></option>
+                                <option value="Repairing"><fmt:message key="adminDriver.carInfoPage.repairing"/></option>
+                                <option value="Ready"><fmt:message key="adminDriver.carInfoPage.ready"/></option>
                             </select>
                         </div>
 

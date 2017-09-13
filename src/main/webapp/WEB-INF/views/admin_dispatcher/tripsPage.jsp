@@ -81,10 +81,10 @@
                                 <i class="fa fa-tasks fa-fw"></i>
                             </div>
                             <select class="form-control" id="status" name="status" required>
-                                <option><fmt:message key="tripsPage.content.option.open"/></option>
+                                <option value="Open"><fmt:message key="tripsPage.content.option.open"/></option>
                                 <option value="In_progress"><fmt:message key="tripsPage.content.option.inProgress"/></option>
-                                <option><fmt:message key="tripsPage.content.option.closed" /></option>
-                                <option><fmt:message key="tripsPage.content.option.canceled"/></option>
+                                <option value="Closed"><fmt:message key="tripsPage.content.option.closed" /></option>
+                                <option value="Canceled"><fmt:message key="tripsPage.content.option.canceled"/></option>
                             </select>
                         </div>
 
