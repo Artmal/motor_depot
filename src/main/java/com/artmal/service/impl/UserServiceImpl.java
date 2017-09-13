@@ -4,11 +4,10 @@ import com.artmal.dao.UserDao;
 import com.artmal.dao.impl.UserDaoImpl;
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
+import com.artmal.utils.RegistrationValidator;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserServiceImpl implements UserService {
     private static UserDao userDao = new UserDaoImpl();
@@ -20,14 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int save(User user) throws SQLException, NamingException {
-        Pattern checkEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = checkEmail.matcher(user.getEmail());
-
-        if(matcher.find()) {
-            return userDao.save(user);
+        if(RegistrationValidator.validateEmail(user.getEmail())){
+            // ???
         }
 
-        return 0;
+        // ???
+
+        return userDao.save(user);
     }
 
     @Override
