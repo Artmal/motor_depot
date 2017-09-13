@@ -1,10 +1,10 @@
-package com.artmal.utils;
+package com.artmal.utils.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Utility class for input validation.
+ * Utility class for server-side input validation during registration process.
  * @author Artem Malchenko
  */
 public final class RegistrationValidator {

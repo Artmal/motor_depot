@@ -1,8 +1,12 @@
-package com.artmal.utils;
+package com.artmal.utils.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class for server-side input validation during trip creation process.
+ * @author Artem Malchenko
+ */
 public final class TripValidator {
     private TripValidator() { }
 
@@ -14,7 +18,7 @@ public final class TripValidator {
     }
 
     public static boolean validateTime(String time) {
-        Pattern checkTime = Pattern.compile("^[2][\\d]{3}-[1-9]{2}-[1-3][\\d] [\\d]{2}:[\\d]{2}:[\\d]{2}");
+        Pattern checkTime = Pattern.compile("^[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$");
         Matcher matcher = checkTime.matcher(time);
 
         return matcher.find();

@@ -1,4 +1,4 @@
-package com.artmal.utils;
+package com.artmal.utils.validation;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
@@ -93,37 +93,37 @@ public class RegistrationValidatorTest {
 
     @Test
     @UseDataProvider("invalidEmailsData")
-    public void validateInvalidEmail(final String input) throws Exception {
+    public void invalidateEmail(final String input) throws Exception {
         assertFalse(RegistrationValidator.validateEmail(input));
     }
 
     @Test
     @UseDataProvider("validEmailsData")
-    public void validateValidEmail(final String input) throws Exception {
+    public void validateEmail(final String input) throws Exception {
         assertTrue(RegistrationValidator.validateEmail(input));
     }
 
     @Test
     @UseDataProvider("invalidFullNamesData")
-    public void validateInvalidFullName(final String input) throws Exception {
+    public void invalidateFullName(final String input) throws Exception {
         assertFalse(RegistrationValidator.validateFullName(input));
     }
 
     @Test
     @UseDataProvider("validFullNamesData")
-    public void validateValidFullName(final String input) throws Exception {
+    public void validateFullName(final String input) throws Exception {
         assertTrue(RegistrationValidator.validateFullName(input));
     }
 
     @Test
     @UseDataProvider("invalidPhoneNumbersData")
-    public void validateInvalidPhoneNumber(final String input) throws Exception {
+    public void invalidatePhoneNumber(final String input) throws Exception {
         assertFalse(RegistrationValidator.validatePhoneNumber(input));
     }
 
     @Test
     @UseDataProvider("validPhoneNumbersData")
-    public void validateValidPhoneNumber(final String input) throws Exception {
+    public void validatePhoneNumber(final String input) throws Exception {
         assertTrue(RegistrationValidator.validatePhoneNumber(input));
     }
 
