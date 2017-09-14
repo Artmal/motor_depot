@@ -6,6 +6,9 @@ import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
+import com.artmal.utils.ValidationException;
+import com.artmal.utils.validation.CarAddValidator;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -15,10 +18,22 @@ import java.util.Set;
 
 @Service
 public class CarServiceImpl implements CarService {
+    final static Logger logger = Logger.getLogger(CarServiceImpl.class);
+
     private static CarDao carDao = new CarDaoImpl();
 
     @Override
     public boolean save(Car car) throws SQLException, NamingException {
+        try {
+            if(!CarAddValidator.validateNumberOfSeats(String.valueOf(car.getNumberOfSeats()))) {
+                throw new ValidationException(String.valueOf(car.getNumberOfSeats()));
+            } else if(!CarAddValidator.validateCarColor(car.getColor())) {
+                throw new ValidationException(car.getColor());
+            }
+        } catch (ValidationException e) {
+            logger.error(e);
+        }
+
         return carDao.save(car);
     }
 
