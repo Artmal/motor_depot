@@ -369,36 +369,6 @@
     <url-pattern>/driver-dashboard/*</url-pattern>
   </filter-mapping>
 
-  <!--<filter>-->
-    <!--<filter-name>adminFilter</filter-name>-->
-    <!--<filter-class>com.artmal.filter.AdminFilter</filter-class>-->
-  <!--</filter>-->
-
-  <!--<filter-mapping>-->
-    <!--<filter-name>adminFilter</filter-name>-->
-    <!--<url-pattern>/admin-dashboard/*</url-pattern>-->
-  <!--</filter-mapping>-->
-
-  <!--<filter>-->
-    <!--<filter-name>dispatcherFilter</filter-name>-->
-    <!--<filter-class>com.artmal.filter.DispatcherFilter</filter-class>-->
-  <!--</filter>-->
-
-  <!--<filter-mapping>-->
-    <!--<filter-name>dispatcherFilter</filter-name>-->
-    <!--<url-pattern>/dispatcher-dashboard/*</url-pattern>-->
-  <!--</filter-mapping>-->
-
-  <!--<filter>-->
-    <!--<filter-name>driverFilter</filter-name>-->
-    <!--<filter-class>com.artmal.filter.DriverFilter</filter-class>-->
-  <!--</filter>-->
-
-  <!--<filter-mapping>-->
-    <!--<filter-name>driverFilter</filter-name>-->
-    <!--<url-pattern>/driver-dashboard/*</url-pattern>-->
-  <!--</filter-mapping>-->
-
   <filter>
     <filter-name>characterSetFilter</filter-name>
     <filter-class>com.artmal.filter.CharacterFilter</filter-class>
@@ -430,6 +400,12 @@
     <!-- Forbidden directory listing -->
     <error-code>403</error-code>
     <location>/WEB-INF/views/util/error/403.jsp</location>
+  </error-page>
+
+  <error-page>
+    <!-- Forbidden directory listing -->
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/util/error/404.jsp</location>
   </error-page>
 
   <error-page>

@@ -4,8 +4,7 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="i18n.errorPages.errorPage500" />
 
-<html lang="en">
-
+<html lang="${language}">
 <head>
     <meta charset="UTF-8" />
     <title><fmt:message key="errorPage500.errorTitle"/></title>
@@ -14,7 +13,6 @@
 </head>
 
 <body>
-
 <div class="Container">
 
     <div class="MainGraphic">
