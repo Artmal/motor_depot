@@ -5,10 +5,12 @@ import com.artmal.dao.impl.UserDaoImpl;
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.utils.validation.RegistrationValidator;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 
+@Service
 public class UserServiceImpl implements UserService {
     private static UserDao userDao = new UserDaoImpl();
 

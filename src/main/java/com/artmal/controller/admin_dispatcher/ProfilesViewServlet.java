@@ -6,12 +6,13 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.DispatcherServiceImpl;
 import com.artmal.service.impl.DriverServiceImpl;
-import com.artmal.service.impl.TripServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,16 @@ import java.util.Set;
 public class ProfilesViewServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
 
-    private TripService tripService = new TripServiceImpl();
-    private DispatcherService dispatcherServiceImpl = new DispatcherServiceImpl();
+    @Autowired
+    private TripService tripService;
+    @Autowired
+    private DispatcherService dispatcherService;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +64,7 @@ public class ProfilesViewServlet extends HttpServlet {
             long dispatcherId = Long.parseLong(req.getParameter("id"));
 
             try {
-                Dispatcher dispatcherInfo = dispatcherServiceImpl.findById(dispatcherId);
+                Dispatcher dispatcherInfo = dispatcherService.findById(dispatcherId);
                 req.setAttribute("dispatcher", dispatcherInfo);
 
                 Set<Trip> tripSet = tripService.findAllByDispatcherId(dispatcherId);

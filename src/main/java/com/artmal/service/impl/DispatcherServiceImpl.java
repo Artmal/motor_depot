@@ -4,11 +4,13 @@ import com.artmal.dao.DispatcherDao;
 import com.artmal.dao.impl.DispatcherDaoImpl;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.service.DispatcherService;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.Set;
 
+@Service
 public class DispatcherServiceImpl implements DispatcherService {
     private static DispatcherDao dispatcherDao = new DispatcherDaoImpl();
 

@@ -4,11 +4,13 @@ import com.artmal.dao.DriverDao;
 import com.artmal.dao.impl.DriverDaoImpl;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.Set;
 
+@Service
 public class DriverServiceImpl implements DriverService {
     private static DriverDao driverDao = new DriverDaoImpl();
 

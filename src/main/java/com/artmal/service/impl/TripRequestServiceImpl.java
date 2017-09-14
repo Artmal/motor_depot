@@ -4,12 +4,14 @@ import com.artmal.dao.TripRequestDao;
 import com.artmal.dao.impl.TripRequestDaoImpl;
 import com.artmal.model.TripRequest;
 import com.artmal.service.TripRequestService;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+@Service
 public class TripRequestServiceImpl implements TripRequestService {
     private static TripRequestDao tripRequestDao = new TripRequestDaoImpl();
 

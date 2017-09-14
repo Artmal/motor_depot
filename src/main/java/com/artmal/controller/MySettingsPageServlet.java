@@ -2,11 +2,13 @@ package com.artmal.controller;
 
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
-import com.artmal.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Users can change information about their profiles(email and password).
+ * @author Artem Malchenko
+ */
 public class MySettingsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(MySettingsPageServlet.class);
 
-    private UserService userService = new UserServiceImpl();
+    @Autowired
+    private UserService userService;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

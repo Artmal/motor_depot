@@ -5,11 +5,13 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
 import com.artmal.service.impl.CarServiceImpl;
-import com.artmal.service.impl.DriverServiceImpl;
 import com.artmal.utils.CarUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,14 @@ import java.util.Set;
 public class GaragePageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(GaragePageServlet.class);
 
-    private DriverService driverService = new DriverServiceImpl();
+    @Autowired
+    private DriverService driverService;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

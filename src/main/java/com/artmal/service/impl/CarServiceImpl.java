@@ -6,12 +6,14 @@ import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+@Service
 public class CarServiceImpl implements CarService {
     private static CarDao carDao = new CarDaoImpl();
 

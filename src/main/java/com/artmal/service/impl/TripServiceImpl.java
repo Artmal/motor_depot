@@ -6,12 +6,14 @@ import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripService;
+import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Set;
 
+@Service
 public class TripServiceImpl implements TripService {
     private static TripDao tripDao = new TripDaoImpl();
 
