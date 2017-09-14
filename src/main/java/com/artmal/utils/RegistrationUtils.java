@@ -25,17 +25,17 @@ public final class RegistrationUtils {
      * Separate method for more clear code in servlet part.
      */
     public static void registerNewDriver(HttpServletRequest req) {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String fullName = req.getParameter("name");
-        String passportSerialNumbers = req.getParameter("passport-serial-numbers");
-        String phoneNumber = req.getParameter("phone-number");
-        int age = Integer.parseInt(req.getParameter("age"));
+        final String email = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final String fullName = req.getParameter("name");
+        final String passportSerialNumbers = req.getParameter("passport-serial-numbers");
+        final String phoneNumber = req.getParameter("phone-number");
+        final int age = Integer.parseInt(req.getParameter("age"));
 
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        User userInfo = new User(email, hashedPassword, Role.Driver);
-        Driver driver = new Driver(fullName, passportSerialNumbers, phoneNumber, age, userInfo);
-        DriverService driverService = new DriverServiceImpl();
+        final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        final User userInfo = new User(email, hashedPassword, Role.Driver);
+        final Driver driver = new Driver(fullName, passportSerialNumbers, phoneNumber, age, userInfo);
+        final DriverService driverService = new DriverServiceImpl();
         try {
             driverService.save(driver);
         } catch (SQLException | NamingException e) {

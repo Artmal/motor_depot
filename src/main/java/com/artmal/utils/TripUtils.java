@@ -65,9 +65,9 @@ public final class TripUtils {
      * We also getting 'yyyy-MM-dd HH:mm:ss.S' format which we need convert to 'yyyy-MM-dd HH:mm:ss'.
      */
     public static DateTime sqlTimestampToDatetime(Timestamp sqlDate) throws ParseException {
-        String stringDate = sqlDate.toString().split("\\.")[0];
+        final String stringDate = sqlDate.toString().split("\\.")[0];
 
-        DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        final DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         return DateTime.parse(stringDate, dft);
     }
 
@@ -75,7 +75,7 @@ public final class TripUtils {
      * Conversion between date in string format and {@link DateTime}.
      */
     public static DateTime stringDateToDateTime(String date) {
-        DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        final DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         return DateTime.parse(date, dft);
     }
 
@@ -92,7 +92,7 @@ public final class TripUtils {
      * @return constructed {@link Trip}.
      */
     public static Trip initializeTrip(ResultSet trips) throws SQLException, ParseException {
-        Trip trip = new Trip();
+        final Trip trip = new Trip();
         trip.setId(trips.getLong("id"));
         trip.setDateOfCreation(trips.getDate("date_of_creation"));
         trip.setTripStatus(TripUtils.intToStatus(trips.getInt("status_id")));

@@ -48,19 +48,19 @@ public class TripInfoPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripId = Long.parseLong(req.getParameter("trip-id"));
+        final long tripId = Long.parseLong(req.getParameter("trip-id"));
 
         try {
-            Trip trip = tripService.findById(tripId);
+            final Trip trip = tripService.findById(tripId);
             req.setAttribute("trip", trip);
 
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
             req.setAttribute("setOfTripRequests", tripRequestSet);
 
-            long userId = (long) req.getSession().getAttribute("id");
-            Driver driver = driverService.findByUserId(userId);
+            final long userId = (long) req.getSession().getAttribute("id");
+            final Driver driver = driverService.findByUserId(userId);
 
-            Set<Car> suitableCarSet = carService.findSuitableForTripDriverCars(driver, trip);
+            final Set<Car> suitableCarSet = carService.findSuitableForTripDriverCars(driver, trip);
             req.setAttribute("setOfSuitableCars", suitableCarSet);
         } catch (SQLException | NamingException | ParseException e) {
             logger.error(e);
@@ -72,14 +72,14 @@ public class TripInfoPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            long carId = Long.parseLong(req.getParameter("car-id"));
-            Car car = carService.findById(carId);
+            final long carId = Long.parseLong(req.getParameter("car-id"));
+            final Car car = carService.findById(carId);
 
-            long tripId = Long.parseLong(req.getParameter("trip-id"));
-            Trip trip = tripService.findById(tripId);
+            final long tripId = Long.parseLong(req.getParameter("trip-id"));
+            final Trip trip = tripService.findById(tripId);
 
-            String message = req.getParameter("message");
-            TripRequest tripRequest = new TripRequest(trip, car, message);
+            final String message = req.getParameter("message");
+            final TripRequest tripRequest = new TripRequest(trip, car, message);
             tripRequestService.save(tripRequest);
 
             resp.sendRedirect("/driver-dashboard/trip?trip-id=" + trip.getId());

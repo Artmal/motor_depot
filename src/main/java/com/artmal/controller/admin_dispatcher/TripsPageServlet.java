@@ -4,14 +4,16 @@ import com.artmal.model.Trip;
 import com.artmal.model.enums.CarType;
 import com.artmal.model.enums.Role;
 import com.artmal.model.enums.TripStatus;
+import com.artmal.service.DispatcherService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.DispatcherServiceImpl;
-import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.TripUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +30,21 @@ import java.util.Set;
 public class TripsPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(TripsPageServlet.class);
 
+    @Autowired
+    private TripService tripService;
+    @Autowired
+    private DispatcherService dispatcherService;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TripService tripService = new TripServiceImpl();
         try {
-            Set<Trip> tripSet = tripService.findAll();
+            final Set<Trip> tripSet = tripService.findAll();
             req.setAttribute("setOfTrips", tripSet);
         } catch (SQLException | NamingException | ParseException e) {
             logger.error(e);
@@ -43,40 +55,35 @@ public class TripsPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TripStatus status = TripStatus.valueOf(req.getParameter("status"));
-        CarType carTypeRequired = CarType.valueOf(req.getParameter("car-type-required"));
-        String townFrom = req.getParameter("town-from");
-        String townTo = req.getParameter("town-to");
-        DateTime timeOut = TripUtils.stringDateToDateTime(req.getParameter("time-out"));
-        DateTime timeIn = TripUtils.stringDateToDateTime(req.getParameter("time-in"));
-        int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
+        final TripStatus status = TripStatus.valueOf(req.getParameter("status"));
+        final CarType carTypeRequired = CarType.valueOf(req.getParameter("car-type-required"));
+        final String townFrom = req.getParameter("town-from");
+        final String townTo = req.getParameter("town-to");
+        final DateTime timeOut = TripUtils.stringDateToDateTime(req.getParameter("time-out"));
+        final DateTime timeIn = TripUtils.stringDateToDateTime(req.getParameter("time-in"));
+        final int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
 
-        Role role = (Role) req.getSession().getAttribute("role");
-        switch (role) {
-            case Dispatcher:
-                try {
-                    long dispatcherId = new DispatcherServiceImpl().findByUserId((long) req.getSession().getAttribute("id")).getId();
-                    System.out.println(dispatcherId);
+        final Role role = (Role) req.getSession().getAttribute("role");
+        if(role.equals(Role.Dispatcher)) {
+            try {
+                final long dispatcherId = dispatcherService.findByUserId((long) req.getSession().getAttribute("id")).getId();
 
-                    Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
-                    TripService tripService = new TripServiceImpl();
-                    tripService.save(trip);
-                } catch (SQLException | NamingException | ParseException e) {
-                    logger.error(e);
-                }
+                final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
+                tripService.save(trip);
+            } catch (SQLException | NamingException | ParseException e) {
+                logger.error(e);
+            }
 
-                resp.sendRedirect("/dispatcher-dashboard/trips");
-                break;
-            case Admin:
-                Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
-                TripService tripService = new TripServiceImpl();
-                try {
-                    tripService.save(trip);
-                } catch (SQLException | NamingException | ParseException e) {
-                    logger.error(e);
-                }
+            resp.sendRedirect("/dispatcher-dashboard/trips");
+        } else if(role.equals(Role.Admin)) {
+            final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
+            try {
+                tripService.save(trip);
+            } catch (SQLException | NamingException | ParseException e) {
+                logger.error(e);
+            }
 
-                resp.sendRedirect("/admin-dashboard/trips");
+            resp.sendRedirect("/admin-dashboard/trips");
         }
     }
 }

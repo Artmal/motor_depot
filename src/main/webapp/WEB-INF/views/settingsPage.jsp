@@ -73,7 +73,6 @@
         </div>
     </div>
 </div>
-</div>
 
 <script>
     function checkPass()
@@ -89,7 +88,7 @@
         if(pass1.value !== pass2.value){
             pass2.style.backgroundColor = badColor;
             message.style.color = badColor;
-            message.innerHTML = "Passwords Do Not Match!"
+            message.innerHTML = "Passwords Do Not Match!";
             return false;
         }
     }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${language}" />
@@ -47,7 +47,7 @@
                         ${driver.name}
                     </div>
                     <div class="profile-usertitle-job">
-                        <fmt:message key="adminDispatcher.driverProfile.driver"></fmt:message>
+                        <fmt:message key="adminDispatcher.driverProfile.driver"/>
                     </div>
                 </div>
 

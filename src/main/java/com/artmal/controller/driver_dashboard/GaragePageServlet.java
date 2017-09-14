@@ -4,7 +4,6 @@ import com.artmal.model.Car;
 import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
-import com.artmal.service.impl.CarServiceImpl;
 import com.artmal.utils.CarUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,8 @@ public class GaragePageServlet extends HttpServlet {
 
     @Autowired
     private DriverService driverService;
+    @Autowired
+    private CarService carService;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -39,13 +40,12 @@ public class GaragePageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CarService carService = new CarServiceImpl();
         try {
-            Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
+            final Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
 
-            long ownerId = loggedDriver.getId();
+            final long ownerId = loggedDriver.getId();
 
-            Set<Car> carSet = carService.findAllByOwnerId(ownerId);
+            final Set<Car> carSet = carService.findAllByOwnerId(ownerId);
             req.setAttribute("setOfCars", carSet);
         } catch (SQLException | NamingException e) {
             logger.error(e);

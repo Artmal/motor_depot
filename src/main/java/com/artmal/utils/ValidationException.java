@@ -12,9 +12,4 @@ public class ValidationException extends Exception {
     public ValidationException(String message) {
         super("Validation fails on" + message);
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

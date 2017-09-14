@@ -74,15 +74,7 @@ public class CarDaoImpl implements CarDao {
             ResultSet car = findCarById.executeQuery();
             car.next();
 
-            Car theCar = new Car();
-            theCar.setId(car.getLong("id"));
-            theCar.setRegistrationNumber(car.getString("registration_number"));
-            theCar.setType(CarUtils.intToType(car.getInt("type_id")));
-            theCar.setCondition(CarUtils.intToCondition(car.getInt("condition_type_id")));
-            theCar.setModel(car.getString("model"));
-            theCar.setNumberOfSeats(car.getInt("number_of_seats"));
-            theCar.setColor(car.getString("color"));
-            theCar.setOwnerId(car.getLong("owner_id"));
+            Car theCar = CarUtils.initializeCar(car);
 
             findCarById.close();
             car.close();
@@ -111,15 +103,7 @@ public class CarDaoImpl implements CarDao {
 
             Set<Car> carSet = new HashSet();
             while(cars.next()) {
-                Car car = new Car();
-                car.setId(cars.getLong("id"));
-                car.setRegistrationNumber(cars.getString("registration_number"));
-                car.setType(CarUtils.intToType(cars.getInt("type_id")));
-                car.setCondition(CarUtils.intToCondition(cars.getInt("condition_type_id")));
-                car.setModel(cars.getString("model"));
-                car.setNumberOfSeats(cars.getInt("number_of_seats"));
-                car.setColor(cars.getString("color"));
-                car.setOwnerId(cars.getLong("owner_id"));
+                Car car = CarUtils.initializeCar(cars);
                 carSet.add(car);
 
             }

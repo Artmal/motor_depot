@@ -34,9 +34,9 @@ public class MySettingsPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = (String) req.getSession().getAttribute("email");
+        final String email = (String) req.getSession().getAttribute("email");
         try {
-            User user = userService.findByEmail(email);
+            final User user = userService.findByEmail(email);
             req.setAttribute("user", user);
 
         } catch (SQLException | NamingException e) {
@@ -48,11 +48,11 @@ public class MySettingsPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User();
-        long userId = (long) req.getSession().getAttribute("id");
-        String newEmail = req.getParameter("email");
-        String password = req.getParameter("password");
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        final User user = new User();
+        final long userId = (long) req.getSession().getAttribute("id");
+        final String newEmail = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         user.setId(userId);
         user.setEmail(newEmail);
@@ -60,7 +60,7 @@ public class MySettingsPageServlet extends HttpServlet {
         try {
             userService.updateUser(user);
         } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
 
         req.getSession().invalidate();

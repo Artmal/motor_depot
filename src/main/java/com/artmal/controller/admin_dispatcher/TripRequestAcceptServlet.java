@@ -5,7 +5,6 @@ import com.artmal.model.Trip;
 import com.artmal.model.TripRequest;
 import com.artmal.service.TripRequestService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.TripServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -31,6 +30,8 @@ public class TripRequestAcceptServlet extends HttpServlet {
 
     @Autowired
     private TripRequestService tripRequestService;
+    @Autowired
+    private TripService tripService;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -40,14 +41,13 @@ public class TripRequestAcceptServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripId = Long.parseLong(req.getParameter("trip-id"));
-        long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
+        final long tripId = Long.parseLong(req.getParameter("trip-id"));
+        final long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
 
         try {
-            TripRequest tripRequest = tripRequestService.findById(tripRequestId);
-            Car car = tripRequest.getCarInfo();
+            final TripRequest tripRequest = tripRequestService.findById(tripRequestId);
+            final Car car = tripRequest.getCarInfo();
 
-            TripService tripService = new TripServiceImpl();
             Trip trip = tripService.findById(tripId);
             tripService.assignCarToTheTrip(trip, car);
 
@@ -55,7 +55,7 @@ public class TripRequestAcceptServlet extends HttpServlet {
             trip = tripService.findById(tripId);
             req.setAttribute("trip", trip);
 
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
             req.setAttribute("setOfTripRequests", tripRequestSet);
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripInfoPage.jsp").forward(req, resp);

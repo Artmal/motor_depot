@@ -17,16 +17,14 @@ public class I18nFilter implements Filter {
         Locale locale = (Locale) req.getSession().getAttribute("language");
 
         if(locale == null) {
-            Locale enLocale = new Locale.Builder().setLanguage("en").build();
-            req.getSession().setAttribute("language", enLocale);
+            setEnLocale(req);
         } else {
             if(req.getParameter("languageChange") != null) {
                 if(locale.getLanguage().equals("en")) {
                     Locale ruLocale = new Locale.Builder().setLanguage("ru").build();
                     req.getSession().setAttribute("language", ruLocale);
                 } else if(locale.getLanguage().equals("ru")) {
-                    Locale enLocale = new Locale.Builder().setLanguage("en").build();
-                    req.getSession().setAttribute("language", enLocale);
+                    setEnLocale(req);
                 }
             }
         }
@@ -36,5 +34,10 @@ public class I18nFilter implements Filter {
     @Override
     public void destroy() {
 
+    }
+
+    private void setEnLocale(HttpServletRequest req) {
+        Locale enLocale = new Locale.Builder().setLanguage("en").build();
+        req.getSession().setAttribute("language", enLocale);
     }
 }

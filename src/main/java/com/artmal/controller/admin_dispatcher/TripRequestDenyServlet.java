@@ -40,28 +40,27 @@ public class TripRequestDenyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripId = Long.parseLong(req.getParameter("trip-id"));
-        long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
+        final long tripId = Long.parseLong(req.getParameter("trip-id"));
+        final long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
 
         try {
             Trip trip = tripService.findById(tripId);
 
-            TripStatus tripStatus = trip.getTripStatus();
+            final TripStatus tripStatus = trip.getTripStatus();
 
-            switch (tripStatus) {
-                case Open:
-                    tripRequestService.deleteById(tripRequestId);
-                    break;
-                case In_progress:
-                    tripService.nullifyResponsibleCarColumn(trip);
-                    tripService.setTripStatus(trip, TripStatus.Open);
-                    tripRequestService.deleteById(tripRequestId);
+
+            if(tripStatus.equals(TripStatus.Open)) {
+                tripRequestService.deleteById(tripRequestId);
+            } else if(tripStatus.equals(TripStatus.In_progress)) {
+                tripService.nullifyResponsibleCarColumn(trip);
+                tripService.setTripStatus(trip, TripStatus.Open);
+                tripRequestService.deleteById(tripRequestId);
             }
 
             trip = tripService.findById(tripId);
             req.setAttribute("trip", trip);
 
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
             req.setAttribute("setOfTripRequests", tripRequestSet);
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripInfoPage.jsp").forward(req, resp);
         } catch (SQLException | NamingException | ParseException e) {

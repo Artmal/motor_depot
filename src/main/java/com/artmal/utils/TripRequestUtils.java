@@ -27,7 +27,7 @@ public final class TripRequestUtils {
      * @return constructed {@link TripRequest}.
      */
     public static TripRequest initializeTripRequest(ResultSet tripRequests) throws SQLException, ParseException, NamingException {
-        TripRequest tripRequest = new TripRequest();
+        final TripRequest tripRequest = new TripRequest();
         tripRequest.setId(tripRequests.getLong("id"));
         tripRequest.setTripInfo(tripService.findById(tripRequests.getLong("trip_id")));
         tripRequest.setCarInfo(carService.findById(tripRequests.getLong("car_id")));

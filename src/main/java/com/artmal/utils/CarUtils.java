@@ -148,16 +148,16 @@ public final class CarUtils {
      * Separate method for more clear code in servlet part.
      */
     public static void addNewCarAsDriver(HttpServletRequest req) throws SQLException, NamingException {
-        String registrationNumber = req.getParameter("registration-number");
-        CarType type = CarType.valueOf(req.getParameter("type"));
-        CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
-        String model = req.getParameter("model");
-        int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
-        String carColor = req.getParameter("color");
-        long ownerId = new DriverServiceImpl().findByUserId((Long) req.getSession().getAttribute("id")).getId();
+        final String registrationNumber = req.getParameter("registration-number");
+        final CarType type = CarType.valueOf(req.getParameter("type"));
+        final CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
+        final String model = req.getParameter("model");
+        final int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
+        final String carColor = req.getParameter("color");
+        final long ownerId = new DriverServiceImpl().findByUserId((Long) req.getSession().getAttribute("id")).getId();
 
-        Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
-        CarService carService = new CarServiceImpl();
+        final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
+        final CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {
@@ -169,16 +169,16 @@ public final class CarUtils {
      * Separate method for more clear code in servlet part.
      */
     public static void addNewCarAsAdmin(HttpServletRequest req) throws SQLException {
-        String registrationNumber = req.getParameter("registration-number");
-        CarType type = CarType.valueOf(req.getParameter("type"));
-        CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
-        String model = req.getParameter("model");
-        int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
-        String carColor = req.getParameter("color");
-        long ownerId = Long.parseLong(req.getParameter("owner-id"));
+        final String registrationNumber = req.getParameter("registration-number");
+        final CarType type = CarType.valueOf(req.getParameter("type"));
+        final CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
+        final String model = req.getParameter("model");
+        final int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
+        final String carColor = req.getParameter("color");
+        final long ownerId = Long.parseLong(req.getParameter("owner-id"));
 
-        Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
-        CarService carService = new CarServiceImpl();
+        final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
+        final CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {
@@ -191,7 +191,7 @@ public final class CarUtils {
      * @return constructed {@link Car}.
      */
     public static Car initializeCar(ResultSet cars) throws SQLException {
-        Car car = new Car();
+        final Car car = new Car();
         car.setId(cars.getLong("id"));
         car.setRegistrationNumber(cars.getString("registration_number"));
         car.setType(CarUtils.intToType(cars.getInt("type_id")));

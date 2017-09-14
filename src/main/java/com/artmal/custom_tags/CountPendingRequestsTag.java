@@ -2,6 +2,7 @@ package com.artmal.custom_tags;
 
 import com.artmal.service.TripRequestService;
 import com.artmal.service.impl.TripRequestServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
 import javax.servlet.jsp.JspException;
@@ -15,15 +16,17 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 public class CountPendingRequestsTag extends SimpleTagSupport {
+    final static Logger logger = Logger.getLogger(CountPendingRequestsTag.class);
+
+    final private TripRequestService tripRequestService = new TripRequestServiceImpl();
+
     @Override
     public void doTag() throws JspException, IOException {
-        TripRequestService tripRequestService = new TripRequestServiceImpl();
-
-        JspWriter jspWriter = getJspContext().getOut();
+        final JspWriter jspWriter = getJspContext().getOut();
         try {
             jspWriter.write(String.valueOf(tripRequestService.countAllPendingRequests()));
         } catch (NamingException | SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 }

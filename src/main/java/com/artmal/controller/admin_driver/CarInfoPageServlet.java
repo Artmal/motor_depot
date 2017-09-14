@@ -37,10 +37,10 @@ public class CarInfoPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long carId = Long.parseLong(req.getParameter("id"));
+        final long carId = Long.parseLong(req.getParameter("id"));
 
         try {
-            Car car = carService.findById(carId);
+            final Car car = carService.findById(carId);
 
             req.setAttribute("carInfo", car);
         } catch (SQLException | NamingException | ParseException e) {
@@ -52,28 +52,27 @@ public class CarInfoPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long carId = Long.parseLong(req.getParameter("id"));
-        String registrationNumber = req.getParameter("registration-number");
-        CarType type = CarType.valueOf(req.getParameter("type"));
-        CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
-        String model = req.getParameter("model");
-        int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
-        String color = req.getParameter("color");
+        final long carId = Long.parseLong(req.getParameter("id"));
+        final String registrationNumber = req.getParameter("registration-number");
+        final CarType type = CarType.valueOf(req.getParameter("type"));
+        final CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
+        final String model = req.getParameter("model");
+        final int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
+        final String color = req.getParameter("color");
 
-        Car car = new Car(carId, registrationNumber, type, condition, model, numberOfSeats, color);
+        final Car car = new Car(carId, registrationNumber, type, condition, model, numberOfSeats, color);
         try {
             carService.updateCar(car);
         } catch (NamingException | SQLException e) {
             logger.error(e);
         }
 
-        Role role = (Role) req.getSession().getAttribute("role");
-        switch (role) {
-            case Driver:
-                resp.sendRedirect("/driver-dashboard/garage");
-                break;
-            case Admin:
-                resp.sendRedirect("/admin-dashboard/cars");
+        final Role role = (Role) req.getSession().getAttribute("role");
+
+        if(role.equals(Role.Driver)) {
+            resp.sendRedirect("/driver-dashboard/garage");
+        } else if(role.equals(Role.Admin)) {
+            resp.sendRedirect("/admin-dashboard/cars");
         }
     }
 }

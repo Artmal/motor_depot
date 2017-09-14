@@ -39,14 +39,14 @@ public class DiscardTripRequestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
+        final long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
 
         try {
             tripRequestService.deleteById(tripRequestId);
 
-            long userId = (long) req.getSession().getAttribute("id");
-            Driver driver = driverService.findByUserId(userId);
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllByDriverId(driver.getId());
+            final long userId = (long) req.getSession().getAttribute("id");
+            final Driver driver = driverService.findByUserId(userId);
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllByDriverId(driver.getId());
             req.setAttribute("setOfTripRequests", tripRequestSet);
         } catch (NamingException | SQLException | ParseException e) {
             logger.error(e);

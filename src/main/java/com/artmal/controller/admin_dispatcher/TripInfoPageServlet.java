@@ -41,13 +41,13 @@ public class TripInfoPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripId = Long.parseLong(req.getParameter("trip-id"));
+        final long tripId = Long.parseLong(req.getParameter("trip-id"));
 
         try {
-            Trip trip = tripService.findById(tripId);
+            final Trip trip = tripService.findById(tripId);
             req.setAttribute("trip", trip);
 
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllByTripId(tripId);
             req.setAttribute("setOfTripRequests", tripRequestSet);
         } catch (SQLException | NamingException | ParseException e) {
             logger.error(e);

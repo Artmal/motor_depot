@@ -40,16 +40,16 @@ public class CompleteTripServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long tripId = Long.parseLong(req.getParameter("trip-id"));
+        final long tripId = Long.parseLong(req.getParameter("trip-id"));
 
         try {
-            Trip trip = tripService.findById(tripId);
+            final Trip trip = tripService.findById(tripId);
             tripService.setTripStatus(trip, TripStatus.Closed);
 
-            long userId = (long) req.getSession().getAttribute("id");
-            Driver driver = driverService.findByUserId(userId);
+            final long userId = (long) req.getSession().getAttribute("id");
+            final Driver driver = driverService.findByUserId(userId);
 
-            Set<Trip> tripSet = tripService.findAllByDriverId(driver.getId());
+            final Set<Trip> tripSet = tripService.findAllByDriverId(driver.getId());
             req.setAttribute("setOfTrips", tripSet);
 
             req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/myTripsPage.jsp").forward(req, resp);

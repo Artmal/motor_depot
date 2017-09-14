@@ -39,28 +39,25 @@ public class DeleteCarServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long carId = Long.parseLong(req.getParameter("car-id"));
+        final long carId = Long.parseLong(req.getParameter("car-id"));
         try {
             carService.deleteById(carId);
 
-            Role role = (Role) req.getSession().getAttribute("role");
-            switch (role) {
-                case Driver:
-                    Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
-                    long ownerId = loggedDriver.getId();
+            final Role role = (Role) req.getSession().getAttribute("role");
+            if(role.equals(Role.Driver)) {
+                final Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
+                final long ownerId = loggedDriver.getId();
 
-                    Set<Car> carSet = carService.findAllByOwnerId(ownerId);
-                    req.setAttribute("setOfCars", carSet);
+                final Set<Car> carSet = carService.findAllByOwnerId(ownerId);
+                req.setAttribute("setOfCars", carSet);
 
-                    req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/garagePage.jsp").forward(req, resp);
-                    break;
-                case Admin:
-                    Set<Car> carSetForAdmin = carService.findAll();
-                    req.setAttribute("setOfCars", carSetForAdmin);
+                req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/garagePage.jsp").forward(req, resp);
+            } else if(role.equals(Role.Admin)) {
+                final Set<Car> carSetForAdmin = carService.findAll();
+                req.setAttribute("setOfCars", carSetForAdmin);
 
-                    req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/carsPage.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/carsPage.jsp").forward(req, resp);
             }
-
         } catch (NamingException | SQLException e) {
             logger.error(e);
         }

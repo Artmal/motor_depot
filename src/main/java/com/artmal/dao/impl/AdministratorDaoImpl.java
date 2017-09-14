@@ -38,10 +38,12 @@ public class AdministratorDaoImpl implements AdministratorDao {
             administrator.close();
             return theAdministrator;
         } finally {
-            if (con != null) try {
+            if (con != null) {
+                try {
                 con.close();
             } catch (Exception ignore) {
             }
+        }
         }
     }
 }

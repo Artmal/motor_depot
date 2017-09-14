@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
@@ -61,7 +61,7 @@
                                     var completeButton = document.getElementById("completeButton${count}");
                                     completeButton.classList.add("disabled");
 
-                                    var refuseButton = document.getElementById("refuseButton${count}")
+                                    var refuseButton = document.getElementById("refuseButton${count}");
                                     refuseButton.classList.add("disabled");
                                 }
                             </script>
@@ -82,14 +82,8 @@
                             <br>
                             <i class="fa fa-id-card-o fa-fw"></i>
                             <strong><fmt:message key="driverDashboard.myTripsPage.carId"/>:</strong>
-                            <c:choose>
-                                <c:when test="${trip.carId eq '0'}">
-                                    <span class="badge badge-pill badge-success"><fmt:message key="driverDashboard.myTripsPage.badge.freeSpot"/></span>
-                                </c:when>
-                                <c:otherwise>
-                                    ${trip.carId}
-                                </c:otherwise>
-                            </c:choose>
+
+                            <custom:displayCarIdOrFreeSpotBadge carId="${trip.carId}"/>
                             <br>
                             <i class="fa fa-building-o fa-fw"></i>
                             <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong> ${trip.townFrom}
