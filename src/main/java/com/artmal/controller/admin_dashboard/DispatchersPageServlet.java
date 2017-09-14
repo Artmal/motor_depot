@@ -4,11 +4,13 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.model.users.User;
 import com.artmal.service.DispatcherService;
-import com.artmal.service.impl.DispatcherServiceImpl;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +27,20 @@ import java.util.Set;
 public class DispatchersPageServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(DispatchersPageServlet.class);
 
+    @Autowired
+    private DispatcherService dispatcherService;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DispatcherService dispatcherService = new DispatcherServiceImpl();
         try {
-            Set<Dispatcher> dispatcherSet = dispatcherService.findAll();
+            final Set<Dispatcher> dispatcherSet = dispatcherService.findAll();
 
             req.setAttribute("setOfDispatchers", dispatcherSet);
         } catch (SQLException | NamingException e) {
@@ -41,17 +52,16 @@ public class DispatchersPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String fullName = req.getParameter("name");
-        String passportSerialNumbers = req.getParameter("passport-serial-numbers");
-        String phoneNumber = req.getParameter("phone-number");
-        int salaryInDollars = Integer.parseInt(req.getParameter("salary-in-dollars"));
+        final String email = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final String fullName = req.getParameter("name");
+        final String passportSerialNumbers = req.getParameter("passport-serial-numbers");
+        final String phoneNumber = req.getParameter("phone-number");
+        final int salaryInDollars = Integer.parseInt(req.getParameter("salary-in-dollars"));
 
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        User userInfo = new User(email, hashedPassword, Role.Driver);
-        Dispatcher dispatcher = new Dispatcher(fullName, passportSerialNumbers, phoneNumber, salaryInDollars, userInfo);
-        DispatcherService dispatcherService = new DispatcherServiceImpl();
+        final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        final User userInfo = new User(email, hashedPassword, Role.Driver);
+        final Dispatcher dispatcher = new Dispatcher(fullName, passportSerialNumbers, phoneNumber, salaryInDollars, userInfo);
         try {
             dispatcherService.save(dispatcher);
         } catch (SQLException | NamingException e) {

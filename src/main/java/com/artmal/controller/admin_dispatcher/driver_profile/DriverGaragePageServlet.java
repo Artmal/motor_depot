@@ -38,13 +38,13 @@ public class DriverGaragePageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long driverId = Long.parseLong(req.getParameter("driver-id"));
+        final long driverId = Long.parseLong(req.getParameter("driver-id"));
 
         try {
-            Set<Car> carSet = carService.findAllByOwnerId(driverId);
+            final Set<Car> carSet = carService.findAllByOwnerId(driverId);
             req.setAttribute("setOfCars", carSet);
 
-            Driver driver = driverService.findById(driverId);
+            final Driver driver = driverService.findById(driverId);
             req.setAttribute("driver", driver);
         } catch (SQLException | NamingException e) {
             logger.error(e);

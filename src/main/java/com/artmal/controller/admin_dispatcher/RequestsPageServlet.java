@@ -36,7 +36,7 @@ public class RequestsPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Set<TripRequest> tripRequestSet = tripRequestService.findAllPending();
+            final Set<TripRequest> tripRequestSet = tripRequestService.findAllPending();
             req.setAttribute("setOfTripRequests", tripRequestSet);
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/requestsPage.jsp").forward(req, resp);

@@ -6,7 +6,6 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.DriverServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -33,6 +32,8 @@ public class ProfilesViewServlet extends HttpServlet {
     private TripService tripService;
     @Autowired
     private DispatcherService dispatcherService;
+    @Autowired
+    private DriverService driverService;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -42,17 +43,16 @@ public class ProfilesViewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String url = String.valueOf(req.getRequestURL());
+        final String url = String.valueOf(req.getRequestURL());
 
         if(url.contains("drivers")) {
-            long driverId = Long.parseLong(req.getParameter("id"));
+            final long driverId = Long.parseLong(req.getParameter("id"));
 
-            DriverService driverServiceImpl = new DriverServiceImpl();
             try {
-                Driver driverInfo = driverServiceImpl.findById(driverId);
+                final Driver driverInfo = driverService.findById(driverId);
                 req.setAttribute("driver", driverInfo);
 
-                Set<Trip> tripSet = tripService.findAllByDriverId(driverInfo.getId());
+                final Set<Trip> tripSet = tripService.findAllByDriverId(driverInfo.getId());
                 req.setAttribute("setOfTrips", tripSet);
             } catch (SQLException | NamingException | ParseException e) {
                 logger.error(e);
@@ -61,13 +61,13 @@ public class ProfilesViewServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/driver_profile/driverProfile.jsp")
                     .forward(req, resp);
         } else if(url.contains("dispatchers")) {
-            long dispatcherId = Long.parseLong(req.getParameter("id"));
+            final long dispatcherId = Long.parseLong(req.getParameter("id"));
 
             try {
-                Dispatcher dispatcherInfo = dispatcherService.findById(dispatcherId);
+                final Dispatcher dispatcherInfo = dispatcherService.findById(dispatcherId);
                 req.setAttribute("dispatcher", dispatcherInfo);
 
-                Set<Trip> tripSet = tripService.findAllByDispatcherId(dispatcherId);
+                final Set<Trip> tripSet = tripService.findAllByDispatcherId(dispatcherId);
                 req.setAttribute("setOfCreatedTrips", tripSet);
 
             } catch (SQLException | NamingException | ParseException e) {

@@ -19,6 +19,8 @@
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="${contextPath}/resource/css/registration.css" rel="stylesheet">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 <div class="container">
@@ -88,14 +90,9 @@
                         <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
                     </div>
 
-                    <%--<label for="age">Security code:</label>--%>
-                    <%--<div class="input-group mb-2 mr-sm-2 mb-sm-0">--%>
-                        <%--<div class="input-group-addon">--%>
-                            <%--<i class="fa fa-shield"></i>--%>
-                        <%--</div>--%>
-                        <%----%>
-                        <%--<input name="captchaCode" id = "captchaCode" class="form-control mb-2 mr-sm-2 mb-sm-0">--%>
-                    <%--</div>--%>
+                    <br>
+
+                    <div class="g-recaptcha" data-sitekey="6LdZljAUAAAAADRyMrkM6xlEa_rsj5YtFiLYF0x0"></div>
 
                     <br>
                     <div class="form-group">
