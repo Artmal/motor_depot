@@ -5,7 +5,7 @@ import com.artmal.model.users.Driver;
 import com.artmal.model.users.User;
 import com.artmal.service.DriverService;
 import com.artmal.service.impl.DriverServiceImpl;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.naming.NamingException;
@@ -16,9 +16,8 @@ import java.sql.SQLException;
  * Utility class for registration.
  * @author Artem Malchenko
  */
+@Log4j
 public final class RegistrationUtils {
-    final static Logger logger = Logger.getLogger(RegistrationUtils.class);
-
     private RegistrationUtils() { }
 
     /**
@@ -39,7 +38,7 @@ public final class RegistrationUtils {
         try {
             driverService.save(driver);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

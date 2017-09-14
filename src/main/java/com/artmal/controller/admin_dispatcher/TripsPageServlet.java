@@ -7,7 +7,7 @@ import com.artmal.model.enums.TripStatus;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.TripService;
 import com.artmal.utils.TripUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -27,9 +27,8 @@ import java.util.Set;
  * Admin and dispatchers can view trips and add new ones.
  * @author Artem Malchenko
  */
+@Log4j
 public class TripsPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(TripsPageServlet.class);
-
     @Autowired
     private TripService tripService;
     @Autowired
@@ -47,7 +46,7 @@ public class TripsPageServlet extends HttpServlet {
             final Set<Trip> tripSet = tripService.findAll();
             req.setAttribute("setOfTrips", tripSet);
         } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripsPage.jsp").forward(req, resp);
@@ -71,7 +70,7 @@ public class TripsPageServlet extends HttpServlet {
                 final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
                 tripService.save(trip);
             } catch (SQLException | NamingException | ParseException e) {
-                logger.error(e);
+                log.error(e);
             }
 
             resp.sendRedirect("/dispatcher-dashboard/trips");
@@ -80,7 +79,7 @@ public class TripsPageServlet extends HttpServlet {
             try {
                 tripService.save(trip);
             } catch (SQLException | NamingException | ParseException e) {
-                logger.error(e);
+                log.error(e);
             }
 
             resp.sendRedirect("/admin-dashboard/trips");

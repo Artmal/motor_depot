@@ -8,7 +8,7 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.CarAddValidator;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -17,9 +17,8 @@ import java.text.ParseException;
 import java.util.Set;
 
 @Service
+@Log4j
 public class CarServiceImpl implements CarService {
-    final static Logger logger = Logger.getLogger(CarServiceImpl.class);
-
     private static CarDao carDao = new CarDaoImpl();
 
     @Override
@@ -31,7 +30,7 @@ public class CarServiceImpl implements CarService {
                 throw new ValidationException(car.getColor());
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         return carDao.save(car);

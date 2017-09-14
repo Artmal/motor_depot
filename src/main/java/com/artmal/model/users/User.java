@@ -1,6 +1,7 @@
 package com.artmal.model.users;
 
 import com.artmal.model.enums.Role;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import java.util.Date;
  * Simple Java Bean for representing {@link Driver} entity.
  * @author Artem Malchenko
  */
-public class User {
+public @Data class User {
     private long id;
     private String email;
     private String password;
@@ -47,44 +48,6 @@ public class User {
         this.password = password;
         this.dateOfRegistration = dateOfRegistration;
         this.regAdminId = regAdminId;
-        this.role = role;
-    }
-
-
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public Date getDateOfRegistration() {
-        return dateOfRegistration;
-    }
-    public void setDateOfRegistration(Date dateOfRegistration) {
-        this.dateOfRegistration = dateOfRegistration;
-    }
-    public long getRegAdminId() {
-        return regAdminId;
-    }
-    public void setRegAdminId(long regAdminId) {
-        this.regAdminId = regAdminId;
-    }
-    public Role getRole() {
-        return role;
-    }
-    public void setRole(Role role) {
         this.role = role;
     }
 }

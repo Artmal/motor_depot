@@ -6,16 +6,15 @@ import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 
 @Service
+@Log4j
 public class UserServiceImpl implements UserService {
-    final static Logger logger = Logger.getLogger(UserServiceImpl.class);
-
     private static UserDao userDao = new UserDaoImpl();
 
     @Override
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
                 throw new ValidationException(user.getEmail());
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         return userDao.save(user);
@@ -43,7 +42,7 @@ public class UserServiceImpl implements UserService {
                 throw new ValidationException(user.getEmail());
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         userDao.updateUser(user);

@@ -3,7 +3,7 @@ package com.artmal.controller.admin_dashboard;
 import com.artmal.model.Car;
 import com.artmal.service.CarService;
 import com.artmal.utils.CarUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -22,9 +22,8 @@ import java.util.Set;
  * Mapped to: /admin-dashboard/cars
  * @author Artem Malchenko
  */
+@Log4j
 public class CarsPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(CarsPageServlet.class);
-
     @Autowired
     private CarService carService;
 
@@ -41,7 +40,7 @@ public class CarsPageServlet extends HttpServlet {
 
             req.setAttribute("setOfCars", carSet);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/carsPage.jsp").forward(req, resp);
@@ -52,7 +51,7 @@ public class CarsPageServlet extends HttpServlet {
         try {
             CarUtils.addNewCarAsAdmin(req);
         } catch (SQLException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         resp.sendRedirect("/admin-dashboard/cars");

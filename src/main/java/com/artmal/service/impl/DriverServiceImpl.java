@@ -6,7 +6,7 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -14,9 +14,8 @@ import java.sql.SQLException;
 import java.util.Set;
 
 @Service
+@Log4j
 public class DriverServiceImpl implements DriverService {
-    final static Logger logger = Logger.getLogger(DriverServiceImpl.class);
-
     private static DriverDao driverDao = new DriverDaoImpl();
 
     @Override
@@ -30,7 +29,7 @@ public class DriverServiceImpl implements DriverService {
                 throw new ValidationException((driver.getPhoneNumber()));
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         return driverDao.save(driver);

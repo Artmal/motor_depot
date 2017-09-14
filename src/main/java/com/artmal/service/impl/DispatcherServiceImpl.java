@@ -7,7 +7,7 @@ import com.artmal.service.DispatcherService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
 import com.artmal.utils.validation.TripValidator;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -15,9 +15,8 @@ import java.sql.SQLException;
 import java.util.Set;
 
 @Service
+@Log4j
 public class DispatcherServiceImpl implements DispatcherService {
-    final static Logger logger = Logger.getLogger(DispatcherServiceImpl.class);
-
     private static DispatcherDao dispatcherDao = new DispatcherDaoImpl();
 
     @Override
@@ -33,7 +32,7 @@ public class DispatcherServiceImpl implements DispatcherService {
                 throw new ValidationException(String.valueOf(dispatcher.getSalaryInDollars()));
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         return dispatcherDao.save(dispatcher);

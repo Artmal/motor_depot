@@ -8,7 +8,7 @@ import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.TripValidator;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -17,9 +17,8 @@ import java.text.ParseException;
 import java.util.Set;
 
 @Service
+@Log4j
 public class TripServiceImpl implements TripService {
-    final static Logger logger = Logger.getLogger(TripServiceImpl.class);
-
     private static TripDao tripDao = new TripDaoImpl();
 
     @Override
@@ -37,7 +36,7 @@ public class TripServiceImpl implements TripService {
                 throw new ValidationException(String.valueOf(trip.getTimeIn()));
             }
         } catch (ValidationException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         return tripDao.save(trip);

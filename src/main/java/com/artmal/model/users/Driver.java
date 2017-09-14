@@ -1,9 +1,11 @@
 package com.artmal.model.users;
 
+import lombok.Data;
+
 /**
  * Simple Java Bean for representing {@link Driver} entity.
  */
-public class Driver {
+public @Data class Driver {
     private long id;
     private String name;
     private String passportSerialNumbers;
@@ -29,43 +31,6 @@ public class Driver {
         this.passportSerialNumbers = passportSerialNumbers;
         this.phoneNumber = phoneNumber;
         this.age = age;
-        this.userInfo = userInfo;
-    }
-
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getPassportSerialNumbers() {
-        return passportSerialNumbers;
-    }
-    public void setPassportSerialNumbers(String passport_serial_numbers) {
-        this.passportSerialNumbers = passport_serial_numbers;
-    }
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    public void setPhoneNumber(String phone_number) {
-        this.phoneNumber = phone_number;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public User getUserInfo() {
-        return userInfo;
-    }
-    public void setUserInfo(User userInfo) {
         this.userInfo = userInfo;
     }
 }

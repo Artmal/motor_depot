@@ -4,7 +4,7 @@ import com.artmal.model.TripRequest;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripRequestService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -23,9 +23,8 @@ import java.util.Set;
  * Driver can notify dispatcher that he discard current trip for whatever reason.
  * @author Artem Malchenko
  */
+@Log4j
 public class DiscardTripRequestServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(DiscardTripRequestServlet.class);
-
     @Autowired
     private TripRequestService tripRequestService;
     @Autowired
@@ -49,7 +48,7 @@ public class DiscardTripRequestServlet extends HttpServlet {
             final Set<TripRequest> tripRequestSet = tripRequestService.findAllByDriverId(driver.getId());
             req.setAttribute("setOfTripRequests", tripRequestSet);
         } catch (NamingException | SQLException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/myRequestsPage.jsp").forward(req, resp);

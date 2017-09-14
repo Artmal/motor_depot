@@ -5,7 +5,7 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
 import com.artmal.utils.CarUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -24,9 +24,8 @@ import java.util.Set;
  * Mapped to: /driver-dashboard/garageServlet
  * @author Artem Malchenko
  */
+@Log4j
 public class GaragePageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(GaragePageServlet.class);
-
     @Autowired
     private DriverService driverService;
     @Autowired
@@ -48,7 +47,7 @@ public class GaragePageServlet extends HttpServlet {
             final Set<Car> carSet = carService.findAllByOwnerId(ownerId);
             req.setAttribute("setOfCars", carSet);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/garagePage.jsp").forward(req, resp);
@@ -59,7 +58,7 @@ public class GaragePageServlet extends HttpServlet {
         try {
             CarUtils.addNewCarAsDriver(req);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         resp.sendRedirect("/driver-dashboard/garage");

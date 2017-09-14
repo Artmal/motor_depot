@@ -4,7 +4,7 @@ import com.artmal.model.Car;
 import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -22,9 +22,8 @@ import java.util.Set;
  * Driver's profile contains garage page which can be viewed by admin.
  * @author Artem Malchenko
  */
+@Log4j
 public class DriverGaragePageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(DriverGaragePageServlet.class);
-
     @Autowired
     private CarService carService;
     @Autowired
@@ -47,7 +46,7 @@ public class DriverGaragePageServlet extends HttpServlet {
             final Driver driver = driverService.findById(driverId);
             req.setAttribute("driver", driver);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/driver_profile/driverGaragePage.jsp")

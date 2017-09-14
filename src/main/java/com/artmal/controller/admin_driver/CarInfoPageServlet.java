@@ -5,7 +5,7 @@ import com.artmal.model.enums.CarCondition;
 import com.artmal.model.enums.CarType;
 import com.artmal.model.enums.Role;
 import com.artmal.service.CarService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -23,9 +23,8 @@ import java.text.ParseException;
  * Admin and drivers can change information about cars.
  * @author Artem Malchenko
  */
+@Log4j
 public class CarInfoPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(CarInfoPageServlet.class);
-
     @Autowired
     private CarService carService;
 
@@ -44,7 +43,7 @@ public class CarInfoPageServlet extends HttpServlet {
 
             req.setAttribute("carInfo", car);
         } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("WEB-INF/views/admin_driver/carInfoPage.jsp").forward(req, resp);
@@ -64,7 +63,7 @@ public class CarInfoPageServlet extends HttpServlet {
         try {
             carService.updateCar(car);
         } catch (NamingException | SQLException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         final Role role = (Role) req.getSession().getAttribute("role");

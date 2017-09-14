@@ -2,7 +2,7 @@ package com.artmal.controller;
 
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -20,9 +20,8 @@ import java.sql.SQLException;
  * Users can change information about their profiles(email and password).
  * @author Artem Malchenko
  */
+@Log4j
 public class MySettingsPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(MySettingsPageServlet.class);
-
     @Autowired
     private UserService userService;
 
@@ -40,7 +39,7 @@ public class MySettingsPageServlet extends HttpServlet {
             req.setAttribute("user", user);
 
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/settingsPage.jsp").forward(req, resp);
@@ -60,7 +59,7 @@ public class MySettingsPageServlet extends HttpServlet {
         try {
             userService.updateUser(user);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getSession().invalidate();

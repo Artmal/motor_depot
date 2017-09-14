@@ -5,7 +5,7 @@ import com.artmal.model.TripRequest;
 import com.artmal.model.enums.TripStatus;
 import com.artmal.service.TripRequestService;
 import com.artmal.service.TripService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -24,9 +24,8 @@ import java.util.Set;
  * Admin and dispatchers can deny a driver's request.
  * @author Artem Malchenko
  */
+@Log4j
 public class TripRequestDenyServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(TripRequestDenyServlet.class);
-
     @Autowired
     private TripService tripService;
     @Autowired
@@ -64,7 +63,7 @@ public class TripRequestDenyServlet extends HttpServlet {
             req.setAttribute("setOfTripRequests", tripRequestSet);
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/tripInfoPage.jsp").forward(req, resp);
         } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

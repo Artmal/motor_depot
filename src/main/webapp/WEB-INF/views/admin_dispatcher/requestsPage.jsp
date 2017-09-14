@@ -101,7 +101,7 @@
 </div>
 
 <script>
-    document.getElementById("trips-nav-link").classList.add("active");
+    document.getElementById("requests-nav-link").classList.add("active");
 </script>
 
 <script>

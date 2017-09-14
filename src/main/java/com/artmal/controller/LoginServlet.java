@@ -3,7 +3,7 @@ package com.artmal.controller;
 import com.artmal.model.enums.Role;
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -23,9 +23,8 @@ import java.util.Locale;
  * Mapped to: /loginServlet
  * @author Artem Malchenko
  */
+@Log4j
 public class LoginServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(LoginServlet.class);
-
     @Autowired
     private UserService userService;
 
@@ -75,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
             }
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.artmal.dao.impl;
 import com.artmal.dao.DriverDao;
 import com.artmal.model.users.Driver;
 import com.artmal.utils.DatabaseUtils;
+import lombok.Cleanup;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -11,146 +12,97 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DriverDaoImpl implements DriverDao {
-    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
 
     @Override
     public Driver findById(final long id) throws SQLException, NamingException {
-        Connection con = null;
+        @Cleanup Connection con = dataSource.getConnection();
 
-        try {
-            con = dataSource.getConnection();
+        @Cleanup PreparedStatement findDriverByIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE id = ?");
+        findDriverByIdStatement.setLong(1, id);
 
-            PreparedStatement findDriverByIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE id = ?");
-            findDriverByIdStatement.setLong(1, id);
-            ResultSet driver = findDriverByIdStatement.executeQuery();
-            driver.next();
+        @Cleanup ResultSet driver = findDriverByIdStatement.executeQuery();
+        driver.next();
+        Driver theDriver = new Driver();
+        theDriver.setId(driver.getInt("id"));
+        theDriver.setName(driver.getString("name"));
+        theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
+        theDriver.setPhoneNumber(driver.getString("phone_number"));
 
-            Driver theDriver = new Driver();
-            theDriver.setId(driver.getInt("id"));
-            theDriver.setName(driver.getString("name"));
-            theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
-            theDriver.setPhoneNumber(driver.getString("phone_number"));
-
-            findDriverByIdStatement.close();
-            driver.close();
-            return theDriver;
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (Exception ignore) {
-            }
-        }
+        return theDriver;
     }
 
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {
-        Connection con = null;
+        @Cleanup Connection con = dataSource.getConnection();
 
-        try {
-            con = dataSource.getConnection();
+        // Insert to users
+        @Cleanup PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
+                " (email, password, date_of_registration, reg_admin_id) VALUES (?, ?, NOW(), ?)");
+        insertUserStatement.setString(1, driver.getUserInfo().getEmail());
+        insertUserStatement.setString(2, driver.getUserInfo().getPassword());
+        insertUserStatement.setLong(3, driver.getUserInfo().getRegAdminId());
+        insertUserStatement.execute();
 
-            // Insert to users
-            PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
-                    " (email, password, date_of_registration, reg_admin_id) VALUES (?, ?, NOW(), ?)");
+        // Insert to user_roles
+        @Cleanup Statement st = con.createStatement();
+        @Cleanup ResultSet rs = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1");
+        rs.next();
+        long idOfLastInsert = rs.getInt("id");
+        @Cleanup PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) "
+                + "VALUES (?, 1)");
+        setRoleForUser.setLong(1, idOfLastInsert);
+        setRoleForUser.execute();
 
-            insertUserStatement.setString(1, driver.getUserInfo().getEmail());
-            insertUserStatement.setString(2, driver.getUserInfo().getPassword());
-            insertUserStatement.setLong(3, driver.getUserInfo().getRegAdminId());
-            insertUserStatement.execute();
+        @Cleanup PreparedStatement insertDriverStatement = con.prepareStatement("INSERT INTO drivers (name, "
+                + "passport_serial_numbers, phone_number, age, user_id) VALUES (?, ?, ?, ?, ?)");
+        insertDriverStatement.setString(1, driver.getName());
+        insertDriverStatement.setString(2, driver.getPassportSerialNumbers());
+        insertDriverStatement.setString(3, driver.getPhoneNumber());
+        insertDriverStatement.setInt(4, driver.getAge());
+        insertDriverStatement.setLong(5, idOfLastInsert);
+        insertDriverStatement.execute();
 
-            // Insert to user_roles
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id FROM users ORDER BY id DESC LIMIT 1");
-            rs.next();
-
-            long idOfLastInsert = rs.getInt("id");
-            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) "
-                    + "VALUES (?, 1)");
-
-            setRoleForUser.setLong(1, idOfLastInsert);
-            setRoleForUser.execute();
-
-            PreparedStatement insertDriverStatement = con.prepareStatement("INSERT INTO drivers (name, "
-                    + "passport_serial_numbers, phone_number, age, user_id) VALUES (?, ?, ?, ?, ?)");
-
-            insertDriverStatement.setString(1, driver.getName());
-            insertDriverStatement.setString(2, driver.getPassportSerialNumbers());
-            insertDriverStatement.setString(3, driver.getPhoneNumber());
-            insertDriverStatement.setInt(4, driver.getAge());
-            insertDriverStatement.setLong(5, idOfLastInsert);
-            insertDriverStatement.execute();
-
-            insertUserStatement.close();
-            st.close();
-            rs.close();
-            return true;
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (Exception ignore) {
-            }
-        }
+        return true;
     }
 
     @Override
     public Driver findByUserId(long id) throws SQLException, NamingException {
-        Connection con = null;
+        @Cleanup Connection con = dataSource.getConnection();
 
-        try {
-            con = dataSource.getConnection();
+        @Cleanup PreparedStatement findDriverByUserIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");
+        findDriverByUserIdStatement.setLong(1, id);
 
-            PreparedStatement findDriverByUserIdStatement = con.prepareStatement("SELECT * FROM drivers WHERE user_id = ?");
-            findDriverByUserIdStatement.setLong(1, id);
-            ResultSet driver = findDriverByUserIdStatement.executeQuery();
-            driver.next();
-
-            Driver theDriver = new Driver();
-            theDriver.setId(driver.getInt("id"));
-            theDriver.setName(driver.getString("name"));
-            theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
-            theDriver.setPhoneNumber(driver.getString("phone_number"));
-            theDriver.setAge(driver.getInt("age"));
-
-            findDriverByUserIdStatement.close();
-            driver.close();
-            return theDriver;
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (Exception ignore) {
-            }
-        }
+        @Cleanup ResultSet driver = findDriverByUserIdStatement.executeQuery();
+        driver.next();
+        Driver theDriver = new Driver();
+        theDriver.setId(driver.getInt("id"));
+        theDriver.setName(driver.getString("name"));
+        theDriver.setPassportSerialNumbers(driver.getString("passport_serial_numbers"));
+        theDriver.setPhoneNumber(driver.getString("phone_number"));
+        theDriver.setAge(driver.getInt("age"));
+        findDriverByUserIdStatement.close();
+        driver.close();
+        return theDriver;
     }
 
     @Override
     public Set<Driver> findAll() throws SQLException, NamingException {
-        Connection con = null;
+        @Cleanup Connection con = dataSource.getConnection();
 
-        try {
-            con = dataSource.getConnection();
+        @Cleanup PreparedStatement findAllDriversStatement = con.prepareStatement("SELECT * FROM drivers ORDER BY id");
+        @Cleanup ResultSet drivers = findAllDriversStatement.executeQuery();
 
-            PreparedStatement findAllDriversStatement = con.prepareStatement("SELECT * FROM drivers ORDER BY id");
-            ResultSet drivers = findAllDriversStatement.executeQuery();
-
-            Set<Driver> driverSet = new HashSet();
-            while(drivers.next()) {
-                Driver driver = new Driver();
-                driver.setId(drivers.getInt("id"));
-                driver.setName(drivers.getString("name"));
-                driver.setPassportSerialNumbers(drivers.getString("passport_serial_numbers"));
-                driver.setPhoneNumber(drivers.getString("phone_number"));
-                driverSet.add(driver);
-            }
-
-            findAllDriversStatement.close();
-            drivers.close();
-
-            return driverSet;
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (Exception ignore) {
-            }
+        Set<Driver> driverSet = new HashSet<>();
+        while(drivers.next()) {
+            Driver driver = new Driver();
+            driver.setId(drivers.getInt("id"));
+            driver.setName(drivers.getString("name"));
+            driver.setPassportSerialNumbers(drivers.getString("passport_serial_numbers"));
+            driver.setPhoneNumber(drivers.getString("phone_number"));
+            driverSet.add(driver);
         }
+
+        return driverSet;
     }
 }

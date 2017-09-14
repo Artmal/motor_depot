@@ -5,7 +5,7 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Driver;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -23,9 +23,8 @@ import java.util.Set;
  * Admin and drivers can delete cars.
  * @author Artem Malchenko
  */
+@Log4j
 public class DeleteCarServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(DeleteCarServlet.class);
-
     @Autowired
     private CarService carService;
     @Autowired
@@ -59,7 +58,7 @@ public class DeleteCarServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/carsPage.jsp").forward(req, resp);
             }
         } catch (NamingException | SQLException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

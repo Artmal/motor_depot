@@ -6,7 +6,7 @@ import com.artmal.model.enums.CarType;
 import com.artmal.service.CarService;
 import com.artmal.service.impl.CarServiceImpl;
 import com.artmal.service.impl.DriverServiceImpl;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +19,8 @@ import java.util.NoSuchElementException;
  * {@link Car} objects.
  * @author Artem Malchenko
  */
+@Log4j
 public final class CarUtils {
-    final static Logger logger = Logger.getLogger(CarUtils.class);
-
     private CarUtils() { }
 
     /**
@@ -161,7 +160,7 @@ public final class CarUtils {
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 
@@ -182,7 +181,7 @@ public final class CarUtils {
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 

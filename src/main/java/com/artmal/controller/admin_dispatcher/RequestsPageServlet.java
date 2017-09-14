@@ -2,7 +2,7 @@ package com.artmal.controller.admin_dispatcher;
 
 import com.artmal.model.TripRequest;
 import com.artmal.service.TripRequestService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -21,9 +21,8 @@ import java.util.Set;
  * Admin and dispatchers can view pending requests.
  * @author Artem Malchenko
  */
+@Log4j
 public class RequestsPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(RequestsPageServlet.class);
-
     @Autowired
     TripRequestService tripRequestService;
 
@@ -41,7 +40,7 @@ public class RequestsPageServlet extends HttpServlet {
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/requestsPage.jsp").forward(req, resp);
         } catch (NamingException | SQLException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

@@ -6,7 +6,7 @@ import com.artmal.model.users.Driver;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -25,9 +25,8 @@ import java.util.Set;
  * Users can view each others profiles.
  * @author Artem Malchenko
  */
+@Log4j
 public class ProfilesViewServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(ProfilesViewServlet.class);
-
     @Autowired
     private TripService tripService;
     @Autowired
@@ -55,7 +54,7 @@ public class ProfilesViewServlet extends HttpServlet {
                 final Set<Trip> tripSet = tripService.findAllByDriverId(driverInfo.getId());
                 req.setAttribute("setOfTrips", tripSet);
             } catch (SQLException | NamingException | ParseException e) {
-                logger.error(e);
+                log.error(e);
             }
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/driver_profile/driverProfile.jsp")
@@ -71,7 +70,7 @@ public class ProfilesViewServlet extends HttpServlet {
                 req.setAttribute("setOfCreatedTrips", tripSet);
 
             } catch (SQLException | NamingException | ParseException e) {
-                logger.error(e);
+                log.error(e);
             }
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/dispatcher_profile/dispatcherProfile.jsp")

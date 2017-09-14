@@ -8,7 +8,7 @@ import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripRequestService;
 import com.artmal.service.TripService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -28,9 +28,8 @@ import java.util.Set;
  * Mapped to: /driver-dashboard/trip
  * @author Artem Malchenko
  */
+@Log4j
 public class TripInfoPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(TripInfoPageServlet.class);
-
     @Autowired
     private TripRequestService tripRequestService;
     @Autowired
@@ -63,7 +62,7 @@ public class TripInfoPageServlet extends HttpServlet {
             final Set<Car> suitableCarSet = carService.findSuitableForTripDriverCars(driver, trip);
             req.setAttribute("setOfSuitableCars", suitableCarSet);
         } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/tripInfoPage.jsp").forward(req, resp);
@@ -84,7 +83,7 @@ public class TripInfoPageServlet extends HttpServlet {
 
             resp.sendRedirect("/driver-dashboard/trip?trip-id=" + trip.getId());
         } catch (SQLException | NamingException | ParseException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

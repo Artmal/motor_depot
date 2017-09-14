@@ -4,7 +4,7 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.model.users.User;
 import com.artmal.service.DispatcherService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -24,9 +24,8 @@ import java.util.Set;
  * Mapped to: /admin-dashboard/dispatcherServlet
  * @author Artem Malchenko
  */
+@Log4j
 public class DispatchersPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(DispatchersPageServlet.class);
-
     @Autowired
     private DispatcherService dispatcherService;
 
@@ -44,7 +43,7 @@ public class DispatchersPageServlet extends HttpServlet {
 
             req.setAttribute("setOfDispatchers", dispatcherSet);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/dispatchersPage.jsp").forward(req, resp);
@@ -65,7 +64,7 @@ public class DispatchersPageServlet extends HttpServlet {
         try {
             dispatcherService.save(dispatcher);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         resp.sendRedirect("/admin-dashboard/dispatchers");

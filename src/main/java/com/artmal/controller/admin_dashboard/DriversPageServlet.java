@@ -3,7 +3,7 @@ package com.artmal.controller.admin_dashboard;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.utils.RegistrationUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -22,9 +22,8 @@ import java.util.Set;
  * Mapped to: /admin-dashboard/drivers
  * @author Artem Malchenko
  */
+@Log4j
 public class DriversPageServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(DriversPageServlet.class);
-
     @Autowired
     private DriverService driverService;
 
@@ -40,7 +39,7 @@ public class DriversPageServlet extends HttpServlet {
             final Set<Driver> driverSet = driverService.findAll();
             req.setAttribute("setOfDrivers", driverSet);
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            log.error(e);
         }
 
         req.getRequestDispatcher("/WEB-INF/views/admin_dashboard/driversPage.jsp").forward(req, resp);
