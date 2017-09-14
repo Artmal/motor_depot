@@ -26,7 +26,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class TripRequestAcceptServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(TripRequestAcceptServlet.class);
+    static final Logger logger = Logger.getLogger(TripRequestAcceptServlet.class);
 
     @Autowired
     private TripRequestService tripRequestService;

@@ -24,7 +24,7 @@ import java.text.ParseException;
  * @author Artem Malchenko
  */
 public class CarInfoPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(CarInfoPageServlet.class);
+    static final Logger logger = Logger.getLogger(CarInfoPageServlet.class);
 
     @Autowired
     private CarService carService;
@@ -69,9 +69,9 @@ public class CarInfoPageServlet extends HttpServlet {
 
         final Role role = (Role) req.getSession().getAttribute("role");
 
-        if(role.equals(Role.Driver)) {
+        if (role.equals(Role.Driver)) {
             resp.sendRedirect("/driver-dashboard/garage");
-        } else if(role.equals(Role.Admin)) {
+        } else if (role.equals(Role.Admin)) {
             resp.sendRedirect("/admin-dashboard/cars");
         }
     }

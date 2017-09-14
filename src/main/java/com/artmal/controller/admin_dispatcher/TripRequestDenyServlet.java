@@ -25,7 +25,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class TripRequestDenyServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(TripRequestDenyServlet.class);
+    static final Logger logger = Logger.getLogger(TripRequestDenyServlet.class);
 
     @Autowired
     private TripService tripService;
@@ -49,9 +49,9 @@ public class TripRequestDenyServlet extends HttpServlet {
             final TripStatus tripStatus = trip.getTripStatus();
 
 
-            if(tripStatus.equals(TripStatus.Open)) {
+            if (tripStatus.equals(TripStatus.Open)) {
                 tripRequestService.deleteById(tripRequestId);
-            } else if(tripStatus.equals(TripStatus.In_progress)) {
+            } else if (tripStatus.equals(TripStatus.In_progress)) {
                 tripService.nullifyResponsibleCarColumn(trip);
                 tripService.setTripStatus(trip, TripStatus.Open);
                 tripRequestService.deleteById(tripRequestId);

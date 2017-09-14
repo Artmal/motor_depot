@@ -21,7 +21,7 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 public class MySettingsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(MySettingsPageServlet.class);
+    static final Logger logger = Logger.getLogger(MySettingsPageServlet.class);
 
     @Autowired
     private UserService userService;

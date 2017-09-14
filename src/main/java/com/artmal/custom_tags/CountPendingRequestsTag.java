@@ -16,9 +16,9 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 public class CountPendingRequestsTag extends SimpleTagSupport {
-    final static Logger logger = Logger.getLogger(CountPendingRequestsTag.class);
+    static final Logger logger = Logger.getLogger(CountPendingRequestsTag.class);
 
-    final private TripRequestService tripRequestService = new TripRequestServiceImpl();
+    private final TripRequestService tripRequestService = new TripRequestServiceImpl();
 
     @Override
     public void doTag() throws JspException, IOException {

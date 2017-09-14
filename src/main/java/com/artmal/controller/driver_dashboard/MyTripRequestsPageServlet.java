@@ -26,7 +26,7 @@ import java.util.Set;
  */
 
 public class MyTripRequestsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(MyTripRequestsPageServlet.class);
+    static final Logger logger = Logger.getLogger(MyTripRequestsPageServlet.class);
 
     @Autowired
     private DriverService driverService;

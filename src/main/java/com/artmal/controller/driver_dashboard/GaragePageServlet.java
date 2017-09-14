@@ -25,7 +25,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class GaragePageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(GaragePageServlet.class);
+    static final Logger logger = Logger.getLogger(GaragePageServlet.class);
 
     @Autowired
     private DriverService driverService;

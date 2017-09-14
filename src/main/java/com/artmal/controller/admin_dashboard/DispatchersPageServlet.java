@@ -25,7 +25,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class DispatchersPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(DispatchersPageServlet.class);
+    static final Logger logger = Logger.getLogger(DispatchersPageServlet.class);
 
     @Autowired
     private DispatcherService dispatcherService;

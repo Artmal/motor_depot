@@ -24,7 +24,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class DeleteCarServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(DeleteCarServlet.class);
+    static final Logger logger = Logger.getLogger(DeleteCarServlet.class);
 
     @Autowired
     private CarService carService;
@@ -44,7 +44,7 @@ public class DeleteCarServlet extends HttpServlet {
             carService.deleteById(carId);
 
             final Role role = (Role) req.getSession().getAttribute("role");
-            if(role.equals(Role.Driver)) {
+            if (role.equals(Role.Driver)) {
                 final Driver loggedDriver = driverService.findByUserId((Long) req.getSession().getAttribute("id"));
                 final long ownerId = loggedDriver.getId();
 
@@ -52,7 +52,7 @@ public class DeleteCarServlet extends HttpServlet {
                 req.setAttribute("setOfCars", carSet);
 
                 req.getRequestDispatcher("/WEB-INF/views/driver_dashboard/garagePage.jsp").forward(req, resp);
-            } else if(role.equals(Role.Admin)) {
+            } else if (role.equals(Role.Admin)) {
                 final Set<Car> carSetForAdmin = carService.findAll();
                 req.setAttribute("setOfCars", carSetForAdmin);
 

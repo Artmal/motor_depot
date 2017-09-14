@@ -2,6 +2,11 @@ package com.artmal.utils;
 
 import com.artmal.model.enums.Role;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 /**
  * All utility methods for working with db.
  * @author Artem Malchenko
@@ -23,6 +28,18 @@ public final class DatabaseUtils {
                 return Role.Dispatcher;
             case 3:
                 return Role.Admin;
+        }
+
+        return null;
+    }
+
+    public static DataSource initializeDataSource() {
+        try {
+            Context ctx = new InitialContext();
+            Context envContext = (Context) ctx.lookup("java:comp/env");
+            return (DataSource) envContext.lookup("jdbc/TestDB");
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
 
         return null;

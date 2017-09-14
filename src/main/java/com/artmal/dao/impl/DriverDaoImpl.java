@@ -2,9 +2,8 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.DriverDao;
 import com.artmal.model.users.Driver;
+import com.artmal.utils.DatabaseUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -12,11 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DriverDaoImpl implements DriverDao {
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
-    public Driver findById(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+    public Driver findById(final long id) throws SQLException, NamingException {
         Connection con = null;
 
         try {
@@ -46,9 +44,6 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -69,14 +64,14 @@ public class DriverDaoImpl implements DriverDao {
             rs.next();
 
             long idOfLastInsert = rs.getInt("id");
-            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) " +
-                    "VALUES (?, 1)");
+            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) "
+                    + "VALUES (?, 1)");
 
             setRoleForUser.setLong(1, idOfLastInsert);
             setRoleForUser.execute();
 
-            PreparedStatement insertDriverStatement = con.prepareStatement("INSERT INTO drivers (name, " +
-                    "passport_serial_numbers, phone_number, age, user_id) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement insertDriverStatement = con.prepareStatement("INSERT INTO drivers (name, "
+                    + "passport_serial_numbers, phone_number, age, user_id) VALUES (?, ?, ?, ?, ?)");
 
             insertDriverStatement.setString(1, driver.getName());
             insertDriverStatement.setString(2, driver.getPassportSerialNumbers());
@@ -99,9 +94,6 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver findByUserId(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -132,9 +124,6 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Set<Driver> findAll() throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {

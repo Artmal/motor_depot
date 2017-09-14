@@ -28,7 +28,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class TripsPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(TripsPageServlet.class);
+    static final Logger logger = Logger.getLogger(TripsPageServlet.class);
 
     @Autowired
     private TripService tripService;
@@ -64,7 +64,7 @@ public class TripsPageServlet extends HttpServlet {
         final int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
 
         final Role role = (Role) req.getSession().getAttribute("role");
-        if(role.equals(Role.Dispatcher)) {
+        if (role.equals(Role.Dispatcher)) {
             try {
                 final long dispatcherId = dispatcherService.findByUserId((long) req.getSession().getAttribute("id")).getId();
 
@@ -75,7 +75,7 @@ public class TripsPageServlet extends HttpServlet {
             }
 
             resp.sendRedirect("/dispatcher-dashboard/trips");
-        } else if(role.equals(Role.Admin)) {
+        } else if (role.equals(Role.Admin)) {
             final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
             try {
                 tripService.save(trip);

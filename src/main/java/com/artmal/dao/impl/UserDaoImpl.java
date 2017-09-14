@@ -6,19 +6,15 @@ import com.artmal.service.UserService;
 import com.artmal.service.impl.UserServiceImpl;
 import com.artmal.utils.DatabaseUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDaoImpl implements UserDao {
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
         try {
             con = dataSource.getConnection();
@@ -56,9 +52,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int save(User user) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -96,9 +89,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {

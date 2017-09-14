@@ -9,9 +9,8 @@ import com.artmal.service.TripService;
 import com.artmal.service.impl.TripRequestServiceImpl;
 import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.CarUtils;
+import com.artmal.utils.DatabaseUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -26,11 +25,10 @@ public class CarDaoImpl implements CarDao {
     private TripRequestService tripRequestService = new TripRequestServiceImpl();
     private TripService tripService = new TripServiceImpl();
 
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
-    public boolean save(Car car) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
+    public boolean save(final Car car) throws SQLException, NamingException {
         Connection con = null;
 
         try {
@@ -61,9 +59,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Car findById(long id) throws SQLException, NamingException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -89,9 +84,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Set<Car> findAllByOwnerId(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -120,10 +112,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Set<Car> findAll() throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -151,10 +139,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Set<Car> findSuitableForTripDriverCars(Driver driver, Trip trip) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -185,10 +169,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void updateCar(Car car) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -217,10 +197,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void deleteById(long id) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(DataSource)envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -235,10 +211,12 @@ public class CarDaoImpl implements CarDao {
 
             deleteCarById.close();
         } finally {
-            if (con != null) try {
-                con.close();
+            if (con != null) {
+                try {
+                    con.close();
             } catch (Exception ignore) {
             }
+        }
         }
     }
 }

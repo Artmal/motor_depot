@@ -2,9 +2,8 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.DispatcherDao;
 import com.artmal.model.users.Dispatcher;
+import com.artmal.utils.DatabaseUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -12,19 +11,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DispatcherDaoImpl implements DispatcherDao {
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
     public boolean save(Dispatcher dispatcher) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
             con = dataSource.getConnection();
 
             // Insert to users
-            PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users" +
-                    " (email, password, date_of_registration, reg_admin_id) VALUES (?, ?, NOW(), ?)");
+            PreparedStatement insertUserStatement = con.prepareStatement("INSERT INTO users"
+                    + " (email, password, date_of_registration, reg_admin_id) VALUES (?, ?, NOW(), ?)");
 
             insertUserStatement.setString(1, dispatcher.getUserInfo().getEmail());
             insertUserStatement.setString(2, dispatcher.getUserInfo().getPassword());
@@ -37,14 +35,14 @@ public class DispatcherDaoImpl implements DispatcherDao {
             rs.next();
 
             long idOfLastInsert = rs.getInt("id");
-            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) " +
-                    "VALUES (?, 2)");
+            PreparedStatement setRoleForUser = con.prepareStatement("INSERT INTO user_roles (user_id, role_id) "
+                    + "VALUES (?, 2)");
 
             setRoleForUser.setLong(1, idOfLastInsert);
             setRoleForUser.execute();
 
-            PreparedStatement insertDispatcherStatement = con.prepareStatement("INSERT INTO dispatchers (name, " +
-                    "passport_serial_numbers, phone_number, salary_in_dollars, user_id) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement insertDispatcherStatement = con.prepareStatement("INSERT INTO dispatchers (name, "
+                    + "passport_serial_numbers, phone_number, salary_in_dollars, user_id) VALUES (?, ?, ?, ?, ?)");
 
             insertDispatcherStatement.setString(1, dispatcher.getName());
             insertDispatcherStatement.setString(2, dispatcher.getPassportSerialNumbers());
@@ -67,9 +65,6 @@ public class DispatcherDaoImpl implements DispatcherDao {
 
     @Override
     public Dispatcher findByUserId(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -100,9 +95,6 @@ public class DispatcherDaoImpl implements DispatcherDao {
 
     @Override
     public Dispatcher findById(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -133,9 +125,6 @@ public class DispatcherDaoImpl implements DispatcherDao {
 
     @Override
     public Set<Dispatcher> findAll() throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {

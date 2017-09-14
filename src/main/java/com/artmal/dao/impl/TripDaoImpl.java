@@ -5,10 +5,9 @@ import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.enums.TripStatus;
 import com.artmal.utils.CarUtils;
+import com.artmal.utils.DatabaseUtils;
 import com.artmal.utils.TripUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -17,11 +16,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TripDaoImpl implements TripDao {
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
     public boolean save(Trip trip) throws SQLException, NamingException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -57,9 +55,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public Trip findById(long id) throws SQLException, NamingException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (javax.sql.DataSource) envContext.lookup("jdbc/TestDB");
         Connection con = null;
 
         try {
@@ -97,10 +92,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public Set<Trip> findAll() throws NamingException, SQLException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -128,10 +119,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -161,10 +148,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -193,10 +176,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -222,10 +201,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -246,10 +221,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {
@@ -270,10 +241,6 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public void deleteByCarId(long id) throws NamingException, SQLException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
-
         Connection con = null;
 
         try {

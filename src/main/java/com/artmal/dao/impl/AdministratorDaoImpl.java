@@ -2,9 +2,8 @@ package com.artmal.dao.impl;
 
 import com.artmal.dao.AdministratorDao;
 import com.artmal.model.users.Administrator;
+import com.artmal.utils.DatabaseUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -13,11 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdministratorDaoImpl implements AdministratorDao {
+    private DataSource dataSource = DatabaseUtils.initializeDataSource();
+
     @Override
-    public Administrator findByUserId(long id) throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        Context envContext = (Context) ctx.lookup("java:comp/env");
-        DataSource dataSource =(javax.sql.DataSource)envContext.lookup("jdbc/TestDB");
+    public Administrator findByUserId(final long id) throws SQLException, NamingException {
         Connection con = null;
 
         try {

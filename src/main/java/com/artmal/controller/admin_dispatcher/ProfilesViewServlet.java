@@ -26,7 +26,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class ProfilesViewServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(ProfilesViewServlet.class);
+    static final Logger logger = Logger.getLogger(ProfilesViewServlet.class);
 
     @Autowired
     private TripService tripService;
@@ -45,7 +45,7 @@ public class ProfilesViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String url = String.valueOf(req.getRequestURL());
 
-        if(url.contains("drivers")) {
+        if (url.contains("drivers")) {
             final long driverId = Long.parseLong(req.getParameter("id"));
 
             try {
@@ -60,7 +60,7 @@ public class ProfilesViewServlet extends HttpServlet {
 
             req.getRequestDispatcher("/WEB-INF/views/admin_dispatcher/driver_profile/driverProfile.jsp")
                     .forward(req, resp);
-        } else if(url.contains("dispatchers")) {
+        } else if (url.contains("dispatchers")) {
             final long dispatcherId = Long.parseLong(req.getParameter("id"));
 
             try {

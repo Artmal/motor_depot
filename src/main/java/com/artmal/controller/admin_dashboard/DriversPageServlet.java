@@ -23,7 +23,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public class DriversPageServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(DriversPageServlet.class);
+    static final Logger logger = Logger.getLogger(DriversPageServlet.class);
 
     @Autowired
     private DriverService driverService;
