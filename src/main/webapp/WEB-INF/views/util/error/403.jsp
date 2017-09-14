@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18n.errorPages.errorPage403" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>403 Forbidden</title>
+    <title><fmt:message key="errorPage403.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
@@ -26,9 +30,19 @@
     <div class="row">
         <div class="span12">
             <div class="jumbotron center">
-                <h1>Forbidden <small><font face="Tahoma" color="red">Error 403</font></small></h1>
+                <h1>
+                    <fmt:message key="errorPage403.forbidden"/>
+                    <small>
+                        <font face="Tahoma" color="red">
+                            <fmt:message key="errorPage403.errorCode"/>
+                        </font>
+                    </small>
+                </h1>
                 <br />
-                <p>You can't view page your request because your're not having rights for this. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from.</p>
+                <p>
+                    <fmt:message key="errorPage403.message"/>
+                    <fmt:message key="errorPage403.instructions"/>
+                </p>
             </div>
             <p></p>
         </div>
