@@ -1,12 +1,12 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.UserDao;
-import com.artmal.dao.impl.UserDaoImpl;
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -15,7 +15,8 @@ import java.sql.SQLException;
 @Service
 @Log4j
 public class UserServiceImpl implements UserService {
-    private static UserDao userDao = new UserDaoImpl();
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {

@@ -6,13 +6,15 @@ import com.artmal.service.UserService;
 import com.artmal.service.impl.UserServiceImpl;
 import com.artmal.utils.DatabaseUtils;
 import lombok.Cleanup;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 
+@Repository
 public class UserDaoImpl implements UserDao {
-    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
 
     @Override
     public User findByEmail(String email) throws SQLException, NamingException {

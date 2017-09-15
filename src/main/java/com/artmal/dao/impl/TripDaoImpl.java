@@ -8,6 +8,7 @@ import com.artmal.utils.CarUtils;
 import com.artmal.utils.DatabaseUtils;
 import com.artmal.utils.TripUtils;
 import lombok.Cleanup;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -16,8 +17,9 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class TripDaoImpl implements TripDao {
-    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
 
     @Override
     public boolean save(Trip trip) throws SQLException, NamingException, ParseException {

@@ -1,12 +1,12 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.DriverDao;
-import com.artmal.dao.impl.DriverDaoImpl;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -16,7 +16,8 @@ import java.util.Set;
 @Service
 @Log4j
 public class DriverServiceImpl implements DriverService {
-    private static DriverDao driverDao = new DriverDaoImpl();
+    @Autowired
+    private DriverDao driverDao;
 
     @Override
     public boolean save(Driver driver) throws SQLException, NamingException {

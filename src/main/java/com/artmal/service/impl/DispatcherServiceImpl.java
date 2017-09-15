@@ -1,13 +1,13 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.DispatcherDao;
-import com.artmal.dao.impl.DispatcherDaoImpl;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.service.DispatcherService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.RegistrationValidator;
 import com.artmal.utils.validation.TripValidator;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -17,7 +17,8 @@ import java.util.Set;
 @Service
 @Log4j
 public class DispatcherServiceImpl implements DispatcherService {
-    private static DispatcherDao dispatcherDao = new DispatcherDaoImpl();
+    @Autowired
+    private DispatcherDao dispatcherDao;
 
     @Override
     public boolean save(Dispatcher dispatcher) throws SQLException, NamingException {

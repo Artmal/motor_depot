@@ -1,7 +1,6 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.CarDao;
-import com.artmal.dao.impl.CarDaoImpl;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
@@ -9,6 +8,7 @@ import com.artmal.service.CarService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.CarAddValidator;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -19,7 +19,8 @@ import java.util.Set;
 @Service
 @Log4j
 public class CarServiceImpl implements CarService {
-    private static CarDao carDao = new CarDaoImpl();
+    @Autowired
+    private CarDao carDao;
 
     @Override
     public boolean save(Car car) throws SQLException, NamingException {
@@ -32,6 +33,7 @@ public class CarServiceImpl implements CarService {
         } catch (ValidationException e) {
             log.error(e);
         }
+
 
         return carDao.save(car);
     }

@@ -5,6 +5,8 @@ import com.artmal.model.TripRequest;
 import com.artmal.utils.DatabaseUtils;
 import com.artmal.utils.TripRequestUtils;
 import lombok.Cleanup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -13,8 +15,13 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class TripRequestDaoImpl implements TripRequestDao {
-    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
+
+
+    @Autowired
+    private TripRequestUtils tripRequestUtils;
 
     @Override
     public Set<TripRequest> findAllByTripId(long id) throws SQLException, NamingException, ParseException {
@@ -26,7 +33,7 @@ public class TripRequestDaoImpl implements TripRequestDao {
         @Cleanup ResultSet tripRequests = findAllTripRequestsByTripId.executeQuery();
         Set<TripRequest> tripRequestSet = new HashSet<>();
         while(tripRequests.next()) {
-            TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
+            TripRequest tripRequest = tripRequestUtils.initializeTripRequest(tripRequests);
             tripRequestSet.add(tripRequest);
         }
 
@@ -43,8 +50,9 @@ public class TripRequestDaoImpl implements TripRequestDao {
 
         @Cleanup ResultSet tripRequests = findAllTripRequestsByDriverId.executeQuery();
         Set<TripRequest> tripRequestSet = new HashSet<>();
+
         while(tripRequests.next()) {
-            TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
+            TripRequest tripRequest = tripRequestUtils.initializeTripRequest(tripRequests);
             tripRequestSet.add(tripRequest);
         }
 
@@ -59,8 +67,9 @@ public class TripRequestDaoImpl implements TripRequestDao {
                 prepareStatement("SELECT * FROM trip_requests WHERE date_of_confirmation IS NULL ");
         @Cleanup ResultSet tripRequests = findAllPendingTripRequests.executeQuery();
         Set<TripRequest> tripRequestSet = new HashSet<>();
+
         while(tripRequests.next()) {
-            TripRequest tripRequest = TripRequestUtils.initializeTripRequest(tripRequests);
+            TripRequest tripRequest = tripRequestUtils.initializeTripRequest(tripRequests);
             tripRequestSet.add(tripRequest);
         }
 
@@ -122,6 +131,7 @@ public class TripRequestDaoImpl implements TripRequestDao {
 
         @Cleanup ResultSet tripRequest = findTripRequestById.executeQuery();
         tripRequest.next();
-        return TripRequestUtils.initializeTripRequest(tripRequest);
+
+        return tripRequestUtils.initializeTripRequest(tripRequest);
     }
 }

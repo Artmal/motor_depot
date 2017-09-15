@@ -6,11 +6,11 @@ import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
 import com.artmal.service.TripRequestService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.TripRequestServiceImpl;
-import com.artmal.service.impl.TripServiceImpl;
 import com.artmal.utils.CarUtils;
 import com.artmal.utils.DatabaseUtils;
 import lombok.Cleanup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -22,11 +22,14 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class CarDaoImpl implements CarDao {
-    private TripRequestService tripRequestService = new TripRequestServiceImpl();
-    private TripService tripService = new TripServiceImpl();
+    @Autowired
+    private TripRequestService tripRequestService;
+    @Autowired
+    private TripService tripService;
 
-    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
 
     @Override
     public boolean save(final Car car) throws SQLException, NamingException {

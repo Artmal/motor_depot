@@ -3,8 +3,8 @@ package com.artmal.utils;
 import com.artmal.model.TripRequest;
 import com.artmal.service.CarService;
 import com.artmal.service.TripService;
-import com.artmal.service.impl.CarServiceImpl;
-import com.artmal.service.impl.TripServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.naming.NamingException;
 import java.sql.ResultSet;
@@ -16,17 +16,20 @@ import java.text.ParseException;
  * {@link TripRequest} objects.
  * @author Artem Malchenko
  */
-public final class TripRequestUtils {
-    private static TripService tripService = new TripServiceImpl();
-    private static CarService carService = new CarServiceImpl();
+@Component
+public class TripRequestUtils {
+    @Autowired
+    private TripService tripService;
+    @Autowired
+    private CarService carService;
 
-    private TripRequestUtils() { }
+    public TripRequestUtils() { }
 
     /**
      * @param tripRequests take result set. In loop we always will get different objects from db.
      * @return constructed {@link TripRequest}.
      */
-    public static TripRequest initializeTripRequest(ResultSet tripRequests) throws SQLException, ParseException, NamingException {
+    public TripRequest initializeTripRequest(ResultSet tripRequests) throws SQLException, ParseException, NamingException {
         final TripRequest tripRequest = new TripRequest();
         tripRequest.setId(tripRequests.getLong("id"));
         tripRequest.setTripInfo(tripService.findById(tripRequests.getLong("trip_id")));

@@ -4,6 +4,7 @@ import com.artmal.dao.DriverDao;
 import com.artmal.model.users.Driver;
 import com.artmal.utils.DatabaseUtils;
 import lombok.Cleanup;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -11,8 +12,9 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class DriverDaoImpl implements DriverDao {
-    private final DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
 
     @Override
     public Driver findById(final long id) throws SQLException, NamingException {

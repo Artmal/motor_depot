@@ -1,9 +1,9 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.TripRequestDao;
-import com.artmal.dao.impl.TripRequestDaoImpl;
 import com.artmal.model.TripRequest;
 import com.artmal.service.TripRequestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -13,7 +13,8 @@ import java.util.Set;
 
 @Service
 public class TripRequestServiceImpl implements TripRequestService {
-    private static TripRequestDao tripRequestDao = new TripRequestDaoImpl();
+    @Autowired
+    private TripRequestDao tripRequestDao;
 
     @Override
     public void save(TripRequest tripRequest) throws SQLException, NamingException {

@@ -1,6 +1,8 @@
 package com.artmal.utils;
 
 import com.artmal.model.enums.Role;
+import lombok.extern.log4j.Log4j;
+import org.springframework.stereotype.Component;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,7 +13,11 @@ import javax.sql.DataSource;
  * All utility methods for working with db.
  * @author Artem Malchenko
  */
+@Component
+@Log4j
 public final class DatabaseUtils {
+    public static DataSource dataSource;
+
     private DatabaseUtils() { }
 
 
@@ -34,12 +40,17 @@ public final class DatabaseUtils {
     }
 
     public static DataSource initializeDataSource() {
-        try {
-            Context ctx = new InitialContext();
-            Context envContext = (Context) ctx.lookup("java:comp/env");
-            return (DataSource) envContext.lookup("jdbc/TestDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
+        if(dataSource == null) {
+            try {
+                Context ctx = new InitialContext();
+                Context envContext = (Context) ctx.lookup("java:comp/env");
+                dataSource = (DataSource) envContext.lookup("jdbc/TestDB");
+                return dataSource;
+            } catch (NamingException e) {
+                log.error(e);
+            }
+        } else {
+            return dataSource;
         }
 
         return null;

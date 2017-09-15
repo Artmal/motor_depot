@@ -1,5 +1,6 @@
 package com.artmal.listener;
 
+import com.artmal.utils.DatabaseUtils;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContextEvent;
@@ -21,6 +22,7 @@ public class Listener implements ServletContextListener,
     }
 
     public void contextInitialized(ServletContextEvent sce) {
+        DatabaseUtils.initializeDataSource();
         log.info("Servlet context initialized.");
     }
 

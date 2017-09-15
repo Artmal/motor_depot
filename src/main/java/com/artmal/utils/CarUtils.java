@@ -7,6 +7,7 @@ import com.artmal.service.CarService;
 import com.artmal.service.impl.CarServiceImpl;
 import com.artmal.service.impl.DriverServiceImpl;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,9 @@ import java.util.NoSuchElementException;
 @Log4j
 public final class CarUtils {
     private CarUtils() { }
+
+    @Autowired
+    private CarService carService;
 
     /**
      * In database there is the dictionary called car_types(id, name), so we
@@ -156,6 +160,8 @@ public final class CarUtils {
         final long ownerId = new DriverServiceImpl().findByUserId((Long) req.getSession().getAttribute("id")).getId();
 
         final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
+
+
         final CarService carService = new CarServiceImpl();
         try {
             carService.save(car);

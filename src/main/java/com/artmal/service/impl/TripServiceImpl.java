@@ -1,7 +1,6 @@
 package com.artmal.service.impl;
 
 import com.artmal.dao.TripDao;
-import com.artmal.dao.impl.TripDaoImpl;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.enums.TripStatus;
@@ -9,6 +8,7 @@ import com.artmal.service.TripService;
 import com.artmal.utils.ValidationException;
 import com.artmal.utils.validation.TripValidator;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.NamingException;
@@ -19,7 +19,8 @@ import java.util.Set;
 @Service
 @Log4j
 public class TripServiceImpl implements TripService {
-    private static TripDao tripDao = new TripDaoImpl();
+    @Autowired
+    private TripDao tripDao;
 
     @Override
     public boolean save(Trip trip) throws SQLException, NamingException, ParseException {

@@ -1,5 +1,3 @@
-<%@ taglib prefix="mytags" uri="http://www.artmal.com/tags"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${language}" />
@@ -13,9 +11,7 @@
         <li class="nav-item">
             <a id="requests-nav-link" class="nav-link" href="/dispatcher-dashboard/requests">
                 <fmt:message key="dispatcherSidebar.requests"/>
-                <span class="badge badge-pill badge-default">
-                    <mytags:countPendingRequests />
-                </span>
+                <span class="badge badge-pill badge-default"></span>
             </a>
         </li>
     </ul>

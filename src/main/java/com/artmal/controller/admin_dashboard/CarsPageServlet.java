@@ -40,6 +40,7 @@ public class CarsPageServlet extends HttpServlet {
 
             req.setAttribute("setOfCars", carSet);
         } catch (SQLException | NamingException e) {
+            e.printStackTrace();
             log.error(e);
         }
 

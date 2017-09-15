@@ -81,7 +81,7 @@
                         <td>${car.model}</td>
                         <td>${car.numberOfSeats}</td>
                         <td>${car.color}</td>
-                        <td><a href="${contextPath}/admin-dashboard/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>
+                        <td><a href="${contextPath}/drivers/profile?id=${car.ownerId}">${car.ownerId}</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

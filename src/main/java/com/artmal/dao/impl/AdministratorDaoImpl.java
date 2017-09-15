@@ -4,6 +4,7 @@ import com.artmal.dao.AdministratorDao;
 import com.artmal.model.users.Administrator;
 import com.artmal.utils.DatabaseUtils;
 import lombok.Cleanup;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -12,8 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class AdministratorDaoImpl implements AdministratorDao {
-    final private DataSource dataSource = DatabaseUtils.initializeDataSource();
+    final private DataSource dataSource = DatabaseUtils.dataSource;
 
     @Override
     public Administrator findByUserId(final long id) throws SQLException, NamingException {
