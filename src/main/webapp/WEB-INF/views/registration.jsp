@@ -93,6 +93,7 @@
                     <br>
 
                     <div class="g-recaptcha" data-sitekey="6LdZljAUAAAAADRyMrkM6xlEa_rsj5YtFiLYF0x0"></div>
+                    <p class="text-danger">${error}</p>
 
                     <br>
                     <div class="form-group">

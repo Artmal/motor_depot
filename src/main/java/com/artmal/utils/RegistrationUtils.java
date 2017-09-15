@@ -4,12 +4,16 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Driver;
 import com.artmal.model.users.User;
 import com.artmal.service.DriverService;
-import com.artmal.service.impl.DriverServiceImpl;
 import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.naming.NamingException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -17,13 +21,17 @@ import java.sql.SQLException;
  * @author Artem Malchenko
  */
 @Log4j
+@Component
 public final class RegistrationUtils {
+    @Autowired
+    private DriverService driverService;
+
     private RegistrationUtils() { }
 
     /**
      * Separate method for more clear code in servlet part.
      */
-    public static void registerNewDriver(HttpServletRequest req) {
+    public void registerNewDriver(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
         final String fullName = req.getParameter("name");
@@ -34,7 +42,17 @@ public final class RegistrationUtils {
         final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         final User userInfo = new User(email, hashedPassword, Role.Driver);
         final Driver driver = new Driver(fullName, passportSerialNumbers, phoneNumber, age, userInfo);
-        final DriverService driverService = new DriverServiceImpl();
+
+        String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+        System.out.println(gRecaptchaResponse);
+
+        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+
+        if(!verify) {
+            req.setAttribute("error", "How about captcha bruh?");
+            req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
+        }
+
         try {
             driverService.save(driver);
         } catch (SQLException | NamingException e) {

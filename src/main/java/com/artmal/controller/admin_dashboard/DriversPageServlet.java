@@ -5,6 +5,7 @@ import com.artmal.service.DriverService;
 import com.artmal.utils.RegistrationUtils;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.naming.NamingException;
@@ -23,9 +24,13 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 @Log4j
+@Component
 public class DriversPageServlet extends HttpServlet {
     @Autowired
     private DriverService driverService;
+
+    @Autowired
+    private RegistrationUtils registrationUtils;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -47,7 +52,7 @@ public class DriversPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RegistrationUtils.registerNewDriver(req);
+        registrationUtils.registerNewDriver(req, resp);
         resp.sendRedirect("/admin-dashboard/drivers");
     }
 }
