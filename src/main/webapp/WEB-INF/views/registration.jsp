@@ -10,23 +10,16 @@
 <head>
     <title><fmt:message key="registration.pageTitle"/></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS & Font Awesome -->
     <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin-panel/dashboard.css">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+    <!-- Styles for the page -->
+    <link rel="stylesheet" href="${contextPath}/resources/css/registration.css">
+    <link rel="script" href="${contextPath}/resources/js/validation/login.js">
 
     <!-- reCaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
-
-    <style>
-        .form-text{
-            clear: both;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
@@ -34,7 +27,7 @@
         <div class="col-md-8">
             <section>
                 <h1 class="entry-title"><span><fmt:message key="registration.header"/></span> </h1>
-                <form id="registration-form" action="/register" class="form-horizontal" method="post" name="signup" >
+                <form id="registration-form" action="/register" name="signup" method="post">
                     <label for="email"><fmt:message key="registration.label.email"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">

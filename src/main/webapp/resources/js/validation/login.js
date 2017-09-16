@@ -6,16 +6,18 @@ $(document).ready(function() {
                 .closest('.form-text')
                 .addClass('has-danger');
         },
-        highlight: function(element) {
+        highlight: function (element) {
             $(element)
                 .closest('.form-group')
-                .addClass('has-danger');
+                .addClass('has-danger')
+                .removeClass('has-success')
         },
-        unhighlight: function(element) {
+        unhighlight: function (element) {
             $(element)
                 .closest('.form-group')
-                .removeClass('has-danger');
-        }
+                .removeClass('has-danger')
+                .addClass('has-success')
+        },
     });
 
    $("#login-form").validate({

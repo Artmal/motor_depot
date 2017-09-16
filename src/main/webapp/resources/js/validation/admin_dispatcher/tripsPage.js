@@ -1,21 +1,21 @@
 $(document).ready(function() {
     $.validator.setDefaults({
+        highlight: function (element) {
+            $(element)
+                .closest('.input-group')
+                .addClass('has-danger')
+                .removeClass('has-success')
+        },
+        unhighlight: function (element) {
+            $(element)
+                .closest('.input-group')
+                .removeClass('has-danger')
+                .addClass('has-success')
+        },
+        errorElement: 'div',
         errorClass: 'form-text',
-        highlight: function(element) {
-            $(element)
-                .closest('.form-text')
-                .addClass('.aria-describedby')
-                .addClass('has-danger');
-        },
-        highlight: function(element) {
-            $(element)
-                .closest('.form-group')
-                .addClass('has-danger');
-        },
-        unhighlight: function(element) {
-            $(element)
-                .closest('.form-group')
-                .removeClass('has-danger');
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent('div'));
         }
     });
 

@@ -19,7 +19,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#registration-form").validate({
+    $("#add-driver-form").validate({
         rules: {
             "email": {
                 required: true,
@@ -28,11 +28,6 @@ $(document).ready(function() {
             "password": {
                 required: true,
                 minlength: 6
-            },
-            "confirm-password": {
-                required: true,
-                minlength: 6,
-                equalTo: "#password"
             },
             "full-name": {
                 required: true,
@@ -61,10 +56,6 @@ $(document).ready(function() {
                 required: "Please, enter your password.",
                 minlength: "Password must contain at least 6 characters."
             },
-            "confirm-password": {
-                required: "Please, confirm your password.",
-                equalTo: "Passwords don't match."
-            },
             "full-name": {
                 pattern: "Please, enter a valid full name(ex. John Smith)."
             },
@@ -72,7 +63,7 @@ $(document).ready(function() {
                 pattern: "Please, enter valid passport serial numbers(ex. ВТ 123456)."
             },
             "phone-number": {
-                required: "Please, enter a phone number!",
+                required: "Please, enter a phone number.",
                 pattern: "Please, enter a valid phone number(ex. +380664039952)."
             },
             "age": {
