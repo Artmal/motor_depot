@@ -48,6 +48,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>forgotPasswordServlet</servlet-name>
+    <servlet-class>com.artmal.controller.ForgotPasswordPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>forgotPasswordServlet</servlet-name>
+    <url-pattern>/forgotPassword</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>mySettingsServlet</servlet-name>
     <servlet-class>com.artmal.controller.MySettingsPageServlet</servlet-class>
   </servlet>

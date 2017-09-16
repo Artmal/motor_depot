@@ -17,13 +17,16 @@
     </title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+
+    <!-- JQuery -->
+    <link rel="script" href="${contextPath}/webjars/jquery/1.12.4/jquery.min.js">
 
     <!-- Custom styles for this template -->
-    <link href="${contextPath}/resources/css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 
     <!-- Font Awesome -->
-    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" >
 </head>
 <body>
 <div class="container">
@@ -34,7 +37,7 @@
                 <button id="languageChangeButton" hidden name = "languageChange" value="change"></button>
             </form>
 
-            <form action="/loginServlet" method="post">
+            <form id="loginForm" action="/loginServlet" method="post">
                 <fieldset>
                     <h2>
                         <fmt:message key="login.header" />
@@ -42,29 +45,35 @@
                         <a href = "javascript:document.getElementById('languageChangeButton').click();" style="float: right">
                             <span class="fa fa-globe"></span>
                         </a>
+
+                        <%--<a onclick="changeLanguage()" style="float: right">--%>
+                            <%--<span class="fa fa-globe"></span>--%>
+                        <%--</a>--%>
                     </h2>
 
                     <hr class="colorgraph">
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-lg"
-                               placeholder="${emailPlaceholderText}">
+                        <input name="email" id="email" class="form-control input-lg required"
+                               placeholder="${emailPlaceholderText}"
+                               type="email" required >
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg"
-                               placeholder="${passwordPlaceholderText}">
+                        <input name="password" id="password" class="form-control input-lg"
+                               placeholder="${passwordPlaceholderText}"
+                               type="password" required>
                     </div>
 
                     <c:if test="${errorText ne null}">
                         <p style="color: #ff6666">${errorText}</p>
                     </c:if>
 
-                    <a href="#">
+                    <a href="/forgotPassword">
                         <fmt:message key="login.button.forgot"/>
                     </a>
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-lg btn-success btn-block"
+                            <input id="signInButton" type="submit" class="btn btn-lg btn-success btn-block"
                                    value="${signInButtonText}">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -77,11 +86,23 @@
     </div>
 </div>
 
+<script>
+    var changeLanguage = function() {
+        if(document.location.href.contains('?')) {
+            var url = document.location.href+"&changeLanguage=change";
+        }else{
+            var url = document.location.href+"?changeLanguage=change";
+        }
+        document.location = url;
+
+        window.location.href = 'microsoft.com';
+    }
+
+</script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>

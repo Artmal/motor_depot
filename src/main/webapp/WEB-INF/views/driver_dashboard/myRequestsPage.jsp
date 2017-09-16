@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${language}" />
@@ -41,16 +42,29 @@
                     <div class="card">
                         <div class="card-header">
                             <fmt:message key="driverDashboard.myRequestsPage.requestNumber"/>${tripRequest.id}
-                            <a href="/driver-dashboard/my-requests/discard?trip-request-id=${tripRequest.id}"
-                               style="float: right"
-                               class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myRequestPage.discard"/></a>
-
+                            <c:choose>
+                                <c:when test="${tripRequest.tripInfo.tripStatus.displayName() eq 'Open'
+                                                or tripRequest.tripInfo.tripStatus.displayName() eq 'In progress'}">
+                                    <a href="/driver-dashboard/my-requests/discard?trip-request-id=${tripRequest.id}"
+                                       style="float: right"
+                                       class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myRequestPage.discard"/></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/driver-dashboard/my-requests/discard?trip-request-id=${tripRequest.id}"
+                                       style="float: right"
+                                       class="btn btn-danger btn-sm btn-space disabled"><fmt:message key="driverDashboard.myRequestPage.discard"/></a>
+                                </c:otherwise>
+                            </c:choose>
 
                         </div>
                         <div class="card-block">
                             <i class="fa fa-road fa-fw"></i>
                             <strong><fmt:message key="driverDashboard.myRequestsPage.label.trip"/>:</strong> <a href="/driver-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
                             <fmt:message key="driverDashboard.myRequestsPage.label.trip"/> №${tripRequest.tripInfo.id}</a><br>
+
+                            <i class="fa fa-tasks fa-fw"></i>
+                            <strong><fmt:message key="driverDashboard.myRequestsPage.label.status"/>:</strong>
+                            <custom:printTripStatusFmt tripStatus="${tripRequest.tripInfo.tripStatus}"/><br>
 
                             <i class="fa fa-car fa-fw"></i>
                             <strong><fmt:message key="driverDashboard.myRequestsPage.label.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>

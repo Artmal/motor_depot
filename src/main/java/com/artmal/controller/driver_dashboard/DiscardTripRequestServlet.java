@@ -1,6 +1,7 @@
 package com.artmal.controller.driver_dashboard;
 
 import com.artmal.model.TripRequest;
+import com.artmal.model.enums.TripStatus;
 import com.artmal.model.users.Driver;
 import com.artmal.service.DriverService;
 import com.artmal.service.TripRequestService;
@@ -41,7 +42,13 @@ public class DiscardTripRequestServlet extends HttpServlet {
         final long tripRequestId = Long.parseLong(req.getParameter("trip-request-id"));
 
         try {
-            tripRequestService.deleteById(tripRequestId);
+            TripRequest tripRequest = tripRequestService.findById(tripRequestId);
+            TripStatus tripStatus = tripRequest.getTripInfo().getTripStatus();
+            if(tripStatus.equals(TripStatus.Open) || tripStatus.equals(TripStatus.In_progress)) {
+                tripRequestService.deleteById(tripRequestId);
+            } else {
+                throw new UnsupportedOperationException("Cannot delete request for canceled or closed trip");
+            }
 
             final long userId = (long) req.getSession().getAttribute("id");
             final Driver driver = driverService.findByUserId(userId);

@@ -11,15 +11,16 @@
     <title><fmt:message key="registration.pageTitle"/></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin-panel/dashboard.css">
+    <link rel="stylesheet" href="${contextPath}/resource/css/registration.css" >
 
-    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" >
 
-    <link href="${contextPath}/resource/css/registration.css" rel="stylesheet">
-
+    <!-- reCaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
@@ -35,7 +36,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </div>
-                        <input type="email" class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email"
+                               type="email" required>
                     </div>
 
                     <label for="password"><fmt:message key="registration.label.password"/></label>
@@ -43,8 +45,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-key"></i>
                         </div>
-                        <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password"
-                               name="password" required>
+                        <input  name="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password"
+                                type="password" required>
                     </div>
 
                     <label for="password"><fmt:message key="registration.label.confirmPassword"/></label>
@@ -52,8 +54,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-key"></i>
                         </div>
-                        <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="cpassword" name="cpassword"
-                               required>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="cpassword" name="cpassword"
+                               type="password" required>
                     </div>
 
                     <label for="name"><fmt:message key="registration.label.fullName"/></label>
@@ -79,7 +81,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-phone-square"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number" required>
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number"
+                               required>
                     </div>
 
                     <label for="age"><fmt:message key="registration.label.age"/></label>
@@ -87,7 +90,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-birthday-cake"></i>
                         </div>
-                        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age"
+                               type="number">
                     </div>
 
                     <br>

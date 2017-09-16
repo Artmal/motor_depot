@@ -51,12 +51,10 @@ public class RegistrationServlet extends HttpServlet {
         final Driver driver = new Driver(fullName, passportSerialNumbers, phoneNumber, age, userInfo);
 
         String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
-        System.out.println(gRecaptchaResponse);
-
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         if(!verify) {
-            req.setAttribute("error", "How about captcha bruh?");
+            req.setAttribute("error", "Did you forget about captcha?");
             req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
         } else {
             try {
