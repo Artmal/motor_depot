@@ -65,16 +65,14 @@
 
             <div class="card">
                 <div class="card-block">
-                        <c:choose>
-                            <c:when test = "${sessionScope.role eq 'Admin'}">
-                                <form class="form-horizontal" action="/admin-dashboard/trips" method="post">
-                            </c:when>
+                    <c:if test="${sessionScope.role eq 'Admin'}">
+                        <c:set var="actionUrl" value="/admin-dashboard/cars"/>
+                    </c:if>
+                    <c:if test="${sessionScope.role eq 'Driver'}">
+                        <c:set var="actionUrl" value="/dispatcher-dashboard/garage"/>
+                    </c:if>
 
-                            <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-                                <form class="form-horizontal" action="/dispatcher-dashboard/trips" method="post">
-                            </c:when>
-                        </c:choose>
-
+                    <form id = "add-trip-form" class="form-horizontal" action="/admin-dashboard/trips" method="post">
                         <label for="status"><fmt:message key="tripsPage.content.label.status"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
@@ -126,8 +124,7 @@
                                 <i class="fa fa-building-o fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from"
-                                   placeholder="Kharkov"
-                                   pattern="^[A-ZА-Я][a-zа-я-\\s]+$" required>
+                                   placeholder="Kharkov">
                         </div>
 
                         <label for="town-to"><fmt:message key="tripsPage.content.addTripForm.label.townTo"/>*:</label>
@@ -136,8 +133,7 @@
                                 <i class="fa fa-building fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-to" name="town-to"
-                                   placeholder="Kiev"
-                                   pattern="^[A-ZА-Я][a-zа-я-\\s]+$" required>
+                                   placeholder="Kiev">
                         </div>
 
 
@@ -147,8 +143,7 @@
                                 <i class="fa fa-calendar fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
-                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS"
-                                   pattern="^[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$" required>
+                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS">
                         </div>
 
 
@@ -158,8 +153,7 @@
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in"
-                                   placeholder="YYYY-MM-DD HH:MM:SS"
-                                   pattern="^[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$" required>
+                                   placeholder="YYYY-MM-DD HH:MM:SS">
                         </div>
 
                         <label for="payment-in-dollars"><fmt:message key="tripsPage.content.addTripForm.label.payment"/>($)*:</label>
@@ -167,11 +161,10 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="payment-in-dollars" name="payment-in-dollars"
-                                   pattern="^[1-9][\\d]*$" required>
+                            <input id="payment-in-dollars" name="payment-in-dollars" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
                         <br>
-                        <button class="btn btn-primary"><fmt:message key="tripsPage.content.addTripForm.button.addTrip"/></button>
+                        <button id="submit-button" class="btn btn-primary"><fmt:message key="tripsPage.content.addTripForm.button.addTrip"/></button>
                     </form>
                 </div>
             </div>
@@ -179,6 +172,11 @@
         </main>
     </div>
 </div>
+
+<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+<script src="${contextPath}/resources/js/validation/admin_dispatcher/tripsPage.js"></script>
 
 <script>
     document.getElementById("trips-nav-link").classList.add("active");

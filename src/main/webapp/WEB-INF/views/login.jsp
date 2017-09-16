@@ -19,8 +19,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 
-    <!-- JQuery -->
-    <link rel="script" href="${contextPath}/webjars/jquery/1.12.4/jquery.min.js">
+    <link rel="script" href="${contextPath}/resources/js/validation/login.js">
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
@@ -33,11 +32,7 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form id="changeLanguageForm" hidden>
-                <button id="languageChangeButton" hidden name = "languageChange" value="change"></button>
-            </form>
-
-            <form id="loginForm" action="/loginServlet" method="post">
+            <form id="login-form" action="/loginServlet" method="post">
                 <fieldset>
                     <h2>
                         <fmt:message key="login.header" />
@@ -49,14 +44,13 @@
 
                     <hr class="colorgraph">
                     <div class="form-group">
-                        <input name="email" id="email" class="form-control input-lg required"
-                               placeholder="${emailPlaceholderText}"
-                               type="email" required >
+                        <input name="email" id="email" class="form-control input-lg"
+                               placeholder="${emailPlaceholderText}">
                     </div>
                     <div class="form-group">
                         <input name="password" id="password" class="form-control input-lg"
                                placeholder="${passwordPlaceholderText}"
-                               type="password" required>
+                               type="password">
                     </div>
 
                     <c:if test="${errorText ne null}">
@@ -69,7 +63,7 @@
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input id="signInButton" type="submit" class="btn btn-lg btn-success btn-block"
+                            <input id="submit-button" type="submit" class="btn btn-lg btn-success btn-block"
                                    value="${signInButtonText}">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -81,6 +75,12 @@
         </div>
     </div>
 </div>
+
+
+<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+<script src="${contextPath}/resources/js/validation/login.js"></script>
 
 <script>
     function appendParameters() {
