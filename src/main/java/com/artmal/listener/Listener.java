@@ -1,5 +1,7 @@
 package com.artmal.listener;
 
+import com.artmal.utils.Constants;
+import com.artmal.utils.CurrencyConverter;
 import com.artmal.utils.DatabaseUtils;
 import lombok.extern.log4j.Log4j;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.io.IOException;
 
 /**
  * Basic ServletContextListener for logging common operations.
@@ -23,6 +26,12 @@ public class Listener implements ServletContextListener,
 
     public void contextInitialized(ServletContextEvent sce) {
         DatabaseUtils.initializeDataSource();
+        try {
+            Constants.USD_TO_UAH = CurrencyConverter.getConversionRate("USD", "UAH");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         log.info("Servlet context initialized.");
     }
 

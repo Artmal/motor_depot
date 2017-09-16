@@ -19,7 +19,7 @@ public class I18nFilter implements Filter {
         if(locale == null) {
             setEnLocale(req);
         } else {
-            if(req.getParameter("languageChange") != null) {
+            if(req.getParameter("language") != null) {
                 if(locale.getLanguage().equals("en")) {
                     Locale ruLocale = new Locale.Builder().setLanguage("ru").build();
                     req.getSession().setAttribute("language", ruLocale);

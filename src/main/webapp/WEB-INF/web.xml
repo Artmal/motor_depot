@@ -307,26 +307,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>adminDashboard</servlet-name>
-    <jsp-file>/WEB-INF/views/admin_dashboard/adminDashboard.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>adminDashboard</servlet-name>
-    <url-pattern>/admin-dashboard</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>profilePage</servlet-name>
-    <jsp-file>/WEB-INF/views/profile.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>profilePage</servlet-name>
-    <url-pattern>/profile</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>adminDashboard-users</servlet-name>
     <jsp-file>/WEB-INF/views/admin_dashboard/usersView.jsp</jsp-file>
   </servlet>
@@ -334,26 +314,6 @@
   <servlet-mapping>
     <servlet-name>adminDashboard-users</servlet-name>
     <url-pattern>/admin-dashboard/user</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>dispatcherDashboard</servlet-name>
-    <jsp-file>/WEB-INF/views/dispatcher_dashboard/dispatcherDashboard.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>dispatcherDashboard</servlet-name>
-    <url-pattern>/dispatcher-dashboard</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>driverDashboard</servlet-name>
-    <jsp-file>/WEB-INF/views/driver_dashboard/driverDashboard.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>driverDashboard</servlet-name>
-    <url-pattern>/driver-dashboard</url-pattern>
   </servlet-mapping>
 
   <!-- Filters -->

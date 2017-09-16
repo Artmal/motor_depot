@@ -4,7 +4,7 @@
 <%@ attribute name="carId" required="true" type="java.lang.Integer" %>
 
 <fmt:setLocale value="${language}" />
-<fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
+<fmt:setBundle basename="i18n.driver_dashboard.myTripsPage" />
 
 <c:choose>
     <c:when test="${trip.carId eq '0'}">

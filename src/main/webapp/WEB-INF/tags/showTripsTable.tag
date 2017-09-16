@@ -2,6 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
+<%@ taglib uri="http://www.artmal.com/currency" prefix="tagLibrary" %>
+
 <%@ attribute name="setOfTrips" required="true" type="java.util.Collection"%>
 
 <fmt:setLocale value="${language}" />
@@ -66,8 +68,10 @@
                 <td>${trip.timeOut.toString("yyyy-MM-dd HH:mm")}</td>
                 <td>${trip.timeIn.toString("yyyy-MM-dd HH:mm")}</td>
 
-                <td>${trip.paymentInDollars}</td>
-
+                <td>
+                    <tagLibrary:currencyTag locale="${language}" paymentInDollars="${trip.paymentInDollars}"/>
+                        <%--${trip.paymentInDollars}</td>--%>
+                </td>
                 <c:if test="${sessionScope.role eq 'Admin'}">
                     <td>${trip.dispatcherId}</td>
                 </c:if>

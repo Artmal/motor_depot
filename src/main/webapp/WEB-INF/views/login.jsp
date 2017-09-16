@@ -42,13 +42,9 @@
                     <h2>
                         <fmt:message key="login.header" />
 
-                        <a href = "javascript:document.getElementById('languageChangeButton').click();" style="float: right">
+                        <a onclick="appendParameters(); return false;" style="float: right">
                             <span class="fa fa-globe"></span>
                         </a>
-
-                        <%--<a onclick="changeLanguage()" style="float: right">--%>
-                            <%--<span class="fa fa-globe"></span>--%>
-                        <%--</a>--%>
                     </h2>
 
                     <hr class="colorgraph">
@@ -87,17 +83,19 @@
 </div>
 
 <script>
-    var changeLanguage = function() {
-        if(document.location.href.contains('?')) {
-            var url = document.location.href+"&changeLanguage=change";
-        }else{
-            var url = document.location.href+"?changeLanguage=change";
+    function appendParameters() {
+        var separator = (window.location.href.indexOf("?")===-1)?"?":"&";
+        if (/language/.test(window.location.href)) {
+            if(/language=ru/.test(window.location.href)) {
+                window.location.href = window.location.href.replace("ru", "en");
+            } else if(/language=en/.test(window.location.href)) {
+                window.location.href = window.location.href.replace("en", "ru");
+            }
+        } else {
+            window.location.href = window.location.href + separator + "language=ru";
         }
-        document.location = url;
 
-        window.location.href = 'microsoft.com';
     }
-
 </script>
 
 <!-- Bootstrap core JavaScript
