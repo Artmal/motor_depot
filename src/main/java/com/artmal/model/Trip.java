@@ -29,6 +29,17 @@ public @Data class Trip {
     public Trip() {
     }
 
+    public Trip(long id, TripStatus tripStatus, CarType carTypeRequired, String townFrom, String townTo, DateTime timeOut, DateTime timeIn, int paymentInDollars) {
+        this.id = id;
+        this.tripStatus = tripStatus;
+        this.carTypeRequired = carTypeRequired;
+        this.townFrom = townFrom;
+        this.townTo = townTo;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
+        this.paymentInDollars = paymentInDollars;
+    }
+
     public Trip(TripStatus tripStatus, CarType carTypeRequired, String townFrom, String townTo, DateTime timeOut, DateTime timeIn, int paymentInDollars, long dispatcherId) {
         this.tripStatus = tripStatus;
         this.carTypeRequired = carTypeRequired;

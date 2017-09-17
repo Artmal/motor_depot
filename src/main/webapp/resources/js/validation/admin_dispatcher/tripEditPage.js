@@ -19,7 +19,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#add-trip-form").validate({
+    $("#edit-trip-form").validate({
         rules: {
             "status": {
                 required: true

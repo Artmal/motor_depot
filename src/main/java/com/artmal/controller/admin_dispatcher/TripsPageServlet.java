@@ -60,14 +60,14 @@ public class TripsPageServlet extends HttpServlet {
         final String townTo = req.getParameter("town-to");
         final DateTime timeOut = TripUtils.stringDateToDateTime(req.getParameter("time-out"));
         final DateTime timeIn = TripUtils.stringDateToDateTime(req.getParameter("time-in"));
-        final int salaryInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
+        final int paymentInDollars = Integer.parseInt(req.getParameter("payment-in-dollars"));
 
         final Role role = (Role) req.getSession().getAttribute("role");
         if (role.equals(Role.Dispatcher)) {
             try {
                 final long dispatcherId = dispatcherService.findByUserId((long) req.getSession().getAttribute("id")).getId();
 
-                final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars, dispatcherId);
+                final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, paymentInDollars, dispatcherId);
                 tripService.save(trip);
             } catch (SQLException | NamingException | ParseException e) {
                 log.error(e);
@@ -75,7 +75,7 @@ public class TripsPageServlet extends HttpServlet {
 
             resp.sendRedirect("/dispatcher-dashboard/trips");
         } else if (role.equals(Role.Admin)) {
-            final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, salaryInDollars);
+            final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, paymentInDollars);
             try {
                 tripService.save(trip);
             } catch (SQLException | NamingException | ParseException e) {

@@ -82,7 +82,7 @@
                         <c:set var="actionUrl" value="/dispatcher-dashboard/garage"/>
                     </c:if>
 
-                    <form id = "add-trip-form" class="form-horizontal" action="/admin-dashboard/trips" method="post">
+                    <form id = "add-trip-form" action="/admin-dashboard/trips" method="post">
                         <label for="status"><fmt:message key="tripsPage.content.label.status"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">

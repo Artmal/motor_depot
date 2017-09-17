@@ -26,6 +26,9 @@ public interface TripService {
     void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException;
     void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException;
 
+    void updateTrip(Trip trip) throws SQLException, ParseException;
 
     void deleteByCarId(long id) throws NamingException, SQLException;
+    void deleteById(long id) throws NamingException, SQLException;
+
 }

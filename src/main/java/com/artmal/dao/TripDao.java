@@ -22,10 +22,12 @@ public interface TripDao {
     Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException;
     Set<Trip> findAllOpen() throws SQLException, ParseException;
 
-
     void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException;
     void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException;
     void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException;
 
+    void updateTrip(Trip trip) throws SQLException, ParseException;
+
     void deleteByCarId(long id) throws NamingException, SQLException;
+    void deleteById(long id) throws NamingException, SQLException;
 }

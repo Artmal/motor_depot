@@ -70,10 +70,16 @@
 
                 <td>
                     <tagLibrary:currencyTag locale="${language}" paymentInDollars="${trip.paymentInDollars}"/>
-                        <%--${trip.paymentInDollars}</td>--%>
                 </td>
                 <c:if test="${sessionScope.role eq 'Admin'}">
-                    <td>${trip.dispatcherId}</td>
+                        <c:choose>
+                            <c:when test="${trip.dispatcherId eq '0'}">
+                                <td><fmt:message key="tripsPage.content.table.admin"/></td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>${trip.dispatcherId}</td>
+                            </c:otherwise>
+                        </c:choose>
                 </c:if>
             </tr>
         </c:forEach>

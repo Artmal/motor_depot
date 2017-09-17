@@ -297,6 +297,28 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>deleteTripServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.DeleteTripServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>deleteTripServlet</servlet-name>
+    <url-pattern>/admin-dashboard/delete-trip</url-pattern>
+    <url-pattern>/dispatcher-dashboard/delete-trip</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>editTripServlet</servlet-name>
+    <servlet-class>com.artmal.controller.admin_dispatcher.EditTripServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>editTripServlet</servlet-name>
+    <url-pattern>/admin-dashboard/edit-trip</url-pattern>
+    <url-pattern>/dispatcher-dashboard/edit-trip</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>registration</servlet-name>
     <jsp-file>/WEB-INF/views/registration.jsp</jsp-file>
   </servlet>

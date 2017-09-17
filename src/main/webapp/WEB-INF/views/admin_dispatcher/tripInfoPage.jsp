@@ -53,10 +53,28 @@
 
         <fmt:setBundle basename="i18n.admin_dispatcher.tripInfoPage" />
 
+        <c:choose>
+            <c:when test="${sessionScope.role eq 'Admin'}">
+                <c:set var="editTripHref" value="/admin-dashboard/edit-trip?id=${trip.id}"/>
+                <c:set var="deleteTripHref" value="/admin-dashboard/delete-trip?id=${trip.id}"/>
+            </c:when>
+            <c:when test="${sessionScope.role eq 'Dispatcher'}">
+                <c:set var="editTripHref" value="/dispatcher-dashboard/edit-trip?id=${trip.id}"/>
+                <c:set var="deleteTripHref" value="/dispatcher-dashboard/delete-trip?id=${trip.id}"/>
+            </c:when>
+        </c:choose>
+
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <div id = "trip-info" class="card card-outline-info">
                 <div class="card-block">
-                    <h4 class="card-title"><fmt:message key="adminDispatcher.tripInfoPage.header"/>${trip.id}</h4>
+                    <h3 class="card-title"><fmt:message key="adminDispatcher.tripInfoPage.header"/>${trip.id}
+                        <a href="${deleteTripHref}">
+                            <i style="font-size: 20px; color: crimson; margin: auto; float: right" class="btn btn-default fa fa-times fa-fw"></i>
+                        </a>
+                        <a href="${editTripHref}">
+                            <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
+                        </a>
+                    </h3>
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
                     <br>

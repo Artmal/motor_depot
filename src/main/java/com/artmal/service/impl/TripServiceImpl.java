@@ -74,6 +74,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    public void updateTrip(Trip trip) throws SQLException, ParseException {
+        tripDao.updateTrip(trip);
+    }
+
+    @Override
     public Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException {
         return tripDao.findAllByDispatcherId(id);
     }
@@ -86,5 +91,10 @@ public class TripServiceImpl implements TripService {
     @Override
     public void deleteByCarId(long id) throws NamingException, SQLException {
         tripDao.deleteByCarId(id);
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        tripDao.deleteById(id);
     }
 }

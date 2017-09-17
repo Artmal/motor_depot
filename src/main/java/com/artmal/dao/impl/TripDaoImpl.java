@@ -161,12 +161,48 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public void updateTrip(Trip trip) throws SQLException, ParseException {
+        @Cleanup Connection con = dataSource.getConnection();
+
+        @Cleanup PreparedStatement updateTrip = con.prepareStatement("UPDATE trips SET status_id = ?,"
+                + " car_type_id_required = ?, town_from = ?, town_to = ?, time_out = ?, time_in = ?,"
+                + " payment_in_dollars = ? WHERE id = ?");
+
+        updateTrip.setInt(1, TripUtils.statusToInt(trip.getTripStatus()));
+        updateTrip.setInt(2, CarUtils.typeToInt(trip.getCarTypeRequired()));
+        updateTrip.setString(3, trip.getTownFrom());
+        updateTrip.setString(4, trip.getTownTo());
+        updateTrip.setTimestamp(5, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeOut()));
+        updateTrip.setTimestamp(6, TripUtils.dateTimeToSQLTimeStamp(trip.getTimeIn()));
+        updateTrip.setInt(7, trip.getPaymentInDollars());
+        updateTrip.setLong(8, trip.getId());
+        updateTrip.execute();
+    }
+
+    @Override
     public void deleteByCarId(long id) throws NamingException, SQLException {
         @Cleanup Connection con = dataSource.getConnection();
 
-        @Cleanup PreparedStatement deleteByCarId = con.prepareStatement("DELETE  FROM trips WHERE car_id = ?");
+        @Cleanup PreparedStatement deleteByCarId = con.prepareStatement("DELETE FROM trips WHERE car_id = ?");
         deleteByCarId.setLong(1, id);
 
         deleteByCarId.execute();
+    }
+
+    @Override
+    public void deleteById(long id) throws NamingException, SQLException {
+        @Cleanup Connection con = dataSource.getConnection();
+        con.setAutoCommit(false);
+
+        @Cleanup PreparedStatement deleteAssociatedTripRequests = con.
+                prepareStatement("DELETE FROM trip_requests WHERE trip_id = ?");
+        deleteAssociatedTripRequests.setLong(1, id);
+        deleteAssociatedTripRequests.execute();
+
+        @Cleanup PreparedStatement deleteTripById = con.prepareStatement("DELETE FROM trips WHERE id = ?");
+        deleteTripById.setLong(1, id);
+        deleteTripById.execute();
+
+        con.commit();
     }
 }
