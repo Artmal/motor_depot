@@ -40,7 +40,7 @@ $(document).ready(function() {
             },
             "passport-serial-numbers": {
                 required: true,
-                pattern: "^[А-Я]{2} [\\d]{6}$"
+                pattern: "^([А-Я]{2} \\d{6})|(\\d{10})$"
             },
             "phone-number": {
                 required: true,
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 equalTo: "Passwords don't match."
             },
             "full-name": {
-                required: "Please, enter full name.",
+                required: "Please, enter full name."
                 pattern: "Please, enter valid full name(ex. John Smith)."
             },
             "passport-serial-numbers": {
