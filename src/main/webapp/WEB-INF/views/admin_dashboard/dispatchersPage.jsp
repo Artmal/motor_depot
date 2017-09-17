@@ -15,15 +15,14 @@
 
     <title><fmt:message key="adminDashboard.dispatchersPage.pageTitle"/></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS & Font Awesome -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Styles for the page -->
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/admin-panel/driversPage.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 
     <!-- Data tables -->
     <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
@@ -70,13 +69,13 @@
 
             <div class="card">
                 <div class="card-block">
-                    <form class="form-horizontal" action="/admin-dashboard/dispatcherServlet" method="post">
+                    <form id="add-dispatcher-form" action="/admin-dashboard/dispatcherServlet" method="post">
                         <label for="email"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.email"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email" required>
+                            <input id="email" name="email" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
                         <label for="password"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.password"/>*:</label>
@@ -84,16 +83,15 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
                             </div>
-                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password" name="password"
-                                   required>
+                            <input id="password" name="password" type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" >
                         </div>
 
-                        <label for="name"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/>*:</label>
+                        <label for="full-name"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" required>
+                            <input id="full-name" name="full-name" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
                         <label for="passport-serial-numbers"><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:</label>
@@ -101,17 +99,15 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport-serial-numbers"
-                                   name="passport-serial-numbers" required>
+                            <input id="passport-serial-numbers" name="passport-serial-numbers" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="phone-number"><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:</label>
+                        <label for="phone-number"><fmt:message key="adminDashboard.dispatchersPage.table.phoneNumber"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number"
-                                   name="phone-number" required>
+                            <input id="phone-number" name="phone-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
                         <label for="salary-in-dollars"><fmt:message key="adminDashboard.dispatchersPage.table.salary"/>:</label>
@@ -119,8 +115,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="salary-in-dollars"
-                                    name="salary-in-dollars">
+                            <input id="salary-in-dollars" name="salary-in-dollars" class="form-control mb-2 mr-sm-2 mb-sm-0" >
                         </div>
                         <br>
                         <button class="btn btn-primary"><fmt:message key="adminDashboard.dispatchersPage.button.addDispatcher"/></button>
@@ -131,6 +126,11 @@
         </main>
     </div>
 </div>
+
+<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+<script src="${contextPath}/resources/js/validation/admin_dashboard/dispatchersPage.js"></script>
 
 <script>
     document.getElementById("dispatchers-nav-link").classList.add("active");

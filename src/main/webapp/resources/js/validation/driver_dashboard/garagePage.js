@@ -21,13 +21,14 @@ $(document).ready(function() {
 
     $("#add-car-form").validate({
         rules: {
-            "type": {
-                required: true
-            },
             "registration-number": {
                 required: true,
                 pattern: "^[А-Я]{2} [\\d]{4} [А-Я]{2}$"
             },
+            "type": {
+                required: true
+            },
+
             "condition": {
                 required: true
             },
@@ -41,19 +42,15 @@ $(document).ready(function() {
             "color": {
                 required: true,
                 pattern: "^[A-ZА-Я][a-zа-я]+$"
-            },
-            "owner-id": {
-                required: true,
-                pattern: "^[1-9][\\d]+$"
             }
         },
         messages: {
-            "type": {
-                required: "Please, enter a car type."
-            },
             "registration-number": {
                 required: "Please, enter registration number of the car you want to add.",
                 pattern: "Please, enter valid registration number of your car(ex. ВТ 1234 АВ)."
+            },
+            "type": {
+                required: "Please, enter car type."
             },
             "condition": {
                 required: "Please, enter condition of the car you want to add."
@@ -68,10 +65,6 @@ $(document).ready(function() {
             "color": {
                 required: "Please, enter color in the car you want to add.",
                 pattern: "Please, enter a valid color in the car you want to add(ex. Yellow)."
-            },
-            "owner-id": {
-                required: "Please, enter a driver ID to link the car with.",
-                pattern: "Please, enter a valid ID(ex. 12)."
             }
         }
     });

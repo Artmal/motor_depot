@@ -19,7 +19,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#registration-form").validate({
+    $("#settings-form").validate({
         rules: {
             "email": {
                 required: true,
@@ -33,23 +33,6 @@ $(document).ready(function() {
                 required: true,
                 minlength: 6,
                 equalTo: "#password"
-            },
-            "full-name": {
-                required: true,
-                pattern: "^[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+$"
-            },
-            "passport-serial-numbers": {
-                required: true,
-                pattern: "^[А-Я]{2} [\\d]{6}$"
-            },
-            "phone-number": {
-                required: true,
-                pattern: "^(1[ \\-\\+]{0,3}|\\+1[ -\\+]{0,3}|\\+1|\\+)?((\\(\\+?1-[2-9][0-9]" +
-                "{1,2}\\))|(\\(\\+?[2-8][0-9][0-9]\\))|(\\(\\+?[1-9][0-9]\\))|(\\(\\+?[17]\\))|(\\([2-9][2-9]\\))|" +
-                "([ \\-\\.]{0,3}[0-9]{2,4}))?([ \\-\\.][0-9])?([ \\-\\.]{0,3}[0-9]{2,4}){2,3}$"
-            },
-            "age": {
-                pattern: "^[1-9][\\d]{0,2}$"
             }
         },
         messages: {
@@ -64,20 +47,6 @@ $(document).ready(function() {
             "confirm-password": {
                 required: "Please, confirm your password.",
                 equalTo: "Passwords don't match."
-            },
-            "full-name": {
-                required: "Please, enter full name.",
-                pattern: "Please, enter valid full name(ex. John Smith)."
-            },
-            "passport-serial-numbers": {
-                pattern: "Please, enter valid passport serial numbers(ex. ВТ 123456)."
-            },
-            "phone-number": {
-                required: "Please, enter phone number!",
-                pattern: "Please, enter a valid phone number(ex. +380664039952)."
-            },
-            "age": {
-                pattern: "Please, enter a valid age(ex. 32)."
             }
         }
     });

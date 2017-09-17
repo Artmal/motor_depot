@@ -19,7 +19,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#registration-form").validate({
+    $("#add-dispatcher-form").validate({
         rules: {
             "email": {
                 required: true,
@@ -28,11 +28,6 @@ $(document).ready(function() {
             "password": {
                 required: true,
                 minlength: 6
-            },
-            "confirm-password": {
-                required: true,
-                minlength: 6,
-                equalTo: "#password"
             },
             "full-name": {
                 required: true,
@@ -48,22 +43,18 @@ $(document).ready(function() {
                 "{1,2}\\))|(\\(\\+?[2-8][0-9][0-9]\\))|(\\(\\+?[1-9][0-9]\\))|(\\(\\+?[17]\\))|(\\([2-9][2-9]\\))|" +
                 "([ \\-\\.]{0,3}[0-9]{2,4}))?([ \\-\\.][0-9])?([ \\-\\.]{0,3}[0-9]{2,4}){2,3}$"
             },
-            "age": {
-                pattern: "^[1-9][\\d]{0,2}$"
+            "salary-in-dollars": {
+                pattern: "^[1-9][\\d]+$"
             }
         },
         messages: {
             "email": {
                 required: "Please, enter email address.",
-                email: "Please, enter a valid email address."
+                email: "Please, enter valid email address."
             },
             "password": {
-                required: "Please, enter your password.",
+                required: "Please, enter password.",
                 minlength: "Password must contain at least 6 characters."
-            },
-            "confirm-password": {
-                required: "Please, confirm your password.",
-                equalTo: "Passwords don't match."
             },
             "full-name": {
                 required: "Please, enter full name.",
@@ -74,10 +65,10 @@ $(document).ready(function() {
             },
             "phone-number": {
                 required: "Please, enter phone number!",
-                pattern: "Please, enter a valid phone number(ex. +380664039952)."
+                pattern: "Please, enter valid phone number(ex. +380664039952)."
             },
-            "age": {
-                pattern: "Please, enter a valid age(ex. 32)."
+            "salary-in-dollars": {
+                pattern: "Enter valid salary(ex. 1234)."
             }
         }
     });

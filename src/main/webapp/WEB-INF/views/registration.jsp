@@ -16,7 +16,7 @@
 
     <!-- Styles for the page -->
     <link rel="stylesheet" href="${contextPath}/resources/css/registration.css">
-    <link rel="script" href="${contextPath}/resources/js/validation/login.js">
+    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 
     <!-- reCaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
