@@ -19,16 +19,13 @@
 
     <title><fmt:message key="tripsPage.title"/></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS & Font Awesome -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Styles for the page-->
+    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 
     <!-- Data tables -->
     <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
@@ -175,7 +172,6 @@
     </div>
 </div>
 
-<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/js/validation/admin_dispatcher/tripsPage.js"></script>

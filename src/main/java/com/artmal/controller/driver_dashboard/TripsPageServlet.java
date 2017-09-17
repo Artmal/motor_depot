@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +35,9 @@ public class TripsPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            final Set<Trip> tripSet = tripService.findAll();
+            final Set<Trip> tripSet = tripService.findAllOpen();
             req.setAttribute("setOfTrips", tripSet);
-        } catch (SQLException | NamingException | ParseException e) {
+        } catch (SQLException | ParseException e) {
             log.error(e);
         }
 

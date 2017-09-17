@@ -20,6 +20,7 @@ public interface TripDao {
     Set<Trip> findAll() throws NamingException, SQLException, ParseException;
     Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException;
     Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException;
+    Set<Trip> findAllOpen() throws SQLException, ParseException;
 
 
     void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException;

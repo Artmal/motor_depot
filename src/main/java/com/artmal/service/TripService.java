@@ -19,11 +19,13 @@ public interface TripService {
     Trip findById(long id) throws SQLException, NamingException, ParseException;
     Set<Trip> findAll() throws NamingException, SQLException, ParseException;
     Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException;
+    Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException;
+    Set<Trip> findAllOpen() throws SQLException, ParseException;
 
     void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException;
     void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException;
     void nullifyResponsibleCarColumn(Trip trip) throws NamingException, SQLException;
-    Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException;
+
 
     void deleteByCarId(long id) throws NamingException, SQLException;
 }
