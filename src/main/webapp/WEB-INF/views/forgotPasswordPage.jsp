@@ -25,14 +25,14 @@
                 <h1 class="entry-title"><span>Password reset</span> </h1>
                 <br>
 
-                <form action="/register" class="form-horizontal" method="post" name="signup" id="signup">
+                <form action="/forgotPassword" class="form-horizontal" method="post" name="signup" id="signup">
                     <label for="email"><fmt:message key="registration.label.email"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </div>
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email"
-                               type="email" required>
+                               type="email">
                     </div>
 
                     <br>

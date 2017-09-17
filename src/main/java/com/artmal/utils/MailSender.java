@@ -34,7 +34,7 @@ public class MailSender {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("artmalchik@gmail.com"));
             message.setSubject("Password Reset");
-            message.setText("Your new password on motor_depot is: ,");
+            message.setText(text);
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
