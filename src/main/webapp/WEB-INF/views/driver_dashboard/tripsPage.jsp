@@ -39,7 +39,18 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><fmt:message key="tripsPage.content.trips"/></h1>
 
-            <custom:showTripsTable setOfTrips="${setOfTrips}"/>
+            <c:choose>
+                <c:when test="${not empty setOfTrips}">
+                    <custom:showTripsTable setOfTrips="${setOfTrips}"/>
+                </c:when>
+
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="tripsPage.noTripsYet"/>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
             <br>
         </main>
     </div>

@@ -65,68 +65,77 @@
 
         <div class="col-md-9">
             <div class="profile-content">
-                <c:if test="${not empty setOfTrips}">
-                    <c:forEach items="${setOfTrips}" var="trip">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
-                        <div class="card">
-                            <div class="card-header">
-                                <fmt:message key="adminDispatcher.driverProfile.header"/>${trip.id}
+
+                <c:choose>
+                    <c:when test="${not empty setOfTrips}">
+                        <c:forEach items="${setOfTrips}" var="trip">
+                            <c:set var="count" value="${count + 1}" scope="page"/>
+                            <div class="card">
+                                <div class="card-header">
+                                    <fmt:message key="adminDispatcher.driverProfile.header"/>${trip.id}
+                                </div>
+                                <div class="card-block">
+                                    <h4 class="card-title">Info</h4>
+                                    <i class="fa fa-calendar-plus-o fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
+                                    <br>
+                                    <i class="fa fa-tasks fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.status"/>:</strong>
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
+                                        <span class="badge badge-success"><fmt:message key="adminDispatcher.driverProfile.badge.open"/></span>
+                                    </c:if>
+                                    <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
+                                        <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverProfile.badge.inProgress"/></span>
+                                    </c:if>
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
+                                        <span class="badge badge-default"><fmt:message key="adminDispatcher.driverProfile.badge.closed"/></span>
+                                    </c:if>
+                                    <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
+                                        <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverProfile.badge.canceled"/></span>
+                                    </c:if>
+                                    <br>
+                                    <i class="fa fa-car fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
+                                    <br>
+                                    <i class="fa fa-id-card-o fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.carId"/>:</strong>
+                                    <c:choose>
+                                        <c:when test="${trip.carId eq '0'}">
+                                            <span class="badge badge-pill badge-success">Free spot</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${trip.carId}
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <br>
+                                    <i class="fa fa-building-o fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.townFrom"/>:</strong> ${trip.townFrom}
+                                    <br>
+                                    <i class="fa fa-building fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.townTo"/>:</strong> ${trip.townTo}
+                                    <br>
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                                    <br>
+                                    <i class="fa fa-calendar-check-o fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                                    <br>
+                                    <i class="fa fa-usd fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.payment"/>:</strong> ${trip.paymentInDollars}
+                                    <br>
+                                    <i class="fa fa-user-plus fa-fw"></i>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                                </div>
                             </div>
-                            <div class="card-block">
-                                <h4 class="card-title">Info</h4>
-                                <i class="fa fa-calendar-plus-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
-                                <br>
-                                <i class="fa fa-tasks fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.status"/>:</strong>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                    <span class="badge badge-success"><fmt:message key="adminDispatcher.driverProfile.badge.open"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                    <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverProfile.badge.inProgress"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                    <span class="badge badge-default"><fmt:message key="adminDispatcher.driverProfile.badge.closed"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                    <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverProfile.badge.canceled"/></span>
-                                </c:if>
-                                <br>
-                                <i class="fa fa-car fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
-                                <br>
-                                <i class="fa fa-id-card-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.carId"/>:</strong>
-                                <c:choose>
-                                    <c:when test="${trip.carId eq '0'}">
-                                        <span class="badge badge-pill badge-success">Free spot</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${trip.carId}
-                                    </c:otherwise>
-                                </c:choose>
-                                <br>
-                                <i class="fa fa-building-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.townFrom"/>:</strong> ${trip.townFrom}
-                                <br>
-                                <i class="fa fa-building fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.townTo"/>:</strong> ${trip.townTo}
-                                <br>
-                                <i class="fa fa-calendar fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
-                                <br>
-                                <i class="fa fa-calendar-check-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
-                                <br>
-                                <i class="fa fa-usd fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.payment"/>:</strong> ${trip.paymentInDollars}
-                                <br>
-                                <i class="fa fa-user-plus fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.driverProfile.dispatcherId"/>:</strong> ${trip.dispatcherId}
-                            </div>
+                        </c:forEach>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="alert alert-info" role="alert">
+                            <fmt:message key="adminDispatcher.driverProfile.noTripsYet"/>
                         </div>
-                    </c:forEach>
-                </c:if>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

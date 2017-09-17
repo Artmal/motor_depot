@@ -102,53 +102,61 @@
             <hr>
             <h3><fmt:message key="adminDispatcher.tripInfoPage.requests"/></h3>
 
-            <c:if test="${not empty setOfTripRequests}">
-                <c:forEach items="${setOfTripRequests}" var="tripRequest">
-                    <c:set var="count" value="${count + 1}" scope="page"/>
-                    <div class="card">
-                        <div class="card-header">
-                            <c:if test="${trip.carId eq tripRequest.carInfo.id}">
-                                <i class="fa fa-check-square-o fa-fw"></i>
-                            </c:if>
-                            <fmt:message key="adminDispatcher.tripInfoPage.requestHeader"/>${tripRequest.id}
-                            <c:choose>
-                                <c:when test="${sessionScope.role eq 'Admin'}">
-                                    <a href="/admin-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                                       style="float: right"
-                                       class="btn btn-danger btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.deny"/></a>
-                                    <a href="/admin-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                                       style="float: right"
-                                       class="btn btn-success btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.accept"/></a>
-                                </c:when>
-                                <c:when test="${sessionScope.role eq 'Dispatcher'}">
-                                    <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                                       style="float: right"
-                                       class="btn btn-danger btn-sm btn-space">Deny</a>
-                                    <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
-                                       style="float: right"
-                                       class="btn btn-success btn-sm btn-space">Accept</a>
-                                </c:when>
-                            </c:choose>
+            <c:choose>
+                <c:when test="${not empty setOfTripRequests}">
+                    <c:forEach items="${setOfTripRequests}" var="tripRequest">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
+                        <div class="card">
+                            <div class="card-header">
+                                <c:if test="${trip.carId eq tripRequest.carInfo.id}">
+                                    <i class="fa fa-check-square-o fa-fw"></i>
+                                </c:if>
+                                <fmt:message key="adminDispatcher.tripInfoPage.requestHeader"/>${tripRequest.id}
+                                <c:choose>
+                                    <c:when test="${sessionScope.role eq 'Admin'}">
+                                        <a href="/admin-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                           style="float: right"
+                                           class="btn btn-danger btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.deny"/></a>
+                                        <a href="/admin-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                           style="float: right"
+                                           class="btn btn-success btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.accept"/></a>
+                                    </c:when>
+                                    <c:when test="${sessionScope.role eq 'Dispatcher'}">
+                                        <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                           style="float: right"
+                                           class="btn btn-danger btn-sm btn-space">Deny</a>
+                                        <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
+                                           style="float: right"
+                                           class="btn btn-success btn-sm btn-space">Accept</a>
+                                    </c:when>
+                                </c:choose>
+                            </div>
+                            <div class="card-block">
+                                <i class="fa fa-user-circle-o fa-fw"></i>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.driver"/>:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
+
+                                <i class="fa fa-car fa-fw"></i>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>
+
+                                <i class="fa fa-users fa-fw"></i>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.numberOfSeats"/>: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
+
+                                <i class="fa fa-tint fa-fw"></i>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carColor"/>: </strong> ${tripRequest.carInfo.color}<br>
+
+                                <i class="fa fa-clock-o fa-fw"></i>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
+                            </div>
                         </div>
-                        <div class="card-block">
-                            <i class="fa fa-user-circle-o fa-fw"></i>
-                            <strong><fmt:message key="adminDispatcher.tripInfoPage.driver"/>:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
+                    </c:forEach>
+                </c:when>
 
-                            <i class="fa fa-car fa-fw"></i>
-                            <strong><fmt:message key="adminDispatcher.tripInfoPage.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>
-
-                            <i class="fa fa-users fa-fw"></i>
-                            <strong><fmt:message key="adminDispatcher.tripInfoPage.numberOfSeats"/>: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
-
-                            <i class="fa fa-tint fa-fw"></i>
-                            <strong><fmt:message key="adminDispatcher.tripInfoPage.carColor"/>: </strong> ${tripRequest.carInfo.color}<br>
-
-                            <i class="fa fa-clock-o fa-fw"></i>
-                            <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
-                        </div>
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="adminDispatcher.tripInfoPage.noRequestsYet"/>
                     </div>
-                </c:forEach>
-            </c:if>
+                </c:otherwise>
+            </c:choose>
         </main>
     </div>
 </div>

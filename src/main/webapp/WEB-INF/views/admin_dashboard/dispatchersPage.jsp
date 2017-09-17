@@ -39,8 +39,9 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><fmt:message key="adminDashboard.dispatchersPage.header"/></h1>
 
-            <c:if test="${not empty setOfDispatchers}">
-                <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <c:choose>
+                <c:when test="${not empty setOfDispatchers}">
+                    <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th><fmt:message key="adminDashboard.dispatchersPage.table.dispatcherId"/></th>
@@ -62,8 +63,15 @@
                             </tr>
                         </c:forEach>
                         </tbody>
-                </table>
-            </c:if>
+                    </table>
+                </c:when>
+
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="adminDashboard.dispatchersPage.noDispatchersYet"/>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <br>
 
@@ -127,7 +135,6 @@
     </div>
 </div>
 
-<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/js/validation/admin_dashboard/dispatchersPage.js"></script>

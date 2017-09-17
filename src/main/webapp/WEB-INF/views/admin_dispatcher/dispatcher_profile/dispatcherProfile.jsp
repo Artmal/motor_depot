@@ -66,51 +66,60 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <h2><fmt:message key="adminDispatcher.dispatcherProfile.createdTrips"/></h2><br>
-                <c:if test="${not empty setOfCreatedTrips}">
-                <table id="example" class="table table-bordered" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th><fmt:message key="adminDispatcher.dispatcherProfile.tripId"/></th>
-                        <th><fmt:message key="adminDispatcher.dispatcherProfile.dateOfCreation"/></th>
-                        <th><fmt:message key="adminDispatcher.dispatcherProfile.status"/></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${setOfCreatedTrips}" var="trip">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
-                        <tr>
-                            <td>
-                                <c:choose>
-                                    <c:when test = "${sessionScope.role eq 'Admin'}">
-                                        <a href="/admin-dashboard/trip?trip-id=${trip.id}">${trip.id}</a>
-                                    </c:when>
 
-                                    <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-                                        <a href="/dispatcher-dashboard/trip?trip-id=${trip.id}">${trip.id}</a>
-                                    </c:when>
-                                </c:choose>
-                            </td>
+                <c:choose>
+                    <c:when test="${not empty setOfCreatedTrips}">
+                        <table id="example" class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th><fmt:message key="adminDispatcher.dispatcherProfile.tripId"/></th>
+                                <th><fmt:message key="adminDispatcher.dispatcherProfile.dateOfCreation"/></th>
+                                <th><fmt:message key="adminDispatcher.dispatcherProfile.status"/></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${setOfCreatedTrips}" var="trip">
+                                <c:set var="count" value="${count + 1}" scope="page"/>
+                                <tr>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test = "${sessionScope.role eq 'Admin'}">
+                                                <a href="/admin-dashboard/trip?trip-id=${trip.id}">${trip.id}</a>
+                                            </c:when>
 
-                            <td>${trip.dateOfCreation}</td>
-                            <td>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                    <span class="badge badge-success"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                    <span class="badge badge-warning"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                    <span class="badge badge-default"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
-                                </c:if>
-                                <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                    <span class="badge badge-danger"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                </c:if>
+                                            <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+                                                <a href="/dispatcher-dashboard/trip?trip-id=${trip.id}">${trip.id}</a>
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
+
+                                    <td>${trip.dateOfCreation}</td>
+                                    <td>
+                                        <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
+                                            <span class="badge badge-success"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
+                                        </c:if>
+                                        <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
+                                            <span class="badge badge-warning"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
+                                        </c:if>
+                                        <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
+                                            <span class="badge badge-default"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
+                                        </c:if>
+                                        <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
+                                            <span class="badge badge-danger"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="alert alert-info" role="alert">
+                            <fmt:message key="adminDispatcher.dispatcherProfile.noCreatedTripsYet"/>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

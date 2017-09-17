@@ -114,13 +114,18 @@
     </div>
 </div>
 
-<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
-<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
-<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
-
-<c:if test="${sessionScope.role eq 'Admin'}">
-    <script src="${contextPath}/resources/js/validation/admin_dashboard/carsPage.js"></script>
-</c:if>
 <c:if test="${sessionScope.role eq 'Driver'}">
+    <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+    <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+    <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
     <script src="${contextPath}/resources/js/validation/driver_dashboard/garagePage.js"></script>
 </c:if>
+
+<c:if test="${sessionScope.role eq 'Admin'}">
+    <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+    <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+    <script src="${contextPath}/resources/js/validation/admin_dashboard/carsPage.js"></script>
+</c:if>
+
+
+

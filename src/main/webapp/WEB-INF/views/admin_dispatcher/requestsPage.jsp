@@ -53,46 +53,53 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><fmt:message key="adminDispatcher.requestsPage.header"/></h1>
 
-            <c:if test="${not empty setOfTripRequests}">
-                <table id="example" class="table table-bordered" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
-                        <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
-                        <th><fmt:message key="adminDispatcher.requestsPage.carId"/></th>
-                        <th><fmt:message key="adminDispatcher.requestsPage.dateOfCreation"/></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${setOfTripRequests}" var="tripRequest">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
+            <c:choose>
+                <c:when test="${not empty setOfTripRequests}">
+                    <table id="example" class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
                         <tr>
-                            <td>${tripRequest.id}</td>
-                            <c:choose>
-                                <c:when test = "${sessionScope.role eq 'Admin'}">
-                                    <td>
-                                        <a href="/admin-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
-                                            ${tripRequest.tripInfo.id}
-                                        </a>
-                                    </td>
-                                </c:when>
-
-                                <c:when test = "${sessionScope.role eq 'Dispatcher'}">
-                                    <td>
-                                        <a href="/dispatcher-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
-                                            ${tripRequest.tripInfo.id}
-                                        </a>
-                                    </td>
-                                </c:when>
-                            </c:choose>
-
-                            <td>${tripRequest.carInfo.id}</td>
-                            <td>${tripRequest.tripInfo.dateOfCreation}</td>
+                            <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
+                            <th><fmt:message key="adminDispatcher.requestsPage.tripRequestId"/></th>
+                            <th><fmt:message key="adminDispatcher.requestsPage.carId"/></th>
+                            <th><fmt:message key="adminDispatcher.requestsPage.dateOfCreation"/></th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${setOfTripRequests}" var="tripRequest">
+                            <c:set var="count" value="${count + 1}" scope="page"/>
+                            <tr>
+                                <td>${tripRequest.id}</td>
+                                <c:choose>
+                                    <c:when test = "${sessionScope.role eq 'Admin'}">
+                                        <td>
+                                            <a href="/admin-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
+                                                    ${tripRequest.tripInfo.id}
+                                            </a>
+                                        </td>
+                                    </c:when>
+
+                                    <c:when test = "${sessionScope.role eq 'Dispatcher'}">
+                                        <td>
+                                            <a href="/dispatcher-dashboard/trip?trip-id=${tripRequest.tripInfo.id}">
+                                                    ${tripRequest.tripInfo.id}
+                                            </a>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+
+                                <td>${tripRequest.carInfo.id}</td>
+                                <td>${tripRequest.tripInfo.dateOfCreation}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="adminDispatcher.requestsPage.noRequestsYet"/>
+                    </div>
+                </c:otherwise>
+            </c:choose>
             <br>
         </main>
     </div>

@@ -36,50 +36,57 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><fmt:message key="driverDashboard.garagePage.header"/></h1>
 
-            <c:if test="${not empty setOfCars}">
-                <c:forEach items="${setOfCars}" var="car">
-                    <c:set var="count" value="${count + 1}" scope="page"/>
-                    <div class="card">
-                        <h3 class="card-header"> ${car.model}
-                            <a href="/driver-dashboard/garage/delete?car-id=${car.id}">
-                                <i style="font-size: 20px; color: crimson; margin: auto; float: right" class="btn btn-default fa fa-times fa-fw"></i>
-                            </a>
-                            <a href="${contextPath}/car?id=${car.id}">
-                                <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
-                            </a>
-                        </h3>
-                        <div class="card-block">
-                            <p class="card-text">
-                                <i class="fa fa-id-card-o fa-fw"></i>
-                                <fmt:message key="driverDashboard.garagePage.registrationNumber"/>: ${car.registrationNumber}
-                                <br>
-                                <i class="fa fa-car fa-fw"></i>
-                                <fmt:message key="driverDashboard.garagePage.type"/>: ${car.type.displayName()}
-                                <br>
-                                <i class="fa fa-cogs fa-fw"></i>
-                                <fmt:message key="driverDashboard.garagePage.condition"/>:
-                                <c:if test="${car.condition eq 'Broken'}">
-                                    <span class="badge badge-danger">Broken</span>
-                                </c:if>
-                                <c:if test="${car.condition eq 'Repairing'}">
-                                    <span class="badge badge-warning">Repairing</span>
-                                </c:if>
-                                <c:if test="${car.condition eq 'Ready'}">
-                                    <span class="badge badge-success">Ready</span>
-                                </c:if>
-                                <br>
-                                <i class="fa fa-users fa-fw"></i>
-                                <fmt:message key="driverDashboard.garagePage.numberOfSeats"/>: ${car.numberOfSeats}
-                                <br>
-                                <i class="fa fa-tint fa-fw"></i>
-                                <fmt:message key="driverDashboard.garagePage.button.addCar"/>: ${car.color}
-                            </p>
+            <c:choose>
+                <c:when test="${not empty setOfCars}">
+                    <c:forEach items="${setOfCars}" var="car">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
+                        <div class="card">
+                            <h3 class="card-header"> ${car.model}
+                                <a href="/driver-dashboard/garage/delete?car-id=${car.id}">
+                                    <i style="font-size: 20px; color: crimson; margin: auto; float: right" class="btn btn-default fa fa-times fa-fw"></i>
+                                </a>
+                                <a href="${contextPath}/car?id=${car.id}">
+                                    <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
+                                </a>
+                            </h3>
+                            <div class="card-block">
+                                <p class="card-text">
+                                    <i class="fa fa-id-card-o fa-fw"></i>
+                                    <fmt:message key="driverDashboard.garagePage.registrationNumber"/>: ${car.registrationNumber}
+                                    <br>
+                                    <i class="fa fa-car fa-fw"></i>
+                                    <fmt:message key="driverDashboard.garagePage.type"/>: ${car.type.displayName()}
+                                    <br>
+                                    <i class="fa fa-cogs fa-fw"></i>
+                                    <fmt:message key="driverDashboard.garagePage.condition"/>:
+                                    <c:if test="${car.condition eq 'Broken'}">
+                                        <span class="badge badge-danger">Broken</span>
+                                    </c:if>
+                                    <c:if test="${car.condition eq 'Repairing'}">
+                                        <span class="badge badge-warning">Repairing</span>
+                                    </c:if>
+                                    <c:if test="${car.condition eq 'Ready'}">
+                                        <span class="badge badge-success">Ready</span>
+                                    </c:if>
+                                    <br>
+                                    <i class="fa fa-users fa-fw"></i>
+                                    <fmt:message key="driverDashboard.garagePage.numberOfSeats"/>: ${car.numberOfSeats}
+                                    <br>
+                                    <i class="fa fa-tint fa-fw"></i>
+                                    <fmt:message key="driverDashboard.garagePage.button.addCar"/>: ${car.color}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                </c:forEach>
-            </c:if>
+                        <br>
+                    </c:forEach>
+                </c:when>
 
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="driverDashboard.garagePage.noCarsYet"/>
+                    </div>
+                </c:otherwise>
+            </c:choose>
             <br>
 
             <custom:addCarForm/>

@@ -70,43 +70,52 @@
 
         <div class="col-md-9">
             <div class="profile-content">
-                <c:if test="${not empty setOfCars}">
-                    <c:forEach items="${setOfCars}" var="car">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
-                        <div class="card">
-                            <h3 class="card-header"> ${car.model}
-                            </h3>
-                            <div class="card-block">
-                                <p class="card-text">
-                                    <i class="fa fa-id-card-o fa-fw"></i>
-                                    <fmt:message key="adminDispatcher.driverGaragePage.registrationNumber"/>: ${car.registrationNumber}
-                                    <br>
-                                    <i class="fa fa-car fa-fw"></i>
-                                    <fmt:message key="adminDispatcher.driverGaragePage.type"/>: ${car.type.displayName()}
-                                    <br>
-                                    <i class="fa fa-cogs fa-fw"></i>
-                                    <fmt:message key="adminDispatcher.driverGaragePage.condition"/>:
-                                    <c:if test="${car.condition eq 'Broken'}">
-                                        <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverGaragePage.badge.broken"/></span>
-                                    </c:if>
-                                    <c:if test="${car.condition eq 'Repairing'}">
-                                        <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverGaragePage.badge.repairing"/></span>
-                                    </c:if>
-                                    <c:if test="${car.condition eq 'Ready'}">
-                                        <span class="badge badge-success"><fmt:message key="adminDispatcher.driverGaragePage.badge.ready"/></span>
-                                    </c:if>
-                                    <br>
-                                    <i class="fa fa-users fa-fw"></i>
-                                    <fmt:message key="adminDispatcher.driverGaragePage.numberOfSeats"/>: ${car.numberOfSeats}
-                                    <br>
-                                    <i class="fa fa-tint fa-fw"></i>
-                                    <fmt:message key="adminDispatcher.driverGaragePage.color"/>: ${car.color}
-                                </p>
+
+                <c:choose>
+                    <c:when test="${not empty setOfCars}">
+                        <c:forEach items="${setOfCars}" var="car">
+                            <c:set var="count" value="${count + 1}" scope="page"/>
+                            <div class="card">
+                                <h3 class="card-header"> ${car.model}
+                                </h3>
+                                <div class="card-block">
+                                    <p class="card-text">
+                                        <i class="fa fa-id-card-o fa-fw"></i>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.registrationNumber"/>: ${car.registrationNumber}
+                                        <br>
+                                        <i class="fa fa-car fa-fw"></i>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.type"/>: ${car.type.displayName()}
+                                        <br>
+                                        <i class="fa fa-cogs fa-fw"></i>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.condition"/>:
+                                        <c:if test="${car.condition eq 'Broken'}">
+                                            <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverGaragePage.badge.broken"/></span>
+                                        </c:if>
+                                        <c:if test="${car.condition eq 'Repairing'}">
+                                            <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverGaragePage.badge.repairing"/></span>
+                                        </c:if>
+                                        <c:if test="${car.condition eq 'Ready'}">
+                                            <span class="badge badge-success"><fmt:message key="adminDispatcher.driverGaragePage.badge.ready"/></span>
+                                        </c:if>
+                                        <br>
+                                        <i class="fa fa-users fa-fw"></i>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.numberOfSeats"/>: ${car.numberOfSeats}
+                                        <br>
+                                        <i class="fa fa-tint fa-fw"></i>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.color"/>: ${car.color}
+                                    </p>
+                                </div>
                             </div>
+                            <br>
+                        </c:forEach>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="alert alert-info" role="alert">
+                            <fmt:message key="adminDispatcher.driverGaragePage.noCarsYet"/>
                         </div>
-                        <br>
-                    </c:forEach>
-                </c:if>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

@@ -41,69 +41,77 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><fmt:message key="driverDashboard.myTripsPage.header"/></h1>
 
-            <c:if test="${not empty setOfTrips}">
-                <c:forEach items="${setOfTrips}" var="trip">
-                    <c:set var="count" value="${count + 1}" scope="page"/>
-                    <div class="card">
-                        <div class="card-header">
-                            <fmt:message key="driverDashboard.myTripsPage.tripNumber"/>${trip.id}
-                            <a id = "completeButton${count}" href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}"
-                               style="float: right"
-                               class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.refuse"/></a>
-                            <a id = "refuseButton${count}" href="/driver-dashboard/my-trips/complete?trip-id=${trip.id}"
-                               style="float: right"
-                               class="btn btn-success btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.markAsCompleted"/></a>
+            <c:choose>
+                <c:when test="${not empty setOfTrips}">
+                    <c:forEach items="${setOfTrips}" var="trip">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
+                        <div class="card">
+                            <div class="card-header">
+                                <fmt:message key="driverDashboard.myTripsPage.tripNumber"/>${trip.id}
+                                <a id = "completeButton${count}" href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}"
+                                   style="float: right"
+                                   class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.refuse"/></a>
+                                <a id = "refuseButton${count}" href="/driver-dashboard/my-trips/complete?trip-id=${trip.id}"
+                                   style="float: right"
+                                   class="btn btn-success btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.markAsCompleted"/></a>
 
-                            <script>
-                                if(${trip.tripStatus.displayName() ne 'In progress'}) {
-                                    var completeButton = document.getElementById("completeButton${count}");
-                                    completeButton.classList.add("disabled");
+                                <script>
+                                    if(${trip.tripStatus.displayName() ne 'In progress'}) {
+                                        var completeButton = document.getElementById("completeButton${count}");
+                                        completeButton.classList.add("disabled");
 
-                                    var refuseButton = document.getElementById("refuseButton${count}");
-                                    refuseButton.classList.add("disabled");
-                                }
-                            </script>
+                                        var refuseButton = document.getElementById("refuseButton${count}");
+                                        refuseButton.classList.add("disabled");
+                                    }
+                                </script>
 
+                            </div>
+                            <div class="card-block">
+                                <h4 class="card-title">Info</h4>
+                                <i class="fa fa-calendar-plus-o fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
+                                <br>
+                                <i class="fa fa-tasks fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.status"/>:</strong>
+                                <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
+
+                                <br>
+                                <i class="fa fa-car fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
+                                <br>
+                                <i class="fa fa-id-card-o fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.carId"/>:</strong>
+
+                                <custom:displayCarIdOrFreeSpotBadge carId="${trip.carId}"/>
+                                <br>
+                                <i class="fa fa-building-o fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong> ${trip.townFrom}
+                                <br>
+                                <i class="fa fa-building fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.townTo"/>:</strong> ${trip.townTo}
+                                <br>
+                                <i class="fa fa-calendar fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                                <br>
+                                <i class="fa fa-calendar-check-o fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                                <br>
+                                <i class="fa fa-usd fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.payment"/>:</strong> ${trip.paymentInDollars}
+                                <br>
+                                <i class="fa fa-user-plus fa-fw"></i>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                            </div>
                         </div>
-                        <div class="card-block">
-                            <h4 class="card-title">Info</h4>
-                            <i class="fa fa-calendar-plus-o fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
-                            <br>
-                            <i class="fa fa-tasks fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.status"/>:</strong>
-                            <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
+                    </c:forEach>
+                </c:when>
 
-                            <br>
-                            <i class="fa fa-car fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
-                            <br>
-                            <i class="fa fa-id-card-o fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.carId"/>:</strong>
-
-                            <custom:displayCarIdOrFreeSpotBadge carId="${trip.carId}"/>
-                            <br>
-                            <i class="fa fa-building-o fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong> ${trip.townFrom}
-                            <br>
-                            <i class="fa fa-building fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.townTo"/>:</strong> ${trip.townTo}
-                            <br>
-                            <i class="fa fa-calendar fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
-                            <br>
-                            <i class="fa fa-calendar-check-o fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
-                            <br>
-                            <i class="fa fa-usd fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.payment"/>:</strong> ${trip.paymentInDollars}
-                            <br>
-                            <i class="fa fa-user-plus fa-fw"></i>
-                            <strong><fmt:message key="driverDashboard.myTripsPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
-                        </div>
+                <c:otherwise>
+                    <div class="alert alert-info" role="alert">
+                        <fmt:message key="driverDashboard.myTripsPage.noTripsYet"/>
                     </div>
-                </c:forEach>
-            </c:if>
+                </c:otherwise>
+            </c:choose>
         </main>
     </div>
 </div>
