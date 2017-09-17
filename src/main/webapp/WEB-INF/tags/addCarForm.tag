@@ -5,6 +5,8 @@
 
 <fmt:setLocale value="${language}" />
 
+<link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
+
 <fmt:setBundle basename="i18n.admin_dashboard.carsPage" />
 <div class="card">
     <div class="card-block">
@@ -15,14 +17,13 @@
             <c:set var="actionUrl" value="/driver-dashboard/garage"/>
         </c:if>
 
-        <form class="form-horizontal" action="${actionUrl}" method="post">
+        <form id="add-car-form" action="${actionUrl}" method="post">
             <label for="registration-number"><fmt:message key="adminDashboard.carsPage.registrationNumber"/>*:</label>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon">
                     <i class="fa fa-id-card-o fa-fw"></i>
                 </div>
-                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="registration-number"
-                       name="registration-number" required>
+                <input id="registration-number" name="registration-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
             </div>
 
             <label for="type"><fmt:message key="adminDashboard.carsPage.type"/>*:</label>
@@ -32,7 +33,7 @@
                 </div>
 
                 <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
-                <select class="form-control" id="type" name="type" required>
+                <select id="type" name="type" class="form-control">
                     <optgroup label="Light">
                         <option><fmt:message key="tripsPage.content.addTripForm.option.micro"/></option>
                         <option><fmt:message key="tripsPage.content.addTripForm.option.sedan"/></option>
@@ -65,7 +66,7 @@
                     <i class="fa fa-cogs fa-fw"></i>
                 </div>
 
-                <select class="form-control" id="condition" name="condition" required>
+                <select id="condition" name="condition" class="form-control">
                     <option value="Broken"><fmt:message key="adminDashboard.carsPage.broken"/></option>
                     <option value="In Progress"><fmt:message key="adminDashboard.carsPage.repairing"/></option>
                     <option value="Ready"><fmt:message key="adminDashboard.carsPage.ready"/></option>
@@ -77,8 +78,8 @@
                 <div class="input-group-addon">
                     <i class="fa fa-industry fa-fw"></i>
                 </div>
-                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="model"
-                       name="model" placeholder="Kia Optima" required>
+                <input id="model" name="model" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                        placeholder="Kia Optima">
             </div>
 
             <label for="number-of-seats"><fmt:message key="adminDashboard.carsPage.numberOfSeats"/>*:</label>
@@ -86,8 +87,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-users fa-fw"></i>
                 </div>
-                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="number-of-seats"
-                       name="number-of-seats" required>
+                <input id="number-of-seats" name="number-of-seats" class="form-control mb-2 mr-sm-2 mb-sm-0">
             </div>
 
             <label for="color"><fmt:message key="adminDashboard.carsPage.color"/>*:</label>
@@ -95,8 +95,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-tint fa-fw"></i>
                 </div>
-                <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="color" name="color"
-                       required>
+                <input id="color" name="color" class="form-control mb-2 mr-sm-2 mb-sm-0">
             </div>
 
             <c:if test="${sessionScope.role eq 'Admin'}">
@@ -105,8 +104,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-user-circle-o fa-fw"></i>
                     </div>
-                    <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="owner-id" name="owner-id"
-                           required>
+                    <input id="owner-id" name="owner-id" class="form-control mb-2 mr-sm-2 mb-sm-0">
                 </div>
             </c:if>
             <br>
@@ -115,3 +113,8 @@
         </form>
     </div>
 </div>
+
+<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+<script src="${contextPath}/resources/js/validation/admin_dashboard/carsPage.js"></script>
