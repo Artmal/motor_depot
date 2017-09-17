@@ -13,6 +13,7 @@
     <!-- Bootstrap CSS & Font Awesome -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +21,6 @@
     <br>
     <br>
     <div class="container">
-
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form id="settings-form" name="settings-form" action="/my-settings/save" method="post">

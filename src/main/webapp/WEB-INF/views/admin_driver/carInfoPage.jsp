@@ -17,18 +17,14 @@
 
     <title><fmt:message key="adminDriver.carInfoPage.pageTitle"/></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS & Font Awesome -->
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/admin-panel/driversPage.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Data tables -->
-    <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
+    <!-- Styles for the page-->
+    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/admin-panel/driversPage.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,12 +35,10 @@
 
     <c:when test = "${sessionScope.role eq 'Driver'}">
         <%@include file = "../../../resources/jsp/driver_utils/driverHeader.jsp" %>
-
     </c:when>
 </c:choose>
 
 <fmt:setBundle basename="i18n.admin_driver.carInfoPage" />
-
 
 <div class="container">
     <br>
@@ -52,7 +46,7 @@
     <div class="container">
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form name="settingsChangeForm" action="/car/save" method="post">
+                <form id = "edit-car-form" name="edit-car-form" action="/car/save" method="post">
                     <input hidden name="id" value="${param.id}">
 
                     <fieldset>
@@ -62,8 +56,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="registration-number"
-                                   name="registration-number" value="${carInfo.registrationNumber}" required>
+                            <input id="registration-number" name="registration-number" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                                    value="${carInfo.registrationNumber}">
                         </div>
 
                         <label for="model"><fmt:message key="adminDriver.carInfoPage.model"/>*:</label>
@@ -71,8 +65,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-industry fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="model"
-                                   name="model" value="${carInfo.model}" required>
+                            <input id="model" name="model" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                                    value="${carInfo.model}">
                         </div>
 
                         <label for="type"><fmt:message key="adminDriver.carInfoPage.type"/>:</label>
@@ -112,7 +106,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-cogs fa-fw"></i>
                             </div>
-                            <select class="form-control" id="condition" name="condition" required>
+                            <select id="condition" name="condition" class="form-control">
                                 <option value="Broken"><fmt:message key="adminDriver.carInfoPage.broken"/></option>
                                 <option value="Repairing"><fmt:message key="adminDriver.carInfoPage.repairing"/></option>
                                 <option value="Ready"><fmt:message key="adminDriver.carInfoPage.ready"/></option>
@@ -124,8 +118,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-users fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="number-of-seats"
-                                   name="number-of-seats" required value="${carInfo.numberOfSeats}">
+                            <input id="number-of-seats" name="number-of-seats" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                                   value="${carInfo.numberOfSeats}">
                         </div>
 
                         <label for="color"><fmt:message key="adminDriver.carInfoPage.color"/>: </label>
@@ -133,8 +127,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-tint fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="color"
-                                   name="color" required value="${carInfo.color}">
+                            <input id="color" name="color" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                                    required value="${carInfo.color}">
                         </div>
 
                         <br>
@@ -158,6 +152,11 @@
         </div>
     </div>
 </div>
+
+<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
+<script src="${contextPath}/resources/js/validation/admin_driver/carInfoPage.js"></script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
