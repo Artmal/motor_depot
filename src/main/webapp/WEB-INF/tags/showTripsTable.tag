@@ -10,7 +10,7 @@
 <fmt:setBundle basename="i18n.admin_dispatcher.tripsPage" />
 
 <c:if test="${not empty setOfTrips}">
-    <table id="example" class="table table-bordered" width="100%" cellspacing="0">
+    <table id="trips-table" class="table table-bordered" width="100%" cellspacing="0">
         <thead>
         <tr>
             <th><fmt:message key="tripsPage.content.table.tripId"/></th>

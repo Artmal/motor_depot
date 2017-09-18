@@ -249,6 +249,23 @@
     });
 </script>
 
+<script>
+    $(document).on("submit", "#add-trip-form", function(event) {
+        var $form = $(this);
+
+        $.post($form.attr("action"), $form.serialize(), function(response) {
+            if (response.redirect) {
+                window.location = response.redirect;
+            }
+
+            var updatedTripstable = $(response).find('#trips-table');
+            $('#trips-table').replaceWith(updatedTripstable);
+        });
+
+        event.preventDefault();
+    });
+</script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

@@ -44,14 +44,18 @@
                         <input name="email" id="email" class="form-control input-lg"
                                placeholder="${emailPlaceholderText}">
                     </div>
-                    <div class="form-group">
+                    <div id="password-div" class="form-group">
                         <input name="password" id="password" class="form-control input-lg"
                                placeholder="${passwordPlaceholderText}"
                                type="password">
                     </div>
 
+                    <div id="error">
+                        <span style = "color: #ff6666"></span>
+                    </div>
+
                     <c:if test="${errorText ne null}">
-                        <p style="color: #ff6666">${errorText}</p>
+                        <p id = "error-text" style="color: #ff6666">${errorText}</p>
                     </c:if>
 
                     <a href="/forgotPassword">
@@ -60,12 +64,14 @@
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input id="submit-button" type="submit" class="btn btn-lg btn-success btn-block"
+                            <input id="submit" type="submit" name = "submit" class="btn btn-lg btn-success btn-block"
                                    value="${signInButtonText}">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <a href="/registration" class="btn btn-lg btn-primary btn-block">${registerButtonText}</a>
                         </div>
+
+                        <div class="result"></div>
                     </div>
                 </fieldset>
             </form>
@@ -74,26 +80,34 @@
 </div>
 
 
+
+
 <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/js/validation/login.js"></script>
 
-<script>
-    function appendParameters() {
-        var separator = (window.location.href.indexOf("?")===-1)?"?":"&";
-        if (/language/.test(window.location.href)) {
-            if(/language=ru/.test(window.location.href)) {
-                window.location.href = window.location.href.replace("ru", "en");
-            } else if(/language=en/.test(window.location.href)) {
-                window.location.href = window.location.href.replace("en", "ru");
-            }
-        } else {
-            window.location.href = window.location.href + separator + "language=ru";
-        }
+<script src="/resources/js/appendLanguageParamToUrl.js"></script>
 
-    }
+<script>
+    $(document).on("submit", "#login-form", function(event) {
+        var $form = $(this);
+
+        $.post($form.attr("action"), $form.serialize(), function(response) {
+            if (response.redirect) {
+                window.location = response.redirect;
+                return;
+            }
+
+            var errorText = $(response).find('#error-text').text();
+
+            $('#error').find('span').text(errorText);
+        });
+
+        event.preventDefault();
+    });
 </script>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

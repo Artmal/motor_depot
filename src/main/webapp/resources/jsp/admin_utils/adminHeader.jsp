@@ -3,11 +3,6 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="i18n.utils.admin_utils.adminHeader"/>
 
-<head>
-    <link rel="script" href="/resources/js/appendLanguageParamToUrl.js">
-</head>
-
-
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,18 +29,4 @@
     </div>
 </nav>
 
-<script>
-    function appendParameters() {
-        var separator = (window.location.href.indexOf("?")===-1)?"?":"&";
-        if (/language/.test(window.location.href)) {
-            if(/language=ru/.test(window.location.href)) {
-                window.location.href = window.location.href.replace("ru", "en");
-            } else if(/language=en/.test(window.location.href)) {
-                window.location.href = window.location.href.replace("en", "ru");
-            }
-        } else {
-            window.location.href = window.location.href + separator + "language=ru";
-        }
-
-    }
-</script>
+<script src="/resources/js/appendLanguageParamToUrl.js"></script>

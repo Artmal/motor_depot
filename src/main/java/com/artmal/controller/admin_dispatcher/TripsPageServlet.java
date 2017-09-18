@@ -7,6 +7,7 @@ import com.artmal.model.enums.TripStatus;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.TripService;
 import com.artmal.utils.TripUtils;
+import com.google.gson.Gson;
 import lombok.extern.log4j.Log4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -73,7 +76,14 @@ public class TripsPageServlet extends HttpServlet {
                 log.error(e);
             }
 
-            resp.sendRedirect("/dispatcher-dashboard/trips");
+            String redirectUrl = "/dispatcher-dashboard/trips";
+            Map<String, String> data = new HashMap<>();
+            data.put("redirect", redirectUrl);
+            String json = new Gson().toJson(data);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+
+            resp.getWriter().write(json);
         } else if (role.equals(Role.Admin)) {
             final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, paymentInDollars);
             try {
@@ -81,6 +91,15 @@ public class TripsPageServlet extends HttpServlet {
             } catch (SQLException | NamingException | ParseException e) {
                 log.error(e);
             }
+
+//            String redirectUrl = "/admin-dashboard/trips";
+//            Map<String, String> data = new HashMap<>();
+//            data.put("redirect", redirectUrl);
+//            String json = new Gson().toJson(data);
+//            resp.setContentType("application/json");
+//            resp.setCharacterEncoding("UTF-8");
+//
+//            resp.getWriter().write(json);
 
             resp.sendRedirect("/admin-dashboard/trips");
         }
