@@ -173,6 +173,22 @@
         );
     });
 
+    $('#time-out').on('apply.daterangepicker', function(ev, picker) {
+        var minDate2 = picker.startDate.format('YYYY-MM-DD HH:mm');
+
+        $('input[name="time-in"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            timePicker: true,
+            timePicker24Hour: true,
+            drops: 'up',
+            locale: {
+                format: 'YYYY-MM-DD HH:mm'
+            },
+            minDate: minDate2
+        });
+    });
+
     $(function() {
         $('input[name="time-in"]').daterangepicker({
                 singleDatePicker: true,
