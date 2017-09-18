@@ -65,9 +65,10 @@ public final class TripUtils {
      * We also getting 'yyyy-MM-dd HH:mm:ss.S' format which we need convert to 'yyyy-MM-dd HH:mm:ss'.
      */
     public static DateTime sqlTimestampToDatetime(Timestamp sqlDate) throws ParseException {
-        final String stringDate = sqlDate.toString().split("\\.")[0];
+        //SQL TimeStamp has format YYYY-MM-DD HH:mm:ss.s so we need to convert Joda Datetime accordingly
+        final String stringDate = sqlDate.toString().split(":00\\.")[0];
 
-        final DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        final DateTimeFormatter dft = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         return DateTime.parse(stringDate, dft);
     }
 
@@ -75,7 +76,7 @@ public final class TripUtils {
      * Conversion between date in string format and {@link DateTime}.
      */
     public static DateTime stringDateToDateTime(String date) {
-        final DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        final DateTimeFormatter dft = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         return DateTime.parse(date, dft);
     }
 

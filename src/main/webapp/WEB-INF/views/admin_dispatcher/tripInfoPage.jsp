@@ -104,10 +104,10 @@
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.townTo"/>:</strong> ${trip.townTo}
                     <br>
                     <i class="fa fa-calendar fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeOut"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeIn"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                     <br>
                     <i class="fa fa-usd fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.payment"/>:</strong> ${trip.paymentInDollars}

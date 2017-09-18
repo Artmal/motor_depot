@@ -36,12 +36,10 @@ $(document).ready(function() {
                 pattern: "^[A-ZА-Я][a-zа-я-\\s]+$"
             },
             "time-out": {
-                required: true,
-                pattern: "[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$"
+                required: true
             },
             "time-in": {
-                required: true,
-                pattern: "[2][\\d]{3}-[\\d][1-9]-[\\d][1-9] [\\d]{2}:[\\d]{2}:[\\d]{2}$"
+                required: true
             },
             "payment-in-dollars": {
                 required: true,

@@ -27,6 +27,9 @@
     <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 
+    <!-- Datetime picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
     <!-- Data tables -->
     <%@include file = "../../../resources/dataTablesScriptsImport.jsp" %>
 </head>
@@ -153,17 +156,15 @@
                                 <i class="fa fa-calendar fa-fw"></i>
                             </div>
                             <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
-                                   name="time-out" placeholder="YYYY-MM-DD HH:MM:SS">
+                                   name="time-out">
                         </div>
-
 
                         <label for="time-in"><fmt:message key="tripsPage.content.addTripForm.label.timeIn"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in"
-                                   placeholder="YYYY-MM-DD HH:MM:SS">
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in">
                         </div>
 
                         <label for="payment-in-dollars"><fmt:message key="tripsPage.content.addTripForm.label.payment"/>($)*:</label>
@@ -187,6 +188,9 @@
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/js/validation/admin_dispatcher/tripsPage.js"></script>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
 <script>
     document.getElementById("trips-nav-link").classList.add("active");
 </script>
@@ -195,6 +199,38 @@
     $(document).ready(function() {
         $('#example').DataTable();
     } );
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('input[name="time-out"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: true,
+                timePicker24Hour: true,
+                drops: 'up',
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm'
+                },
+                minDate: moment().format('YYYY-MM-DD HH:mm')
+            }
+        );
+    });
+
+    $(function() {
+        $('input[name="time-in"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: true,
+                timePicker24Hour: true,
+                drops: 'up',
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm'
+                },
+                minDate: moment().format('YYYY-MM-DD HH:mm')
+            }
+        );
+    });
 </script>
 
 <!-- Bootstrap core JavaScript
