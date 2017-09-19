@@ -17,7 +17,7 @@ $(document).ready(function() {
                 .closest('.form-group')
                 .removeClass('has-danger')
                 .addClass('has-success')
-        },
+        }
     });
 
    $("#login-form").validate({

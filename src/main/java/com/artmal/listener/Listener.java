@@ -1,8 +1,8 @@
 package com.artmal.listener;
 
-import com.artmal.utils.Constants;
 import com.artmal.utils.CurrencyConverter;
 import com.artmal.utils.DatabaseUtils;
+import com.artmal.utils.VariablesHolder;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContextEvent;
@@ -27,7 +27,7 @@ public class Listener implements ServletContextListener,
     public void contextInitialized(ServletContextEvent sce) {
         DatabaseUtils.initializeDataSource();
         try {
-            Constants.USD_TO_UAH = CurrencyConverter.getConversionRate("USD", "UAH");
+            VariablesHolder.USD_TO_UAH = CurrencyConverter.getConversionRate("USD", "UAH");
         } catch (IOException e) {
             e.printStackTrace();
         }

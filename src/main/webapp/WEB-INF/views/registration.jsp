@@ -27,7 +27,7 @@
         <div class="col-md-8">
             <section>
                 <h1 class="entry-title"><span><fmt:message key="registration.header"/></span> </h1>
-                <form id="registration-form" action="/register" name="signup" method="post">
+                <form id="registration-form" action="/registration" name="signup" method="post">
                     <label for="email"><fmt:message key="registration.label.email"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
@@ -92,12 +92,13 @@
                     <p class="text-danger">${error}</p>
 
                     <br>
-                    <div class="form-group">
+                    <div class="input-group">
                         <div class="col-xs-offset-3 col-xs-10">
-                            <input onclick="return checkPass()" name="Submit" type="submit" value="${signUpButtonText}" class="btn btn-primary">
+                            <input  name="submit" type="submit" value="${signUpButtonText}" class="btn btn-primary">
                         </div>
                     </div>
                 </form>
+            </section>
         </div>
     </div>
 </div>

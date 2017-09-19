@@ -203,7 +203,6 @@
     table
         .column( '0:visible' )
         .order( 'asc' )
-        .iDisplayLength(100)
         .draw();
 </script>
 
@@ -261,22 +260,20 @@
 
         $.post($form.attr("action"), $form.serialize(), function(response) {
             var lastRow = $(response).find('tr:last').attr('id');
-            console.log(lastRow);
+            table.api().row(lastRow).draw();
 
-            $('#trips-table').find("> tbody").append(lastRow);
-            table.destroy();
-
-            $(document).ready(function() {
-                $('#trips-table').DataTable({
-                    "iDisplayLength": 50
-                });
-                table
-                    .column( '0:visible' )
-                    .order( 'asc' )
-                    .iDisplayLength(100)
-                    .draw();
-
-            } );
+//            table.destroy();
+//
+//            $(document).ready(function() {
+//                $('#trips-table').DataTable({
+//                    "iDisplayLength": 50
+//                });
+//                table
+//                    .column( '0:visible' )
+//                    .order( 'asc' )
+//                    .draw();
+//
+//            } );
 
         });
 

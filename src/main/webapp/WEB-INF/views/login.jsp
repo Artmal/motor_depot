@@ -64,7 +64,7 @@
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input id="submit" type="submit" name = "submit" class="btn btn-lg btn-success btn-block"
+                            <input id="submit" type="submit" name="submit" class="btn btn-lg btn-success btn-block"
                                    value="${signInButtonText}">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">

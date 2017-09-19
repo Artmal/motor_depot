@@ -1,6 +1,6 @@
 package com.artmal.custom_tags;
 
-import com.artmal.utils.Constants;
+import com.artmal.utils.VariablesHolder;
 import lombok.Setter;
 
 import javax.servlet.jsp.JspException;
@@ -27,7 +27,7 @@ public class CurrencyTag extends SimpleTagSupport {
         if(locale.getLanguage().equals("en")) {
             jspWriter.write(paymentInDollars + "$");
         } else if(locale.getLanguage().equals("ru")) {
-            jspWriter.write(Constants.USD_TO_UAH * paymentInDollars + "₴");
+            jspWriter.write(VariablesHolder.USD_TO_UAH * paymentInDollars + "₴");
         }
     }
 }

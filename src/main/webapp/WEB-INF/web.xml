@@ -38,13 +38,13 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>register</servlet-name>
+    <servlet-name>RegistrationServlet</servlet-name>
     <servlet-class>com.artmal.controller.RegistrationServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>register</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/registration</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -319,16 +319,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>registration</servlet-name>
-    <jsp-file>/WEB-INF/views/registration.jsp</jsp-file>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>registration</servlet-name>
-    <url-pattern>/registration</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>adminDashboard-users</servlet-name>
     <jsp-file>/WEB-INF/views/admin_dashboard/usersView.jsp</jsp-file>
   </servlet>
@@ -338,7 +328,7 @@
     <url-pattern>/admin-dashboard/user</url-pattern>
   </servlet-mapping>
 
-  <!-- Filters -->
+  <!-- Filters _____________________________________________________________________________________________________ -->
   <filter>
     <filter-name>alreadyLoggedInFilter</filter-name>
     <filter-class>com.artmal.filter.AlreadyLoggedInFilter</filter-class>
@@ -380,6 +370,7 @@
     <filter-name>i18nFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!-- _____________________________________________________________________________________________________________ -->
 
   <resource-ref>
     <description>DB Connection</description>
