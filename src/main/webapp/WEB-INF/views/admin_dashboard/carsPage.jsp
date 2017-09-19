@@ -61,7 +61,7 @@
                         <c:forEach items="${setOfCars}" var="car">
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
-                                <td><a href="${contextPath}/car?id=${car.id}">${car.id}</a></td>
+                                <td><a href="/admin-dashboard/cars/car?id=${car.id}">${car.id}</a></td>
                                 <td>${car.registrationNumber}</td>
                                 <td>
                                     <custom:printTypeCarRequiredFmt carTypeRequired="${car.type}"/>

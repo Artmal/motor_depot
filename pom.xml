@@ -9,13 +9,6 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
@@ -124,6 +117,7 @@
       <artifactId>jquery-validation</artifactId>
       <version>1.17.0</version>
     </dependency>
+
       <dependency>
           <groupId>org.junit.jupiter</groupId>
           <artifactId>junit-jupiter-api</artifactId>
@@ -182,12 +176,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>jquery-validation</artifactId>
-      <version>1.17.0</version>
-    </dependency>
-
       <dependency>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
@@ -199,6 +187,7 @@
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
     </dependency>
+
       <dependency>
           <groupId>com.google.code.gson</groupId>
           <artifactId>gson</artifactId>
@@ -211,16 +200,43 @@
       <version>1.4.0</version>
     </dependency>
   </dependencies>
+
   <build>
     <finalName>motor_depot</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>1.7.6</version>
+        <executions>
+          <execution>
+            <id>default-minify</id>
+            <configuration>
+              <!--<cssSourceFiles>-->
+                <!--<cssSourceFile>/resources/appendLanguageParamToUrl</cssSourceFile>-->
+                <!--&lt;!&ndash; ... &ndash;&gt;-->
+                <!--<cssSourceFile>file-n.css</cssSourceFile>-->
+              <!--</cssSourceFiles>-->
+              <jsSourceFiles>
+                <jsSourceFile>/resources/js/appendLanguageParamToUrl.js</jsSourceFile>
+                <!--<jsSourceFile>file-n.js</jsSourceFile>-->
+              </jsSourceFiles>
+            </configuration>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

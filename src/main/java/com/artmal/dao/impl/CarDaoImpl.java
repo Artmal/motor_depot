@@ -134,6 +134,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public void deleteById(long id) throws NamingException, SQLException {
         @Cleanup Connection con = dataSource.getConnection();
+        con.setAutoCommit(false);
 
         tripRequestService.deleteByCarId(id);
         tripService.deleteByCarId(id);
@@ -141,5 +142,6 @@ public class CarDaoImpl implements CarDao {
         @Cleanup PreparedStatement deleteCarById = con.prepareStatement("DELETE FROM cars WHERE id = ?");
         deleteCarById.setLong(1, id);
         deleteCarById.execute();
+        con.commit();
     }
 }

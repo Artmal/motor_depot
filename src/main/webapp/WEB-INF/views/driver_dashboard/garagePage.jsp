@@ -45,7 +45,7 @@
                                 <a href="/driver-dashboard/garage/delete?car-id=${car.id}">
                                     <i style="font-size: 20px; color: crimson; margin: auto; float: right" class="btn btn-default fa fa-times fa-fw"></i>
                                 </a>
-                                <a href="${contextPath}/car?id=${car.id}">
+                                <a href="/driver-dashboard/garage/car?id=${car.id}">
                                     <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
                                 </a>
                             </h3>

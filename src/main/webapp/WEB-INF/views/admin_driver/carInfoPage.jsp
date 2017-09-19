@@ -46,7 +46,18 @@
     <div class="container">
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form id = "edit-car-form" name="edit-car-form" action="/car/save" method="post">
+
+                <c:choose>
+                    <c:when test = "${sessionScope.role eq 'Admin'}">
+                        <c:set var="saveEditCarUrl" value="/admin-dashboard/cars/car/save"/>
+                    </c:when>
+
+                    <c:when test = "${sessionScope.role eq 'Driver'}">
+                        <c:set var="saveEditCarUrl" value="/driver-dashboard/garage/car/save"/>
+                    </c:when>
+                </c:choose>
+
+                <form id = "edit-car-form" name="edit-car-form" action="${saveEditCarUrl}" method="post">
                     <input hidden name="id" value="${param.id}">
 
                     <fieldset>
@@ -148,7 +159,7 @@
 
                             <c:if test="${sessionScope.role eq 'Admin'}">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <a href="/car/delete?car-id=${carInfo.id}" class="btn btn-lg btn-danger btn-block">
+                                    <a href="/admin-dashboard/cars/car/delete?car-id=${carInfo.id}" class="btn btn-lg btn-danger btn-block">
                                         <fmt:message key="adminDriver.carInfoPage.button.delete"/>
                                     </a>
                                 </div>

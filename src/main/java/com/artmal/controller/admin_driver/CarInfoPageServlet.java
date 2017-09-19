@@ -46,7 +46,7 @@ public class CarInfoPageServlet extends HttpServlet {
             log.error(e);
         }
 
-        req.getRequestDispatcher("WEB-INF/views/admin_driver/carInfoPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/admin_driver/carInfoPage.jsp").forward(req, resp);
     }
 
     @Override

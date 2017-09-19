@@ -261,7 +261,8 @@
 
   <servlet-mapping>
     <servlet-name>carInfoPageServlet</servlet-name>
-    <url-pattern>/car</url-pattern>
+    <url-pattern>/admin-dashboard/cars/car</url-pattern>
+    <url-pattern>/driver-dashboard/garage/car</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -271,7 +272,8 @@
 
   <servlet-mapping>
     <servlet-name>carInfoSaveServlet</servlet-name>
-    <url-pattern>/car/save</url-pattern>
+    <url-pattern>/admin-dashboard/cars/car/save</url-pattern>
+    <url-pattern>/driver-dashboard/garage/car/save</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -282,7 +284,7 @@
   <servlet-mapping>
     <servlet-name>deleteCarServlet</servlet-name>
     <url-pattern>/driver-dashboard/garage/delete</url-pattern>
-    <url-pattern>/car/delete</url-pattern>
+    <url-pattern>/admin-dashboard/cars/car/delete</url-pattern>
   </servlet-mapping>
 
   <servlet>
