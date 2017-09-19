@@ -57,8 +57,6 @@ public class LoginServlet extends HttpServlet {
 
                 final Role role = userInDb.getRole();
 
-
-
                 String redirectUrl = "";
                 switch (role) {
                     case Driver:
@@ -77,7 +75,6 @@ public class LoginServlet extends HttpServlet {
                 String json = new Gson().toJson(data);
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
-
                 resp.getWriter().write(json);
             } else {
                 final Locale language = (Locale) req.getSession().getAttribute("language");

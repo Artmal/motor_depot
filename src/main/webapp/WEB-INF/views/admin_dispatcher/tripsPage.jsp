@@ -79,13 +79,13 @@
             <div class="card">
                 <div class="card-block">
                     <c:if test="${sessionScope.role eq 'Admin'}">
-                        <c:set var="actionUrl" value="/admin-dashboard/cars"/>
+                        <c:set var="actionUrl" value="/admin-dashboard/trips"/>
                     </c:if>
-                    <c:if test="${sessionScope.role eq 'Driver'}">
-                        <c:set var="actionUrl" value="/dispatcher-dashboard/garage"/>
+                    <c:if test="${sessionScope.role eq 'Dispatcher'}">
+                        <c:set var="actionUrl" value="/dispatcher-dashboard/trips"/>
                     </c:if>
 
-                    <form id = "add-trip-form" action="/admin-dashboard/trips" method="post">
+                    <form id = "add-trip-form" action="${actionUrl}" method="post">
                         <label for="status"><fmt:message key="tripsPage.content.label.status"/>*:</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
@@ -196,9 +196,15 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
+    var table = $('#trips-table').DataTable({
+        "iDisplayLength": 50
+    });
+
+    table
+        .column( '0:visible' )
+        .order( 'asc' )
+        .iDisplayLength(100)
+        .draw();
 </script>
 
 <script type="text/javascript">
@@ -254,12 +260,24 @@
         var $form = $(this);
 
         $.post($form.attr("action"), $form.serialize(), function(response) {
-            if (response.redirect) {
-                window.location = response.redirect;
-            }
+            var lastRow = $(response).find('tr:last').attr('id');
+            console.log(lastRow);
 
-            var updatedTripstable = $(response).find('#trips-table');
-            $('#trips-table').replaceWith(updatedTripstable);
+            $('#trips-table').find("> tbody").append(lastRow);
+            table.destroy();
+
+            $(document).ready(function() {
+                $('#trips-table').DataTable({
+                    "iDisplayLength": 50
+                });
+                table
+                    .column( '0:visible' )
+                    .order( 'asc' )
+                    .iDisplayLength(100)
+                    .draw();
+
+            } );
+
         });
 
         event.preventDefault();

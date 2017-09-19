@@ -62,7 +62,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#trips-table').DataTable();
     } );
 </script>
 

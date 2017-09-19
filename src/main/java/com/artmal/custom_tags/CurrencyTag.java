@@ -9,6 +9,10 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * Make request to Yahoo Finance API(Currency Converter).
+ * @author Artem Malchenko
+ */
 public class CurrencyTag extends SimpleTagSupport {
     @Setter private Locale locale;
     @Setter private int paymentInDollars;
