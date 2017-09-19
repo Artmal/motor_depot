@@ -66,7 +66,7 @@ public final class TripUtils {
      */
     public static DateTime sqlTimestampToDatetime(Timestamp sqlDate) throws ParseException {
         //SQL TimeStamp has format YYYY-MM-DD HH:mm:ss.s so we need to convert Joda Datetime accordingly
-        final String stringDate = sqlDate.toString().split(":00\\.")[0];
+        final String stringDate = sqlDate.toString().split(":\\d{2}\\.")[0];
 
         final DateTimeFormatter dft = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         return DateTime.parse(stringDate, dft);

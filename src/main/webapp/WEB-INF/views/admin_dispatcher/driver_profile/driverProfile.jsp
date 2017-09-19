@@ -52,10 +52,14 @@
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}"><fmt:message key="adminDispatcher.driverProfile.lastTrips"/></a>
+                            <a class="nav-link active" href="/drivers/profile?id=${driver.id}">
+                                <fmt:message key="adminDispatcher.driverProfile.lastTrips"/>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}"><fmt:message key="adminDispatcher.driverProfile.garage"/></a>
+                            <a class="nav-link" href="/drivers/profile/garage?driver-id=${driver.id}">
+                                <fmt:message key="adminDispatcher.driverProfile.garage"/>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -77,26 +81,36 @@
                                 <div class="card-block">
                                     <h4 class="card-title">Info</h4>
                                     <i class="fa fa-calendar-plus-o fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.dateOfCreation"/></strong>
+                                        ${trip.dateOfCreation}<br>
+
                                     <i class="fa fa-tasks fa-fw"></i>
                                     <strong><fmt:message key="adminDispatcher.driverProfile.status"/>:</strong>
                                     <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                        <span class="badge badge-success"><fmt:message key="adminDispatcher.driverProfile.badge.open"/></span>
+                                        <span class="badge badge-success">
+                                            <fmt:message key="adminDispatcher.driverProfile.badge.open"/>
+                                        </span>
                                     </c:if>
                                     <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                        <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverProfile.badge.inProgress"/></span>
+                                        <span class="badge badge-warning">
+                                            <fmt:message key="adminDispatcher.driverProfile.badge.inProgress"/>
+                                        </span>
                                     </c:if>
                                     <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                        <span class="badge badge-default"><fmt:message key="adminDispatcher.driverProfile.badge.closed"/></span>
+                                        <span class="badge badge-default">
+                                            <fmt:message key="adminDispatcher.driverProfile.badge.closed"/>
+                                        </span>
                                     </c:if>
                                     <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                        <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverProfile.badge.canceled"/></span>
-                                    </c:if>
-                                    <br>
+                                        <span class="badge badge-danger">
+                                            <fmt:message key="adminDispatcher.driverProfile.badge.canceled"/>
+                                        </span>
+                                    </c:if><br>
+
                                     <i class="fa fa-car fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.carTypeRequired"/></strong>
+                                        ${trip.carTypeRequired.displayName()}<br>
+
                                     <i class="fa fa-id-card-o fa-fw"></i>
                                     <strong><fmt:message key="adminDispatcher.driverProfile.carId"/>:</strong>
                                     <c:choose>
@@ -106,25 +120,31 @@
                                         <c:otherwise>
                                             ${trip.carId}
                                         </c:otherwise>
-                                    </c:choose>
-                                    <br>
+                                    </c:choose><br>
+
                                     <i class="fa fa-building-o fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.townFrom"/>:</strong> ${trip.townFrom}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.townFrom"/></strong>
+                                        ${trip.townFrom}<br>
+
                                     <i class="fa fa-building fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.townTo"/>:</strong> ${trip.townTo}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.townTo"/></strong>
+                                        ${trip.townTo}<br>
+
                                     <i class="fa fa-calendar fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeOut"/></strong>
+                                        ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}<br>
+
                                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.timeIn"/></strong>
+                                        ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}<br>
+
                                     <i class="fa fa-usd fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.payment"/>:</strong> ${trip.paymentInDollars}
-                                    <br>
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.payment"/></strong>
+                                        ${trip.paymentInDollars}<br>
+
                                     <i class="fa fa-user-plus fa-fw"></i>
-                                    <strong><fmt:message key="adminDispatcher.driverProfile.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                                    <strong><fmt:message key="adminDispatcher.driverProfile.dispatcherId"/></strong>
+                                        ${trip.dispatcherId}
                                 </div>
                             </div>
                         </c:forEach>
@@ -146,7 +166,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

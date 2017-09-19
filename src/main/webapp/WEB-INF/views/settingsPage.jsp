@@ -40,7 +40,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-key"></i>
                             </div>
-                            <input id="password" name="password" type="password" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="password" name="password" type="password"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
                         <label for="confirm-password"><fmt:message key="settings.label.confirmPassword"/></label>
@@ -50,9 +51,7 @@
                             </div>
                             <input id="confirm-password" name="confirm-password" type="password"
                                    class="form-control mb-2 mr-sm-2 mb-sm-0">
-
-                        </div>
-                        <br>
+                        </div><br>
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -75,7 +74,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="stylesheet">
 </body>
 </html>

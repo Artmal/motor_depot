@@ -75,8 +75,8 @@
 
             <div class="card">
                 <div class="card-block">
-                    <form id="add-driver-form" class="form-horizontal" action="/admin-dashboard/addDriverServlet" method="post">
-                        <label for="email"><fmt:message key="adminDashboard.driversPage.addDriverForm.email"/>*:</label>
+                    <form id="add-driver-form" action="/admin-dashboard/addDriverServlet" method="post">
+                        <label for="email"><fmt:message key="adminDashboard.driversPage.addDriverForm.email"/></label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
@@ -84,7 +84,9 @@
                             <input id="email" name="email" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="password"><fmt:message key="adminDashboard.driversPage.addDriverForm.password"/>*:</label>
+                        <label for="password">
+                            <fmt:message key="adminDashboard.driversPage.addDriverForm.password"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
@@ -92,7 +94,9 @@
                             <input id="password" name="password" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="full-name"><fmt:message key = "adminDashboard.driversPage.addDriverForm.fullName"/>*:</label>
+                        <label for="full-name">
+                            <fmt:message key = "adminDashboard.driversPage.addDriverForm.fullName"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
@@ -100,7 +104,9 @@
                             <input id="full-name" name="full-name" class="form-control mb-2 mr-sm-2 mb-sm-0" >
                         </div>
 
-                        <label for="passport-serial-numbers"><fmt:message key="adminDashboard.driversPage.passportSerialNumbers"/>*:</label>
+                        <label for="passport-serial-numbers">
+                            <fmt:message key="adminDashboard.driversPage.passportSerialNumbers"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
@@ -109,7 +115,9 @@
                                    class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="phone-number"><fmt:message key="adminDashboard.driversPage.phoneNumber"/>*:</label>
+                        <label for="phone-number">
+                            <fmt:message key="adminDashboard.driversPage.phoneNumber"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
@@ -117,15 +125,19 @@
                             <input id="phone-number" name="phone-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="age"><fmt:message key="adminDashboard.driversPage.addDriverForm.age"/>:</label>
+                        <label for="age">
+                            <fmt:message key="adminDashboard.driversPage.addDriverForm.age"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-birthday-cake fa-fw"></i>
                             </div>
                             <input id="age" name="age" class="form-control mb-2 mr-sm-2 mb-sm-0" >
-                        </div>
-                        <br>
-                        <button class="btn btn-primary"><fmt:message key="adminDashboard.driversPage.button.addDriver"/></button>
+                        </div><br>
+
+                        <button class="btn btn-primary">
+                            <fmt:message key="adminDashboard.driversPage.button.addDriver"/>
+                        </button>
                 </form>
                 </div>
             </div>
@@ -151,7 +163,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

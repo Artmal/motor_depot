@@ -52,11 +52,12 @@
                             <div class="card-block">
                                 <p class="card-text">
                                     <i class="fa fa-id-card-o fa-fw"></i>
-                                    <fmt:message key="driverDashboard.garagePage.registrationNumber"/>: ${car.registrationNumber}
-                                    <br>
+                                    <fmt:message key="driverDashboard.garagePage.registrationNumber"/>
+                                        ${car.registrationNumber}<br>
+
                                     <i class="fa fa-car fa-fw"></i>
-                                    <fmt:message key="driverDashboard.garagePage.type"/>: ${car.type.displayName()}
-                                    <br>
+                                    <fmt:message key="driverDashboard.garagePage.type"/>: ${car.type.displayName()}<br>
+
                                     <i class="fa fa-cogs fa-fw"></i>
                                     <fmt:message key="driverDashboard.garagePage.condition"/>:
                                     <c:if test="${car.condition eq 'Broken'}">
@@ -67,11 +68,12 @@
                                     </c:if>
                                     <c:if test="${car.condition eq 'Ready'}">
                                         <span class="badge badge-success">Ready</span>
-                                    </c:if>
-                                    <br>
+                                    </c:if><br>
+
                                     <i class="fa fa-users fa-fw"></i>
-                                    <fmt:message key="driverDashboard.garagePage.numberOfSeats"/>: ${car.numberOfSeats}
-                                    <br>
+                                    <fmt:message key="driverDashboard.garagePage.numberOfSeats"/>
+                                        ${car.numberOfSeats}<br>
+
                                     <i class="fa fa-tint fa-fw"></i>
                                     <fmt:message key="driverDashboard.garagePage.button.addCar"/>: ${car.color}
                                 </p>
@@ -102,7 +104,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

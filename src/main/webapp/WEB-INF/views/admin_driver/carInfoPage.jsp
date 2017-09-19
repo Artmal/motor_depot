@@ -51,13 +51,15 @@
 
                     <fieldset>
                         <h2><fmt:message key="adminDriver.carInfoPage.editCarNumber"/>${carInfo.id}</h2>
-                        <label for="registration-number"><fmt:message key="adminDriver.carInfoPage.registrationNumber"/>*:</label>
+                        <label for="registration-number">
+                            <fmt:message key="adminDriver.carInfoPage.registrationNumber"/>
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
-                            <input id="registration-number" name="registration-number" class="form-control mb-2 mr-sm-2 mb-sm-0"
-                                    value="${carInfo.registrationNumber}">
+                            <input id="registration-number" name="registration-number"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0" value="${carInfo.registrationNumber}">
                         </div>
 
                         <label for="model"><fmt:message key="adminDriver.carInfoPage.model"/>*:</label>
@@ -93,9 +95,13 @@
                                 </optgroup>
                                 <optgroup label="Heavy">
                                     <option><fmt:message key="adminDriver.carInfoPage.option.campervan"/></option>
-                                    <option value="Mini_truck"><fmt:message key="adminDriver.carInfoPage.option.miniTruck"/></option>
+                                    <option value="Mini_truck">
+                                        <fmt:message key="adminDriver.carInfoPage.option.miniTruck"/>
+                                    </option>
                                     <option><fmt:message key="adminDriver.carInfoPage.option.truck"/></option>
-                                    <option value="Big_truck"><fmt:message key="adminDriver.carInfoPage.option.bigTruck"/></option>
+                                    <option value="Big_truck">
+                                        <fmt:message key="adminDriver.carInfoPage.option.bigTruck"/>
+                                    </option>
                                 </optgroup>
                             </select>
                         </div>
@@ -108,12 +114,14 @@
                             </div>
                             <select id="condition" name="condition" class="form-control">
                                 <option value="Broken"><fmt:message key="adminDriver.carInfoPage.broken"/></option>
-                                <option value="Repairing"><fmt:message key="adminDriver.carInfoPage.repairing"/></option>
+                                <option value="Repairing">
+                                    <fmt:message key="adminDriver.carInfoPage.repairing"/>
+                                </option>
                                 <option value="Ready"><fmt:message key="adminDriver.carInfoPage.ready"/></option>
                             </select>
                         </div>
 
-                        <label for="number-of-seats"><fmt:message key="adminDriver.carInfoPage.numberOfSeats"/>: </label>
+                        <label for="number-of-seats"><fmt:message key="adminDriver.carInfoPage.numberOfSeats"/> </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-users fa-fw"></i>
@@ -161,7 +169,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

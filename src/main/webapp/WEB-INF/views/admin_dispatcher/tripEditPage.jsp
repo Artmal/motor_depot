@@ -25,7 +25,8 @@
     <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
 
     <!-- Datetime picker -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
 </head>
 
 <body>
@@ -65,7 +66,9 @@
                         </select>
                     </div>
 
-                    <label for="car-type-required"><fmt:message key="tripsPage.content.addTripForm.label.carTypeRequired"/>*:</label>
+                    <label for="car-type-required">
+                        <fmt:message key="tripsPage.content.addTripForm.label.carTypeRequired"/>
+                    </label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-car fa-fw"></i>
@@ -90,14 +93,18 @@
                             </optgroup>
                             <optgroup label="Heavy">
                                 <option><fmt:message key="tripsPage.content.addTripForm.option.campervan"/></option>
-                                <option value="Mini_truck"><fmt:message key="tripsPage.content.addTripForm.option.miniTruck"/></option>
+                                <option value="Mini_truck">
+                                    <fmt:message key="tripsPage.content.addTripForm.option.miniTruck"/>
+                                </option>
                                 <option><fmt:message key="tripsPage.content.addTripForm.option.truck"/></option>
-                                <option value="Big_truck"><fmt:message key="tripsPage.content.addTripForm.option.bigTruck"/></option>
+                                <option value="Big_truck">
+                                    <fmt:message key="tripsPage.content.addTripForm.option.bigTruck"/>
+                                </option>
                             </optgroup>
                         </select>
                     </div>
 
-                    <label for="town-from"><fmt:message key="tripsPage.content.addTripForm.label.townFrom"/>*:</label>
+                    <label for="town-from"><fmt:message key="tripsPage.content.addTripForm.label.townFrom"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-building-o fa-fw"></i>
@@ -125,7 +132,7 @@
                                name="time-out">
                     </div>
 
-                    <label for="time-in"><fmt:message key="tripsPage.content.addTripForm.label.timeIn"/>*:</label>
+                    <label for="time-in"><fmt:message key="tripsPage.content.addTripForm.label.timeIn"/></label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-check-o fa-fw"></i>
@@ -133,16 +140,20 @@
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in">
                     </div>
 
-                    <label for="payment-in-dollars"><fmt:message key="tripsPage.content.addTripForm.label.payment"/>($)*:</label>
+                    <label for="payment-in-dollars">
+                        <fmt:message key="tripsPage.content.addTripForm.label.payment"/>:
+                    </label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">
                             <i class="fa fa-usd fa-fw"></i>
                         </div>
-                        <input id="payment-in-dollars" name="payment-in-dollars" class="form-control mb-2 mr-sm-2 mb-sm-0"
-                               value="${trip.paymentInDollars}">
-                    </div>
-                    <br>
-                    <button id="submit-button" class="btn btn-primary"><fmt:message key="tripsPage.content.addTripForm.button.editTrip"/></button>
+                        <input id="payment-in-dollars" name="payment-in-dollars"
+                               class="form-control mb-2 mr-sm-2 mb-sm-0" value="${trip.paymentInDollars}">
+                    </div><br>
+
+                    <button id="submit-button" class="btn btn-primary">
+                        <fmt:message key="tripsPage.content.addTripForm.button.editTrip"/>
+                    </button>
                 </form>
             </div>
         </div>
@@ -208,7 +219,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

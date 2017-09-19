@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 /**
- * Make request to Yahoo Finance API(Currency Converter).
+ * Makes request to Yahoo Finance API(Currency Converter).
  * @author Artem Malchenko
  */
 public class CurrencyTag extends SimpleTagSupport {

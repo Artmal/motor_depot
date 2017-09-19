@@ -48,12 +48,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <fmt:message key="driverDashboard.myTripsPage.tripNumber"/>${trip.id}
-                                <a id = "completeButton${count}" href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}"
-                                   style="float: right"
-                                   class="btn btn-danger btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.refuse"/></a>
-                                <a id = "refuseButton${count}" href="/driver-dashboard/my-trips/complete?trip-id=${trip.id}"
-                                   style="float: right"
-                                   class="btn btn-success btn-sm btn-space"><fmt:message key="driverDashboard.myTripsPage.markAsCompleted"/></a>
+                                <a id = "completeButton${count}" class="btn btn-danger btn-sm btn-space"
+                                   href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}" style="float: right">
+                                    <fmt:message key="driverDashboard.myTripsPage.refuse"/>
+                                </a>
+                                <a id = "refuseButton${count}" class="btn btn-success btn-sm btn-space"
+                                   href="/driver-dashboard/my-trips/complete?trip-id=${trip.id}" style="float: right">
+                                    <fmt:message key="driverDashboard.myTripsPage.markAsCompleted"/>
+                                </a>
 
                                 <script>
                                     if(${trip.tripStatus.displayName() ne 'In progress'}) {
@@ -69,38 +71,46 @@
                             <div class="card-block">
                                 <h4 class="card-title">Info</h4>
                                 <i class="fa fa-calendar-plus-o fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.dateOfCreation"/>:</strong>
+                                    ${trip.dateOfCreation}<br>
+
                                 <i class="fa fa-tasks fa-fw"></i>
                                 <strong><fmt:message key="driverDashboard.myTripsPage.status"/>:</strong>
                                 <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
 
                                 <br>
                                 <i class="fa fa-car fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.carTypeRequired"/>:</strong> ${trip.carTypeRequired.displayName()}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.carTypeRequired"/>:</strong>
+                                    ${trip.carTypeRequired.displayName()}<br>
+
                                 <i class="fa fa-id-card-o fa-fw"></i>
                                 <strong><fmt:message key="driverDashboard.myTripsPage.carId"/>:</strong>
-
                                 <custom:displayCarIdOrFreeSpotBadge carId="${trip.carId}"/>
                                 <br>
+
                                 <i class="fa fa-building-o fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong> ${trip.townFrom}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.townFrom"/>:</strong>
+                                    ${trip.townFrom}<br>
+
                                 <i class="fa fa-building fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.townTo"/>:</strong> ${trip.townTo}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.townTo"/>:</strong>
+                                    ${trip.townTo}<br>
+
                                 <i class="fa fa-calendar fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.timeOut"/>:</strong>
+                                    ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}<br>
+
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.timeIn"/>:</strong>
+                                    ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}<br>
+
                                 <i class="fa fa-usd fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.payment"/>:</strong> ${trip.paymentInDollars}
-                                <br>
+                                <strong><fmt:message key="driverDashboard.myTripsPage.payment"/>:</strong>
+                                    ${trip.paymentInDollars}<br>
+
                                 <i class="fa fa-user-plus fa-fw"></i>
-                                <strong><fmt:message key="driverDashboard.myTripsPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                                <strong><fmt:message key="driverDashboard.myTripsPage.dispatcherId"/>:</strong>
+                                    ${trip.dispatcherId}
                             </div>
                         </div>
                     </c:forEach>
@@ -123,9 +133,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
+
 </body>
 </html>

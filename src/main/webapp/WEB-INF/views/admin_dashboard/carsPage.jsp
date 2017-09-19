@@ -68,13 +68,19 @@
                                 </td>
                                 <td>
                                     <c:if test="${car.condition eq 'Broken'}">
-                                        <span class="badge badge-danger"><fmt:message key="adminDashboard.carsPage.broken"/></span>
+                                        <span class="badge badge-danger">
+                                            <fmt:message key="adminDashboard.carsPage.broken"/>
+                                        </span>
                                     </c:if>
                                     <c:if test="${car.condition eq 'Repairing'}">
-                                        <span class="badge badge-warning"><fmt:message key="adminDashboard.carsPage.repairing"/></span>
+                                        <span class="badge badge-warning">
+                                            <fmt:message key="adminDashboard.carsPage.repairing"/>
+                                        </span>
                                     </c:if>
                                     <c:if test="${car.condition eq 'Ready'}">
-                                        <span class="badge badge-success"><fmt:message key="adminDashboard.carsPage.ready"/></span>
+                                        <span class="badge badge-success">
+                                            <fmt:message key="adminDashboard.carsPage.ready"/>
+                                        </span>
                                     </c:if>
                                 </td>
                                 <td>${car.model}</td>
@@ -93,7 +99,6 @@
                     </div>
                 </c:otherwise>
             </c:choose>
-
             <br>
 
             <custom:addCarForm/>
@@ -115,7 +120,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

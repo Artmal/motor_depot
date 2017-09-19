@@ -32,7 +32,7 @@ public class MailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("artmalchik@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("artmalchik@gmail.com"));
+                    InternetAddress.parse(recipient));
             message.setSubject("Password Reset");
             message.setText(text);
             Transport.send(message);

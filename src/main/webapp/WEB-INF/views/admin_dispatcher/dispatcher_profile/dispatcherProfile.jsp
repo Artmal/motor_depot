@@ -56,7 +56,9 @@
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#"><fmt:message key="adminDispatcher.dispatcherProfile.createdTrips"/></a>
+                            <a class="nav-link active" href="#">
+                                <fmt:message key="adminDispatcher.dispatcherProfile.createdTrips"/>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -96,16 +98,24 @@
                                     <td>${trip.dateOfCreation}</td>
                                     <td>
                                         <c:if test="${trip.tripStatus.displayName() eq 'Open'}">
-                                            <span class="badge badge-success"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
+                                            <span class="badge badge-success">
+                                                <fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/>
+                                            </span>
                                         </c:if>
                                         <c:if test="${trip.tripStatus.displayName() eq 'In progress'}">
-                                            <span class="badge badge-warning"><fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/></span>
+                                            <span class="badge badge-warning">
+                                                <fmt:message key="adminDispatcher.dispatcherProfile.badge.open"/>
+                                            </span>
                                         </c:if>
                                         <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
-                                            <span class="badge badge-default"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
+                                            <span class="badge badge-default">
+                                                <fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/>
+                                            </span>
                                         </c:if>
                                         <c:if test="${trip.tripStatus.displayName() eq 'Canceled'}">
-                                            <span class="badge badge-danger"><fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/></span>
+                                            <span class="badge badge-danger">
+                                                <fmt:message key="adminDispatcher.dispatcherProfile.badge.closed"/>
+                                            </span>
                                         </c:if>
                                     </td>
                                 </tr>
@@ -134,7 +144,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

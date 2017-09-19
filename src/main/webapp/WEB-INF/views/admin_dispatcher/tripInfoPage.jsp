@@ -75,45 +75,62 @@
                             <i style="font-size: 20px; color: darkorange; float: right;" class="btn btn-default fa fa-pencil fa-fw"></i>
                         </a>
                     </h3>
+
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong>
+                    ${trip.dateOfCreation}
                     <br>
+
                     <i class="fa fa-tasks fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.status"/>:</strong>
                     <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
                     <br>
+
                     <i class="fa fa-car fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.carTypeRequired"/>:</strong>
                     <custom:printTypeCarRequiredFmt carTypeRequired="${trip.carTypeRequired}"/>
                     <br>
+
                     <i class="fa fa-id-card-o fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.carId"/>:</strong>
                     <c:choose>
                         <c:when test="${trip.carId eq '0'}">
-                            <span class="badge badge-pill badge-success"><fmt:message key="adminDispatcher.tripInfoPage.content.badge.freeSpot"/></span>
+                            <span class="badge badge-pill badge-success">
+                                <fmt:message key="adminDispatcher.tripInfoPage.content.badge.freeSpot"/>
+                            </span>
                         </c:when>
                         <c:otherwise>
                             ${trip.carId}
                         </c:otherwise>
                     </c:choose>
                     <br>
+
                     <i class="fa fa-building-o fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.townFrom"/>:</strong> ${trip.townFrom}
                     <br>
+
                     <i class="fa fa-building fa-fw"></i>
                     <strong><fmt:message key="adminDispatcher.tripInfoPage.townTo"/>:</strong> ${trip.townTo}
                     <br>
+
                     <i class="fa fa-calendar fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeOut"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeOut"/>:</strong>
+                        ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                     <br>
+
                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeIn"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.timeIn"/>:</strong>
+                        ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                     <br>
+
                     <i class="fa fa-usd fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.payment"/>:</strong> ${trip.paymentInDollars}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.payment"/>:</strong>
+                        ${trip.paymentInDollars}
                     <br>
+
                     <i class="fa fa-user-plus fa-fw"></i>
-                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                    <strong><fmt:message key="adminDispatcher.tripInfoPage.dispatcherId"/>:</strong>
+                        ${trip.dispatcherId}
                 </div>
             </div>
 
@@ -134,36 +151,51 @@
                                     <c:when test="${sessionScope.role eq 'Admin'}">
                                         <a href="/admin-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                            style="float: right"
-                                           class="btn btn-danger btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.deny"/></a>
+                                           class="btn btn-danger btn-sm btn-space">
+                                            <fmt:message key="adminDispatcher.tripInfoPage.deny"/>
+                                        </a>
                                         <a href="/admin-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                            style="float: right"
-                                           class="btn btn-success btn-sm btn-space"><fmt:message key="adminDispatcher.tripInfoPage.accept"/></a>
+                                           class="btn btn-success btn-sm btn-space">
+                                            <fmt:message key="adminDispatcher.tripInfoPage.accept"/>
+                                        </a>
                                     </c:when>
                                     <c:when test="${sessionScope.role eq 'Dispatcher'}">
                                         <a href="/dispatcher-dashboard/trip/deny?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                            style="float: right"
-                                           class="btn btn-danger btn-sm btn-space">Deny</a>
+                                           class="btn btn-danger btn-sm btn-space">
+                                            Deny
+                                        </a>
                                         <a href="/dispatcher-dashboard/trip/accept?trip-request-id=${tripRequest.id}&trip-id=${trip.id}"
                                            style="float: right"
-                                           class="btn btn-success btn-sm btn-space">Accept</a>
+                                           class="btn btn-success btn-sm btn-space">
+                                            Accept
+                                        </a>
                                     </c:when>
                                 </c:choose>
                             </div>
                             <div class="card-block">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.tripInfoPage.driver"/>:</strong> <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">Driver №${tripRequest.carInfo.ownerId}</a><br>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.driver"/>:</strong>
+                                <a href="/drivers/profile?id=${tripRequest.carInfo.ownerId}">
+                                    Driver №${tripRequest.carInfo.ownerId}
+                                </a><br>
 
                                 <i class="fa fa-car fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carModel"/>: </strong> ${tripRequest.carInfo.model}<br>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carModel"/> </strong>
+                                    ${tripRequest.carInfo.model}<br>
 
                                 <i class="fa fa-users fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.tripInfoPage.numberOfSeats"/>: </strong> ${tripRequest.carInfo.numberOfSeats}<br>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.numberOfSeats"/> </strong>
+                                    ${tripRequest.carInfo.numberOfSeats}<br>
 
                                 <i class="fa fa-tint fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carColor"/>: </strong> ${tripRequest.carInfo.color}<br>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.carColor"/> </strong>
+                                    ${tripRequest.carInfo.color}<br>
 
                                 <i class="fa fa-clock-o fa-fw"></i>
-                                <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong> ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
+                                <strong><fmt:message key="adminDispatcher.tripInfoPage.dateOfCreation"/>:</strong>
+                                    ${tripRequest.dateOfCreation.toString("yyyy-MM-dd HH:mm")}<br>
                             </div>
                         </div>
                     </c:forEach>
@@ -201,7 +233,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

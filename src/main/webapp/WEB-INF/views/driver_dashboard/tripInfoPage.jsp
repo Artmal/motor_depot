@@ -42,16 +42,20 @@
                 <div class="card-block">
                     <h4 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.header"/>${trip.id}</h4>
                     <i class="fa fa-calendar-plus-o fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.dateOfCreation"/>:</strong> ${trip.dateOfCreation}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.dateOfCreation"/></strong>
+                    ${trip.dateOfCreation}
                     <br>
+
                     <i class="fa fa-tasks fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.status"/>:</strong>
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.status"/></strong>
                     <custom:printTripStatusFmt tripStatus="${trip.tripStatus}"/>
                     <br>
+
                     <i class="fa fa-car fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.carTypeRequired"/>:</strong>
                     <custom:printTypeCarRequiredFmt carTypeRequired="${trip.carTypeRequired}"/>
                     <br>
+
                     <i class="fa fa-id-card-o fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.carId"/>:</strong>
                     <custom:displayCarIdOrFreeSpotBadge carId="${trip.carId}"/>
@@ -59,20 +63,29 @@
                     <i class="fa fa-building-o fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.townFrom"/>:</strong> ${trip.townFrom}
                     <br>
+
                     <i class="fa fa-building fa-fw"></i>
                     <strong><fmt:message key="driverDashboard.tripInfoPage.townTo"/>:</strong> ${trip.townTo}
                     <br>
+
                     <i class="fa fa-calendar fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeOut"/>:</strong> ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeOut"/>:</strong>
+                    ${trip.timeIn.toString("yyyy-MM-dd HH:mm")}
                     <br>
+
                     <i class="fa fa-calendar-check-o fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeIn"/>:</strong> ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.timeIn"/>:</strong>
+                    ${trip.timeOut.toString("yyyy-MM-dd HH:mm")}
                     <br>
+
                     <i class="fa fa-usd fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.payment"/>:</strong> ${trip.paymentInDollars}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.payment"/>:</strong>
+                    ${trip.paymentInDollars}
                     <br>
+
                     <i class="fa fa-user-plus fa-fw"></i>
-                    <strong><fmt:message key="driverDashboard.tripInfoPage.dispatcherId"/>:</strong> ${trip.dispatcherId}
+                    <strong><fmt:message key="driverDashboard.tripInfoPage.dispatcherId"/>:</strong>
+                    ${trip.dispatcherId}
                 </div>
             </div>
 
@@ -84,7 +97,9 @@
                     <div class="card card-inverse" style="background-color: #333; border-color: #333;">
                         <div class="card-block">
                             <h3 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.closedRequest"/></h3>
-                            <a href="/driver-dashboard/trips" class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/></a>
+                            <a href="/driver-dashboard/trips" class="btn btn-primary">
+                                <fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/>
+                            </a>
                         </div>
                     </div>
                 </c:when>
@@ -94,7 +109,9 @@
                         <div class="card-block">
                             <h3 class="card-title"><fmt:message key="driverDashboard.tripInfoPage.closedRequest"/></h3>
                             <p><fmt:message key="driverDashoard.tripInfoPage.noSuitableCar"/></p>
-                            <a href="/driver-dashboard/trips" class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/></a>
+                            <a href="/driver-dashboard/trips" class="btn btn-primary">
+                                <fmt:message key="driverDashboard.tripInfoPage.button.goToTrips"/>
+                            </a>
                         </div>
                     </div>
                 </c:when>
@@ -102,8 +119,8 @@
                 <c:otherwise>
                     <div class="card">
                         <div class="card-block">
-                            <form class="form-horizontal" action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">
-                                <label for="car"><fmt:message key="driverDashboard.tripInfoPage.car"/>*:</label>
+                            <form action="/driver-dashboard/trip" accept-charset="UTF-8" method="post">
+                                <label for="car"><fmt:message key="driverDashboard.tripInfoPage.car"/></label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <div class="input-group-addon">
                                         <i class="fa fa-cogs fa-fw"></i>
@@ -119,17 +136,18 @@
                                     <input type="hidden" value="${trip.id}" name="trip-id" />
                                 </div>
 
-                                <label for="message"><fmt:message key="driverDashboard.tripInfoPage.message"/>:</label>
+                                <label for="message"><fmt:message key="driverDashboard.tripInfoPage.message"/></label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <div class="input-group-addon">
                                         <i class="fa fa-comment-o fa-fw"></i>
                                     </div>
                                     <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="message"
                                            name="message">
-                                </div>
+                                </div><br>
 
-                                <br>
-                                <button class="btn btn-primary"><fmt:message key="driverDashboard.tripInfoPage.button.makeRequest"/></button>
+                                <button class="btn btn-primary">
+                                    <fmt:message key="driverDashboard.tripInfoPage.button.makeRequest"/>
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -148,7 +166,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
+
 </body>
 </html>

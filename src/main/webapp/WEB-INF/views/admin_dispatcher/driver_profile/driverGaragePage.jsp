@@ -81,26 +81,35 @@
                                 <div class="card-block">
                                     <p class="card-text">
                                         <i class="fa fa-id-card-o fa-fw"></i>
-                                        <fmt:message key="adminDispatcher.driverGaragePage.registrationNumber"/>: ${car.registrationNumber}
-                                        <br>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.registrationNumber"/>
+                                            ${car.registrationNumber}<br>
+
                                         <i class="fa fa-car fa-fw"></i>
-                                        <fmt:message key="adminDispatcher.driverGaragePage.type"/>: ${car.type.displayName()}
-                                        <br>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.type"/>
+                                            ${car.type.displayName()}<br>
+
                                         <i class="fa fa-cogs fa-fw"></i>
                                         <fmt:message key="adminDispatcher.driverGaragePage.condition"/>:
                                         <c:if test="${car.condition eq 'Broken'}">
-                                            <span class="badge badge-danger"><fmt:message key="adminDispatcher.driverGaragePage.badge.broken"/></span>
+                                            <span class="badge badge-danger">
+                                                <fmt:message key="adminDispatcher.driverGaragePage.badge.broken"/>
+                                            </span>
                                         </c:if>
                                         <c:if test="${car.condition eq 'Repairing'}">
-                                            <span class="badge badge-warning"><fmt:message key="adminDispatcher.driverGaragePage.badge.repairing"/></span>
+                                            <span class="badge badge-warning">
+                                                <fmt:message key="adminDispatcher.driverGaragePage.badge.repairing"/>
+                                            </span>
                                         </c:if>
                                         <c:if test="${car.condition eq 'Ready'}">
-                                            <span class="badge badge-success"><fmt:message key="adminDispatcher.driverGaragePage.badge.ready"/></span>
-                                        </c:if>
-                                        <br>
+                                            <span class="badge badge-success">
+                                                <fmt:message key="adminDispatcher.driverGaragePage.badge.ready"/>
+                                            </span>
+                                        </c:if><br>
+
                                         <i class="fa fa-users fa-fw"></i>
-                                        <fmt:message key="adminDispatcher.driverGaragePage.numberOfSeats"/>: ${car.numberOfSeats}
-                                        <br>
+                                        <fmt:message key="adminDispatcher.driverGaragePage.numberOfSeats"/>
+                                            ${car.numberOfSeats}<br>
+
                                         <i class="fa fa-tint fa-fw"></i>
                                         <fmt:message key="adminDispatcher.driverGaragePage.color"/>: ${car.color}
                                     </p>
@@ -126,7 +135,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="${contextPath}/webjars/jquery/3.2.1/jquery.min.js"><\/script>')</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

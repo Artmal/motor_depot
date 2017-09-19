@@ -56,7 +56,11 @@
                             <c:set var="count" value="${count + 1}" scope="page"/>
                             <tr>
                                 <td>${dispatcher.id}</td>
-                                <td><a href="${contextPath}/dispatchers/profile?id=${dispatcher.id}">${dispatcher.name}</a></td>
+                                <td>
+                                    <a href="${contextPath}/dispatchers/profile?id=${dispatcher.id}">
+                                            ${dispatcher.name}
+                                    </a>
+                                </td>
                                 <td>${dispatcher.passportSerialNumbers}</td>
                                 <td>${dispatcher.phoneNumber}</td>
                                 <td>${dispatcher.salaryInDollars}</td>
@@ -78,7 +82,9 @@
             <div class="card">
                 <div class="card-block">
                     <form id="add-dispatcher-form" action="/admin-dashboard/dispatcherServlet" method="post">
-                        <label for="email"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.email"/>*:</label>
+                        <label for="email">
+                            <fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.email"/>*:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
@@ -86,15 +92,20 @@
                             <input id="email" name="email" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="password"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.password"/>*:</label>
+                        <label for="password">
+                            <fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.password"/>*:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
                             </div>
-                            <input id="password" name="password" type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" >
+                            <input id="password" name="password" type="password"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0" >
                         </div>
 
-                        <label for="full-name"><fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/>*:</label>
+                        <label for="full-name">
+                            <fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.fullName"/>*:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
@@ -102,15 +113,20 @@
                             <input id="full-name" name="full-name" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="passport-serial-numbers"><fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:</label>
+                        <label for="passport-serial-numbers">
+                            <fmt:message key="adminDashboard.dispatchersPage.table.passportSerialNumbers"/>*:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
-                            <input id="passport-serial-numbers" name="passport-serial-numbers" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="passport-serial-numbers" name="passport-serial-numbers"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="phone-number"><fmt:message key="adminDashboard.dispatchersPage.table.phoneNumber"/>*:</label>
+                        <label for="phone-number">
+                            <fmt:message key="adminDashboard.dispatchersPage.table.phoneNumber"/>*:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
@@ -118,15 +134,20 @@
                             <input id="phone-number" name="phone-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
-                        <label for="salary-in-dollars"><fmt:message key="adminDashboard.dispatchersPage.table.salary"/>:</label>
+                        <label for="salary-in-dollars">
+                            <fmt:message key="adminDashboard.dispatchersPage.table.salary"/>:
+                        </label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
-                            <input id="salary-in-dollars" name="salary-in-dollars" class="form-control mb-2 mr-sm-2 mb-sm-0" >
-                        </div>
-                        <br>
-                        <button class="btn btn-primary"><fmt:message key="adminDashboard.dispatchersPage.button.addDispatcher"/></button>
+                            <input id="salary-in-dollars" name="salary-in-dollars"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0" >
+                        </div><br>
+
+                        <button class="btn btn-primary">
+                            <fmt:message key="adminDashboard.dispatchersPage.button.addDispatcher"/>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -152,7 +173,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 </body>
 </html>

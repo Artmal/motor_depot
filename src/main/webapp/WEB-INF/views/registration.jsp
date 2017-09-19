@@ -61,7 +61,9 @@
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="full-name">
                     </div>
 
-                    <label for="passport-serial-numbers"><fmt:message key="registration.label.passportSerialNumber"/></label>
+                    <label for="passport-serial-numbers">
+                        <fmt:message key="registration.label.passportSerialNumber"/>
+                    </label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-id-card-o"></i>
@@ -84,14 +86,11 @@
                             <i class="fa fa-birthday-cake"></i>
                         </div>
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
-                    </div>
-
-                    <br>
+                    </div><br>
 
                     <div class="g-recaptcha" data-sitekey="6LdZljAUAAAAADRyMrkM6xlEa_rsj5YtFiLYF0x0"></div>
-                    <p class="text-danger">${error}</p>
+                    <p class="text-danger">${error}</p><br>
 
-                    <br>
                     <div class="input-group">
                         <div class="col-xs-offset-3 col-xs-10">
                             <input  name="submit" type="submit" value="${signUpButtonText}" class="btn btn-primary">
@@ -110,7 +109,8 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="stylesheet">
+
 </body>
 </html>
