@@ -68,7 +68,7 @@
 
                 <select id="condition" name="condition" class="form-control">
                     <option value="Broken"><fmt:message key="adminDashboard.carsPage.broken"/></option>
-                    <option value="In Progress"><fmt:message key="adminDashboard.carsPage.repairing"/></option>
+                    <option value="Repairing"><fmt:message key="adminDashboard.carsPage.repairing"/></option>
                     <option value="Ready"><fmt:message key="adminDashboard.carsPage.ready"/></option>
                 </select>
             </div>

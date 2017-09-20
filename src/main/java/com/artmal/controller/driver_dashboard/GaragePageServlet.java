@@ -30,6 +30,8 @@ public class GaragePageServlet extends HttpServlet {
     private DriverService driverService;
     @Autowired
     private CarService carService;
+    @Autowired
+    private CarUtils carUtils;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -56,7 +58,7 @@ public class GaragePageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            CarUtils.addNewCarAsDriver(req);
+            carUtils.addNewCarAsDriver(req);
         } catch (SQLException | NamingException e) {
             log.error(e);
         }

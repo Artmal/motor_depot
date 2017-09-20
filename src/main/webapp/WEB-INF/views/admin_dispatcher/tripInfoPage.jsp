@@ -223,6 +223,12 @@
             denyButtons[i].classList.add("disabled");
         }
     }
+
+    if(${trip.tripStatus.displayName() eq 'In progress'}) {
+        for(var i = 0; i < acceptButtons.length; i++) {
+            acceptButtons[i].classList.add("disabled");
+        }
+    }
 </script>
 
 <!-- Bootstrap core JavaScript

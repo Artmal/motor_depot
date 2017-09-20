@@ -62,21 +62,19 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('#trips-table').DataTable({
-            responsive: true
-            <c:if test="${language.getLanguage() eq 'ru'}">
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
-            }
-            </c:if>
-        });
+    var table = $('#trips-table').DataTable({
+        responsive: true,
+        <c:if test="${language.getLanguage() eq 'ru'}">
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
+        }
+        </c:if>
+    });
 
-        table
-            .column( '0:visible' )
-            .order( 'asc' )
-            .draw();
-    } );
+    table
+        .column( '0:visible' )
+        .order( 'asc' )
+        .draw();
 </script>
 
 <!-- Bootstrap core JavaScript

@@ -39,7 +39,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email">
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="email" name="email"
+                               value="${userInfo.email}">
                     </div>
 
                     <label for="password"><fmt:message key="registration.label.password"/></label>
@@ -64,7 +65,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="full-name">
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="full-name"
+                               value="${driverInfo.name}">
                     </div>
 
                     <label for="passport-serial-numbers">
@@ -75,7 +77,7 @@
                             <i class="fa fa-id-card-o"></i>
                         </div>
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="passport-serial-numbers"
-                               name="passport-serial-numbers">
+                               name="passport-serial-numbers" value="${driverInfo.passportSerialNumbers}">
                     </div>
 
                     <label for="phone-number"><fmt:message key="registration.label.phoneNumber"/></label>
@@ -83,7 +85,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-phone-square"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number">
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="phone-number" name="phone-number"
+                               value="${driverInfo.phoneNumber}">
                     </div>
 
                     <label for="age"><fmt:message key="registration.label.age"/></label>
@@ -91,7 +94,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-birthday-cake"></i>
                         </div>
-                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age">
+                        <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="age" name="age"
+                               value="${driverInfo.age}">
                     </div><br>
 
                     <div class="g-recaptcha" data-sitekey="6LdZljAUAAAAADRyMrkM6xlEa_rsj5YtFiLYF0x0"></div>

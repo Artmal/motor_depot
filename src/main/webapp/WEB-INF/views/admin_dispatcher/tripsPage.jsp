@@ -211,9 +211,10 @@
     document.getElementById("trips-nav-link").classList.add("active");
 </script>
 
+
 <script>
     var table = $('#trips-table').DataTable({
-        responsive: true
+        responsive: true,
         <c:if test="${language.getLanguage() eq 'ru'}">
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
@@ -275,41 +276,13 @@
     });
 </script>
 
-<script>
-    $(document).on("submit", "#add-trip-form", function(event) {
-        var $form = $(this);
-
-        $.post($form.attr("action"), $form.serialize(), function(response) {
-            var lastRow = $(response).find('tr:last').attr('id');
-            table.row(lastRow).draw();
-
-
-
-//            table.destroy();
-//
-//            $(document).ready(function() {
-//                $('#trips-table').DataTable({
-//                    "iDisplayLength": 50
-//                });
-//                table
-//                    .column( '0:visible' )
-//                    .order( 'asc' )
-//                    .draw();
-//
-//            } );
-
-        });
-
-        event.preventDefault();
-    });
-</script>
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
 
+<link href="//cdn.datatables.net/plug-ins/1.10.16/api/fnAddTr.js" rel="script">
 <link href="//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json">
 </body>
 </html>

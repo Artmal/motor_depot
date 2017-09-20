@@ -48,6 +48,9 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <div class="card">
                             <div class="card-header">
+                                <c:if test="${trip.tripStatus.displayName() eq 'Closed'}">
+                                    <i class="fa fa-check-square-o fa-fw"></i>
+                                </c:if>
                                 <fmt:message key="driverDashboard.myTripsPage.tripNumber"/>${trip.id}
                                 <a id = "completeButton${count}" class="btn btn-danger btn-sm btn-space"
                                    href="/driver-dashboard/my-trips/refuse?trip-id=${trip.id}" style="float: right">

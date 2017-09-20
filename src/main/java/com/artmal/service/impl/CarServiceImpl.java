@@ -34,7 +34,6 @@ public class CarServiceImpl implements CarService {
             log.error(e);
         }
 
-
         return carDao.save(car);
     }
 

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tagLibrary" uri="http://www.artmal.com/currency" %>
 
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="i18n.admin_dashboard.dispatchersPage" />
@@ -64,7 +65,8 @@
                                 </td>
                                 <td>${dispatcher.passportSerialNumbers}</td>
                                 <td>${dispatcher.phoneNumber}</td>
-                                <td>${dispatcher.salaryInDollars}</td>
+
+                                <td><tagLibrary:currencyTag locale="${language}" paymentInDollars="${dispatcher.salaryInDollars}"/>
                             </tr>
                         </c:forEach>
                         </tbody>

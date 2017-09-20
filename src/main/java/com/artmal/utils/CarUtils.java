@@ -4,10 +4,11 @@ import com.artmal.model.Car;
 import com.artmal.model.enums.CarCondition;
 import com.artmal.model.enums.CarType;
 import com.artmal.service.CarService;
+import com.artmal.service.DriverService;
 import com.artmal.service.impl.CarServiceImpl;
-import com.artmal.service.impl.DriverServiceImpl;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,12 @@ import java.util.NoSuchElementException;
  * @author Artem Malchenko
  */
 @Log4j
+@Component
 public final class CarUtils {
     private CarUtils() { }
+
+    @Autowired
+    private DriverService driverService;
 
     @Autowired
     private CarService carService;
@@ -150,19 +155,17 @@ public final class CarUtils {
     /**
      * Separate method for more clear code in servlet part.
      */
-    public static void addNewCarAsDriver(HttpServletRequest req) throws SQLException, NamingException {
+    public void addNewCarAsDriver(HttpServletRequest req) throws SQLException, NamingException {
         final String registrationNumber = req.getParameter("registration-number");
         final CarType type = CarType.valueOf(req.getParameter("type"));
         final CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
         final String model = req.getParameter("model");
         final int numberOfSeats = Integer.parseInt(req.getParameter("number-of-seats"));
         final String carColor = req.getParameter("color");
-        final long ownerId = new DriverServiceImpl().findByUserId((Long) req.getSession().getAttribute("id")).getId();
+        final long ownerId = driverService.findByUserId((Long) req.getSession().getAttribute("id")).getId();
 
         final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
 
-
-        final CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {

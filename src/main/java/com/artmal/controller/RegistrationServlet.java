@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
-        final String fullName = req.getParameter("name");
+        final String fullName = req.getParameter("full-name");
         final String passportSerialNumbers = req.getParameter("passport-serial-numbers");
         final String phoneNumber = req.getParameter("phone-number");
         final int age = Integer.parseInt(req.getParameter("age"));
@@ -66,6 +66,9 @@ public class RegistrationServlet extends HttpServlet {
             } else if(locale.getLanguage().equals("ru")) {
                 req.setAttribute("error", "Про капчу не забыли?");
             }
+
+            req.setAttribute("userInfo", userInfo);
+            req.setAttribute("driverInfo", driver);
             req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
         } else {
             try {

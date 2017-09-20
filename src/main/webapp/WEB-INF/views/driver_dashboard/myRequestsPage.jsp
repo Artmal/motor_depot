@@ -42,6 +42,10 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <div class="card">
                             <div class="card-header">
+                                <c:if test="${tripRequest.dateOfConfirmation ne null}">
+                                    <i class="fa fa-check-square-o fa-fw"></i>
+                                </c:if>
+
                                 <fmt:message key="driverDashboard.myRequestsPage.requestNumber"/>${tripRequest.id}
                                 <c:choose>
                                     <c:when test="${tripRequest.tripInfo.tripStatus.displayName() eq 'Open'
