@@ -9,6 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -71,7 +72,7 @@
 
                 <c:choose>
                     <c:when test="${not empty setOfCreatedTrips}">
-                        <table id="example" class="table table-bordered" width="100%" cellspacing="0">
+                        <table id="trips-table" class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th><fmt:message key="adminDispatcher.dispatcherProfile.tripId"/></th>
@@ -137,7 +138,13 @@
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#trips-table').DataTable({
+            <c:if test="${language.getLanguage() eq 'ru'}">
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
+            }
+            </c:if>
+        });
     } );
 </script>
 

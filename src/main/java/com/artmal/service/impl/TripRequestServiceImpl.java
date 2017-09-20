@@ -50,9 +50,4 @@ public class TripRequestServiceImpl implements TripRequestService {
     public void deleteByCarId(long id) throws NamingException, SQLException {
         tripRequestDao.deleteByCarId(id);
     }
-
-    @Override
-    public long countAllPendingRequests() throws NamingException, SQLException {
-        return tripRequestDao.countAllPendingRequests();
-    }
 }

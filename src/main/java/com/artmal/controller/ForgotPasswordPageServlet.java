@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 
 @Log4j
 public class ForgotPasswordPageServlet extends HttpServlet {
@@ -44,7 +45,13 @@ public class ForgotPasswordPageServlet extends HttpServlet {
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         if(!verify) {
-            req.setAttribute("error", "Did you forget about captcha?");
+            Locale locale = (Locale) req.getSession().getAttribute("language");
+            if(locale.getLanguage().equals("en")) {
+                req.setAttribute("error", "Did you forget about captcha?");
+            } else if(locale.getLanguage().equals("ru")) {
+                req.setAttribute("error", "Про капчу не забыли?");
+            }
+
             req.getRequestDispatcher("/WEB-INF/views/forgotPasswordPage.jsp").forward(req, resp);
         } else {
             String newPassword = RandomStringUtils.randomAlphabetic(10);

@@ -9,6 +9,7 @@
 <html lang="${language}">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -110,7 +111,7 @@
                             <i class="fa fa-building-o fa-fw"></i>
                         </div>
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from"
-                               placeholder="Kharkov" value="${trip.townFrom}">
+                               placeholder="Харьков" value="${trip.townFrom}">
                     </div>
 
                     <label for="town-to"><fmt:message key="tripsPage.content.addTripForm.label.townTo"/>*:</label>
@@ -119,7 +120,7 @@
                             <i class="fa fa-building fa-fw"></i>
                         </div>
                         <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-to" name="town-to"
-                               placeholder="Kiev" value="${trip.townTo}">
+                               placeholder="Киев" value="${trip.townTo}">
                     </div>
 
 

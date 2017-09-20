@@ -12,6 +12,10 @@
 
 <html lang="${language}">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>
         <fmt:message key="login.pageTitle"/>
     </title>
@@ -22,7 +26,6 @@
 
     <!-- Styles for the page -->
     <link rel="stylesheet" href="${contextPath}/resources/css/login.min.css">
-    <link rel="script" href="${contextPath}/resources/js/validation/login.min.js">
 </head>
 <body>
 <div class="container">
@@ -81,12 +84,15 @@
 
 
 
-
 <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
 <script src="${contextPath}/resources/js/validation/login.js"></script>
-<script src="${contextPath}/resources/js/validation/login_ru.js"></script>
+
+<%--<script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>--%>
+<%--<script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>--%>
+<%--<script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>--%>
+<%--<link rel="script" href="${contextPath}/resources/js/validation/login.min.js">--%>
 
 <script src="/resources/js/appendLanguageParamToUrl.min.js"></script>
 

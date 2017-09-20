@@ -23,7 +23,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-id-card-o fa-fw"></i>
                 </div>
-                <input id="registration-number" name="registration-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                <input id="registration-number" name="registration-number" class="form-control">
             </div>
 
             <label for="type"><fmt:message key="adminDashboard.carsPage.type"/>*:</label>
@@ -78,7 +78,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-industry fa-fw"></i>
                 </div>
-                <input id="model" name="model" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                <input id="model" name="model" class="form-control"
                         placeholder="Kia Optima">
             </div>
 
@@ -87,7 +87,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-users fa-fw"></i>
                 </div>
-                <input id="number-of-seats" name="number-of-seats" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                <input id="number-of-seats" name="number-of-seats" class="form-control">
             </div>
 
             <label for="color"><fmt:message key="adminDashboard.carsPage.color"/>*:</label>
@@ -95,7 +95,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-tint fa-fw"></i>
                 </div>
-                <input id="color" name="color" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                <input id="color" name="color" class="form-control">
             </div>
 
             <c:if test="${sessionScope.role eq 'Admin'}">
@@ -104,7 +104,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-user-circle-o fa-fw"></i>
                     </div>
-                    <input id="owner-id" name="owner-id" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                    <input id="owner-id" name="owner-id" class="form-control">
                 </div>
             </c:if>
             <br>

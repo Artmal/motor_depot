@@ -9,6 +9,7 @@
 <html lang="${language}">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -110,7 +111,7 @@
 <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
-<script src="${contextPath}/resources/js/validation/registration.min.js"></script>
+<script src="${contextPath}/resources/js/validation/registration.min.js" charset="UTF-8"></script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

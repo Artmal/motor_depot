@@ -222,7 +222,7 @@
           <execution>
             <id>default-minify</id>
             <configuration>
-              <charset>utf-8</charset>
+              <charset>UTF-8</charset>
               <skipMerge>true</skipMerge>
 
               <cssSourceDir>resources/css</cssSourceDir>

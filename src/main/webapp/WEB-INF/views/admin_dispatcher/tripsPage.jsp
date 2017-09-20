@@ -13,6 +13,7 @@
 <html lang="${language}">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -108,7 +109,6 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-car fa-fw"></i>
-
                             </div>
                             <select class="form-control" id="car-type-required" name="car-type-required" required>
                                 <optgroup label="Light">
@@ -147,8 +147,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-building-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-from" name="town-from"
-                                   placeholder="Kharkov">
+                            <input class="form-control" id="town-from" name="town-from"
+                                   placeholder="Харьков">
                         </div>
 
                         <label for="town-to"><fmt:message key="tripsPage.content.addTripForm.label.townTo"/>*:</label>
@@ -156,8 +156,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-building fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="town-to" name="town-to"
-                                   placeholder="Kiev">
+                            <input class="form-control" id="town-to" name="town-to"
+                                   placeholder="Киев">
                         </div>
 
 
@@ -166,7 +166,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-out"
+                            <input class="form-control" id="time-out"
                                    name="time-out">
                         </div>
 
@@ -175,7 +175,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar-check-o fa-fw"></i>
                             </div>
-                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="time-in" name="time-in">
+                            <input class="form-control" id="time-in" name="time-in">
                         </div>
 
                         <label for="payment-in-dollars">
@@ -186,7 +186,7 @@
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
                             <input id="payment-in-dollars" name="payment-in-dollars"
-                                   class="form-control mb-2 mr-sm-2 mb-sm-0">
+                                   class="form-control">
                         </div><br>
 
                         <button id="submit-button" class="btn btn-primary">
@@ -213,17 +213,18 @@
 
 <script>
     var table = $('#trips-table').DataTable({
-        "iDisplayLength": 10
+        responsive: true
+        <c:if test="${language.getLanguage() eq 'ru'}">
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
+            }
+        </c:if>
     });
 
-    table.fnPageChange( 'last' );
-
     table
-        .fnPageChange( 'last' )
         .column( '0:visible' )
         .order( 'asc' )
         .draw();
-
 </script>
 
 <script type="text/javascript">
@@ -280,7 +281,9 @@
 
         $.post($form.attr("action"), $form.serialize(), function(response) {
             var lastRow = $(response).find('tr:last').attr('id');
-            table.api().row(lastRow).draw();
+            table.row(lastRow).draw();
+
+
 
 //            table.destroy();
 //
@@ -306,5 +309,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <link href="${contextPath}/webjars/tether/1.4.0/dist/js/tether.min.js" rel="script">
 <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" rel="script">
+
+<link href="//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json">
 </body>
 </html>

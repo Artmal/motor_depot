@@ -6,7 +6,10 @@
 
 <html lang="${language}">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title><fmt:message key="errorPage500.errorTitle"/></title>
 
     <link href="${contextPath}/resources/css/errorPage500.css" rel="stylesheet">

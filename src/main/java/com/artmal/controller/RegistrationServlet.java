@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 
 /**
  * Servlet for handling registration process.
@@ -59,7 +60,12 @@ public class RegistrationServlet extends HttpServlet {
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         if(!verify) {
-            req.setAttribute("error", "Did you forget about captcha?");
+            Locale locale = (Locale) req.getSession().getAttribute("language");
+            if(locale.getLanguage().equals("en")) {
+                req.setAttribute("error", "Did you forget about captcha?");
+            } else if(locale.getLanguage().equals("ru")) {
+                req.setAttribute("error", "Про капчу не забыли?");
+            }
             req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
         } else {
             try {
