@@ -25,10 +25,10 @@ public final class RegistrationValidator {
     }
 
     public static boolean validatePhoneNumber(String phoneNumber) {
-        Pattern checkFullName = Pattern.compile("^(1[ \\-\\+]{0,3}|\\+1[ -\\+]{0,3}|\\+1|\\+)?((\\(\\+?1-[2-9][0-9]" +
+        Pattern checkPhoneNumber = Pattern.compile("^(1[ \\-\\+]{0,3}|\\+1[ -\\+]{0,3}|\\+1|\\+)?((\\(\\+?1-[2-9][0-9]" +
                 "{1,2}\\))|(\\(\\+?[2-8][0-9][0-9]\\))|(\\(\\+?[1-9][0-9]\\))|(\\(\\+?[17]\\))|(\\([2-9][2-9]\\))|" +
                 "([ \\-\\.]{0,3}[0-9]{2,4}))?([ \\-\\.][0-9])?([ \\-\\.]{0,3}[0-9]{2,4}){2,3}$");
-        Matcher matcher = checkFullName.matcher(phoneNumber);
+        Matcher matcher = checkPhoneNumber.matcher(phoneNumber);
 
         return matcher.find();
     }

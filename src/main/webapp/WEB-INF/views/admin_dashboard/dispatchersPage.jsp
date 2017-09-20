@@ -84,7 +84,7 @@
 
             <div class="card">
                 <div class="card-block">
-                    <form id="add-dispatcher-form" action="/admin-dashboard/dispatcherServlet" method="post">
+                    <form id="add-dispatcher-form" action="/admin-dashboard/dispatchers" method="post">
                         <label for="email">
                             <fmt:message key="adminDashboard.dispatchersPage.addDispatcherForm.email"/>*:
                         </label>
@@ -92,7 +92,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-envelope fa-fw"></i>
                             </div>
-                            <input id="email" name="email" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="email" name="email" class="form-control">
                         </div>
 
                         <label for="password">
@@ -103,7 +103,7 @@
                                 <i class="fa fa-key fa-fw"></i>
                             </div>
                             <input id="password" name="password" type="password"
-                                   class="form-control mb-2 mr-sm-2 mb-sm-0" >
+                                   class="form-control" >
                         </div>
 
                         <label for="full-name">
@@ -113,7 +113,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-user-circle-o fa-fw"></i>
                             </div>
-                            <input id="full-name" name="full-name" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="full-name" name="full-name" class="form-control">
                         </div>
 
                         <label for="passport-serial-numbers">
@@ -124,7 +124,7 @@
                                 <i class="fa fa-id-card-o fa-fw"></i>
                             </div>
                             <input id="passport-serial-numbers" name="passport-serial-numbers"
-                                   class="form-control mb-2 mr-sm-2 mb-sm-0">
+                                   class="form-control">
                         </div>
 
                         <label for="phone-number">
@@ -134,7 +134,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-phone-square fa-fw"></i>
                             </div>
-                            <input id="phone-number" name="phone-number" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="phone-number" name="phone-number" class="form-control">
                         </div>
 
                         <label for="salary-in-dollars">
@@ -145,7 +145,7 @@
                                 <i class="fa fa-usd fa-fw"></i>
                             </div>
                             <input id="salary-in-dollars" name="salary-in-dollars"
-                                   class="form-control mb-2 mr-sm-2 mb-sm-0" >
+                                   class="form-control" >
                         </div><br>
 
                         <button class="btn btn-primary">

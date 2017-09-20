@@ -81,7 +81,7 @@ public class TripInfoPageServlet extends HttpServlet {
             final TripRequest tripRequest = new TripRequest(trip, car, message);
             tripRequestService.save(tripRequest);
 
-            resp.sendRedirect("/driver-dashboard/trip?trip-id=" + trip.getId());
+            resp.sendRedirect("/driver-dashboard/my-requests");
         } catch (SQLException | NamingException | ParseException e) {
             log.error(e);
         }

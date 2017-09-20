@@ -142,7 +142,7 @@
                     </div>
 
                     <label for="payment-in-dollars">
-                        <fmt:message key="tripsPage.content.addTripForm.label.payment"/>:
+                        <fmt:message key="tripsPage.content.addTripForm.label.payment"/>
                     </label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon">

@@ -52,7 +52,7 @@ public class DriversPageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        registrationUtils.registerNewDriver(req, resp);
+        registrationUtils.registerNewDriverAsAdmin(req, resp);
         resp.sendRedirect("/admin-dashboard/drivers");
     }
 }

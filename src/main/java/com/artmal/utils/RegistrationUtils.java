@@ -59,4 +59,23 @@ public final class RegistrationUtils {
             log.error(e);
         }
     }
+
+    public void registerNewDriverAsAdmin(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        final String email = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final String fullName = req.getParameter("full-name");
+        final String passportSerialNumbers = req.getParameter("passport-serial-numbers");
+        final String phoneNumber = req.getParameter("phone-number");
+        final int age = Integer.parseInt(req.getParameter("age"));
+
+        final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        final User userInfo = new User(email, hashedPassword, Role.Driver);
+        final Driver driver = new Driver(fullName, passportSerialNumbers, phoneNumber, age, userInfo);
+
+        try {
+            driverService.save(driver);
+        } catch (SQLException | NamingException e) {
+            log.error(e);
+        }
+    }
 }

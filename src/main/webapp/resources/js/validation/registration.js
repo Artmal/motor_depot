@@ -48,7 +48,7 @@ $(document).ready(function() {
             },
             "age": {
                 required: true,
-                pattern: "~^(1[89]|[2-9][0-9])$~ "
+                pattern: "^(1[89]|[2-9][0-9])$"
             }
         },
         messages: {
@@ -76,8 +76,8 @@ $(document).ready(function() {
                 pattern: "Please, enter a valid phone number(ex. +380664039952)."
             },
             "age": {
-                pattern: "Please, enter a valid age(ex. 32).",
-                required: "Please, enter a valid age(>18 & <100)."
+                pattern: "Please, enter a valid age. You need to be over 18 years old.",
+                required: "Please, enter your age."
             }
         }
     });

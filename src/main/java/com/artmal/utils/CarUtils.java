@@ -5,7 +5,6 @@ import com.artmal.model.enums.CarCondition;
 import com.artmal.model.enums.CarType;
 import com.artmal.service.CarService;
 import com.artmal.service.DriverService;
-import com.artmal.service.impl.CarServiceImpl;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -176,7 +175,7 @@ public final class CarUtils {
     /**
      * Separate method for more clear code in servlet part.
      */
-    public static void addNewCarAsAdmin(HttpServletRequest req) throws SQLException {
+    public void addNewCarAsAdmin(HttpServletRequest req) throws SQLException {
         final String registrationNumber = req.getParameter("registration-number");
         final CarType type = CarType.valueOf(req.getParameter("type"));
         final CarCondition condition = CarCondition.valueOf(req.getParameter("condition"));
@@ -186,7 +185,6 @@ public final class CarUtils {
         final long ownerId = Long.parseLong(req.getParameter("owner-id"));
 
         final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
-        final CarService carService = new CarServiceImpl();
         try {
             carService.save(car);
         } catch (SQLException | NamingException e) {

@@ -27,6 +27,9 @@ public class CarsPageServlet extends HttpServlet {
     @Autowired
     private CarService carService;
 
+    @Autowired
+    private CarUtils carUtils;
+
     public void init(final ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
@@ -50,7 +53,7 @@ public class CarsPageServlet extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         try {
-            CarUtils.addNewCarAsAdmin(req);
+            carUtils.addNewCarAsAdmin(req);
         } catch (SQLException e) {
             log.error(e);
         }

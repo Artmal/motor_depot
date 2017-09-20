@@ -10,8 +10,8 @@ import java.util.Properties;
  * @author Artem Malchenko
  */
 public class MailSender {
-    static final String username = "";
-    static final String password = "";
+    static final String username = "motor.depot.service@gmail.com";
+    static final String password = "motor_depot_service";
 
     public static void sendEmail(String recipient, String text) {
         Properties props = new Properties();

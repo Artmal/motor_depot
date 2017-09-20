@@ -44,7 +44,7 @@ $(document).ready(function() {
             },
             "owner-id": {
                 required: true,
-                pattern: "^[1-9][\\d]+$"
+                pattern: "^[1-9][\\d]*$"
             }
         },
         messages: {

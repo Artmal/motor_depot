@@ -39,12 +39,11 @@ $(document).ready(function() {
             },
             "phone-number": {
                 required: true,
-                pattern: "^(1[ \\-\\+]{0,3}|\\+1[ -\\+]{0,3}|\\+1|\\+)?((\\(\\+?1-[2-9][0-9]" +
-                "{1,2}\\))|(\\(\\+?[2-8][0-9][0-9]\\))|(\\(\\+?[1-9][0-9]\\))|(\\(\\+?[17]\\))|(\\([2-9][2-9]\\))|" +
-                "([ \\-\\.]{0,3}[0-9]{2,4}))?([ \\-\\.][0-9])?([ \\-\\.]{0,3}[0-9]{2,4}){2,3}$"
+                pattern: "^(\\+?\\d{12})|(\\d{10})$"
             },
             "age": {
-                pattern: "^[1-9][\\d]{0,2}$"
+                required: true,
+                pattern: "^(1[89]|[2-9][0-9])$"
             }
         },
         messages: {
@@ -67,7 +66,8 @@ $(document).ready(function() {
                 pattern: "Please, enter a valid phone number(ex. +380664039952)."
             },
             "age": {
-                pattern: "Please, enter a valid age(ex. 32)."
+                required: "Please, enter driver's age.",
+                pattern: "Please, enter a valid age(>18 & <99)."
             }
         }
     });

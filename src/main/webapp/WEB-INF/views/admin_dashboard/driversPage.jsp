@@ -76,7 +76,7 @@
 
             <div class="card">
                 <div class="card-block">
-                    <form id="add-driver-form" action="/admin-dashboard/addDriverServlet" method="post">
+                    <form id="add-driver-form" action="/admin-dashboard/drivers" method="post">
                         <label for="email"><fmt:message key="adminDashboard.driversPage.addDriverForm.email"/></label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon">
@@ -92,7 +92,8 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-key fa-fw"></i>
                             </div>
-                            <input id="password" name="password" class="form-control mb-2 mr-sm-2 mb-sm-0">
+                            <input id="password" name="password" type="password"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0">
                         </div>
 
                         <label for="full-name">
