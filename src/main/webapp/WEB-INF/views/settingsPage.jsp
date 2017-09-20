@@ -14,7 +14,7 @@
     <link href="${contextPath}/webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/validation.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -69,7 +69,7 @@
 <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
-<script src="${contextPath}/resources/js/validation/settingsPage.js"></script>
+<script src="${contextPath}/resources/js/validation/settingsPage.min.js"></script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

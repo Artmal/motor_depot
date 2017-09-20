@@ -8,6 +8,11 @@
 
 <html lang="${language}">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title><fmt:message key="registration.pageTitle"/></title>
 
     <!-- Bootstrap CSS & Font Awesome -->
@@ -15,8 +20,8 @@
     <link rel="stylesheet" href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" >
 
     <!-- Styles for the page -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/registration.css">
-    <link href="${contextPath}/resources/css/validation.css" rel="stylesheet">
+    <link rel="stylesheet" href="${contextPath}/resources/css/registration.min.css">
+    <link href="${contextPath}/resources/css/validation.min.css" rel="stylesheet">
 
     <!-- reCaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -105,7 +110,7 @@
 <script src="${contextPath}/webjars/jquery/2.1.3/jquery.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
-<script src="${contextPath}/resources/js/validation/registration.js"></script>
+<script src="${contextPath}/resources/js/validation/registration.min.js"></script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

@@ -222,15 +222,21 @@
           <execution>
             <id>default-minify</id>
             <configuration>
-              <!--<cssSourceFiles>-->
-                <!--<cssSourceFile>/resources/appendLanguageParamToUrl</cssSourceFile>-->
-                <!--&lt;!&ndash; ... &ndash;&gt;-->
-                <!--<cssSourceFile>file-n.css</cssSourceFile>-->
-              <!--</cssSourceFiles>-->
-              <jsSourceFiles>
-                <jsSourceFile>/resources/js/appendLanguageParamToUrl.js</jsSourceFile>
-                <!--<jsSourceFile>file-n.js</jsSourceFile>-->
-              </jsSourceFiles>
+              <charset>utf-8</charset>
+              <skipMerge>true</skipMerge>
+
+              <cssSourceDir>resources/css</cssSourceDir>
+              <cssSourceIncludes>
+                <cssSourceInclude>**/*.css</cssSourceInclude>
+              </cssSourceIncludes>
+
+              <jsSourceDir>resources/js/</jsSourceDir>
+              <jsSourceIncludes>
+                <jsSourceInclude>**/*.js</jsSourceInclude>
+              </jsSourceIncludes>
+
+              <cssEngine>YUI</cssEngine>
+              <jsEngine>CLOSURE</jsEngine>
             </configuration>
             <goals>
               <goal>minify</goal>

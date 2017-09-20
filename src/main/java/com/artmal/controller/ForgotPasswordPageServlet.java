@@ -68,7 +68,5 @@ public class ForgotPasswordPageServlet extends HttpServlet {
             MailSender.sendEmail(email, message);
             resp.sendRedirect("/login");
         }
-
-
     }
 }

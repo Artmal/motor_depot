@@ -24,8 +24,8 @@
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles for the page-->
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin-panel/dashboard.css" >
-    <link rel="stylesheet" href="${contextPath}/resources/css/validation.css" >
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin-panel/dashboard.min.css" >
+    <link rel="stylesheet" href="${contextPath}/resources/css/validation.min.css" >
 
     <!-- Datetime picker -->
     <link rel="stylesheet" type="text/css"
@@ -202,7 +202,7 @@
 
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
 <script src="${contextPath}/webjars/jquery-validation/1.17.0/additional-methods.min.js"></script>
-<script src="${contextPath}/resources/js/validation/admin_dispatcher/tripsPage.js"></script>
+<script src="${contextPath}/resources/js/validation/admin_dispatcher/tripsPage.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>

@@ -22,7 +22,7 @@
     <link href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles for the page -->
-    <link href="${contextPath}/resources/css/admin-panel/dashboard.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/admin-panel/dashboard.min.css" rel="stylesheet">
 </head>
 
 <body>

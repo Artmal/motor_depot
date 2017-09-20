@@ -30,4 +30,4 @@
     </div>
 </nav>
 
-<script src="/resources/js/appendLanguageParamToUrl.js"></script>
+<script src="/resources/js/appendLanguageParamToUrl.min.js"></script>

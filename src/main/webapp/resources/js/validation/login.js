@@ -1,11 +1,6 @@
 $(document).ready(function() {
     $.validator.setDefaults({
         errorClass: 'form-text',
-        highlight: function(element) {
-            $(element)
-                .closest('.form-text')
-                .addClass('has-danger');
-        },
         highlight: function (element) {
             $(element)
                 .closest('.form-group')

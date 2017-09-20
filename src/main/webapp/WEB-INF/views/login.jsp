@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="${contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" >
 
     <!-- Styles for the page -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
-    <link rel="script" href="${contextPath}/resources/js/validation/login.js">
+    <link rel="stylesheet" href="${contextPath}/resources/css/login.min.css">
+    <link rel="script" href="${contextPath}/resources/js/validation/login.min.js">
 </head>
 <body>
 <div class="container">
@@ -88,7 +88,7 @@
 <script src="${contextPath}/resources/js/validation/login.js"></script>
 <script src="${contextPath}/resources/js/validation/login_ru.js"></script>
 
-<script src="/resources/js/appendLanguageParamToUrl.js"></script>
+<script src="/resources/js/appendLanguageParamToUrl.min.js"></script>
 
 <script>
     $(document).on("submit", "#login-form", function(event) {
