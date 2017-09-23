@@ -21,6 +21,7 @@ public interface TripService {
     Set<Trip> findAllByDriverId(long id) throws NamingException, SQLException, ParseException;
     Set<Trip> findAllByDispatcherId(long id) throws NamingException, SQLException, ParseException;
     Set<Trip> findAllOpen() throws SQLException, ParseException;
+    Set<Trip> findAllByCarId(long carId) throws SQLException, ParseException;
 
     void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException;
     void setTripStatus(Trip trip, TripStatus tripStatus) throws NamingException, SQLException;

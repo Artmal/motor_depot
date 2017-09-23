@@ -124,6 +124,22 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
+    public Set<Trip> findAllByCarId(long carId) throws SQLException, ParseException {
+        @Cleanup Connection con = dataSource.getConnection();
+        @Cleanup PreparedStatement findAllByCarId = con.prepareStatement("SELECT * FROM trips WHERE car_id = ?");
+        findAllByCarId.setLong(1, carId);
+
+        @Cleanup ResultSet trips = findAllByCarId.executeQuery();
+        Set<Trip> tripSet = new HashSet<>();
+        while (trips.next()) {
+            Trip trip = TripUtils.initializeTrip(trips);
+            tripSet.add(trip);
+        }
+
+        return tripSet;
+    }
+
+    @Override
     public void assignCarToTheTrip(Trip trip, Car car) throws SQLException, NamingException {
         @Cleanup Connection con = dataSource.getConnection();
 

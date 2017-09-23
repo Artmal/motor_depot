@@ -49,10 +49,8 @@ public final class DatabaseUtils {
             } catch (NamingException e) {
                 log.error(e);
             }
-        } else {
-            return dataSource;
         }
 
-        return null;
+        return dataSource;
     }
 }

@@ -98,10 +98,11 @@ public class DriverDaoImpl implements DriverDao {
         Set<Driver> driverSet = new HashSet<>();
         while(drivers.next()) {
             Driver driver = new Driver();
-            driver.setId(drivers.getInt("id"));
+            driver.setId(drivers.getLong("id"));
             driver.setName(drivers.getString("name"));
             driver.setPassportSerialNumbers(drivers.getString("passport_serial_numbers"));
             driver.setPhoneNumber(drivers.getString("phone_number"));
+            driver.setAge(drivers.getInt("age"));
             driverSet.add(driver);
         }
 
