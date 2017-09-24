@@ -167,7 +167,7 @@ public final class CarUtils {
 
         try {
             carService.save(car);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
     }
@@ -187,7 +187,7 @@ public final class CarUtils {
         final Car car = new Car(registrationNumber, type, condition, model, numberOfSeats, carColor, ownerId);
         try {
             carService.save(car);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
     }

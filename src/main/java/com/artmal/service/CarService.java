@@ -3,6 +3,7 @@ package com.artmal.service;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.users.Driver;
+import com.artmal.utils.ValidationException;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public interface CarService {
-    boolean save(Car car) throws SQLException, NamingException;
+    boolean save(Car car) throws SQLException, NamingException, ValidationException;
 
     Car findById(long id) throws SQLException, NamingException, ParseException;
     Set<Car> findAllByOwnerId(long id) throws SQLException, NamingException;

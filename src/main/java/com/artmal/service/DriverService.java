@@ -1,6 +1,7 @@
 package com.artmal.service;
 
 import com.artmal.model.users.Driver;
+import com.artmal.utils.ValidationException;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public interface DriverService {
-    boolean save(Driver driver) throws SQLException, NamingException;
+    boolean save(Driver driver) throws SQLException, NamingException, ValidationException;
 
     Driver findByUserId(long id) throws SQLException, NamingException;
     Set<Driver> findAll() throws SQLException, NamingException;

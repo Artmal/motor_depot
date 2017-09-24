@@ -23,15 +23,11 @@ public class CarServiceImpl implements CarService {
     private CarDao carDao;
 
     @Override
-    public boolean save(Car car) throws SQLException, NamingException {
-        try {
-            if(!CarAddValidator.validateNumberOfSeats(String.valueOf(car.getNumberOfSeats()))) {
-                throw new ValidationException(String.valueOf(car.getNumberOfSeats()));
-            } else if(!CarAddValidator.validateCarColor(car.getColor())) {
-                throw new ValidationException(car.getColor());
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public boolean save(Car car) throws SQLException, NamingException, ValidationException {
+        if(!CarAddValidator.validateNumberOfSeats(String.valueOf(car.getNumberOfSeats()))) {
+            throw new ValidationException(String.valueOf(car.getNumberOfSeats()));
+        } else if(!CarAddValidator.validateCarColor(car.getColor())) {
+            throw new ValidationException(car.getColor());
         }
 
         return carDao.save(car);

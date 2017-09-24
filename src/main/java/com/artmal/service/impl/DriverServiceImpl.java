@@ -20,17 +20,13 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public boolean save(Driver driver) throws SQLException, NamingException {
-        try {
-            if(!RegistrationValidator.validateFullName(driver.getName())) {
-                throw new ValidationException(driver.getName());
-            } else if(!RegistrationValidator.validateAge(String.valueOf(driver.getAge()))) {
-                throw new ValidationException(String.valueOf(driver.getAge()));
-            } else if(!RegistrationValidator.validatePhoneNumber(driver.getPhoneNumber())) {
-                throw new ValidationException((driver.getPhoneNumber()));
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public boolean save(Driver driver) throws SQLException, NamingException, ValidationException {
+        if(!RegistrationValidator.validateFullName(driver.getName())) {
+            throw new ValidationException(driver.getName());
+        } else if(!RegistrationValidator.validateAge(String.valueOf(driver.getAge()))) {
+            throw new ValidationException(String.valueOf(driver.getAge()));
+        } else if(!RegistrationValidator.validatePhoneNumber(driver.getPhoneNumber())) {
+            throw new ValidationException((driver.getPhoneNumber()));
         }
 
         return driverDao.save(driver);

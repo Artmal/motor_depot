@@ -3,6 +3,7 @@ package com.artmal.service;
 import com.artmal.model.Car;
 import com.artmal.model.Trip;
 import com.artmal.model.enums.TripStatus;
+import com.artmal.utils.ValidationException;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author Artem Malchenko
  */
 public interface TripService {
-    boolean save(Trip trip) throws SQLException, NamingException, ParseException;
+    boolean save(Trip trip) throws SQLException, NamingException, ParseException, ValidationException;
 
     Trip findById(long id) throws SQLException, NamingException, ParseException;
     Set<Trip> findAll() throws NamingException, SQLException, ParseException;

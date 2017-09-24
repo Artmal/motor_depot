@@ -14,5 +14,5 @@ public interface UserService {
     User findByEmail(String username) throws SQLException, NamingException;
     int save(User user) throws SQLException, NamingException, ValidationException;
 
-    void updateUser(User user) throws NamingException, SQLException;
+    void updateUser(User user) throws NamingException, SQLException, ValidationException;
 }

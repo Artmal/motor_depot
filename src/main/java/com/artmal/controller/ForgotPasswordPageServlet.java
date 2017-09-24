@@ -3,6 +3,7 @@ package com.artmal.controller;
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
 import com.artmal.utils.MailSender;
+import com.artmal.utils.ValidationException;
 import com.artmal.utils.VerifyRecaptcha;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang.RandomStringUtils;
@@ -66,7 +67,7 @@ public class ForgotPasswordPageServlet extends HttpServlet {
                 userWithNewPass.setPassword(hashedPassword);
 
                 userService.updateUser(userWithNewPass);
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException | NamingException | ValidationException e) {
                 log.error(e);
             }
 

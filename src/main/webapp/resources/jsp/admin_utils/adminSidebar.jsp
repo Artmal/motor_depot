@@ -33,17 +33,4 @@
             </a>
         </li>
     </ul>
-
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a id = "task-nav-link" class="nav-link" href="/admin-dashboard/task">
-                Task
-            </a>
-        </li>
-        <li class="nav-item">
-            <a id = "harder-task-nav-link" class="nav-link" href="/admin-dashboard/hard-task">
-                Harder task
-            </a>
-        </li>
-    </ul>
 </nav>

@@ -79,16 +79,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>taskServlet</servlet-name>
-    <servlet-class>com.artmal.controller.admin_dashboard.TaskServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>taskServlet</servlet-name>
-    <url-pattern>/admin-dashboard/task</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>logoutServlet</servlet-name>
     <servlet-class>com.artmal.controller.LogoutServlet</servlet-class>
   </servlet>
@@ -211,16 +201,6 @@
   <servlet-mapping>
     <servlet-name>driverDashboard_tripsInfoPageServlet</servlet-name>
     <url-pattern>/driver-dashboard/trip</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>adminDashboard_hardTask</servlet-name>
-    <servlet-class>com.artmal.controller.admin_dashboard.HardTaskServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>adminDashboard_hardTask</servlet-name>
-    <url-pattern>/admin-dashboard/hard-task</url-pattern>
   </servlet-mapping>
 
   <servlet>

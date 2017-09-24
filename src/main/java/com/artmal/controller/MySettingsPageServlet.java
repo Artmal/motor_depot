@@ -2,6 +2,7 @@ package com.artmal.controller;
 
 import com.artmal.model.users.User;
 import com.artmal.service.UserService;
+import com.artmal.utils.ValidationException;
 import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class MySettingsPageServlet extends HttpServlet {
         user.setPassword(hashedPassword);
         try {
             userService.updateUser(user);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
 

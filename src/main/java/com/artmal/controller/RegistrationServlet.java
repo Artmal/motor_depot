@@ -4,6 +4,7 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Driver;
 import com.artmal.model.users.User;
 import com.artmal.service.DriverService;
+import com.artmal.utils.ValidationException;
 import com.artmal.utils.VerifyRecaptcha;
 import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -73,7 +74,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             try {
                 driverService.save(driver);
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException | NamingException | ValidationException e) {
                 log.error(e);
             }
         }

@@ -55,7 +55,7 @@ public final class RegistrationUtils {
 
         try {
             driverService.save(driver);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
     }
@@ -74,7 +74,7 @@ public final class RegistrationUtils {
 
         try {
             driverService.save(driver);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
     }

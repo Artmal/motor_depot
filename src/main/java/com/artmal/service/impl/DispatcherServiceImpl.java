@@ -21,19 +21,15 @@ public class DispatcherServiceImpl implements DispatcherService {
     private DispatcherDao dispatcherDao;
 
     @Override
-    public boolean save(Dispatcher dispatcher) throws SQLException, NamingException {
-        try {
-            if(!RegistrationValidator.validateEmail(dispatcher.getUserInfo().getEmail())) {
-                throw new ValidationException(dispatcher.getUserInfo().getEmail());
-            } else if(!RegistrationValidator.validateFullName(dispatcher.getName())) {
-                throw new ValidationException(dispatcher.getName());
-            } else if(!RegistrationValidator.validatePhoneNumber(dispatcher.getPhoneNumber())) {
-                throw new ValidationException(dispatcher.getPhoneNumber());
-            } else if(!TripValidator.validatePayment(String.valueOf(dispatcher.getSalaryInDollars()))) {
-                throw new ValidationException(String.valueOf(dispatcher.getSalaryInDollars()));
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public boolean save(Dispatcher dispatcher) throws SQLException, NamingException, ValidationException {
+        if(!RegistrationValidator.validateEmail(dispatcher.getUserInfo().getEmail())) {
+            throw new ValidationException(dispatcher.getUserInfo().getEmail());
+        } else if(!RegistrationValidator.validateFullName(dispatcher.getName())) {
+            throw new ValidationException(dispatcher.getName());
+        } else if(!RegistrationValidator.validatePhoneNumber(dispatcher.getPhoneNumber())) {
+            throw new ValidationException(dispatcher.getPhoneNumber());
+        } else if(!TripValidator.validatePayment(String.valueOf(dispatcher.getSalaryInDollars()))) {
+            throw new ValidationException(String.valueOf(dispatcher.getSalaryInDollars()));
         }
 
         return dispatcherDao.save(dispatcher);

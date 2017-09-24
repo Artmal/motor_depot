@@ -4,6 +4,7 @@ import com.artmal.model.enums.Role;
 import com.artmal.model.users.Dispatcher;
 import com.artmal.model.users.User;
 import com.artmal.service.DispatcherService;
+import com.artmal.utils.ValidationException;
 import lombok.extern.log4j.Log4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class DispatchersPageServlet extends HttpServlet {
         final Dispatcher dispatcher = new Dispatcher(fullName, passportSerialNumbers, phoneNumber, salaryInDollars, userInfo);
         try {
             dispatcherService.save(dispatcher);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ValidationException e) {
             log.error(e);
         }
 

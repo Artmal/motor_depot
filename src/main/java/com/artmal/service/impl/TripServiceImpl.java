@@ -23,23 +23,18 @@ public class TripServiceImpl implements TripService {
     private TripDao tripDao;
 
     @Override
-    public boolean save(Trip trip) throws SQLException, NamingException, ParseException {
-        try {
-            if(!TripValidator.validateTown(trip.getTownFrom())) {
-                throw new ValidationException(trip.getTownFrom());
-            } else if(!TripValidator.validateTown(trip.getTownTo())) {
-                throw new ValidationException(trip.getTownTo());
-            } else if(!TripValidator.validatePayment(String.valueOf(trip.getPaymentInDollars()))) {
-                throw new ValidationException(String.valueOf(trip.getPaymentInDollars()));
-            } else if(!TripValidator.validateTime(String.valueOf(trip.getTimeOut()))) {
-                throw new ValidationException((String.valueOf(trip.getTimeOut())));
-            } else if(!TripValidator.validateTime(String.valueOf(trip.getTimeIn()))) {
-                throw new ValidationException(String.valueOf(trip.getTimeIn()));
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public boolean save(Trip trip) throws SQLException, NamingException, ParseException, ValidationException {
+        if(!TripValidator.validateTown(trip.getTownFrom())) {
+            throw new ValidationException(trip.getTownFrom());
+        } else if(!TripValidator.validateTown(trip.getTownTo())) {
+            throw new ValidationException(trip.getTownTo());
+        } else if(!TripValidator.validatePayment(String.valueOf(trip.getPaymentInDollars()))) {
+            throw new ValidationException(String.valueOf(trip.getPaymentInDollars()));
+        } else if(!TripValidator.validateTime(String.valueOf(trip.getTimeOut()))) {
+            throw new ValidationException((String.valueOf(trip.getTimeOut())));
+        } else if(!TripValidator.validateTime(String.valueOf(trip.getTimeIn()))) {
+            throw new ValidationException(String.valueOf(trip.getTimeIn()));
         }
-
         return tripDao.save(trip);
     }
 

@@ -24,26 +24,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int save(User user) throws SQLException, NamingException {
-        try {
-            if(!RegistrationValidator.validateEmail(user.getEmail())){
-                throw new ValidationException(user.getEmail());
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public int save(User user) throws SQLException, NamingException, ValidationException {
+        if(!RegistrationValidator.validateEmail(user.getEmail())){
+            throw new ValidationException(user.getEmail());
         }
 
         return userDao.save(user);
     }
 
     @Override
-    public void updateUser(User user) throws NamingException, SQLException {
-        try {
-            if(!RegistrationValidator.validateEmail(user.getEmail())){
-                throw new ValidationException(user.getEmail());
-            }
-        } catch (ValidationException e) {
-            log.error(e);
+    public void updateUser(User user) throws NamingException, SQLException, ValidationException {
+        if(!RegistrationValidator.validateEmail(user.getEmail())){
+            throw new ValidationException(user.getEmail());
         }
 
         userDao.updateUser(user);

@@ -7,6 +7,7 @@ import com.artmal.model.enums.TripStatus;
 import com.artmal.service.DispatcherService;
 import com.artmal.service.TripService;
 import com.artmal.utils.TripUtils;
+import com.artmal.utils.ValidationException;
 import lombok.extern.log4j.Log4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class TripsPageServlet extends HttpServlet {
 
                 final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, paymentInDollars, dispatcherId);
                 tripService.save(trip);
-            } catch (SQLException | NamingException | ParseException e) {
+            } catch (SQLException | NamingException | ParseException | ValidationException e) {
                 log.error(e);
             }
 
@@ -78,7 +79,7 @@ public class TripsPageServlet extends HttpServlet {
             final Trip trip = new Trip(status, carTypeRequired, townFrom, townTo, timeOut, timeIn, paymentInDollars);
             try {
                 tripService.save(trip);
-            } catch (SQLException | NamingException | ParseException e) {
+            } catch (SQLException | NamingException | ParseException | ValidationException e) {
                 log.error(e);
             }
 
